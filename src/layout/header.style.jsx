@@ -5,19 +5,18 @@ export const HeaderWrapper = styled.header`
   color: white;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 `;
 
 export const Logo = styled.img`
   width: 100px;
   height: auto;
+  margin-right: 20px;
 `;
 
 export const Navigation = styled.nav`
   display: flex;
   gap: 20px;
-  margin: 0 20px;
 `;
 
 export const NavLink = styled.a`
