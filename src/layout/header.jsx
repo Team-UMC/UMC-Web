@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HeaderWrapper, HeaderTitle, Navigation, NavLink } from './header.style';
+import { HeaderWrapper, Logo, Navigation, NavLink } from './header.style';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -34,13 +34,13 @@ const Header = () => {
         setMenus(updatedMenus);
     };
 
-    const handleTitleClick = () => {
+    const handleLogoClick = () => {
         navigate('/');
     };
 
     return (
         <HeaderWrapper>
-            <HeaderTitle onClick={handleTitleClick}>NetworkingService</HeaderTitle>
+            <Logo src={require('../assets/logo.svg').default} alt="Logo" onClick={handleLogoClick} />
             <Navigation>
                 {menu.map((item, index) => (
                     <NavLink
