@@ -6,6 +6,11 @@ export const HeaderWrapper = styled.header`
   padding: 10px;
   display: flex;
   align-items: center;
+  margin-bottom: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 `;
 
 export const Logo = styled.img`

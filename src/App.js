@@ -6,6 +6,7 @@ function App() {
   return (
     <div>
       <Header />
+      <img src={require('./assets/image.svg').default} alt="대충 사진" />
     </div>
   );
 }
