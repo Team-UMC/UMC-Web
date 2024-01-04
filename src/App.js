@@ -1,12 +1,17 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './layout/header.jsx';
 import './App.css';
+import Main from './pages/main.jsx';
 
 function App() {
   return (
     <div>
       <Header />
-      <img src={require('./assets/image.svg').default} alt="대충 사진" />
+
+      <Routes>
+        <Route path="/" element={<Main />} />
+      </Routes>
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { HeaderWrapper, Logo, Navigation, NavLink } from './header.style';
+import { Link } from 'react-router-dom';
+import "./header.css";
 
 const Header = () => {
-    const navigate = useNavigate();
-
     const [menu, setMenus] = useState([
-        { label: '학교 게시판', path: '/school-board' },
-        { label: '지부 게시판', path: '/branch-board' },
-        { label: '연합 게시판', path: '/union-board' },
+        { label: '홈', path: '/' },
+        { label: '게시판', path: '/board' },
+        { label: '히스토리', path: '/history' },
+        { label: '사진첩', path: '/gallery' },
+        { label: 'UMC 네트워킹', path: '/umcnetworking' },
     ]);
 
     const menuClick = (selectedIndex) => {
@@ -17,43 +17,40 @@ const Header = () => {
             isSelected: index === selectedIndex,
         }));
 
-        switch (selectedIndex) {
-            case 0:
-                navigate('/school-board');
-                break;
-            case 1:
-                navigate('/branch-board');
-                break;
-            case 2:
-                navigate('/union-board');
-                break;
-            default:
-                break;
-        }
-
         setMenus(updatedMenus);
     };
 
-    const handleLogoClick = () => {
-        navigate('/');
-    };
-
     return (
-        <HeaderWrapper>
-            <Logo src={require('../assets/logo.svg').default} alt="Logo" onClick={handleLogoClick} />
-            <Navigation>
-                {menu.map((item, index) => (
-                    <NavLink
-                        key={index}
-                        href={item.path}
-                        className={item.isSelected ? 'selected' : ''}
-                        onClick={() => menuClick(index)}
-                    >
-                        {item.label}
-                    </NavLink>
-                ))}
-            </Navigation>
-        </HeaderWrapper>
+        <header className='header-wrapper'>
+
+            <div className='left'>
+                <img src={require('../assets/hambuger.svg').default} alt="햄버거 아이콘" />
+            </div>
+
+            <div className='center'>
+                <img src={require('../assets/logo.svg').default} alt="로고" />
+
+                <div className='navigation'>
+                    {menu.map((item, index) => (
+                        <Link
+                            key={index}
+                            to={item.path}
+                            className={item.isSelected ? 'selected' : ''}
+                            onClick={() => menuClick(index)}
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
+                </div>
+
+            </div>
+
+            <div className='right'>
+                <img src={require('../assets/notification.svg').default} alt="Notification" />
+                <img src={require('../assets/friend.svg').default} alt="Friend" />
+            </div>
+
+        </header>
     );
 };
 
