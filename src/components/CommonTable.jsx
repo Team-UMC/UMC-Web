@@ -1,12 +1,21 @@
 import React from "react";
+import styled from "styled-components";
 
-import "./CommonTable.css";
+const CommonTableWrapper = styled.table`
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
+  font-family: "Pretendard";
+  border-spacing: 0;
+  border-top: 4px solid #000c76;
+`;
 
 const CommonTable = ({ children }) => {
     return (
-        <table className="common-table">
+        <CommonTableWrapper>
             <tbody>{children}</tbody>
-        </table>
+        </CommonTableWrapper>
     );
 }
 

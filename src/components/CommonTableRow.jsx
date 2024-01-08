@@ -1,10 +1,18 @@
 import React from "react";
+import styled from "styled-components";
 
-const CommonTableRow = ({ children }) => {
+const CommonTableRowWrapper = styled.tr`
+  &:hover {
+    background-color: #eceaea;
+    cursor: pointer;
+  }
+`;
+
+const CommonTableRow = ({children}) => {
     return (
-        <tr className="common-table-row">
-            {children}
-        </tr>
+
+        <CommonTableRowWrapper>{children}</CommonTableRowWrapper>
+
     );
 }
 

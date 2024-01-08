@@ -1,10 +1,15 @@
 import React from "react";
+import styled from "styled-components";
+
+const CommonTableColumWrapper = styled.td`
+  padding: 10px 5px;
+`;
 
 const CommonTableColumn = ({ children }) => {
     return (
-        <td className="common-table-column">
+        <CommonTableColumWrapper>
             {children}
-        </td>
+        </CommonTableColumWrapper>
     );
 }
 
