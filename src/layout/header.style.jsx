@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import HeaderBackground from '../assets/header/header.svg';
 import SmallHeaderBackground from '../assets/header/smallheader.svg';
-import OpenHambugerIcon from '../assets/header/OpenHambuger.svg';
+import OpenHambugerIcon from '../assets/header/openhamburger.svg';
 import SettingIcon from '../assets/header/setting.svg';
 import NotificationIcon from '../assets/header/notification.svg';
 import FriendIcon from '../assets/header/friend.svg';
@@ -48,6 +48,7 @@ const Hamburger = styled.div`
 
 const Navigation = styled.div`
     display: flex;
+    height: 43px;
 
     a {
         font-size: 15px;
