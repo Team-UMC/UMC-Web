@@ -4,12 +4,27 @@ import CommonTable from "../components/CommonTable";
 import CommonTableRow from "../components/CommonTableRow";
 import CommonTableColumn from "../components/CommonTableColumn";
 import { noticeList } from "../Data";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const clickAnimation = keyframes`
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+`;
 
 const PinButton = styled.div`
   width: 100%;
   height: 100%;
   border: none;
+
+  &:hover,
+  &:active {
+    animation: ${clickAnimation} 0.5s ease;
+  }
+`;
+
+const TitleTextAlign = styled.div`
+  text-align: left;
 `;
 
 const NoticeList = props => {
@@ -41,20 +56,44 @@ const NoticeList = props => {
         {dataList
           ? dataList.map((item, index) => {
               return (
-                <CommonTableRow key={index}>
-                  <CommonTableColumn>
-                    <PinButton onClick={() => togglePin(item.no)}>
-                      {item.isPin ? <img src='../assets/pin.svg' alt="고정핀 on" /> : <img src='../assets/nopin.svg' alt="고정핀 off" />}
-                    </PinButton>
-                  </CommonTableColumn>
-                  <CommonTableColumn>
-                    <Link to={`/noticeView/${item.no}`}>
-                      {item.title}
-                    </Link>
-                  </CommonTableColumn>
-                  <CommonTableColumn>{item.author}</CommonTableColumn>
-                  <CommonTableColumn>{item.date}</CommonTableColumn>
-                </CommonTableRow>
+                <>
+                  <CommonTableRow
+                    key={index}
+                  >
+                    <CommonTableColumn>
+                      <PinButton
+                        onClick={() => {
+                          togglePin(item.no);
+                        }}
+                      >
+                        {item.isPin ? (
+                          <img
+                            src={require("../assets/pin.svg").default}
+                            alt="고정핀 on"
+                          />
+                        ) : (
+                          <img
+                            src={require("../assets/nopin.svg").default}
+                            alt="고정핀 off"
+                          />
+                        )}
+                      </PinButton>
+                    </CommonTableColumn>
+                    <CommonTableColumn>
+                      <TitleTextAlign>
+                        <Link to={`/noticeView/${item.no}`}>{item.title}</Link>
+                      </TitleTextAlign>
+                    </CommonTableColumn>
+                    <CommonTableColumn>{item.author}</CommonTableColumn>
+                    <CommonTableColumn>{item.date}</CommonTableColumn>
+                    <CommonTableColumn>
+                      <img
+                        src={require("../assets/open-arrow.svg").default}
+                        alt="펼치기/접기"
+                      />
+                    </CommonTableColumn>
+                  </CommonTableRow>
+                </>
               );
             })
           : ""}
