@@ -11,9 +11,9 @@ function App() {
       <Header />
 
       <MyCalendar />
-      
+
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path="/" element={<Main />} />
       </Routes>
     </div>
   );
