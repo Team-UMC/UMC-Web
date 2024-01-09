@@ -1,57 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import "./header.css";
+import HeaderStyles from './header.style';
+import HamburgerMenu from './hamburgermenu';
 
 const Header = () => {
-    const [menu, setMenus] = useState([
-        { label: '홈', path: '/' },
-        { label: '게시판', path: '/board' },
-        { label: '히스토리', path: '/history' },
-        { label: '사진첩', path: '/gallery' },
-        { label: 'UMC 네트워킹', path: '/umcnetworking' },
-    ]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isSmallHeader, setSmallHeader] = useState(false);
+  const [hambugerOpen, setHambugerOpen] = useState(false);
 
-    const menuClick = (selectedIndex) => {
-        const updatedMenus = menu.map((item, index) => ({
-            ...item,
-            isSelected: index === selectedIndex,
-        }));
+  const [menu, setMenus] = useState([
+    { label: '홈', path: '/', isSelected: true },
+    { label: '게시판', path: '/board', isSelected: false },
+    { label: '히스토리', path: '/history', isSelected: false },
+    { label: '사진첩', path: '/gallery', isSelected: false },
+    { label: 'UMC 네트워킹', path: '/umcnetworking', isSelected: false },
+  ]);
 
-        setMenus(updatedMenus);
+  const loginClick = () => {
+    setIsLoggedIn(true);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setSmallHeader(isScrolled);
     };
 
-    return (
-        <header className='header-wrapper'>
+    window.addEventListener('scroll', handleScroll);
 
-            <div className='left'>
-                <img src={require('../assets/hambuger.svg').default} alt="햄버거 아이콘" />
-            </div>
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-            <div className='center'>
-                <img src={require('../assets/logo.svg').default} alt="로고" />
+  const menuClick = (selectedIndex) => {
+    const updatedMenus = menu.map((item, index) => ({
+      ...item,
+      isSelected: index === selectedIndex,
+    }));
 
-                <div className='navigation'>
-                    {menu.map((item, index) => (
-                        <Link
-                            key={index}
-                            to={item.path}
-                            className={item.isSelected ? 'selected' : ''}
-                            onClick={() => menuClick(index)}
-                        >
-                            {item.label}
-                        </Link>
-                    ))}
-                </div>
+    setMenus(updatedMenus);
+  };
 
-            </div>
+  const renderRightContent = () => {
+    if (isSmallHeader) {
+      return <p> 눈꽃님 반가워요! </p>;
+    } else {
+      return (
+        <>
+          <HeaderStyles.SmallHeaderImage
+            src={HeaderStyles.SettingIcon}
+            alt="Setting"
+          />
+          <HeaderStyles.SmallHeaderImage
+            src={HeaderStyles.NotificationIcon}
+            alt="Notification"
+          />
+          <HeaderStyles.SmallHeaderImage
+            src={HeaderStyles.FriendIcon}
+            alt="Friend"
+          />
+          <p> 눈꽃님 반가워요! </p>
+        </>
+      );
+    }
+  };
 
-            <div className='right'>
-                <img src={require('../assets/notification.svg').default} alt="Notification" />
-                <img src={require('../assets/friend.svg').default} alt="Friend" />
-            </div>
+  const OpenHamburger = () => {
+    setHambugerOpen(true);
+  };
 
-        </header>
-    );
+  return (
+    <HeaderStyles.HeaderWrapper className={isSmallHeader ? 'small-header' : ''}>
+      {isLoggedIn && (
+        <HeaderStyles.LeftContainer>
+          <HeaderStyles.Hamburger role="button" onClick={OpenHamburger}>
+            <img src={HeaderStyles.OpenHambugerIcon} alt="Hambuger" />
+          </HeaderStyles.Hamburger>
+
+          <HamburgerMenu
+            isOpen={hambugerOpen}
+            toggleSide={() => setHambugerOpen(false)}
+          />
+
+          <HeaderStyles.Navigation>
+            {menu.map((item, index) => (
+              <Link
+                key={index}
+                to={item.path}
+                className={item.isSelected ? 'selected' : ''}
+                onClick={() => menuClick(index)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </HeaderStyles.Navigation>
+        </HeaderStyles.LeftContainer>
+      )}
+
+      {isLoggedIn && (
+        <HeaderStyles.RightContainer>
+          {renderRightContent()}
+        </HeaderStyles.RightContainer>
+      )}
+
+      {!isLoggedIn && (
+        <HeaderStyles.LoginContainer>
+          <button onClick={loginClick}> 로그인 할래? </button>
+        </HeaderStyles.LoginContainer>
+      )}
+    </HeaderStyles.HeaderWrapper>
+  );
 };
 
 export default Header;
