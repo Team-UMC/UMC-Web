@@ -1,13 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import HamburgerMenuStyles from './hamburgermenu.style';
 
 const { HamburgerWrapper, MenuContainer, ExitIcon } = HamburgerMenuStyles;
 
 const HamburgerMenu = ({ isOpen, toggleSide }) => {
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const outside = useRef();
 
   const closeHamburger = () => {
+    setHamburgerOpen(false);
     toggleSide();
   };
 
@@ -49,11 +51,11 @@ const HamburgerMenu = ({ isOpen, toggleSide }) => {
       </div>
     </HamburgerWrapper>
   );
-};
 
 HamburgerMenu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleSide: PropTypes.func.isRequired,
+
 };
 
 export default HamburgerMenu;
