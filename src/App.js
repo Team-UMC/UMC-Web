@@ -3,17 +3,20 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './layout/header.jsx';
 import './App.css';
 import Main from './pages/main.jsx';
-import BoardWrite from './pages/boardwrite.jsx';
+import MyCalendar from './components/calendar.jsx';
 
 function App() {
   return (
     <div>
       <Header />
 
+      <MyCalendar />
+
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/board" element={<BoardWrite />} />
       </Routes>
+      <NoticeMain />
     </div>
   );
 }
