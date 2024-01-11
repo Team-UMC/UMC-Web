@@ -14,9 +14,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/board" element={<BoardWrite />} />
       </Routes>
-      <NoticeMain />
     </div>
   );
 }

@@ -27,7 +27,7 @@ const TitleTextAlign = styled.div`
   text-align: left;
 `;
 
-const NoticeList = props => {
+const NoticeList = () => {
   const [ dataList, setDataList ] = useState();
 
   useEffect(() => {

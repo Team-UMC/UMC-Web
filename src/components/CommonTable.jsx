@@ -11,7 +11,7 @@ const CommonTableWrapper = styled.table`
   border-top: 4px solid #000c76;
 `;
 
-const CommonTable = ({ children }) => {
+const CommonTable = (children) => {
     return (
         <CommonTableWrapper>
             <tbody>{children}</tbody>

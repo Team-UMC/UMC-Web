@@ -8,11 +8,9 @@ const CommonTableRowWrapper = styled.tr`
   }
 `;
 
-const CommonTableRow = ({children}) => {
+const CommonTableRow = (children) => {
     return (
-
         <CommonTableRowWrapper>{children}</CommonTableRowWrapper>
-
     );
 }
 
