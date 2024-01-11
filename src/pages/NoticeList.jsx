@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import CommonTable from "../components/CommonTable";
-import CommonTableRow from "../components/CommonTableRow";
-import CommonTableColumn from "../components/CommonTableColumn";
-import { noticeList } from "../Data";
-import styled, { keyframes } from "styled-components";
+import CommonTable from '../components/CommonTable';
+import CommonTableRow from '../components/CommonTableRow';
+import CommonTableColumn from '../components/CommonTableColumn';
+import { noticeList } from '../Data';
+import styled, { keyframes } from 'styled-components';
+
+import pin from '../assets/pin.svg';
+import nopin from '../assets/nopin.svg';
+import openArrow from '../assets/open-arrow.svg';
 
 const clickAnimation = keyframes`
   0% { transform: scale(1); }
@@ -28,38 +32,32 @@ const TitleTextAlign = styled.div`
 `;
 
 const NoticeList = () => {
-  const [ dataList, setDataList ] = useState();
+  const [dataList, setDataList] = useState();
 
   useEffect(() => {
-      setDataList(noticeList);
-  }, [ ]);
+    setDataList(noticeList);
+  }, []);
 
   const togglePin = (no) => {
-    setDataList(prevDataList =>
-      prevDataList.map(data =>
-        data.no === no ? { ...data, isPin: !data.isPin } : data
-      ).sort((a, b) => (b.isPin - a.isPin) || (a.no - b.no))
+    setDataList((prevDataList) =>
+      prevDataList
+        .map((data) =>
+          data.no === no ? { ...data, isPin: !data.isPin } : data,
+        )
+        .sort((a, b) => b.isPin - a.isPin || a.no - b.no),
     );
   };
 
   return (
     <>
       <CommonTable
-        headersName={[
-          "고정핀",
-          "제목",
-          "작성자",
-          "등록날짜",
-          "펼치기/접기",
-        ]}
+        headersName={['고정핀', '제목', '작성자', '등록날짜', '펼치기/접기']}
       >
         {dataList
           ? dataList.map((item, index) => {
               return (
                 <>
-                  <CommonTableRow
-                    key={index}
-                  >
+                  <CommonTableRow key={index}>
                     <CommonTableColumn>
                       <PinButton
                         onClick={() => {
@@ -67,15 +65,9 @@ const NoticeList = () => {
                         }}
                       >
                         {item.isPin ? (
-                          <img
-                            src={require("../assets/pin.svg").default}
-                            alt="고정핀 on"
-                          />
+                          <img src={pin} alt="고정핀 on" />
                         ) : (
-                          <img
-                            src={require("../assets/nopin.svg").default}
-                            alt="고정핀 off"
-                          />
+                          <img src={nopin} alt="고정핀 off" />
                         )}
                       </PinButton>
                     </CommonTableColumn>
@@ -87,19 +79,16 @@ const NoticeList = () => {
                     <CommonTableColumn>{item.author}</CommonTableColumn>
                     <CommonTableColumn>{item.date}</CommonTableColumn>
                     <CommonTableColumn>
-                      <img
-                        src={require("../assets/open-arrow.svg").default}
-                        alt="펼치기/접기"
-                      />
+                      <img src={openArrow} alt="펼치기/접기" />
                     </CommonTableColumn>
                   </CommonTableRow>
                 </>
               );
             })
-          : ""}
+          : ''}
       </CommonTable>
     </>
   );
-}
+};
 
 export default NoticeList;
