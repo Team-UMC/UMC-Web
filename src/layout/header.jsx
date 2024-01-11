@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderStyles from './header.style';
+import HamburgerMenu from './hamburgermenu';
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isSmallHeader, setSmallHeader] = useState(false);
+    const [hambugerOpen, setHambugerOpen] = useState(false);
 
     const [menu, setMenus] = useState([
         { label: '홈', path: '/', isSelected: true },
@@ -18,15 +20,6 @@ const Header = () => {
         setIsLoggedIn(true);
     }
 
-    const menuClick = (selectedIndex) => {
-        const updatedMenus = menu.map((item, index) => ({
-            ...item,
-            isSelected: index === selectedIndex,
-        }));
-
-        setMenus(updatedMenus);
-    };
-
     useEffect(() => {
         const handleScroll = () => {
             const isScrolled = window.scrollY > 0;
@@ -39,6 +32,15 @@ const Header = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    const menuClick = (selectedIndex) => {
+        const updatedMenus = menu.map((item, index) => ({
+            ...item,
+            isSelected: index === selectedIndex,
+        }));
+
+        setMenus(updatedMenus);
+    };
 
     const renderRightContent = () => {
         if (isSmallHeader) {
@@ -55,13 +57,19 @@ const Header = () => {
         }
     };
 
+    const OpenHamburger = () => {
+        setHambugerOpen(true);
+    }
+
     return (
         <HeaderStyles.HeaderWrapper className={isSmallHeader ? 'small-header' : ''}>
             {isLoggedIn && (
                 <HeaderStyles.LeftContainer>
-                    <HeaderStyles.Hamburger>
+                    <HeaderStyles.Hamburger role='button' onClick={OpenHamburger}>
                         <img src={HeaderStyles.OpenHambugerIcon} alt="Hambuger" />
                     </HeaderStyles.Hamburger>
+
+                    <HamburgerMenu isOpen={hambugerOpen} toggleSide={() => setHambugerOpen(false)} />
 
                     <HeaderStyles.Navigation>
                         {menu.map((item, index) => (
