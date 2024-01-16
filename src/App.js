@@ -1,12 +1,15 @@
 import React from 'react';
 // import CommonTable from './components/CommonTable';
 import './App.css';
-import NoticeMain from './pages/NoticeMain';
+import { StyledEngineProvider } from '@mui/material';
+import BoardPage from './pages/NewBoardPage/BoardPage';
 
 function App() {
   return (
     <div>
-      <NoticeMain />
+      <StyledEngineProvider injectFirst>
+        <BoardPage />
+      </StyledEngineProvider>
     </div>
   );
 }
