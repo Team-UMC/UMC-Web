@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import BoardFile from '../components/boardwrite/BoardFile';
 import BoardLabel from '../components/boardwrite/BoardLabel';
-import BoardTitle from '../components/BoardTitle';
-import BoardText from '../components/BoardText';
+import BoardTitle from '../components/boardwrite/BoardTitle';
+import BoardText from '../components/boardwrite/BoardText';
 import BoardButton from '../components/boardwrite/BoardButton';
 
 const BoardWriteContainer = styled.div`

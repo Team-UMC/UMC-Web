@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import SchoolUnchecked from '../assets/schoolUnchecked.svg';
-import SchoolChecked from '../assets/schoolChecked.svg';
-import CampUnchecked from '../assets/campUnchecked.svg';
-import CampChecked from '../assets/campChecked.svg';
-import UnionUnchecked from '../assets/unionUnchecked.svg';
-import UnionChecked from '../assets/unionChecked.svg';
-import SchoolBoard from '../BoardSchool'; 
+import SchoolUnchecked from '../../assets/schoolUnchecked.svg';
+import SchoolChecked from '../../assets/schoolChecked.svg';
+import CampUnchecked from '../../assets/campUnchecked.svg';
+import CampChecked from '../../assets/campChecked.svg';
+import UnionUnchecked from '../../assets/unionUnchecked.svg';
+import UnionChecked from '../../assets/unionChecked.svg';
+import SchoolBoard from './BoardSchool'; 
 import CampBoard from './BoardCamp';
-import UnionBoard from '../BoardUnion';
+import UnionBoard from './BoardUnion';
 
 const ContainerType = styled.div`
   display: flex;
