@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import School from '../../assets/boardCard/school.svg';
@@ -64,56 +64,67 @@ const BoardBoxSchoolContent = styled.p`
 `;
 
 const BoardBoxSchool = () => {
-    return (
-      <BoardBoxSchoolContainer>
-        <BoardBoxSchoolImage>
-          <img src={School} alt="school" />
-        </BoardBoxSchoolImage>
-        <BoardBoxSchoolTitle>학교</BoardBoxSchoolTitle>
-        <BoardBoxSchoolContentWrapper>
-          <BoardBoxSchoolContent>
-            <NavLink
-              to={`/board/school/notice`}
-              activeStyle={{ color: '#8784ff' }}
-            >
-              공지사항
-            </NavLink>
-          </BoardBoxSchoolContent>
-          <BoardBoxSchoolContent>
-            <NavLink
-              to={`/board/school/free`}
-              activeStyle={{ color: '#8784ff' }}
-            >
-              자유 게시판
-            </NavLink>
-          </BoardBoxSchoolContent>
-          <BoardBoxSchoolContent>
-            <NavLink
-              to={`/board/school/question`}
-              activeStyle={{ color: '#8784ff' }}
-            >
-              질문 게시판
-            </NavLink>
-          </BoardBoxSchoolContent>
-          <BoardBoxSchoolContent>
-            <NavLink
-              to={`/board/school/workbook`}
-              activeStyle={{ color: '#8784ff' }}
-            >
-              워크북 게시판
-            </NavLink>
-          </BoardBoxSchoolContent>
-          <BoardBoxSchoolContent>
-            <NavLink
-              to={`/board/school/prev`}
-              activeStyle={{ color: '#8784ff' }}
-            >
-              이전 기수 게시판
-            </NavLink>
-          </BoardBoxSchoolContent>
-        </BoardBoxSchoolContentWrapper>
-      </BoardBoxSchoolContainer>
-    );
+  const navigate = useNavigate();
+
+  const navigateTo = (path) => {
+    navigate(`/board/school/${path}`);
+  };
+
+  return (
+    <BoardBoxSchoolContainer>
+      <BoardBoxSchoolImage>
+        <img src={School} alt="school" />
+      </BoardBoxSchoolImage>
+      <BoardBoxSchoolTitle>학교</BoardBoxSchoolTitle>
+      <BoardBoxSchoolContentWrapper>
+        <BoardBoxSchoolContent>
+          <NavLink
+            to={`/board/school/notice`}
+            activeStyle={{ color: '#8784ff' }}
+            onClick={navigateTo('notice')}
+          >
+            공지사항
+          </NavLink>
+        </BoardBoxSchoolContent>
+        <BoardBoxSchoolContent>
+          <NavLink
+            to={`/board/school/free`}
+            activeStyle={{ color: '#8784ff' }}
+            onClick={navigateTo('free')}
+          >
+            자유 게시판
+          </NavLink>
+        </BoardBoxSchoolContent>
+        <BoardBoxSchoolContent>
+          <NavLink
+            to={`/board/school/question`}
+            activeStyle={{ color: '#8784ff' }}
+            onClick={navigateTo('question')}
+          >
+            질문 게시판
+          </NavLink>
+        </BoardBoxSchoolContent>
+        <BoardBoxSchoolContent>
+          <NavLink
+            to={`/board/school/workbook`}
+            activeStyle={{ color: '#8784ff' }}
+            onClick={navigateTo('workbook')}
+          >
+            워크북 게시판
+          </NavLink>
+        </BoardBoxSchoolContent>
+        <BoardBoxSchoolContent>
+          <NavLink
+            to={`/board/school/prev`}
+            activeStyle={{ color: '#8784ff' }}
+            onClick={navigateTo('prev')}
+          >
+            이전 기수 게시판
+          </NavLink>
+        </BoardBoxSchoolContent>
+      </BoardBoxSchoolContentWrapper>
+    </BoardBoxSchoolContainer>
+  );
 };
 
 export default BoardBoxSchool;

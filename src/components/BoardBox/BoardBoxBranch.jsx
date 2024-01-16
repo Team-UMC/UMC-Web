@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import branch from '../../assets/boardCard/branch.svg';
@@ -64,6 +64,28 @@ const BoardBoxBranchContent = styled.div`
 `;
 
 const BoardBoxBranch = () => {
+  const navigate = useNavigate();
+
+  const navigateToNotice = () => {
+    navigate('/board/branch/notice');
+  };
+
+  const navigateToFree = () => {
+    navigate('/board/branch/free');
+  };
+
+  const navigateToQuestion = () => {
+    navigate('/board/branch/question');
+  };
+
+  const navigateToWorkbook = () => {
+    navigate('/board/branch/workbook');
+  };
+
+  const navigateToPrev = () => {
+    navigate('/board/branch/prev');
+  };
+
   return (
     <BoardBoxBranchContainer>
       <BoardBoxBranchImage>
@@ -75,12 +97,17 @@ const BoardBoxBranch = () => {
           <NavLink
             to={`/board/branch/notice`}
             activeStyle={{ color: '#8784ff' }}
+            onClick={navigateToNotice}
           >
             공지사항
           </NavLink>
         </BoardBoxBranchContent>
         <BoardBoxBranchContent>
-          <NavLink to={`/board/branch/free`} activeStyle={{ color: '#8784ff' }}>
+          <NavLink
+            to={`/board/branch/free`}
+            activeStyle={{ color: '#8784ff' }}
+            onClick={navigateToFree}
+          >
             자유 게시판
           </NavLink>
         </BoardBoxBranchContent>
@@ -88,6 +115,7 @@ const BoardBoxBranch = () => {
           <NavLink
             to={`/board/branch/question`}
             activeStyle={{ color: '#8784ff' }}
+            onClick={navigateToQuestion}
           >
             질문 게시판
           </NavLink>
@@ -96,12 +124,17 @@ const BoardBoxBranch = () => {
           <NavLink
             to={`/board/branch/workbook`}
             activeStyle={{ color: '#8784ff' }}
+            onClick={navigateToWorkbook}
           >
             워크북 게시판
           </NavLink>
         </BoardBoxBranchContent>
         <BoardBoxBranchContent>
-          <NavLink to={`/board/branch/prev`} activeStyle={{ color: '#8784ff' }}>
+          <NavLink
+            to={`/board/branch/prev`}
+            activeStyle={{ color: '#8784ff' }}
+            onClick={navigateToPrev}
+          >
             이전 기수 게시판
           </NavLink>
         </BoardBoxBranchContent>
