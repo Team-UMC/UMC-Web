@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import BoardFile from '../components/BoardFile';
-import BoardLabel from '../components/BoardLabel';
+import BoardFile from '../components/boardwrite/BoardFile';
+import BoardLabel from '../components/boardwrite/BoardLabel';
 import BoardTitle from '../components/BoardTitle';
 import BoardText from '../components/BoardText';
-import BoardButton from '../components/BoardButton';
+import BoardButton from '../components/boardwrite/BoardButton';
 
 const BoardWriteContainer = styled.div`
   display: flex;
