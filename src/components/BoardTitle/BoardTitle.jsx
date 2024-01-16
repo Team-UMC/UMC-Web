@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import schoolIcon from '../../assets/titleIcon/schoolIcon.svg';
-import dotImage from '../../assets/titleIcon/titledot.svg';
-
 const BoardTitleSchoolContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,7 +26,7 @@ const BoardTitleSchoolMain = styled.h1`
     display: inline-block;
     width: 10px;
     height: 10px;
-    background: url(${dotImage}) no-repeat;
+
     background-size: contain;
     margin-right: 5px;
   }
