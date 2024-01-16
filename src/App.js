@@ -1,15 +1,12 @@
 import React from 'react';
 
 import './App.css';
-import BoardPage from './pages/NewBoardPage/BoardPage';
-import { StyledEngineProvider } from '@mui/material';
+import BoardWrite from './pages/BoardWrite/boardwrite.jsx';
 
 function App() {
   return (
     <div>
-      <StyledEngineProvider injectFirst>
-        <BoardPage />
-      </StyledEngineProvider>
+      <BoardWrite />
     </div>
   );
 }

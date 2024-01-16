@@ -26,7 +26,6 @@ const BoardTitleSchoolMain = styled.h1`
     display: inline-block;
     width: 10px;
     height: 10px;
-
     background-size: contain;
     margin-right: 5px;
   }
@@ -43,9 +42,7 @@ const BoardTitleSchoolSub = styled.p`
 const BoardTitle = () => {
   return (
     <BoardTitleSchoolContainer>
-      <div className="board-title-icon">
-        <img src={schoolIcon} alt="schoolIcon" />
-      </div>
+      <div className="board-title-icon"></div>
       <BoardTitleSchoolWrapper>
         <BoardTitleSchoolMain>자유게시판</BoardTitleSchoolMain>
         <BoardTitleSchoolSub>
