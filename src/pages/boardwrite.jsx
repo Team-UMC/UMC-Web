@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import SchoolUnchecked from '../assets/schoolUnchecked.svg';
-import SchoolChecked from '../assets/schoolChecked.svg';
-import CampUnchecked from '../assets/campUnchecked.svg';
-import CampChecked from '../assets/campChecked.svg';
-import UnionUnchecked from '../assets/unionUnchecked.svg';
-import UnionChecked from '../assets/unionChecked.svg';
-import SuggestionUnchecked from '../assets/suggestionUnchecked.svg';
-import SuggestionChecked from '../assets/suggestionChecked.svg';
-import Imgfile from '../assets/imgfile.svg';
-import FileIcon from '../assets/file.svg';
+import SchoolUnchecked from 'assets/board/write/SchoolUnchecked.svg';
+import SchoolChecked from 'assets/board/write/SchoolChecked.svg';
+import CampUnchecked from 'assets/board/write/CampUnchecked.svg';
+import CampChecked from 'assets/board/write/CampChecked.svg';
+import UnionUnchecked from 'assets/board/write/UnionUnchecked.svg';
+import UnionChecked from 'assets/board/write/UnionChecked.svg';
+import SuggestionUnchecked from 'assets/board/write/SuggestionUnchecked.svg';
+import SuggestionChecked from 'assets/board/write/SuggestionChecked.svg';
+import Imgfile from 'assets/board/write/ImageFile.svg';
+import FileIcon from 'assets/board/write/File.svg';
 
 const CenteredContainer = styled.div`
   display: flex;

@@ -1,9 +1,12 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from './layout/header.jsx';
-import './App.css';
-import Main from './pages/main.jsx';
-import MyCalendar from './components/calendar.jsx';
+import 'App.css';
+
+import Header from 'layout/header.jsx';
+import Main from 'pages/main.jsx';
+import MyCalendar from 'components/calendar.jsx';
+import BoardWrite from 'pages/boardwrite.jsx';
+import SignUpForm from 'pages/signup.jsx';
 
 function App() {
   return (
@@ -14,6 +17,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/boardWrite" element={<BoardWrite />} />
+        <Route path="/signup" element={<SignUpForm />} />
       </Routes>
     </div>
   );

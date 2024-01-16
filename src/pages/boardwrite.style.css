@@ -1,79 +1,77 @@
 .centered-container {
-    display: flex;
-    flex-direction: column;
-    padding: 30px 400px 0px 400px;
-  }
-  
-  .write-title { /*글작성*/
-    font-size: 25px;
-    color: #000C76;
-    font-weight: bold;
-    margin: 30px 0px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 400px 0px 400px;
+}
 
-  }
+.write-title {
+  /*글작성*/
+  font-size: 25px;
+  color: #000c76;
+  font-weight: bold;
+  margin: 30px 0px;
+}
 
-  .type {
-    margin-right: 10px;
-    font-weight: bold;
-    border: none; /* 태두리 없음 */
-    background-color: transparent; /* 채우기 색 없음 */
-    cursor: pointer;
-  }
-  
+.type {
+  margin-right: 10px;
+  font-weight: bold;
+  border: none; /* 태두리 없음 */
+  background-color: transparent; /* 채우기 색 없음 */
+  cursor: pointer;
+}
 
 .title {
-    color: black; /* 입력된 텍스트의 색을 검정 */
-    border: none;
-    border-bottom: 1px solid #C0C0C0;
-    outline: none;
-    width: 900px;
-    height: 30px;
-    font-size: 20px;
-    resize: none;
-  }
+  color: black; /* 입력된 텍스트의 색을 검정 */
+  border: none;
+  border-bottom: 1px solid #c0c0c0;
+  outline: none;
+  width: 900px;
+  height: 30px;
+  font-size: 20px;
+  resize: none;
+}
 
-  /* placeholder 색상 유지 */
-  .title::placeholder,
-  .title::-webkit-input-placeholder {
-    color: #C0C0C0;
-    font-size: 20px;
-    font-weight: bold;
-  }
+/* placeholder 색상 유지 */
+.title::placeholder,
+.title::-webkit-input-placeholder {
+  color: #c0c0c0;
+  font-size: 20px;
+  font-weight: bold;
+}
 
-  .file {
-    display: flex;
-    align-items: center;
-    color: #C0C0C0;
-    font-size: 17px;
-  }
-  
-  .circle-button {
-    display: inline-block;
-    background-color: #C0C0C0;
-    border: none;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
-    font-size: 15px;
-    font-weight: bold;
-    color: white; /* + 기호의 색상 설정 */
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .file-container{
-    display: flex;
-    flex-direction: center;
-    align-items: center;
-    height: 50px;
-  }
-  
+.file {
+  display: flex;
+  align-items: center;
+  color: #c0c0c0;
+  font-size: 17px;
+}
+
+.circle-button {
+  display: inline-block;
+  background-color: #c0c0c0;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white; /* + 기호의 색상 설정 */
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.file-container {
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  height: 50px;
+}
+
 .file-name-comtainer {
   display: flex;
   flex-direction: row;
-
 }
 
 .file-details {
@@ -89,80 +87,75 @@
   margin-left: 10px; /*이미지를 글자의 가운데 위치하도록??*/
 }
 
-  
-  .text {
-    color: black; /* 입력된 텍스트의 색을 검정 */
-    padding-top: 10px;
-    border: none;
-    border-top: 1px solid #C0C0C0;
-    outline: none;
-    width: 900px;
-    height: 300px; 
-    font-size: 15px;
-    resize: none;
-  }
+.text {
+  color: black; /* 입력된 텍스트의 색을 검정 */
+  padding-top: 10px;
+  border: none;
+  border-top: 1px solid #c0c0c0;
+  outline: none;
+  width: 900px;
+  height: 300px;
+  font-size: 15px;
+  resize: none;
+}
 
-  .text::placeholder,
-  .text::-webkit-input-placeholder {
-    color: #C0C0C0;
-    font-size: 15px;
-  }
-  
-  .button {
-    width: 50px;
-    height: 30px;
-    border-radius: 40px;
-    background-color: #000c76;
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 0 10px;
-    cursor: pointer;
-  }
-  
-  
-  .button-container {
-    display: flex;
-    margin : 10px;
-    justify-content: flex-end;
-  }
-  
-  .container-type {
-    display: flex;
-    align-items: center;
-    margin-top : 50px;
-    margin-left: 15px;
-  }
+.text::placeholder,
+.text::-webkit-input-placeholder {
+  color: #c0c0c0;
+  font-size: 15px;
+}
 
-  .container-board {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .board {
-    border-radius: 18px;
-    background-color: #fff;
-    color: #D1D1D1;
-    border: 1px solid #C0C0C0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    height: 23px;
-    padding: 8px;
-    cursor: pointer;
-  }
-  
-  .board.selected {
-    background-color: #fff; /* 선택된 경우 내부의 색은 변경하지 않음 */
-    color: #000C76; /* 선택된 경우 글자의 색상 변경 */
-    border-color: #000C76; /* 선택된 경우 테두리 색상 변경 */
-  }
+.button {
+  width: 50px;
+  height: 30px;
+  border-radius: 40px;
+  background-color: #000c76;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
+  cursor: pointer;
+}
 
-  
+.button-container {
+  display: flex;
+  margin: 10px;
+  justify-content: flex-end;
+}
 
+.container-type {
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 15px;
+}
+
+.container-board {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.board {
+  border-radius: 18px;
+  background-color: #fff;
+  color: #d1d1d1;
+  border: 1px solid #c0c0c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  height: 23px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.board.selected {
+  background-color: #fff; /* 선택된 경우 내부의 색은 변경하지 않음 */
+  color: #000c76; /* 선택된 경우 글자의 색상 변경 */
+  border-color: #000c76; /* 선택된 경우 테두리 색상 변경 */
+}

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ExitHamburgerIcon from '../assets/set.svg';
 
 const HamburgerWrapper = styled.div`
   z-index: 5;
@@ -50,7 +49,6 @@ const HamburgerMenuStyles = {
   HamburgerWrapper,
   ExitIcon,
   MenuContainer,
-  ExitHamburgerIcon,
 };
 
 export default HamburgerMenuStyles;
