@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import BackgroundImage from 'assets/signup/Background.svg';
+import BackgroundImage from 'assets/signup/background.svg';
 
 const StartButton = styled.button`
   height: 6vh;
