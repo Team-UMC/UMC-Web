@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import SchoolUnchecked from '../assets/schoolUnchecked.svg';
-import SchoolChecked from '../assets/schoolChecked.svg';
-import CampUnchecked from '../assets/campUnchecked.svg';
-import CampChecked from '../assets/campChecked.svg';
-import UnionUnchecked from '../assets/unionUnchecked.svg';
-import UnionChecked from '../assets/unionChecked.svg';
-import SuggestionUnchecked from '../assets/suggestionUnchecked.svg';
-import SuggestionChecked from '../assets/suggestionChecked.svg';
-import Imgfile from '../assets/imgfile.svg';
-import FileIcon from '../assets/file.svg';
+import SchoolUnchecked from '../../assets/boardwrite/schoolUnchecked.svg';
+import SchoolChecked from '../../assets/boardwrite/schoolChecked.svg';
+import CampUnchecked from '../../assets/boardwrite/campUnchecked.svg';
+import CampChecked from '../../assets/boardwrite/campChecked.svg';
+import UnionUnchecked from '../../assets/boardwrite/unionUnchecked.svg';
+import UnionChecked from '../../assets/boardwrite/unionChecked.svg';
+import SuggestionUnchecked from '../../assets/boardwrite/suggestionUnchecked.svg';
+import SuggestionChecked from '../../assets/boardwrite/suggestionChecked.svg';
+import Imgfile from '../../assets/boardwrite/imgfile.svg';
+import FileIcon from '../../assets/boardwrite/file.svg';
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const CenteredContainer = styled.div`
 
 const WriteTitle = styled.div`
   font-size: 25px;
-  color: #000C76;
+  color: #000c76;
   font-weight: bold;
   margin: 30px 0px;
 `;
@@ -65,7 +65,7 @@ const Board = styled.div`
   border-radius: 18px;
   background-color: #fff;
   color: ${({ selected }) => (selected ? '#000C76' : '#D1D1D1')};
-  border: 1px solid #C0C0C0;
+  border: 1px solid #c0c0c0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,8 +76,8 @@ const Board = styled.div`
 
   &.selected {
     background-color: #fff;
-    color: #000C76;
-    border-color: #000C76;
+    color: #000c76;
+    border-color: #000c76;
   }
 `;
 
@@ -106,7 +106,7 @@ const Button = styled.button`
 const TitleInput = styled.input`
   color: black;
   border: none;
-  border-bottom: 1px solid #C0C0C0;
+  border-bottom: 1px solid #c0c0c0;
   outline: none;
   width: 900px;
   height: 30px;
@@ -114,7 +114,7 @@ const TitleInput = styled.input`
   resize: none;
 
   &::placeholder {
-    color: #C0C0C0;
+    color: #c0c0c0;
     font-size: 20px;
     font-weight: bold;
   }
@@ -127,7 +127,7 @@ const FileContainer = styled.div`
 `;
 
 const FileLabel = styled.div`
-  color: #C0C0C0;
+  color: #c0c0c0;
   font-size: 17px;
 `;
 
@@ -137,7 +137,7 @@ const FileInput = styled.input`
 
 const CircleButton = styled.label`
   display: inline-block;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   border: none;
   border-radius: 50%;
   width: 20px;
@@ -173,7 +173,7 @@ const Textarea = styled.textarea`
   color: black;
   padding-top: 10px;
   border: none;
-  border-top: 1px solid #C0C0C0;
+  border-top: 1px solid #c0c0c0;
   outline: none;
   width: 900px;
   height: 300px;
@@ -181,7 +181,7 @@ const Textarea = styled.textarea`
   resize: none;
 
   &::placeholder {
-    color: #C0C0C0;
+    color: #c0c0c0;
     font-size: 15px;
   }
 `;
@@ -217,7 +217,12 @@ const BoardWrite = () => {
     const newFiles = Array.from(selectedFiles).map((file) => ({
       name: file.name,
       type: file.type,
-      icon: <img src={file.type === 'image/jpeg' ? Imgfile : FileIcon} alt="File Icon" />,
+      icon: (
+        <img
+          src={file.type === 'image/jpeg' ? Imgfile : FileIcon}
+          alt="File Icon"
+        />
+      ),
     }));
 
     setFileDetails((prevDetails) => ({
@@ -234,19 +239,35 @@ const BoardWrite = () => {
 
         <div>
           <TypeLink to="#" onClick={() => handleClick('schoolButton')}>
-            {buttonStates.schoolButton ? <img src={SchoolChecked} alt="Inactive Image" /> : <img src={SchoolUnchecked} alt="학교" />}
+            {buttonStates.schoolButton ? (
+              <img src={SchoolChecked} alt="Inactive Image" />
+            ) : (
+              <img src={SchoolUnchecked} alt="학교" />
+            )}
           </TypeLink>
 
           <TypeLink to="#" onClick={() => handleClick('campButton')}>
-            {buttonStates.campButton ? <img src={CampChecked} alt="Inactive Image" /> : <img src={CampUnchecked} alt="지부" />}
+            {buttonStates.campButton ? (
+              <img src={CampChecked} alt="Inactive Image" />
+            ) : (
+              <img src={CampUnchecked} alt="지부" />
+            )}
           </TypeLink>
 
           <TypeLink to="#" onClick={() => handleClick('unionButton')}>
-            {buttonStates.unionButton ? <img src={UnionChecked} alt="Inactive Image" /> : <img src={UnionUnchecked} alt="연합" />}
+            {buttonStates.unionButton ? (
+              <img src={UnionChecked} alt="Inactive Image" />
+            ) : (
+              <img src={UnionUnchecked} alt="연합" />
+            )}
           </TypeLink>
 
           <TypeLink to="#" onClick={() => handleClick('suggestionButton')}>
-            {buttonStates.suggestionButton ? <img src={SuggestionChecked} alt="Inactive Image" /> : <img src={SuggestionUnchecked} alt="공지" />}
+            {buttonStates.suggestionButton ? (
+              <img src={SuggestionChecked} alt="Inactive Image" />
+            ) : (
+              <img src={SuggestionUnchecked} alt="공지" />
+            )}
           </TypeLink>
         </div>
       </ContainerType>
@@ -276,7 +297,13 @@ const BoardWrite = () => {
 
       <FileContainer>
         <FileLabel>첨부파일</FileLabel>
-        <FileInput type="file" id="fileInput" style={{ display: 'none' }} onChange={(e) => handleFileChange(e)} multiple />
+        <FileInput
+          type="file"
+          id="fileInput"
+          style={{ display: 'none' }}
+          onChange={(e) => handleFileChange(e)}
+          multiple
+        />
         <CircleButton htmlFor="fileInput">+</CircleButton>
       </FileContainer>
 

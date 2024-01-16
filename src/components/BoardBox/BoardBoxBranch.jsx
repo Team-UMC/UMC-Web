@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import branch from '../../assets/boardCard/branch.svg';
@@ -47,6 +48,13 @@ const BoardBoxBranchContent = styled.div`
   word-wrap: break-word;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
+  a {
+    background: white;
+    text-decoration: none;
+    color: inherit;
+  }
+
   &:hover {
     color: #8784ff;
   }
@@ -63,11 +71,40 @@ const BoardBoxBranch = () => {
       </BoardBoxBranchImage>
       <BoardBoxBranchTitle>학교</BoardBoxBranchTitle>
       <BoardBoxBranchContentWrapper>
-        <BoardBoxBranchContent>공지사항</BoardBoxBranchContent>
-        <BoardBoxBranchContent>자유 게시판</BoardBoxBranchContent>
-        <BoardBoxBranchContent>질문 게시판</BoardBoxBranchContent>
-        <BoardBoxBranchContent>워크북 게시판</BoardBoxBranchContent>
-        <BoardBoxBranchContent>이전 기수 게시판</BoardBoxBranchContent>
+        <BoardBoxBranchContent>
+          <NavLink
+            to={`/board/branch/notice`}
+            activeStyle={{ color: '#8784ff' }}
+          >
+            공지사항
+          </NavLink>
+        </BoardBoxBranchContent>
+        <BoardBoxBranchContent>
+          <NavLink to={`/board/branch/free`} activeStyle={{ color: '#8784ff' }}>
+            자유 게시판
+          </NavLink>
+        </BoardBoxBranchContent>
+        <BoardBoxBranchContent>
+          <NavLink
+            to={`/board/branch/question`}
+            activeStyle={{ color: '#8784ff' }}
+          >
+            질문 게시판
+          </NavLink>
+        </BoardBoxBranchContent>
+        <BoardBoxBranchContent>
+          <NavLink
+            to={`/board/branch/workbook`}
+            activeStyle={{ color: '#8784ff' }}
+          >
+            워크북 게시판
+          </NavLink>
+        </BoardBoxBranchContent>
+        <BoardBoxBranchContent>
+          <NavLink to={`/board/branch/prev`} activeStyle={{ color: '#8784ff' }}>
+            이전 기수 게시판
+          </NavLink>
+        </BoardBoxBranchContent>
       </BoardBoxBranchContentWrapper>
     </BoardBoxBranchContainer>
   );

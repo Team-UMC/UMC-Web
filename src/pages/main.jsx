@@ -1,9 +1,10 @@
 import React from 'react';
+import Image from '../assets/image.svg';
 
 const Main = () => {
   return (
     <div>
-      <img src={require('../assets/image.svg').default} alt="대충 사진" />
+      <img src={Image} alt="대충 사진" />
     </div>
   );
 };

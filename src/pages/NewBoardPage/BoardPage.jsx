@@ -1,9 +1,23 @@
-import React from "react";
+import React from 'react';
+import styled from 'styled-components';
 
-import BoardBox from "../../components/BoardBox/BoardBox";
-import BoardTable from "../../components/NewBoard/BoardTable";
-import styled from "styled-components";
-import BoardWriteBottom from "../../components/NewBoard/BoardWriteButtom";
+import BoardTitle from '../../components/BoardTitle/BoardTitle';
+import BoardBox from '../../components/BoardBox/BoardBox';
+import BoardTable from '../../components/NewBoard/BoardTable';
+import BoardWriteButton from '../../components/NewBoard/BoardWriteButton';
+
+const BoardPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BoardTitleLayout = styled(BoardTitle)`
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+`;
 
 const BoardBoxAndBoardTableWrapper = styled.div`
   display: flex;
@@ -30,15 +44,18 @@ const StyledBoardTable = styled(BoardTable)`
 `;
 
 const BoardPage = () => {
-    return (
+  return (
+    <BoardPageContainer>
+      <BoardTitleLayout />
       <BoardBoxAndBoardTableWrapper>
         <StyledBoardBox />
         <BoardTableWrapper>
           <StyledBoardTable />
-          <BoardWriteBottom />
+          <BoardWriteButton />
         </BoardTableWrapper>
       </BoardBoxAndBoardTableWrapper>
-    );
+    </BoardPageContainer>
+  );
 };
 
 export default BoardPage;

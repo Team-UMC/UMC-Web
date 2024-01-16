@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import union from '../../assets/boardCard/union.svg';
@@ -46,6 +47,13 @@ const BoardBoxUnionContent = styled.div`
   word-wrap: break-word;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
+  a {
+    background: white;
+    text-decoration: none;
+    color: inherit;
+  }
+
   &:hover {
     color: #8784ff;
   }
@@ -62,11 +70,40 @@ const BoardBoxUnion = () => {
       </BoardBoxUnionImage>
       <BoardBoxUnionTitle>학교</BoardBoxUnionTitle>
       <BoardBoxUnionContentWrapper>
-        <BoardBoxUnionContent>공지사항</BoardBoxUnionContent>
-        <BoardBoxUnionContent>자유 게시판</BoardBoxUnionContent>
-        <BoardBoxUnionContent>질문 게시판</BoardBoxUnionContent>
-        <BoardBoxUnionContent>워크북 게시판</BoardBoxUnionContent>
-        <BoardBoxUnionContent>이전 기수 게시판</BoardBoxUnionContent>
+        <BoardBoxUnionContent>
+          <NavLink
+            to={`/board/union/notice`}
+            activeStyle={{ color: '#8784ff' }}
+          >
+            공지사항
+          </NavLink>
+        </BoardBoxUnionContent>
+        <BoardBoxUnionContent>
+          <NavLink to={`/board/union/free`} activeStyle={{ color: '#8784ff' }}>
+            자유 게시판
+          </NavLink>
+        </BoardBoxUnionContent>
+        <BoardBoxUnionContent>
+          <NavLink
+            to={`/board/union/question`}
+            activeStyle={{ color: '#8784ff' }}
+          >
+            질문 게시판
+          </NavLink>
+        </BoardBoxUnionContent>
+        <BoardBoxUnionContent>
+          <NavLink
+            to={`/board/union/workbook`}
+            activeStyle={{ color: '#8784ff' }}
+          >
+            워크북 게시판
+          </NavLink>
+        </BoardBoxUnionContent>
+        <BoardBoxUnionContent>
+          <NavLink to={`/board/union/prev`} activeStyle={{ color: '#8784ff' }}>
+            이전 기수 게시판
+          </NavLink>
+        </BoardBoxUnionContent>
       </BoardBoxUnionContentWrapper>
     </BoardBoxUnionContainer>
   );

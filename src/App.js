@@ -1,8 +1,8 @@
 import React from 'react';
-// import CommonTable from './components/CommonTable';
+
 import './App.css';
-import { StyledEngineProvider } from '@mui/material';
 import BoardPage from './pages/NewBoardPage/BoardPage';
+import { StyledEngineProvider } from '@mui/material';
 
 function App() {
   return (
