@@ -1,12 +1,14 @@
 import React from 'react';
 // import CommonTable from './components/CommonTable';
 import './App.css';
-import NoticeMain from './pages/NoticeMain';
+import BoardWrite from './pages/BoardWrite';
+//import Header from './layout/header';
 
 function App() {
   return (
     <div>
-      <NoticeMain />
+      
+      <BoardWrite />
     </div>
   );
 }
