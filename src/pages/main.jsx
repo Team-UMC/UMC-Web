@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import MyCalendar from 'components/Main/Calendar/calendar';
-import RowContents from 'components/Main/RowContents';
+import RowContents from 'components/Main/Calendar/RowContents';
 import MainDescription from 'components/Main/MainDescription';
+import Notification from 'components/Main/Notification/Notification';
 
 import CalendarData from 'components/Main/Calendar/CalendarData';
 
 const MainWrapper = styled.div`
-  margin-top: 100%;
+  margin-top: 35vh;
 `;
 
 const Wrapper = styled.div`
@@ -46,7 +47,7 @@ const Main = () => {
       {/* 홈화면 공지사항 */}
       <MainDescription title='공지사항' subtitle='새롭게 업데이트된 공지사항을 확인하세요!'/>
       <Wrapper>
-        <RowContents data={CalendarData.CalendarSchoolData} itemsToShow={4} displayProperties={['data', 'title']}/>
+        <Notification />
       </Wrapper>
 
     </MainWrapper>
