@@ -8,7 +8,7 @@ import FriendIcon from 'assets/header/Friend.svg';
 
 const HeaderWrapper = styled.header`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
   background: url('${HeaderBackground}') no-repeat center/cover;
   height: 100vh;
@@ -52,10 +52,9 @@ const Navigation = styled.div`
 
   a {
     font-size: 15px;
-    margin: 10px 30px;
+    margin: 10px 60px;
     text-decoration: none;
     color: white;
-    font-family: 'Pretendard', sans-serif;
 
     &.selected {
       font-weight: bold;
@@ -65,7 +64,7 @@ const Navigation = styled.div`
 
 const RightContainer = styled.div`
   height: 43px;
-  padding: 28px 20px 20px 50px;
+  padding: 28px 100px 20px 50px;
   display: flex;
   align-items: center;
 `;

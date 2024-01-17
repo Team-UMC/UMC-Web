@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUpFormWrapper from './SignUpForm.style';
 
-const WriteInput = ({label}) => {
+const WriteInput = ({ label }) => {
   return (
     <SignUpFormWrapper>
       <label>{label}</label>
