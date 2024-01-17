@@ -24,7 +24,7 @@ const HeaderWrapper = styled.header`
     right: 0;
     z-index: 1000;
     background: url('${SmallHeaderBackground}') no-repeat center/cover;
-    height: 89px;
+    height: 91px;
     margin: 0;
   }
 `;
