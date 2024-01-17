@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderStyles from 'layout/Header/header.style';
-import HamburgerMenuStyles from 'layout/HamburgerMenu/hamburgermenu.style';
 import HamburgerMenu from 'components/Header/HamburgerMenu';
+import HeaderStyles from 'layout/Header/header.style';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -161,7 +160,7 @@ const Header = () => {
       )}
 
       {hambugerOpen && (
-        <HamburgerMenuStyles.HamburgerWrapper
+        <HeaderStyles.HamburgerWrapper
           ref={outside}
           className={`SideBarWrap ${hambugerOpen ? 'open' : ''}`}
           onMouseLeave={handleMouseLeaveHamburger}
@@ -172,7 +171,7 @@ const Header = () => {
             <HamburgerMenu menuItems={HistoryMenuItems} />;
             <HamburgerMenu menuItems={GalleryMenuItems} />;
           </div>
-        </HamburgerMenuStyles.HamburgerWrapper>
+        </HeaderStyles.HamburgerWrapper>
       )}
     </HeaderStyles.HeaderWrapper>
   );
