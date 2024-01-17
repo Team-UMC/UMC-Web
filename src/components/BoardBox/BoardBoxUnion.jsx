@@ -65,25 +65,9 @@ const BoardBoxUnionContent = styled.div`
 const BoardBoxUnion = () => {
   const navigate = useNavigate();
 
-  const navigateToNotice = () => {
-    navigate('/board/union/notice');
-  };
-
-  const navigateToFree = () => {
-    navigate('/board/union/free');
-  };
-
-  const navigateToQuestion = () => {
-    navigate('/board/union/question');
-  };
-
-  const navigateToWorkbook = () => {
-    navigate('/board/union/workbook');
-  };
-
-  const navigateToPrev = () => {
-    navigate('/board/union/prev');
-  };
+    const navigateTo = (path) => () => {
+      navigate(`/board/union/${path}`);
+    };
 
   return (
     <BoardBoxUnionContainer>
@@ -94,45 +78,32 @@ const BoardBoxUnion = () => {
       <BoardBoxUnionContentWrapper>
         <BoardBoxUnionContent>
           <NavLink
-            to={`/board/union/notice`}
-            activeStyle={{ color: '#8784ff' }}
-            onClick={navigateToNotice}
+            activestyle={{ color: '#8784ff' }}
+            onClick={navigateTo('notice')}
           >
             공지사항
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
           <NavLink
-            to={`/board/union/free`}
-            activeStyle={{ color: '#8784ff' }}
-            onClick={navigateToFree}
+            activestyle={{ color: '#8784ff' }}
+            onClick={navigateTo('free')}
           >
             자유 게시판
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
           <NavLink
-            to={`/board/union/question`}
-            activeStyle={{ color: '#8784ff' }}
-            onClick={navigateToQuestion}
+            activestyle={{ color: '#8784ff' }}
+            onClick={navigateTo('question')}
           >
             질문 게시판
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
           <NavLink
-            to={`/board/union/workbook`}
-            activeStyle={{ color: '#8784ff' }}
-            onClick={navigateToWorkbook}
-          >
-            워크북 게시판
-          </NavLink>
-        </BoardBoxUnionContent>
-        <BoardBoxUnionContent>
-          <NavLink
-            to={`/board/union/prev`}
-            activeStyle={{ color: '#8784ff' }}
-            onClick={navigateToPrev}
+            activestyle={{ color: '#8784ff' }}
+            onClick={navigateTo('prev')}
           >
             이전 기수 게시판
           </NavLink>

@@ -66,7 +66,7 @@ const BoardBoxSchoolContent = styled.p`
 const BoardBoxSchool = () => {
   const navigate = useNavigate();
 
-  const navigateTo = (path) => {
+  const navigateTo = (path) => () => {
     navigate(`/board/school/${path}`);
   };
 
@@ -79,8 +79,7 @@ const BoardBoxSchool = () => {
       <BoardBoxSchoolContentWrapper>
         <BoardBoxSchoolContent>
           <NavLink
-            to={`/board/school/notice`}
-            activeStyle={{ color: '#8784ff' }}
+            activestyle={{ color: '#8784ff' }}
             onClick={navigateTo('notice')}
           >
             공지사항
@@ -88,8 +87,7 @@ const BoardBoxSchool = () => {
         </BoardBoxSchoolContent>
         <BoardBoxSchoolContent>
           <NavLink
-            to={`/board/school/free`}
-            activeStyle={{ color: '#8784ff' }}
+            activestyle={{ color: '#8784ff' }}
             onClick={navigateTo('free')}
           >
             자유 게시판
@@ -97,8 +95,7 @@ const BoardBoxSchool = () => {
         </BoardBoxSchoolContent>
         <BoardBoxSchoolContent>
           <NavLink
-            to={`/board/school/question`}
-            activeStyle={{ color: '#8784ff' }}
+            activestyle={{ color: '#8784ff' }}
             onClick={navigateTo('question')}
           >
             질문 게시판
@@ -106,8 +103,7 @@ const BoardBoxSchool = () => {
         </BoardBoxSchoolContent>
         <BoardBoxSchoolContent>
           <NavLink
-            to={`/board/school/workbook`}
-            activeStyle={{ color: '#8784ff' }}
+            activestyle={{ color: '#8784ff' }}
             onClick={navigateTo('workbook')}
           >
             워크북 게시판
@@ -115,8 +111,7 @@ const BoardBoxSchool = () => {
         </BoardBoxSchoolContent>
         <BoardBoxSchoolContent>
           <NavLink
-            to={`/board/school/prev`}
-            activeStyle={{ color: '#8784ff' }}
+            activestyle={{ color: '#8784ff' }}
             onClick={navigateTo('prev')}
           >
             이전 기수 게시판
