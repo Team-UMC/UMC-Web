@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import HamburgerMenu from 'components/Header/HamburgerMenu';
 import HeaderStyles from 'layout/Header/header.style';
+import LeftContainer from 'components/Header/LeftContainer';
+import RightContainer from 'components/Header/RightContainer';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -128,29 +129,19 @@ const Header = () => {
       className={`${isSmallHeader ? 'small-header' : ''}`}
     >
       {isLoggedIn && (
-        <HeaderStyles.LeftContainer
-          onMouseEnter={handleMouseEnterLeftContainer}
-          onMouseLeave={handleMouseLeaveLeftContainer}
-        >
-          <HeaderStyles.Navigation>
-            {menu.map((item, index) => (
-              <Link
-                key={index}
-                to={item.path}
-                className={item.isSelected ? 'selected' : ''}
-                onClick={() => menuClick(index)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </HeaderStyles.Navigation>
-        </HeaderStyles.LeftContainer>
+        <LeftContainer
+          menu={menu}
+          menuClick={menuClick}
+          handleMouseEnter={handleMouseEnterLeftContainer}
+          handleMouseLeave={handleMouseLeaveLeftContainer}
+        />
       )}
 
       {isLoggedIn && (
-        <HeaderStyles.RightContainer>
-          {renderRightContent()}
-        </HeaderStyles.RightContainer>
+        <RightContainer
+          isSmallHeader={isSmallHeader}
+          renderRightContent={renderRightContent}
+        />
       )}
 
       {!isLoggedIn && (
