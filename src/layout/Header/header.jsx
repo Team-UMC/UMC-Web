@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderStyles from './header.style';
-import HamburgerMenu from './hamburgermenu';
+import HamburgerMenu from 'layout/HamburgerMenu/hamburgermenu';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
