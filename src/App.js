@@ -2,11 +2,13 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import 'App.css';
 
-import Header from 'layout/header.jsx';
+import Header from 'layout/Header/header';
 import Main from 'pages/main.jsx';
-import MyCalendar from 'components/calendar.jsx';
-import BoardWrite from 'pages/boardwrite.jsx';
-import SignUpForm from 'pages/signup.jsx';
+import MyCalendar from 'components/OldBoard/calendar';
+import BoardWrite from 'pages/BoardWrite/boardwrite';
+import SignUpForm from 'pages/SignUp/signup';
+import TodayiLearn from 'pages/TodayiLearn/todayilearn';
+import MyWrite from 'pages/MyWrite/MyWrite';
 
 function App() {
   return (
@@ -17,7 +19,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/boardWrite" element={<BoardWrite />} />
+
+        <Route path="/boardwrite" element={<BoardWrite />} />
+        <Route path="/todayilearn" element={<TodayiLearn />} />
+        <Route path="/mywrite" element={<MyWrite />} />
+
+
         <Route path="/signup" element={<SignUpForm />} />
       </Routes>
     </div>
