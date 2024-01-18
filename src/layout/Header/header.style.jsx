@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import HeaderBackground from 'assets/header/header.svg';
-import SmallHeaderBackground from 'assets/header/SmallHeader.svg';
+import SmallHeaderBackground from 'assets/header/smallheader.svg';
 import OpenHambugerIcon from 'assets/header/openhamburger.svg';
-import SettingIcon from 'assets/header/Setting.svg';
-import NotificationIcon from 'assets/header/Notification.svg';
-import FriendIcon from 'assets/header/Friend.svg';
+import SettingIcon from 'assets/header/setting.svg';
+import NotificationIcon from 'assets/header/notification.svg';
+import FriendIcon from 'assets/header/friend.svg';
 
 const HeaderWrapper = styled.header`
   display: flex;
