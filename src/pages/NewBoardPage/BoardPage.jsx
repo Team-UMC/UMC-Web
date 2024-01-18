@@ -15,7 +15,8 @@ const BoardPageContainer = styled.div`
 
 const BoardTitleLayout = styled(BoardTitle)`
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
+  align-items: flex-start;
   padding: 0;
 `;
 

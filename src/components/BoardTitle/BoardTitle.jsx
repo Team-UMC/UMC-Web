@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import SchoolIcon from 'assets/titleIcon/schoolIcon.svg';
@@ -73,7 +73,8 @@ const TITLE_LISTS = [
 ];
 
 const SchoolTitle = () => {
-  let { boardPath } = useParams();
+  const location = useLocation();
+  const boardPath = location.pathname.split('/').pop();
   const board = TITLE_LISTS.find((board) => board.path === boardPath);
 
   return (
@@ -90,7 +91,8 @@ const SchoolTitle = () => {
 };
 
 const BranchTitle = () => {
-  const { boardPath } = useParams();
+  const location = useLocation();
+  const boardPath = location.pathname.split('/').pop();
   const board = TITLE_LISTS.find((board) => board.path === boardPath);
 
   return (
@@ -107,7 +109,8 @@ const BranchTitle = () => {
 };
 
 const UnionTitle = () => {
-  const { boardPath } = useParams();
+  const location = useLocation();
+  const boardPath = location.pathname.split('/').pop();
   const board = TITLE_LISTS.find((board) => board.path === boardPath);
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import union from '../../assets/boardCard/union.svg';
@@ -63,12 +63,6 @@ const BoardBoxUnionContent = styled.div`
 `;
 
 const BoardBoxUnion = () => {
-  const navigate = useNavigate();
-
-    const navigateTo = (path) => () => {
-      navigate(`/board/union/${path}`);
-    };
-
   return (
     <BoardBoxUnionContainer>
       <BoardBoxUnionImage>
@@ -78,32 +72,32 @@ const BoardBoxUnion = () => {
       <BoardBoxUnionContentWrapper>
         <BoardBoxUnionContent>
           <NavLink
+            to="/board/union/notice"
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('notice')}
           >
             공지사항
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
           <NavLink
+            to="/board/union/free"
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('free')}
           >
             자유 게시판
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
           <NavLink
+            to="/board/union/question"
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('question')}
           >
             질문 게시판
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
           <NavLink
+            to="/board/union/prev"
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('prev')}
           >
             이전 기수 게시판
           </NavLink>

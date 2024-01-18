@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import branch from '../../assets/boardCard/branch.svg';
@@ -64,12 +64,6 @@ const BoardBoxBranchContent = styled.div`
 `;
 
 const BoardBoxBranch = () => {
-  const navigate = useNavigate();
-
-  const navigateTo = (path) => () => {
-    navigate(`/board/branch/${path}`);
-  };
-
   return (
     <BoardBoxBranchContainer>
       <BoardBoxBranchImage>
@@ -79,32 +73,32 @@ const BoardBoxBranch = () => {
       <BoardBoxBranchContentWrapper>
         <BoardBoxBranchContent>
           <NavLink
+            to="/board/branch/notice"
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('notice')}
           >
             공지사항
           </NavLink>
         </BoardBoxBranchContent>
         <BoardBoxBranchContent>
           <NavLink
+            to="/board/branch/free"
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('free')}
           >
             자유 게시판
           </NavLink>
         </BoardBoxBranchContent>
         <BoardBoxBranchContent>
           <NavLink
+            to="/board/branch/question"
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('question')}
           >
             질문 게시판
           </NavLink>
         </BoardBoxBranchContent>
         <BoardBoxBranchContent>
           <NavLink
+            to="/board/branch/prev"
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('prev')}
           >
             이전 기수 게시판
           </NavLink>

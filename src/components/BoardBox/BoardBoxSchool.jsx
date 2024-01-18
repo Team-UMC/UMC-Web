@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import School from '../../assets/boardCard/school.svg';
@@ -64,12 +64,6 @@ const BoardBoxSchoolContent = styled.p`
 `;
 
 const BoardBoxSchool = () => {
-  const navigate = useNavigate();
-
-  const navigateTo = (path) => () => {
-    navigate(`/board/school/${path}`);
-  };
-
   return (
     <BoardBoxSchoolContainer>
       <BoardBoxSchoolImage>
@@ -79,40 +73,40 @@ const BoardBoxSchool = () => {
       <BoardBoxSchoolContentWrapper>
         <BoardBoxSchoolContent>
           <NavLink
+            to='/board/school/notice'
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('notice')}
           >
             공지사항
           </NavLink>
         </BoardBoxSchoolContent>
         <BoardBoxSchoolContent>
           <NavLink
+            to='/board/school/free'
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('free')}
           >
             자유 게시판
           </NavLink>
         </BoardBoxSchoolContent>
         <BoardBoxSchoolContent>
           <NavLink
+            to='/board/school/question'
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('question')}
           >
             질문 게시판
           </NavLink>
         </BoardBoxSchoolContent>
         <BoardBoxSchoolContent>
           <NavLink
+            to='/board/school/workbook'
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('workbook')}
           >
             워크북 게시판
           </NavLink>
         </BoardBoxSchoolContent>
         <BoardBoxSchoolContent>
           <NavLink
+            to='/board/school/prev'
             activestyle={{ color: '#8784ff' }}
-            onClick={navigateTo('prev')}
           >
             이전 기수 게시판
           </NavLink>
