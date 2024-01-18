@@ -8,7 +8,7 @@ import FriendIcon from 'assets/header/friend.svg';
 
 const HeaderWrapper = styled.header`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
   background: url('${HeaderBackground}') no-repeat center/cover;
   height: 100vh;
@@ -24,7 +24,7 @@ const HeaderWrapper = styled.header`
     right: 0;
     z-index: 1000;
     background: url('${SmallHeaderBackground}') no-repeat center/cover;
-    height: 89px;
+    height: 91px;
     margin: 0;
   }
 `;
@@ -52,10 +52,9 @@ const Navigation = styled.div`
 
   a {
     font-size: 15px;
-    margin: 10px 30px;
+    margin: 10px 60px;
     text-decoration: none;
     color: white;
-    font-family: 'Pretendard', sans-serif;
 
     &.selected {
       font-weight: bold;
@@ -65,7 +64,7 @@ const Navigation = styled.div`
 
 const RightContainer = styled.div`
   height: 43px;
-  padding: 28px 20px 20px 50px;
+  padding: 28px 100px 20px 50px;
   display: flex;
   align-items: center;
 `;
@@ -83,6 +82,38 @@ const LoginContainer = styled.div`
   margin: 10px 10px 10px auto;
 `;
 
+const HamburgerWrapper = styled.div`
+  z-index: 5;
+  padding-left: 100px;
+  background-color: #f4f4f4;
+  height: 50%;
+  width: 100%;
+  top: -100%;
+  left: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition:
+    top 0.5s ease,
+    opacity 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
+
+  &.open {
+    top: 91px;
+    opacity: 0.8;
+    pointer-events: auto;
+  }
+
+  .menu-container-wrapper {
+    display: flex;
+    flex-direction: row; /* Set the main axis to row */
+    justify-contents: center;
+    width: 100%;
+  }
+`;
+
 const HeaderStyles = {
   HeaderWrapper,
   LeftContainer,
@@ -91,6 +122,7 @@ const HeaderStyles = {
   RightContainer,
   SmallHeaderImage,
   LoginContainer,
+  HamburgerWrapper,
   OpenHambugerIcon,
   SettingIcon,
   NotificationIcon,
