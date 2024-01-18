@@ -45,11 +45,31 @@ const BoardTitleSub = styled.p`
 `;
 
 const TITLE_LISTS = [
-  { path: 'notice', title: '공지사항', subtitle: '중요한 공지들을 알려드려요!' },
-  { path: 'free', title: '자유 게시판', subtitle: '챌린저들과 자유롭게 의견을 나눠보세요!' },
-  { path: 'question', title: '질문 게시판', subtitle: '궁금한 점을 질문하고 답해보세요!' },
-  { path: 'workbook', title: '워크북 게시판', subtitle: '워크북으로 공부 의지를 활활 불태워 봐요!' },
-  { path: 'prev', title: '이전 기수 게시판', subtitle: '이전 챌린저들과 함께 소통해봐요!' },
+  {
+    path: 'notice',
+    title: '공지사항',
+    subtitle: '중요한 공지들을 알려드려요!',
+  },
+  {
+    path: 'free',
+    title: '자유 게시판',
+    subtitle: '챌린저들과 자유롭게 의견을 나눠보세요!',
+  },
+  {
+    path: 'question',
+    title: '질문 게시판',
+    subtitle: '궁금한 점을 질문하고 답해보세요!',
+  },
+  {
+    path: 'workbook',
+    title: '워크북 게시판',
+    subtitle: '워크북으로 공부 의지를 활활 불태워 봐요!',
+  },
+  {
+    path: 'prev',
+    title: '이전 기수 게시판',
+    subtitle: '이전 챌린저들과 함께 소통해봐요!',
+  },
 ];
 
 const SchoolTitle = () => {
@@ -59,7 +79,7 @@ const SchoolTitle = () => {
   return (
     <BoardTitleContainer>
       <div className="board-title-icon">
-        <img src={SchoolIcon} alt='school-icon' />
+        <img src={SchoolIcon} alt="school-icon" />
       </div>
       <BoardTitleWrapper>
         <BoardTitleMain>{board?.title}</BoardTitleMain>
