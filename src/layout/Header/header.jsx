@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import HeaderStyles from './header.style';
-import HamburgerMenu from './hamburgermenu';
+import React, { useState, useEffect, useRef } from 'react';
+import HamburgerMenu from 'components/Header/HamburgerMenu';
+import HeaderStyles from 'layout/Header/header.style';
+import LeftContainer from 'components/Header/LeftContainer';
+import RightContainer from 'components/Header/RightContainer';
+import { HomeMenuItems, BoardMenuItems, HistoryMenuItems, GalleryMenuItems } from 'layout/Header/MenuItem';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSmallHeader, setSmallHeader] = useState(false);
-  const [hambugerOpen, setHambugerOpen] = useState(false);
+  const [isMouseOverLeftContainer, setMouseOverLeftContainer] = useState(false);
+  const [hambugerOpen, setHamburgerOpen] = useState(false);
 
   const [menu, setMenus] = useState([
     { label: '홈', path: '/', isSelected: true },
     { label: '게시판', path: '/board', isSelected: false },
     { label: '히스토리', path: '/history', isSelected: false },
     { label: '사진첩', path: '/gallery', isSelected: false },
-    { label: 'UMC 네트워킹', path: '/umcnetworking', isSelected: false },
   ]);
 
   const loginClick = () => {
@@ -66,48 +68,62 @@ const Header = () => {
     }
   };
 
-  const OpenHamburger = () => {
-    setHambugerOpen(true);
+  const handleMouseEnterLeftContainer = () => {
+    setMouseOverLeftContainer(true);
+    setHamburgerOpen(true);
   };
 
+  const handleMouseLeaveLeftContainer = () => {
+    setMouseOverLeftContainer(false);
+  };
+
+  const handleMouseLeaveHamburger = () => {
+    if (!isMouseOverLeftContainer) {
+      setHamburgerOpen(false);
+    }
+  };
+
+  const outside = useRef();
+
   return (
-    <HeaderStyles.HeaderWrapper className={isSmallHeader ? 'small-header' : ''}>
+    <HeaderStyles.HeaderWrapper
+      className={`${isSmallHeader ? 'small-header' : ''}`}
+    >
       {isLoggedIn && (
-        <HeaderStyles.LeftContainer>
-          <HeaderStyles.Hamburger role="button" onClick={OpenHamburger}>
-            <img src={HeaderStyles.OpenHambugerIcon} alt="Hambuger" />
-          </HeaderStyles.Hamburger>
-
-          <HamburgerMenu
-            isOpen={hambugerOpen}
-            toggleSide={() => setHambugerOpen(false)}
-          />
-
-          <HeaderStyles.Navigation>
-            {menu.map((item, index) => (
-              <Link
-                key={index}
-                to={item.path}
-                className={item.isSelected ? 'selected' : ''}
-                onClick={() => menuClick(index)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </HeaderStyles.Navigation>
-        </HeaderStyles.LeftContainer>
+        <LeftContainer
+          menu={menu}
+          menuClick={menuClick}
+          handleMouseEnter={handleMouseEnterLeftContainer}
+          handleMouseLeave={handleMouseLeaveLeftContainer}
+        />
       )}
 
       {isLoggedIn && (
-        <HeaderStyles.RightContainer>
-          {renderRightContent()}
-        </HeaderStyles.RightContainer>
+        <RightContainer
+          isSmallHeader={isSmallHeader}
+          renderRightContent={renderRightContent}
+        />
       )}
 
       {!isLoggedIn && (
         <HeaderStyles.LoginContainer>
           <button onClick={loginClick}> 로그인 할래? </button>
         </HeaderStyles.LoginContainer>
+      )}
+
+      {hambugerOpen && (
+        <HeaderStyles.HamburgerWrapper
+          ref={outside}
+          className={`SideBarWrap ${hambugerOpen ? 'open' : ''}`}
+          onMouseLeave={handleMouseLeaveHamburger}
+        >
+          <div className="menu-container-wrapper">
+            <HamburgerMenu menuItems={HomeMenuItems} />;
+            <HamburgerMenu menuItems={BoardMenuItems} />;
+            <HamburgerMenu menuItems={HistoryMenuItems} />;
+            <HamburgerMenu menuItems={GalleryMenuItems} />;
+          </div>
+        </HeaderStyles.HamburgerWrapper>
       )}
     </HeaderStyles.HeaderWrapper>
   );

@@ -14,6 +14,11 @@ const MyCalendar = () => {
         value={value}
         showNeighboringMonth={false}
         locale="en-US"
+        prev2Label={null}
+        prevLabel={null}
+        nextLabel={null}
+        next2Label={null}
+
       />
     </div>
   );
