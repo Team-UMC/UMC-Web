@@ -1,16 +1,19 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import SchoolIcon from 'assets/titleIcon/schoolIcon.svg';
 import BranchIcon from 'assets/titleIcon/branchIcon.svg';
 import UnionIcon from 'assets/titleIcon/unionIcon.svg';
+import TitleDot from 'assets/titleIcon/titledot.svg';
 
 const BoardTitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0 8px;
+  padding-bottom: 72px;
 `;
 
 const BoardTitleWrapper = styled.div`
@@ -19,22 +22,53 @@ const BoardTitleWrapper = styled.div`
   gap: 4px;
 `;
 
-const BoardTitleMain = styled.h1`
+const BoardTitleMainStyle = styled.h1`
   color: #7682f6;
   font-size: 34px;
   font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
+`;
 
-  ::before {
+const HighlightedText = styled.span`
+  color: #00095C;
+`;
+
+const TitleWithDot = styled.div`
+  position: relative;
+  padding-top: 24px;
+
+  &::before {
     content: '';
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-size: contain;
-    margin-right: 5px;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url(${TitleDot});
+    background-size: cover;
   }
 `;
+
+const BoardTitleMain = ({ children }) => {
+  const parts = children.split(/(게시판)/);
+
+  return (
+    <BoardTitleMainStyle>
+      {parts.map((part, i) => (
+        <React.Fragment key={i}>
+          {part === '게시판' ? <HighlightedText>{part}</HighlightedText> : part}
+          {(part === '공지' || part === '자유' || part === '질문' || part === '워크북' || part === '이전 기수') && <TitleWithDot>{part}</TitleWithDot>}
+        </React.Fragment>
+      ))}
+    </BoardTitleMainStyle>
+  );
+};
+
+BoardTitleMain.propTypes = {
+  children: PropTypes.node,
+};
 
 const BoardTitleSub = styled.p`
   color: #9d9d9d;

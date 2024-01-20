@@ -4,18 +4,16 @@ import styled from 'styled-components';
 import BoardTitle from '../../components/BoardTitle/BoardTitle';
 import BoardBox from '../../components/BoardBox/BoardBox';
 import BoardTable from '../../components/NewBoard/BoardTable';
-import BoardWriteButton from '../../components/NewBoard/BoardWriteButton';
 
 const BoardPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 `;
 
 const BoardTitleLayout = styled(BoardTitle)`
   display: flex;
-  flex-direction: row;
   align-items: flex-start;
   padding: 0;
 `;
@@ -23,8 +21,7 @@ const BoardTitleLayout = styled(BoardTitle)`
 const BoardBoxAndBoardTableWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
   gap: 0 55px;
 `;
 
@@ -35,9 +32,6 @@ const StyledBoardBox = styled(BoardBox)`
 const BoardTableWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 24px;
 `;
 
 const StyledBoardTable = styled(BoardTable)`
@@ -46,16 +40,17 @@ const StyledBoardTable = styled(BoardTable)`
 
 const BoardPage = () => {
   return (
-    <BoardPageContainer>
-      <BoardTitleLayout />
-      <BoardBoxAndBoardTableWrapper>
-        <StyledBoardBox />
-        <BoardTableWrapper>
-          <StyledBoardTable />
-          <BoardWriteButton />
-        </BoardTableWrapper>
-      </BoardBoxAndBoardTableWrapper>
-    </BoardPageContainer>
+    <>
+      <BoardPageContainer>
+        <BoardTitleLayout />
+        <BoardBoxAndBoardTableWrapper>
+          <StyledBoardBox />
+          <BoardTableWrapper>
+            <StyledBoardTable />
+          </BoardTableWrapper>
+        </BoardBoxAndBoardTableWrapper>
+      </BoardPageContainer>
+    </>
   );
 };
 
