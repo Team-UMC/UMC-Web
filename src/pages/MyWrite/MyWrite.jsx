@@ -27,7 +27,7 @@ align-items: center;
 const MyWrite = () => {
 
     const [activeType, setActiveType] = useState({
-        writingButton: false,
+        writingButton: true,
         commentButton: false,
         goodButton: false,
       });
@@ -48,6 +48,7 @@ const MyWrite = () => {
       <TypeContainer>
         <Type activeType={activeType} handleTypeClick={handleTypeClick}/>
       </TypeContainer>
+      
       <BoardType />
       <TypeComponent activeType={activeType} />
 
