@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
-import {
-  useRoutes,
-  useNavigate
-} from 'react-router-dom';
+import { useRoutes, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import 'App.css';
 
 // import Header from 'layout/Header/header';
 import Main from 'pages/main.jsx';
 import BoardPage from 'pages/NewBoardPage/BoardPage';
+import AdminTable from 'components/Admin/AdminTable';
 
 function App() {
   let navigate = useNavigate();
@@ -30,6 +28,10 @@ function App() {
     {
       path: '/board',
       element: <RedirectTo navigate={navigate} to="/board/school/notice" />,
+    },
+    {
+      path: '/admin/*',
+      element: <AdminTable />,
     },
   ]);
 
