@@ -1,7 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-import Image from 'assets/SampleImage.svg';
-=======
 import styled from 'styled-components';
 import MyCalendar from 'components/Main/Calendar/calendar';
 import RowContents from 'components/Main/Calendar/RowContents';
@@ -29,7 +26,6 @@ const RightWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
 `;
->>>>>>> f524ee9bf7c0cbe100afca53582b41e29f2e87c4
 
 const Main = () => {
   return (

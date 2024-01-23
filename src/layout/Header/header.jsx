@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import HeaderStyles from './header.style';
-import HamburgerMenu from 'layout/HamburgerMenu/hamburgermenu';
-=======
 import React, { useState, useEffect, useRef } from 'react';
 import HamburgerMenu from 'components/Header/HamburgerMenu';
 import HeaderStyles from 'layout/Header/header.style';
 import LeftContainer from 'components/Header/LeftContainer';
 import RightContainer from 'components/Header/RightContainer';
 import { HomeMenuItems, BoardMenuItems, HistoryMenuItems, GalleryMenuItems } from 'layout/Header/MenuItem';
->>>>>>> f524ee9bf7c0cbe100afca53582b41e29f2e87c4
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

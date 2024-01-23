@@ -9,7 +9,7 @@ background: var(--white, #FFF);
 font-size: 18px;
 font-weight: bold;
 width: 120vh;
-padding: 16px;
+padding: 1vh;
 border-radius: 12px;
 margin-top: 1.6vh;
 
