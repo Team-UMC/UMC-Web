@@ -9,19 +9,17 @@ const BoardPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; 
 `;
 
 const BoardTitleLayout = styled(BoardTitle)`
   display: flex;
-  align-items: flex-start;
-  padding: 0;
+  padding: 0 0 0 40px;
 `;
 
 const BoardBoxAndBoardTableWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 0 55px;
 `;
 
@@ -40,7 +38,14 @@ const StyledBoardTable = styled(BoardTable)`
 
 const BoardPage = () => {
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <BoardPageContainer>
         <BoardTitleLayout />
         <BoardBoxAndBoardTableWrapper>
@@ -50,7 +55,7 @@ const BoardPage = () => {
           </BoardTableWrapper>
         </BoardBoxAndBoardTableWrapper>
       </BoardPageContainer>
-    </>
+    </div>
   );
 };
 

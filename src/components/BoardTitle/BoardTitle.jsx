@@ -31,7 +31,7 @@ const BoardTitleMainStyle = styled.h1`
 `;
 
 const HighlightedText = styled.span`
-  color: #00095C;
+  color: #00095c;
 `;
 
 const TitleWithDot = styled.div`
@@ -59,7 +59,11 @@ const BoardTitleMain = ({ children }) => {
       {parts.map((part, i) => (
         <React.Fragment key={i}>
           {part === '게시판' ? <HighlightedText>{part}</HighlightedText> : part}
-          {(part === '공지' || part === '자유' || part === '질문' || part === '워크북' || part === '이전 기수') && <TitleWithDot>{part}</TitleWithDot>}
+          {(part === '공지' ||
+            part === '자유' ||
+            part === '질문' ||
+            part === '워크북' ||
+            part === '이전 기수') && <TitleWithDot>{part}</TitleWithDot>}
         </React.Fragment>
       ))}
     </BoardTitleMainStyle>

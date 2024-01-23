@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import SearchBar from "./BoardSearch";
-import BoardWriteButton from "./BoardWriteButton";
+import React, { useState, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import SearchBar from './BoardSearch';
+import BoardWriteButton from './BoardWriteButton';
 
-import { IconButton } from "@mui/material";
+import { IconButton } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
@@ -66,14 +66,14 @@ const StyledCollapseContent = styled.div`
 `;
 
 const createData = (ispinned, title, author, date, views, content) => {
-    return { 
-        ispinned,
-        title, 
-        author, 
-        date, 
-        views,
-        content,
-    };
+  return {
+    ispinned,
+    title,
+    author,
+    date,
+    views,
+    content,
+  };
 };
 
 const BoardWriteButtonLayout = styled.div`
@@ -95,11 +95,14 @@ const PageButton = styled.div`
   font-weight: 600;
   word-wrap: break-word;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    transform 0.2s ease-in-out;
 
   &:hover {
-    background-color: #EBEBEB;
-    color: #000C76;
+    background-color: #ebebeb;
+    color: #000c76;
   }
 
   &:active {
@@ -121,7 +124,10 @@ const PageArrowButton = styled.div`
   color: ${(props) => (props.$isActive ? '#000C76' : '#4B4B4B')};
   cursor: ${(props) => (props.$isActive ? 'pointer' : 'default')};
   opacity: ${(props) => (props.$isActive ? '1' : '0.5')};
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    transform 0.2s ease-in-out;
 `;
 
 const BoardSearchLayout = styled.div`
@@ -206,7 +212,6 @@ const rows = [
   createData(false, '제목15', '작성자15', '2021.10.15', 1500, '내용15'),
 ];
 
-
 Row.propTypes = {
   row: PropTypes.exact({
     ispinned: PropTypes.bool.isRequired,
@@ -240,12 +245,12 @@ const BoardTable = () => {
     const buttons = [];
 
     buttons.push(
-      <PageArrowButton 
-        key="prev" 
-        onClick={() => setCurrentPage(currentPage - 1)} 
-        $isActive={currentPage > 1} 
-        $icon={LeftArrowIcon} 
-      />
+      <PageArrowButton
+        key="prev"
+        onClick={() => setCurrentPage(currentPage - 1)}
+        $isActive={currentPage > 1}
+        $icon={LeftArrowIcon}
+      />,
     );
 
     for (let i = 1; i <= numberOfPages; i++) {
@@ -261,17 +266,16 @@ const BoardTable = () => {
     }
 
     buttons.push(
-      <PageArrowButton 
-        key="next" 
-        onClick={() => setCurrentPage(currentPage + 1)} 
-        $isActive={currentPage < numberOfPages} 
-        $icon={RightArrowIcon} 
-      />
+      <PageArrowButton
+        key="next"
+        onClick={() => setCurrentPage(currentPage + 1)}
+        $isActive={currentPage < numberOfPages}
+        $icon={RightArrowIcon}
+      />,
     );
 
     return buttons;
   };
-
 
   return (
     <>
