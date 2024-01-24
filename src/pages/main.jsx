@@ -11,9 +11,10 @@ const MainWrapper = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
-  margin-bottom: 150px;
-  width: 100%;
-  justify-content: space-evenly;
+  margin: 3% auto;
+  width: 70%;
+  height: 80%;
+  justify-content: space-between;
 `;
 
 const LeftWrapper = styled.div`
@@ -32,31 +33,33 @@ const RightWrapper = styled.div`
 
 const Main = () => {
   return (
-    <MainWrapper>
-      {/* 홈화면 캘린더 */}
-      <MainDescription
-        title="이번달 일정 한눈에 보기"
-        subtitle="UMC 일정을 확인해보세요!"
-      />
-      <Wrapper>
-        <LeftWrapper>
-          <MyCalendar />
-        </LeftWrapper>
+    <div>
+      <MainWrapper>
+        {/* 홈화면 캘린더 */}
+        <MainDescription
+          title="이번달 일정 한눈에 보기"
+          subtitle="UMC 일정을 확인해보세요!"
+        />
+        <Wrapper>
+          <LeftWrapper>
+            <MyCalendar />
+          </LeftWrapper>
 
-        <RightWrapper>
-          <Schedule />
-        </RightWrapper>
-      </Wrapper>
+          <RightWrapper>
+            <Schedule />
+          </RightWrapper>
+        </Wrapper>
 
-      {/* 홈화면 공지사항 */}
-      <MainDescription
-        title="공지사항"
-        subtitle="새롭게 업데이트된 공지사항을 확인하세요!"
-      />
-      <Wrapper>
-        <Notification />
-      </Wrapper>
-    </MainWrapper>
+        {/* 홈화면 공지사항 */}
+        <MainDescription
+          title="공지사항"
+          subtitle="새롭게 업데이트된 공지사항을 확인하세요!"
+        />
+        <Wrapper>
+          <Notification />
+        </Wrapper>
+      </MainWrapper>
+    </div>
   );
 };
 

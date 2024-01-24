@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+
+// eslint-disable-next-line
+import { setScrolled, selectCanScrolled } from 'app/headerSlice';
+import { useLocation } from 'react-router-dom';
 
 import NewRight from 'components/Header/NewRight';
 import NewLeft from 'components/Header/NewLeft';
@@ -38,7 +43,14 @@ const HeaderWrapper = styled.div`
 `;
 
 const NewHeader = () => {
+  const dispatch = useDispatch();
+  // eslint-disable-next-line
+  const canScrolled = useSelector(selectCanScrolled);
+  // eslint-disable-next-line
+  const location = useLocation();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // eslint-disable-next-line
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleLogin = () => {
@@ -52,23 +64,31 @@ const NewHeader = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 0);
+      dispatch(setScrolled(scrollY > 0));
     };
-
-    window.addEventListener('scroll', handleScroll);
-
+  
+    const currentRoute = location.pathname;
+  
+    // 현재 경로가 홈 페이지("/")인지 확인
+    if (currentRoute === "/") {
+      window.addEventListener('scroll', handleScroll);
+    } else {
+      // 홈 페이지가 아닌 경우 isScrolled를 true로 설정
+      dispatch(setScrolled(true));
+    }
+  
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [dispatch, location]);
 
   return (
     <>
       <HeaderWrapper
-        isScrolled={isScrolled}
+        isScrolled={canScrolled}
         style={{
           background: `url(${
-            isScrolled ? SmallHeader : Header
+            canScrolled ? SmallHeader : Header
           }) no-repeat center center`,
         }}
       >

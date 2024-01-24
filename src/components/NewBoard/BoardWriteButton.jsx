@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import pencil from '../../assets/board/pencil-fill.svg';
+import pencil from 'assets/board/pencil-fill.svg';
 
 const BoardButtonWrapper = styled.div`
   display: flex;
