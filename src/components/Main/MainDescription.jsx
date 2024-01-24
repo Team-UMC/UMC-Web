@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const HeaderWrapper = styled.div`
-  margin-left: 220px;
+  margin-left: 10%;
   margin-bottom: 50px;
 `;
 

@@ -1,19 +1,21 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'App.css';
 
-import Header from 'layout/Header/header';
+//import NewHeader from 'layout/Header/NewHeader';
 import Main from 'pages/main.jsx';
+import SignUpForm from 'pages/SignUp/signup';
 
 function App() {
   return (
-    <div>
-      <Header />
-
-      <Routes>
-        <Route path="/" element={<Main />} />
-      </Routes>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/signupform" element={<SignUpForm />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

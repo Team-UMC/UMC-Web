@@ -22,15 +22,16 @@ const HeaderWrapper = styled.header`
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 999;
     background: url('${SmallHeaderBackground}') no-repeat center/cover;
-    height: 91px;
+    height: 120px;
     margin: 0;
+    margin-top: -20px; 
   }
 `;
 
 const LeftContainer = styled.div`
-  padding: 28px 20px 20px 50px;
+  padding: 30px 20px 20px 50px;
   display: flex;
   align-items: center;
 `;
@@ -64,7 +65,7 @@ const Navigation = styled.div`
 
 const RightContainer = styled.div`
   height: 43px;
-  padding: 28px 100px 20px 50px;
+  padding: 30px 100px 20px 50px;
   display: flex;
   align-items: center;
 `;
@@ -72,14 +73,14 @@ const RightContainer = styled.div`
 const SmallHeaderImage = styled.img`
   width: 20px;
   height: 20px;
-  margin: 10px;
+  margin: 0px;
 `;
 
 const LoginContainer = styled.div`
-  padding: 28px 150px 20px 50px;
+  padding: 0px 150px 20px 50px;
   display: flex;
   align-items: center;
-  margin: 10px 10px 10px auto;
+  margin: 0px 10px 10px auto;
 `;
 
 const HamburgerWrapper = styled.div`
@@ -109,7 +110,7 @@ const HamburgerWrapper = styled.div`
   .menu-container-wrapper {
     display: flex;
     flex-direction: row; /* Set the main axis to row */
-    justify-contents: center;
+    justify-content: center;
     width: 100%;
   }
 `;

@@ -46,7 +46,7 @@ const Header = () => {
 
   const renderRightContent = () => {
     if (isSmallHeader) {
-      return <p> 눈꽃님 반가워요! </p>;
+      return <div> 눈꽃님 반가워요! </div>;
     } else {
       return (
         <>
@@ -62,7 +62,7 @@ const Header = () => {
             src={HeaderStyles.FriendIcon}
             alt="Friend"
           />
-          <p> 눈꽃님 반가워요! </p>
+          <div> 눈꽃님 반가워요! </div>
         </>
       );
     }
