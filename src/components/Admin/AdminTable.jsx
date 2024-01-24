@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import SearchBar from 'components/NewBoard/BoardSearch';
 import AdminCompletionButton from 'components/Admin/AdminCompletionButton';
-import { ROWS_DATA } from '../../Data';
+import { ROWS_DATA } from 'Data';
 
 import { IconButton } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
+import Checked from 'assets/admin/checked.svg';
 
 const StyledTable = styled.table`
   width: 100%;
@@ -34,8 +35,8 @@ const StyledTableRow = styled.tr`
 `;
 
 const StyledTitleColumn = styled.td`
-  width: 15rem;
-  padding: 10px 40px 10px 30px;
+  width: 20rem;
+  padding: 10px 40px 10px 4px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -126,6 +127,48 @@ const BoardSearchLayout = styled.div`
   align-items: center;
 `;
 
+const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #bcbcbc;
+  padding: 2px 4px;
+  position: relative;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.3s ease-in-out;
+
+  &:hover {
+    border: 1px solid #8784FF;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &:checked {
+    border: 1px solid #8784FF;
+  }
+
+  &:checked::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(${Checked}) no-repeat center center;
+  }
+`;
+
+const StyledTableCheckBoxCell = styled.td`
+  max-width: 10rem;
+  padding-left: 10px;
+  padding-right: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 const ROWS_PER_PAGE = 10;
 
 const Row = ({ row, onPinChange }) => {
@@ -145,13 +188,9 @@ const Row = ({ row, onPinChange }) => {
   return (
     <Fragment>
       <StyledTableRow>
-        <StyledTableCell>
-          <input
-            type="checkbox"
-            checked={ispinned}
-            onChange={handleCheckboxChange}
-          />
-        </StyledTableCell>
+        <StyledTableCheckBoxCell>
+          <Checkbox checked={ispinned} onChange={handleCheckboxChange} />
+        </StyledTableCheckBoxCell>
         <StyledTitleColumn style={{ textAlign: 'left' }}>
           {row.title}
         </StyledTitleColumn>
@@ -191,7 +230,7 @@ Row.propTypes = {
   onPinChange: PropTypes.func.isRequired,
 };
 
-const BoardTable = () => {
+const AdminTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [pinnedRows, setPinnedRows] = useState({});
@@ -275,7 +314,11 @@ const BoardTable = () => {
   const handlePinChange = (title, isPinned) => {
     setPinnedRows((prev) => {
       const newPinnedRows = { ...prev };
-      newPinnedRows[title] = isPinned;
+      if (isPinned) {
+        newPinnedRows[title] = isPinned;
+      } else {
+        delete newPinnedRows[title];
+      }
       return newPinnedRows;
     });
 
@@ -285,19 +328,60 @@ const BoardTable = () => {
         ispinned: row.title === title ? isPinned : row.ispinned,
       })),
     );
+    localStorage.setItem(`ispinned-${title}`, isPinned);
   };
 
   const handleConfirm = () => {
-    localStorage.setItem('pinnedRows', JSON.stringify(pinnedRows));
+    const savedPinnedRows = localStorage.getItem('pinnedRows');
+    let mergedPinnedRows = { ...pinnedRows };
+
+    if (savedPinnedRows) {
+      const savedPinnedRowsParsed = JSON.parse(savedPinnedRows);
+      mergedPinnedRows = { ...savedPinnedRowsParsed, ...pinnedRows };
+    }
+
+    rows.forEach(row => {
+      if (row.ispinned) {
+        mergedPinnedRows[row.title] = true;
+        localStorage.setItem(`ispinned-${row.title}`, true);
+      } else {
+        delete mergedPinnedRows[row.title];
+        localStorage.removeItem(`ispinned-${row.title}`);
+      }
+    });
+
+    localStorage.setItem('pinnedRows', JSON.stringify(mergedPinnedRows));
+
     alert('공지 등록이 완료되었습니다!');
+    window.location.reload();
   };
+
+  const fetchData = async () => {
+    const response = await fetch('http://localhost:3000/admin');
+    const data = await response.json();
+
+    const pinnedData = data.filter(
+      (row) => localStorage.getItem(`ispinned-${row.title}`) === 'true',
+    );
+    const unpinnedData = data.filter(
+      (row) => localStorage.getItem(`ispinned-${row.title}`) !== 'true',
+    );
+
+    const sortedData = [...pinnedData, ...unpinnedData];
+
+    setRows(sortedData);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
       <StyledTable>
         <StyledTableHeader>
           <StyledTableRow style={{ borderBottom: 0, paddingBottom: 0 }}>
-            <StyledTableCell />
+            <StyledTableCheckBoxCell />
             <StyledTitleColumn>제목</StyledTitleColumn>
             <StyledTableCell>작성자</StyledTableCell>
             <StyledTableCell>작성일</StyledTableCell>
@@ -330,4 +414,4 @@ const BoardTable = () => {
   );
 };
 
-export default BoardTable;
+export default AdminTable;
