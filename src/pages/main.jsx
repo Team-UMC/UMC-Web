@@ -6,7 +6,7 @@ import Notification from 'components/Main/Notification/Notification';
 import Schedule from 'components/Main/Calendar/Schedule';
 
 const MainWrapper = styled.div`
-  margin-top: 35vh;
+  margin-top: 25vh;
 `;
 
 const Wrapper = styled.div`
@@ -37,7 +37,7 @@ const Main = () => {
       <MainWrapper>
         {/* 홈화면 캘린더 */}
         <MainDescription
-          title="이번달 일정 한눈에 보기"
+          title="이번 달 일정 한눈에 보기"
           subtitle="UMC 일정을 확인해보세요!"
         />
         <Wrapper>

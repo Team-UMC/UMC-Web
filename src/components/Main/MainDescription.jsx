@@ -19,9 +19,25 @@ const Subtitle = styled.div`
 `;
 
 const MainDescription = ({ title, subtitle }) => {
+  const titleWords = title.split(' ');
+
+  const titleSpans = titleWords.map((word, index) => (
+    <React.Fragment key={index}>
+      {index === 3 && <br />}
+      <span
+        style={{
+          textEmphasisStyle: index === 2 ? 'circle' : 'none',
+          color: index === 2 ? '#7682F6' : 'inherit',
+        }}
+      >
+        {word}{' '}
+      </span>
+    </React.Fragment>
+  ));
+
   return (
     <HeaderWrapper>
-      <Title>{title}</Title>
+      <Title>{titleSpans}</Title>
       <Subtitle>{subtitle}</Subtitle>
     </HeaderWrapper>
   );

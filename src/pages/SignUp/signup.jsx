@@ -56,59 +56,59 @@ const SignUpForm = () => {
   }
 
   return (
-    <SignUpStyles.SignUpPageContainer step={step}>
-      {step === 0 && (
-        <SignUpStyles.StartButton onClick={handleNextStep}>
-          UMC 챌린저로 시작하기
-        </SignUpStyles.StartButton>
-      )}
+      <SignUpStyles.SignUpPageContainer step={step}>
+        {step === 0 && (
+          <SignUpStyles.StartButton onClick={handleNextStep}>
+            UMC 챌린저로 시작하기
+          </SignUpStyles.StartButton>
+        )}
 
-      {step === 1 && (
-        <InviteCode nextStep={handleNextStep} prevStep={handlePrevStep} />
-      )}
+        {step === 1 && (
+          <InviteCode nextStep={handleNextStep} prevStep={handlePrevStep} />
+        )}
 
-      {step === 2 && (
-        <School
-          setUserData={setUserData}
-          userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
-        />
-      )}
-      {step === 3 && (
-        <GenerationPart
-          setUserData={setUserData}
-          userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
-        />
-      )}
-      {step === 4 && (
-        <Name
-          setUserData={setUserData}
-          userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
-        />
-      )}
-      {step === 5 && (
-        <Nickname
-          setUserData={setUserData}
-          userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
-        />
-      )}
-      {step === 6 && (
-        <Agreement
-          setUserData={setUserData}
-          userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
-        />
-      )}
-      {step === 7 && <SignUpComplete />}
-    </SignUpStyles.SignUpPageContainer>
+        {step === 2 && (
+          <School
+            setUserData={setUserData}
+            userData={userData}
+            nextStep={handleNextStep}
+            prevStep={handlePrevStep}
+          />
+        )}
+        {step === 3 && (
+          <GenerationPart
+            setUserData={setUserData}
+            userData={userData}
+            nextStep={handleNextStep}
+            prevStep={handlePrevStep}
+          />
+        )}
+        {step === 4 && (
+          <Name
+            setUserData={setUserData}
+            userData={userData}
+            nextStep={handleNextStep}
+            prevStep={handlePrevStep}
+          />
+        )}
+        {step === 5 && (
+          <Nickname
+            setUserData={setUserData}
+            userData={userData}
+            nextStep={handleNextStep}
+            prevStep={handlePrevStep}
+          />
+        )}
+        {step === 6 && (
+          <Agreement
+            setUserData={setUserData}
+            userData={userData}
+            nextStep={handleNextStep}
+            prevStep={handlePrevStep}
+          />
+        )}
+        {step === 7 && <SignUpComplete />}
+      </SignUpStyles.SignUpPageContainer>
   );
 };
 

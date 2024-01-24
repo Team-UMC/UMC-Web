@@ -12,7 +12,7 @@ export const headerSlice = createSlice({
   },
 });
 
-export const { setScrolled } = headerSlice.actions;  // Corrected action name
+export const { setScrolled } = headerSlice.actions;
 
 export const selectCanScrolled = (state) => state.header.canScrolled;
 
