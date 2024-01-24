@@ -23,7 +23,6 @@ const ManagmentContainer = styled.div`
 
 const Management = () => {
     
-
     return(
       <ManagmentContainer>
   

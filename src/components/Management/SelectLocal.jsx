@@ -8,6 +8,7 @@ const LocalContainer = styled.div`
   border-radius: 12px;
   color: #BCBCBC;
   margin-top: 1.6vh;
+  
   border: 1px solid #232A6D;
 `;
 

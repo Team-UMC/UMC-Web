@@ -8,25 +8,26 @@ const ListContainer = styled.div`
 `;
 const ListItem = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 2fr 2fr 2fr; /* 5개의 열을 추가하고 각 열의 너비를 조절 */
+  grid-template-columns: 1fr 3fr 2fr 2fr 1fr; /* 5개의 열을 추가하고 각 열의 너비를 조절 */
   padding: 10px;
   margin-bottom: 10px;
   align-items: center;
   border-bottom: 1px solid #D8D8FF;
+  width: 100%;
 `;
 
 const HeaderContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+  grid-template-columns: 1fr 3fr 2fr 2fr 1fr;
   padding: 10px;
   margin-bottom: 10px;
   align-items: center;
   width: 100%; /* 수정된 부분: 너비를 100%로 지정 */
 `;
 const Header = styled.div`
-  font-weight: bold;
   justify-self: center; /* 수평 가운데 정렬 */
   align-self: center;
+  font-weight:600;
 `;
 
 const PaginationContainer = styled.div`
@@ -85,7 +86,7 @@ const Center = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-
+font-weight:500;
 
 `;
 
@@ -146,13 +147,13 @@ const MyList = () => {
         <Center>좋아요</Center>
       </HeaderContainer>
 
-      {currentList.map((item) => (
+      {currentList.slice().reverse().map((item) => (
         <ListItem key={item.id}>
           <Center>{item.id}</Center> 
           <Left>{item.title}</Left>
-          <Left>{item.writetDate}</Left>
-          <Left>{item.viewCount}</Left>
-          <Left>{item.great}</Left> 
+          <Center>{item.writetDate}</Center>
+          <Center>{item.viewCount}</Center>
+          <Center>{item.great}</Center> 
         </ListItem>
       ))}
       

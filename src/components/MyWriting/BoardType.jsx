@@ -2,17 +2,19 @@ import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import SchoolUnchecked from '../../assets/boardwrite/schoolUnchecked.svg';
-import SchoolChecked from '../../assets/boardwrite/schoolChecked.svg';
-import CampUnchecked from '../../assets/boardwrite/campUnchecked.svg';
-import CampChecked from '../../assets/boardwrite/campChecked.svg';
-import UnionUnchecked from '../../assets/boardwrite/unionUnchecked.svg';
-import UnionChecked from '../../assets/boardwrite/unionChecked.svg';
-import SuggestionUnchecked from '../../assets/boardwrite/suggestionUnchecked.svg';
-import SuggestionChecked from '../../assets/boardwrite/suggestionChecked.svg';
+import SchoolUnchecked from 'assets/mywrite/mywriteSchoolUnchecked.svg';
+import SchoolChecked from 'assets/mywrite/mywriteSchoolChecked.svg';
+import CampUnchecked from 'assets/mywrite/mywriteCampUnchecked.svg';
+import CampChecked from 'assets/mywrite/mywriteCampChecked.svg';
+import UnionUnchecked from 'assets/mywrite/mywriteUnionUnchecked.svg';
+import UnionChecked from 'assets/mywrite/mywriteUnionChecked.svg';
+import SuggestionUnchecked from 'assets/mywrite/mywriteSuggestionUnchecked.svg';
+import SuggestionChecked from 'assets/mywrite/mywriteSuggestionChecked.svg';
 
 import SchoolBoard from '../boardwrite/BoardSchool';
 import CampBoard from '../boardwrite/BoardCamp';
+
+import ResetImg from 'assets/mywrite/reset.svg';
 
 const AllContainer = styled.div`
   display: flex;
@@ -25,13 +27,13 @@ const AllContainer = styled.div`
   width: 85%;
   border-radius: 12px;
   background-color: white;
+
+
 `;
 
 
 const ContainerType = styled.div`
   display: flex;  
-	
-  
 `;
 
 const TypeName = styled.div`
@@ -59,29 +61,52 @@ const TypeLink = styled(Link)`
   cursor: pointer;
 `;
 
+const ResetContainer = styled.div`
+  display: flex; /* Add this line */
+  justify-content: flex-end;
+  width: 100%;
+`;
+
+const Reset = styled.img`
+  cursor: pointer;
+  height: 14px;
+`;
+
+
 const BoardType = () => {
-  const [buttonStates, setButtonStates] = useState({
+  const initialButtonStates = {
     schoolButton: true,
     campButton: false,
     unionButton: false,
     suggestionButton: false,
-  });
+  };
+
+  const [buttonStates, setButtonStates] = useState(initialButtonStates);
+  const resetButtonStates = () => {
+    setButtonStates(initialButtonStates);
+  };
 
   const handleClick = (buttonName) => {
     setButtonStates((prevStates) => ({
-      schoolButton:
-        buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
+      schoolButton: buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
       campButton: buttonName === 'campButton' ? !prevStates.campButton : false,
       unionButton: buttonName === 'unionButton' ? !prevStates.unionButton : false,
       suggestionButton: buttonName === 'suggestionButton' ? !prevStates.suggestionButton : false,
     }));
   };
+
+ 
   
 
   return (
     <AllContainer>
+      <ResetContainer>
+      <Reset src={ResetImg} alt="reset" onClick={resetButtonStates} />
+      </ResetContainer>
+
       <ContainerType>
       <TypeName>종류</TypeName>
+
         <div>
          
           <TypeLink to="#" onClick={() => handleClick('schoolButton')}>
@@ -115,17 +140,18 @@ const BoardType = () => {
               <img src={SuggestionUnchecked} alt="연합" />
             )}
           </TypeLink>
-
-
         </div>
+
       </ContainerType>
       <ContainerType>
-        <BoardName>게시판</BoardName>
+        {!buttonStates.suggestionButton && <BoardName>게시판</BoardName>}
         {buttonStates.schoolButton && <SchoolBoard />}{' '}
         {buttonStates.campButton && <CampBoard />}{' '}
         {buttonStates.unionButton && <CampBoard />}{' '}
-        {buttonStates.suggestionButton && <CampBoard />}{' '}
+        {buttonStates.suggestionButton && <div></div>}
+
       </ContainerType>
+
 
     </AllContainer>
   );
