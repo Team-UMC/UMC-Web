@@ -11,6 +11,7 @@ const RightWrapper = styled.div`
   display: flex;
   width: 15%;
   justify-content: space-evenly;
+  height: 10%;
 `;
 
 const NewRight = ({ isLoggedIn, onLogout }) => {

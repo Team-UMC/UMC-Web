@@ -19,13 +19,13 @@ const HeaderWrapper = styled.div`
   justify-content: space-around;
 
   // 왼쪽 요소와 오른쪽 요소 가운데 정렬 (수직)
-  align-items: center;
+  align-items: flex-start;
 
   // 왼쪽 요소와 오른쪽 요소 가로로 정렬
   flex-direction: row;
 
   // Header 배경 이미지 설정
-  background: url(${Header}) no-repeat center center;
+  background: url(${Header});
 
   // 화면 width 전체
   width: 100%;
@@ -40,6 +40,13 @@ const HeaderWrapper = styled.div`
   transition: background 0.3s ease;
 
   background-size: cover;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
 `;
 
 const NewHeader = () => {
@@ -66,17 +73,17 @@ const NewHeader = () => {
       const scrollY = window.scrollY;
       dispatch(setScrolled(scrollY > 0));
     };
-  
+
     const currentRoute = location.pathname;
-  
+
     // 현재 경로가 홈 페이지("/")인지 확인
-    if (currentRoute === "/") {
+    if (currentRoute === '/') {
       window.addEventListener('scroll', handleScroll);
     } else {
       // 홈 페이지가 아닌 경우 isScrolled를 true로 설정
       dispatch(setScrolled(true));
     }
-  
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -92,12 +99,14 @@ const NewHeader = () => {
           }) no-repeat center center`,
         }}
       >
-        <NewLeft isLoggedIn={isLoggedIn} />
-        {isLoggedIn ? (
-          <NewRight isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-        ) : (
-          <button onClick={handleLogin}> 로그인 </button>
-        )}
+        <Wrapper>
+          <NewLeft isLoggedIn={isLoggedIn} />
+          {isLoggedIn ? (
+            <NewRight isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+          ) : (
+            <button onClick={handleLogin}> 로그인 </button>
+          )}
+        </Wrapper>
       </HeaderWrapper>
     </>
   );
