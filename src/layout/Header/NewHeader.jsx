@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-// eslint-disable-next-line
 import { setScrolled, selectCanScrolled } from 'app/headerSlice';
 import { useLocation } from 'react-router-dom';
 
@@ -54,16 +53,6 @@ const NewHeader = () => {
   const canScrolled = useSelector(selectCanScrolled);
   const location = useLocation();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -96,12 +85,10 @@ const NewHeader = () => {
         }}
       >
         <Wrapper>
-          <NewLeft isLoggedIn={isLoggedIn} />
-          {isLoggedIn ? (
-            <NewRight isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-          ) : (
-            <button onClick={handleLogin}> 로그인 </button>
-          )}
+
+          <NewLeft />
+          <NewRight />
+
         </Wrapper>
       </HeaderWrapper>
     </>

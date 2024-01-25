@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import NavStyleStar from 'assets/header/NavStyleStar.svg';
 import NavTextStyle from 'assets/header/NavTextStyle.svg';
@@ -43,38 +42,32 @@ const TextWrapper = styled.div`
   }
 `;
 
-const NewLeft = ({ isLoggedIn }) => {
+const NewLeft = () => {
   return (
     <NavWrapper>
-      {isLoggedIn && (
-        <>
-          <StyledLink to="/">
-            <img src={NavStyleStar} alt="별" />
-            <TextWrapper>홈</TextWrapper>
-          </StyledLink>
+      <>
+        <StyledLink to="/">
+          <img src={NavStyleStar} alt="별" />
+          <TextWrapper>홈</TextWrapper>
+        </StyledLink>
 
-          <StyledLink to="/board">
-            <img src={NavStyleStar} alt="별" />
-            <TextWrapper>게시판</TextWrapper>
-          </StyledLink>
+        <StyledLink to="/board">
+          <img src={NavStyleStar} alt="별" />
+          <TextWrapper>게시판</TextWrapper>
+        </StyledLink>
 
-          <StyledLink to="/history">
-            <img src={NavStyleStar} alt="별" />
-            <TextWrapper>히스토리</TextWrapper>
-          </StyledLink>
+        <StyledLink to="/history">
+          <img src={NavStyleStar} alt="별" />
+          <TextWrapper>히스토리</TextWrapper>
+        </StyledLink>
 
-          <StyledLink to="/gallery">
-            <img src={NavStyleStar} alt="별" />
-            <TextWrapper>사진첩</TextWrapper>
-          </StyledLink>
-        </>
-      )}
+        <StyledLink to="/gallery">
+          <img src={NavStyleStar} alt="별" />
+          <TextWrapper>사진첩</TextWrapper>
+        </StyledLink>
+      </>
     </NavWrapper>
   );
-};
-
-NewLeft.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 export default NewLeft;
