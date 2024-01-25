@@ -41,11 +41,7 @@ const BoardPageRoute = () => {
     },
   ]);
 
-  return (
-    <div>
-      {routes}
-    </div>
-  );
+  return <div>{routes}</div>;
 };
 
 export default BoardPageRoute;
