@@ -35,25 +35,23 @@ const BoardBoxSchoolTitle = styled.h3`
 `;
 
 const BoardBoxSchoolContentWrapper = styled.div`
-  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 
-const BoardBoxSchoolContent = styled.p`
+const BoardBoxSchoolLink = styled(NavLink).attrs({
+  activeStyle: { color: '#8784ff !important' },
+})`
   text-align: left;
   color: black;
   background: white;
+  text-decoration: none;
   font-size: 12px;
   font-weight: 400;
-  padding-bottom: 8px;
   word-wrap: break-word;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-
-  a {
-    background: white;
-    text-decoration: none;
-    color: inherit;
-  }
 
   &:hover {
     color: #8784ff;
@@ -71,46 +69,21 @@ const BoardBoxSchool = () => {
       </BoardBoxSchoolImage>
       <BoardBoxSchoolTitle>학교</BoardBoxSchoolTitle>
       <BoardBoxSchoolContentWrapper>
-        <BoardBoxSchoolContent>
-          <NavLink
-            to='/board/school/notice'
-            activestyle={{ color: '#8784ff' }}
-          >
-            공지사항
-          </NavLink>
-        </BoardBoxSchoolContent>
-        <BoardBoxSchoolContent>
-          <NavLink
-            to='/board/school/free'
-            activestyle={{ color: '#8784ff' }}
-          >
-            자유 게시판
-          </NavLink>
-        </BoardBoxSchoolContent>
-        <BoardBoxSchoolContent>
-          <NavLink
-            to='/board/school/question'
-            activestyle={{ color: '#8784ff' }}
-          >
-            질문 게시판
-          </NavLink>
-        </BoardBoxSchoolContent>
-        <BoardBoxSchoolContent>
-          <NavLink
-            to='/board/school/workbook'
-            activestyle={{ color: '#8784ff' }}
-          >
-            워크북 게시판
-          </NavLink>
-        </BoardBoxSchoolContent>
-        <BoardBoxSchoolContent>
-          <NavLink
-            to='/board/school/prev'
-            activestyle={{ color: '#8784ff' }}
-          >
-            이전 기수 게시판
-          </NavLink>
-        </BoardBoxSchoolContent>
+        <BoardBoxSchoolLink to="/board/school/notice">
+          공지사항
+        </BoardBoxSchoolLink>
+        <BoardBoxSchoolLink to="/board/school/free">
+          자유 게시판
+        </BoardBoxSchoolLink>
+        <BoardBoxSchoolLink to="/board/school/question">
+          질문 게시판
+        </BoardBoxSchoolLink>
+        <BoardBoxSchoolLink to="/board/school/workbook">
+          워크북 게시판
+        </BoardBoxSchoolLink>
+        <BoardBoxSchoolLink to="/board/school/prev">
+          이전 기수 게시판
+        </BoardBoxSchoolLink>
       </BoardBoxSchoolContentWrapper>
     </BoardBoxSchoolContainer>
   );
