@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { ROWS_DATA } from 'Data';
 import SearchBar from './BoardSearch';
 import BoardWriteButton from './BoardWriteButton';
 
@@ -9,6 +10,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
+import pin from 'assets/board/list/Pinned.svg';
 
 const StyledTable = styled.table`
   width: 100%;
@@ -33,8 +35,8 @@ const StyledTableRow = styled.tr`
 `;
 
 const StyledTitleColumn = styled.td`
-  width: 15rem;
-  padding: 10px 40px 10px 30px;
+  width: 20rem;
+  padding: 10px 40px 10px 4px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -64,17 +66,6 @@ const StyledCollapseContent = styled.div`
   overflow: hidden;
   max-height: ${(props) => (props.open ? '500px' : '0')};
 `;
-
-const createData = (ispinned, title, author, date, views, content) => {
-  return {
-    ispinned,
-    title,
-    author,
-    date,
-    views,
-    content,
-  };
-};
 
 const BoardWriteButtonLayout = styled.div`
   display: flex;
@@ -136,7 +127,18 @@ const BoardSearchLayout = styled.div`
   align-items: center;
 `;
 
+const StyledTableCheckBoxCell = styled.td`
+  max-width: 10rem;
+  padding-left: 10px;
+  padding-right: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 const ROWS_PER_PAGE = 10;
+
+const rows = ROWS_DATA;
 
 const Row = ({ row }) => {
   const [open, setOpen] = useState(false);
@@ -144,7 +146,9 @@ const Row = ({ row }) => {
   return (
     <Fragment>
       <StyledTableRow>
-        <StyledTableCell>{row.ispinned}</StyledTableCell>
+        <StyledTableCheckBoxCell>
+          {row.ispinned ? <img src={pin} alt='pinned' /> : null}
+        </StyledTableCheckBoxCell>
         <StyledTitleColumn style={{ textAlign: 'left' }}>
           {row.title}
         </StyledTitleColumn>
@@ -171,46 +175,6 @@ const Row = ({ row }) => {
     </Fragment>
   );
 };
-
-// 대충 데이터들 모음 (여기에 JSON 서버 생기면 구현하면 될 듯...)
-const rows = [
-  createData(
-    false,
-    'ㅑㅓ랴ㅐ재래ㅑㅁㄹㅈㄹㅈ',
-    '작성자1',
-    '2021.10.01',
-    100,
-    '내용1',
-  ),
-  createData(false, '공지공지공공지', '작성자2', '2021.10.02', 200, '내용2'),
-  createData(false, '야야저래ㅑㅈㄹ', '작성자3', '2021.10.03', 300, '내용3'),
-  createData(
-    false,
-    '이제야 틀이 완성됬다에베벱ㅂ베벱ㅂ',
-    '작성자4',
-    '2021-10-04',
-    400,
-    '내용4',
-  ),
-  createData(false, '뉴뉴난ㄴ내', '작성자5', '2021.10.05', 500, '내용5'),
-  createData(false, '힘들어...', '작성자6', '2021.10.06', 600, '내용6'),
-  createData(false, '살려줘...', '작성자7', '2021.10.07', 700, '내용7'),
-  createData(false, '가나다라마바사', '작성자8', '2021.10.08', 800, '내용8'),
-  createData(false, '공지입다', '작성자9', '2021.10.09', 900, '내용9'),
-  createData(
-    false,
-    'ㅡ애버ㅡ재ㅔ러ㅐㅔㅈ',
-    '작성자10',
-    '2021.10.10',
-    1000,
-    '내용10',
-  ),
-  createData(false, 'ㅡㅏㅇ9394914', '작성자11', '2021.10.11', 1100, '내용11'),
-  createData(false, 'test', '작성자12', '2021.10.12', 1200, '내용12'),
-  createData(false, '낄낄낄', '작성자13', '2021.10.13', 1300, '내용13'),
-  createData(false, '안녕?', '작성자14', '2021.10.14', 1400, '내용14'),
-  createData(false, '제목15', '작성자15', '2021.10.15', 1500, '내용15'),
-];
 
 Row.propTypes = {
   row: PropTypes.exact({
@@ -282,7 +246,7 @@ const BoardTable = () => {
       <StyledTable>
         <StyledTableHeader>
           <StyledTableRow style={{ borderBottom: 0, paddingBottom: 0 }}>
-            <StyledTableCell /> {/* 여기가 고정핀 부분임 */}
+            <StyledTableCheckBoxCell /> {/* 여기가 고정핀 부분임 */}
             <StyledTitleColumn>제목</StyledTitleColumn>
             <StyledTableCell>작성자</StyledTableCell>
             <StyledTableCell>작성일</StyledTableCell>
