@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'App.css';
 
 import NewHeader from 'layout/Header/NewHeader';
-import Main from 'pages/m.jsx';
-import SignUpForm from 'pages/SignUp/su';
-import BoardWrite from 'pages/BoardWrite/bw';
+import Main from 'pages/Main.jsx';
+import SignUpForm from 'pages/SignUp/SignUp';
+import BoardWrite from 'pages/BoardWrite/BoardWrite';
 import BoardPage from 'pages/NewBoardPage/BoardPage';
 import SocialLogin from 'components/SignUp/SocialLogin';
 
