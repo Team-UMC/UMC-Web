@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //import axios from 'axios';
 
-import SignUpStyles from 'pages/SignUp/signup.style';
+import SignUpStyles from 'pages/SignUp/SignUp.style';
 import BackgroundImage from 'assets/signup/background.svg';
 import NocontentsBackgroundImage from 'assets/signup/NoContentsBackground.svg';
 

@@ -2,16 +2,14 @@ import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import SchoolUnchecked from '../../assets/boardwrite/schoolUnchecked.svg';
-import SchoolChecked from '../../assets/boardwrite/schoolChecked.svg';
-import CampUnchecked from '../../assets/boardwrite/campUnchecked.svg';
-import CampChecked from '../../assets/boardwrite/campChecked.svg';
-import UnionUnchecked from '../../assets/boardwrite/unionUnchecked.svg';
-import UnionChecked from '../../assets/boardwrite/unionChecked.svg';
-import SuggestionUnchecked from '../../assets/boardwrite/suggestionUnchecked.svg';
-import SuggestionChecked from '../../assets/boardwrite/suggestionChecked.svg';
-
-
+import SchoolUnchecked from 'assets/board/write/SchoolUnchecked.svg'
+import SchoolChecked from 'assets/board/write/SchoolChecked.svg';
+import CampUnchecked from 'assets/board/write/CampUnchecked.svg';
+import CampChecked from 'assets/board/write/CampChecked.svg';
+import UnionUnchecked from 'assets/board/write/UnionUnchecked.svg';
+import UnionChecked from 'assets/board/write/UnionChecked.svg';
+import SuggestionUnchecked from 'assets/board/write/SuggestionUnchecked.svg';
+import SuggestionChecked from 'assets/board/write/SuggestionChecked.svg';
 
 import SchoolBoard from './BoardSchool';
 import CampBoard from './BoardCamp';
