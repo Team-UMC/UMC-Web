@@ -21,6 +21,13 @@ font-weight: 500;
 border: 1px solid #232A6D;
 `;
 
+const SubTitle = styled.div`
+font-size: 16px;
+font-weight: 500;
+color: #4B4B4B;
+`;
+
+
 
 const ChallengerType = () => {
 
@@ -28,8 +35,8 @@ const ChallengerType = () => {
         <ChallengerTypeContainer>
         <TitleContainer>
             운영진 직책
-            <div>학교</div>
-            <div>중앙</div>
+            <SubTitle>학교</SubTitle>
+            <SubTitle>중앙</SubTitle>
         </TitleContainer>
 
         <TitleContainer>
