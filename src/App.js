@@ -1,32 +1,28 @@
 import React from 'react';
-import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import 'App.css';
 
-import Header from 'layout/Header/header';
-import Main from 'pages/main';
-import BoardWrite from 'pages/BoardWrite/boardwrite';
+import NewHeader from 'layout/Header/NewHeader';
+import Main from 'pages/main.jsx';
 import SignUpForm from 'pages/SignUp/signup';
-import Management from 'pages/Management/management';
-import MyWrite from 'pages/MyWrite/MyWrite';
-import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
+import BoardWrite from 'pages/BoardWrite/BoardWrite';
+import BoardPage from 'pages/NewBoardPage/BoardPage';
+import SocialLogin from 'components/SignUp/SocialLogin';
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-
-        <Route path="/boardWrite" element={<BoardWrite />} />
-        <Route path="/management" element={<Management />} />
-        <Route path="/mywrite" element={<MyWrite />} />
-        <Route path="/boardpageroute" element={<BoardPageRoute />} />
-
-        <Route path="/signup" element={<SignUpForm />} />
-      </Routes>
-
-      <BoardPageRoute />
-    </div>
+    <>
+      <BrowserRouter>
+        <NewHeader />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/signupform" element={<SignUpForm />} />
+          <Route path="/boardPage" element={<BoardPage />} />
+          <Route path="/boardwrite" element={<BoardWrite />} />
+          <Route path="/kakaologin" element={<SocialLogin />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

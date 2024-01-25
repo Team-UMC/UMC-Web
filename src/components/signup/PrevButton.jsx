@@ -1,21 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import PrevButtonImage from 'assets/signup/PrevButton.svg';
 
-const PrevButton = styled.img`
+const Button = styled.img`
   display: flex;
   width: 30px;
   height: 30px;
   cursor: pointer;
-  margin-top: 50px;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
-const prevButton = ({ step, setStep }) => {
-  const prevStep = () => {
-    setStep(step - 1);
+const PrevButton = ({ nextStep }) => {
+  const handlePrevStep = () => {
+    nextStep((prevStep) => prevStep - 1);
   };
 
-  return <PrevButton src={PrevButtonImage} alt="이전" onClick={prevStep} />;
+  return <Button src={PrevButtonImage} alt="이전" onClick={handlePrevStep} />;
 };
 
-export default prevButton;
+PrevButton.propTypes = {
+  nextStep: PropTypes.func.isRequired,
+};
+
+export default PrevButton;

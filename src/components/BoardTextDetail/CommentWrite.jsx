@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { BoxContainer } from 'components/OldBoard/DetailPage.style';
+import { BoxContainer } from 'pages/DetailPage/DetailPage.style';
 import {
   ProfileBigWrapper,
   ProfileSmallWrapper,

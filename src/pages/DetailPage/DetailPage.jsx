@@ -11,7 +11,7 @@ import {
   BoardText,
   BoardSubText,
   BoxContainer,
-} from 'components/OldBoard/DetailPage.style';
+} from 'pages/DetailPage/DetailPage.style';
 
 const DetailPage = () => {
   const [comments, setComments] = useState([]);
