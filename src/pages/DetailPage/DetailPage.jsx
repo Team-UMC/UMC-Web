@@ -41,7 +41,7 @@ const DetailPage = () => {
         <TextDetail
           ProfileImg={require('assets/ProfileImg.svg')}
           NameNickname="리오/이원영"
-          CohortPartText="5기 Web"
+          CohortPartText="5기 &#124; Web"
           commentCount={commentCount}
         />
       </BoxContainer>
@@ -57,7 +57,7 @@ const DetailPage = () => {
 
       <CommentWrite
         NameNicknameText="델로/오정현"
-        CohortPartText="5기 Design"
+        CohortPartText="5기 &#124; Design"
         onCommentSubmit={handleCommentSubmit}
         commentCount={commentCount}
         setCommentCount={setCommentCount}

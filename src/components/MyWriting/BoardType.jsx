@@ -11,8 +11,8 @@ import UnionChecked from 'assets/mywrite/mywriteUnionChecked.svg';
 import SuggestionUnchecked from 'assets/mywrite/mywriteSuggestionUnchecked.svg';
 import SuggestionChecked from 'assets/mywrite/mywriteSuggestionChecked.svg';
 
-import SchoolBoard from '../boardwrite/BoardSchool';
-import CampBoard from '../boardwrite/BoardCamp';
+import SchoolBoard from '../BoardWrite/BoardSchool';
+import CampBoard from '../BoardWrite/BoardCamp';
 
 import ResetImg from 'assets/mywrite/reset.svg';
 
