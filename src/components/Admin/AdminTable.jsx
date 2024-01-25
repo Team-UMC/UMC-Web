@@ -140,7 +140,7 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   transition: border 0.3s ease-in-out;
 
   &:hover {
-    border: 1px solid #8784FF;
+    border: 1px solid #8784ff;
   }
 
   &:active {
@@ -148,11 +148,11 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   }
 
   &:checked {
-    border: 1px solid #8784FF;
+    border: 1px solid #8784ff;
   }
 
   &:checked::after {
-    content: "";
+    content: '';
     display: block;
     width: 100%;
     height: 100%;
@@ -312,6 +312,8 @@ const AdminTable = () => {
   };
 
   const handlePinChange = (title, isPinned) => {
+    console.log('handlePinChange called with', title, isPinned);
+
     setPinnedRows((prev) => {
       const newPinnedRows = { ...prev };
       if (isPinned) {
@@ -340,7 +342,7 @@ const AdminTable = () => {
       mergedPinnedRows = { ...savedPinnedRowsParsed, ...pinnedRows };
     }
 
-    rows.forEach(row => {
+    rows.forEach((row) => {
       if (row.ispinned) {
         mergedPinnedRows[row.title] = true;
         localStorage.setItem(`ispinned-${row.title}`, true);
@@ -375,6 +377,10 @@ const AdminTable = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    console.log('ROWS_DATA has been updated: ', ROWS_DATA);
+  }, [ROWS_DATA]);
 
   return (
     <>

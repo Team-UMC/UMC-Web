@@ -1,5 +1,5 @@
 // 대충 데이터들 모음 (여기에 JSON 서버 생기면 구현하면 될 듯...)
-const createData = (ispinned, title, author, date, views, content) => {
+let createData = (ispinned, title, author, date, views, content) => {
   return {
     ispinned,
     title,
@@ -10,7 +10,7 @@ const createData = (ispinned, title, author, date, views, content) => {
   };
 };
 
-const ROWS_DATA = [
+let ROWS_DATA = [
   createData(
     false,
     'ㅑㅓ랴ㅐ재래ㅑㅁㄹㅈㄹㅈ',

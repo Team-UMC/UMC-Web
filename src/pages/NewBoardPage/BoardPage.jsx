@@ -22,7 +22,7 @@ const BoardBoxAndBoardTableWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 0 55px;
+  gap: 0 80px;
 `;
 
 const StyledBoardBox = styled(BoardBox)`
@@ -41,7 +41,7 @@ const StyledBoardTable = styled(BoardTable)`
 const BoardPage = () => {
   return (
     <div
-      className='board-page' 
+      className="board-page"
       style={{
         display: 'flex',
         flexDirection: 'column',
