@@ -6,6 +6,7 @@ import union from '../../assets/boardCard/union.svg';
 
 const BoardBoxUnionContainer = styled.div`
   height: 100%;
+  padding-bottom: 30px;
   background: white;
   border-color: white;
   flex-direction: column;
@@ -72,35 +73,33 @@ const BoardBoxUnion = () => {
       <BoardBoxUnionContentWrapper>
         <BoardBoxUnionContent>
           <NavLink
-            to={`/board/union/notice`}
-            activeStyle={{ color: '#8784ff' }}
+            to="/board/union/notice"
+            activestyle={{ color: '#8784ff' }}
           >
             공지사항
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
-          <NavLink to={`/board/union/free`} activeStyle={{ color: '#8784ff' }}>
+          <NavLink
+            to="/board/union/free"
+            activestyle={{ color: '#8784ff' }}
+          >
             자유 게시판
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
           <NavLink
-            to={`/board/union/question`}
-            activeStyle={{ color: '#8784ff' }}
+            to="/board/union/question"
+            activestyle={{ color: '#8784ff' }}
           >
             질문 게시판
           </NavLink>
         </BoardBoxUnionContent>
         <BoardBoxUnionContent>
           <NavLink
-            to={`/board/union/workbook`}
-            activeStyle={{ color: '#8784ff' }}
+            to="/board/union/prev"
+            activestyle={{ color: '#8784ff' }}
           >
-            워크북 게시판
-          </NavLink>
-        </BoardBoxUnionContent>
-        <BoardBoxUnionContent>
-          <NavLink to={`/board/union/prev`} activeStyle={{ color: '#8784ff' }}>
             이전 기수 게시판
           </NavLink>
         </BoardBoxUnionContent>

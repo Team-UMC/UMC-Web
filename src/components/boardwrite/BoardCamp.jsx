@@ -28,7 +28,7 @@ const Board = styled.div`
 `;
 
 const CampBoard = () => {
-    const [selectedBoard, setSelectedBoard] = useState(null);
+    const [selectedBoard, setSelectedBoard] = useState(0);
 
     const handleBoardClick = (index) => {
       setSelectedBoard(index);

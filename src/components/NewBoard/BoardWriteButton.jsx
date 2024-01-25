@@ -37,7 +37,7 @@ const BoardWriteFont = styled.div`
   word-wrap: break-word;
 `;
 
-const BoardWriteBottom = () => {
+const BoardWriteButton = () => {
   return (
     <BoardButtonWrapper>
       <BoardButtonContent>
@@ -48,4 +48,4 @@ const BoardWriteBottom = () => {
   );
 };
 
-export default BoardWriteBottom;
+export default BoardWriteButton;

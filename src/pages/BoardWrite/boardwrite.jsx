@@ -8,6 +8,7 @@ import BoardText from 'components/BoardWrite/BoardText';
 import BoardButton from 'components/BoardWrite/BoardButton';
 
 const BoardWriteContainer = styled.div`
+  margin-top: 100%;   
   display: flex;
   flex-direction: column;
   align-items: center;
