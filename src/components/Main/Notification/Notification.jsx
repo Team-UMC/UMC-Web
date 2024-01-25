@@ -20,7 +20,7 @@ const Rectangle = styled.div`
   border: 1px solid black;
   padding: 10px;
   border-radius: 15px;
-  box-shadow:3px 3px 3px 3px #999;
+  box-shadow: 3px 3px 3px 3px #999;
 `;
 
 const ButtonContainer = styled.div`
@@ -31,6 +31,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Title = styled.div`
+  letter-spacing: -2px;
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
@@ -38,6 +39,7 @@ const Title = styled.div`
 
 const Contents = styled.div`
   font-size: 12px;
+  letter-spacing: -2px;
 `;
 
 const Notification = () => {
@@ -66,15 +68,39 @@ const Notification = () => {
       contents:
         '인하대 UMC 6기 Spring 파트장은 벡스로 확정되어 모집 받지 않습니다.',
     },
+    {
+      title: 'UMC 6기 모집',
+      contents:
+        'UMC 6기를 모집합니다!!! 개발도 하고 친목도 다질 수 있는 절호의 기회~~~ 많은 지원 부탁드려요~',
+    },
+    {
+      title: '5기 회식 안내',
+      contents:
+        'UMC 5기 회식을 진행합니다!!! 돈은 회장 벡스가 다 낸다고 합니다~~',
+    },
+    {
+      title: '프로젝트 매칭 안내',
+      contents: '이번 주부터 프로젝트 매칭을 시작합니다.',
+    },
+    {
+      title: 'Design 파트장 모집',
+      contents:
+        '인하대 UMC 6기 Design 파트장은 델로로 확정되어 모집 받지 않습니다.',
+    },
+    {
+      title: 'Spring 파트장 모집',
+      contents:
+        '인하대 UMC 6기 Spring 파트장은 벡스로 확정되어 모집 받지 않습니다.',
+    },
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 4, 0));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, data.length - 4));
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 4, data.length - 4));
   };
 
   const isLeftArrowGray = currentIndex === 0;
