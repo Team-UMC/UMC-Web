@@ -34,6 +34,7 @@ const Underline = styled.div`
 
 
 const Type = ({ activeType, handleTypeClick }) => {
+  
   const handleItemClick = (type) => {
     handleTypeClick(type);
   };
