@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import Form from 'components/OldBoard/Form.jsx';
-import Header from 'assets/header/smallheader.svg';
+import {DetailPage} from 'components/OldBoard/DetailPage';
+//import Header from 'layout/Header/header';
+
 
 function App() {
   return (
     <div>
-      <img src={Header} />
-      <Form />
-      
+      {/*<Header />*/}
+      <DetailPage />
     </div>
   );
 }
