@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRoutes, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Main from 'pages/main.jsx';
+import Main from 'pages/m.jsx';
 import BoardPage from 'pages/NewBoardPage/BoardPage';
 
 const RedirectTo = ({ navigate, to }) => {
