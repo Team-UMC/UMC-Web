@@ -73,35 +73,33 @@ const BoardBoxBranch = () => {
       <BoardBoxBranchContentWrapper>
         <BoardBoxBranchContent>
           <NavLink
-            to={`/board/branch/notice`}
-            activeStyle={{ color: '#8784ff' }}
+            to="/board/branch/notice"
+            activestyle={{ color: '#8784ff' }}
           >
             공지사항
           </NavLink>
         </BoardBoxBranchContent>
         <BoardBoxBranchContent>
-          <NavLink to={`/board/branch/free`} activeStyle={{ color: '#8784ff' }}>
+          <NavLink
+            to="/board/branch/free"
+            activestyle={{ color: '#8784ff' }}
+          >
             자유 게시판
           </NavLink>
         </BoardBoxBranchContent>
         <BoardBoxBranchContent>
           <NavLink
-            to={`/board/branch/question`}
-            activeStyle={{ color: '#8784ff' }}
+            to="/board/branch/question"
+            activestyle={{ color: '#8784ff' }}
           >
             질문 게시판
           </NavLink>
         </BoardBoxBranchContent>
         <BoardBoxBranchContent>
           <NavLink
-            to={`/board/branch/workbook`}
-            activeStyle={{ color: '#8784ff' }}
+            to="/board/branch/prev"
+            activestyle={{ color: '#8784ff' }}
           >
-            워크북 게시판
-          </NavLink>
-        </BoardBoxBranchContent>
-        <BoardBoxBranchContent>
-          <NavLink to={`/board/branch/prev`} activeStyle={{ color: '#8784ff' }}>
             이전 기수 게시판
           </NavLink>
         </BoardBoxBranchContent>

@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import pencil from '../../assets/board/pencil-fill.svg';
 
-const BoardButtonWrapper = styled.div`
+const AdminCompletionButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +19,7 @@ const BoardButtonWrapper = styled.div`
   }
 `;
 
-const BoardButtonContent = styled.div`
+const AdminCompletionButtonContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -28,7 +27,7 @@ const BoardButtonContent = styled.div`
   gap: 0 4px;
 `;
 
-const BoardWriteFont = styled.div`
+const AdminCompletionFont = styled.div`
   font-family: 'Pretendard';
   font-size: 14px;
   font-weight: 500;
@@ -37,15 +36,14 @@ const BoardWriteFont = styled.div`
   word-wrap: break-word;
 `;
 
-const BoardWriteButton = () => {
+const AdminCompletionButton = () => {
   return (
-    <BoardButtonWrapper>
-      <BoardButtonContent>
-        <img src={pencil} alt="pencil" />
-        <BoardWriteFont>글쓰기</BoardWriteFont>
-      </BoardButtonContent>
-    </BoardButtonWrapper>
+    <AdminCompletionButtonWrapper>
+      <AdminCompletionButtonContent>
+        <AdminCompletionFont>완료</AdminCompletionFont>
+      </AdminCompletionButtonContent>
+    </AdminCompletionButtonWrapper>
   );
 };
 
-export default BoardWriteButton;
+export default AdminCompletionButton;

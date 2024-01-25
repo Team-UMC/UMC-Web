@@ -3,7 +3,12 @@ import HamburgerMenu from 'components/Header/HamburgerMenu';
 import HeaderStyles from 'layout/Header/header.style';
 import LeftContainer from 'components/Header/LeftContainer';
 import RightContainer from 'components/Header/RightContainer';
-import { HomeMenuItems, BoardMenuItems, HistoryMenuItems, GalleryMenuItems } from 'layout/Header/MenuItem';
+import {
+  HomeMenuItems,
+  BoardMenuItems,
+  HistoryMenuItems,
+  GalleryMenuItems,
+} from 'layout/Header/MenuItem';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

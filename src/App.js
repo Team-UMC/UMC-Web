@@ -4,6 +4,7 @@ import 'App.css';
 
 import Header from 'layout/Header/header';
 import Main from 'pages/main.jsx';
+import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
       </Routes>
+
+      <BoardPageRoute />
     </div>
   );
 }

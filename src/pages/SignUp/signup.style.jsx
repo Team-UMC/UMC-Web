@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Background from "assets/signup/background.svg";
+import Background from 'assets/signup/background.svg';
 
 const SignUpPageContainer = styled.div`
   background: url('${Background}') no-repeat center/cover;
