@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
 
 const ChallengerTypeContainer = styled.div`
@@ -31,6 +31,12 @@ color: #4B4B4B;
 
 const ChallengerType = () => {
 
+    const [selectedOption, setSelectedOption] = useState('');
+
+    const handleDropdownChange = (event) => {
+      setSelectedOption(event.target.value);
+    };
+
     return (
         <ChallengerTypeContainer>
         <TitleContainer>
@@ -40,12 +46,23 @@ const ChallengerType = () => {
         </TitleContainer>
 
         <TitleContainer>
-            기수
+            기수 및 파트
+            <label htmlFor="dropdown">Select a generation:</label>
+      <select id="dropdown" value={selectedOption} onChange={handleDropdownChange}>
+        <option value="">Select a generation</option>
+        <option value="1st">1기</option>
+        <option value="2nd">2기</option>
+        <option value="3rd">3기</option>
+        <option value="4th">4기</option>
+        <option value="5th">5기</option>
+        <option value="6th">6기</option>
+      </select>
+
+      {selectedOption && (
+        <p>You selected: {selectedOption}</p>
+      )}
         </TitleContainer>
 
-        <TitleContainer>
-            파트
-        </TitleContainer>
         </ChallengerTypeContainer>
     );
 };

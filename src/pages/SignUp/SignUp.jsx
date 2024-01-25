@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 //import axios from 'axios';
 
-import SignUpStyles from 'pages/SignUp/signup.style';
+import SignUpStyles from 'pages/SignUp/SignUp.style';
 import BackgroundImage from 'assets/signup/background.svg';
 import NocontentsBackgroundImage from 'assets/signup/NoContentsBackground.svg';
 
-import InviteCode from 'components/signup/InviteCode';
-import School from 'components/signup/School';
+import InviteCode from 'components/SignUp/InviteCode';
+import School from 'components/SignUp/School';
 import Name from 'components/SignUp/Name';
 import Nickname from 'components/SignUp/Nickname';
 import Agreement from 'components/SignUp/Agreement';

@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import BoardFile from 'components/boardwrite/BoardFile';
-import BoardLabel from 'components/boardwrite/BoardLabel';
+import BoardFile from 'components/BoardWrite/BoardFile';
+import BoardLabel from 'components/BoardWrite/BoardLabel';
 import BoardTitle from 'components/BoardTitle/BoardTitle';
-import BoardText from 'components/boardwrite/BoardText';
-import BoardButton from 'components/boardwrite/BoardButton';
+import BoardText from 'components/BoardWrite/BoardText';
+import BoardButton from 'components/BoardWrite/BoardButton';
 
 const BoardWriteContainer = styled.div`
-  margin-top: 100%;   
   display: flex;
   flex-direction: column;
   align-items: center;

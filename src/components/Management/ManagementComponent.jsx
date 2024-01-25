@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types"; // Import PropTypes
 
-import BoardTitle from '../../components/boardwrite/BoardTitle';
-import BoardText from '../../components/boardwrite/BoardText';
+import BoardTitle from '../BoardWrite/BoardTitle';
+import BoardText from '../BoardWrite/BoardText';
 import ManagementButton from 'components/Management/Button';
 import StartendDate from '../../components/Management/StartendDate';
 import Local from '../../components/Management/SelectLocal';
