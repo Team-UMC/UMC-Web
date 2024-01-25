@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import SearchBar from './BoardSearch';
-import BoardWriteButton from './BoardWriteButton';
+import SearchBar from 'components/NewBoard/BoardSearch';
+import AdminCompletionButton from 'components/Admin/AdminCompletionButton';
+import { ROWS_DATA } from '../../Data';
 
 import { IconButton } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -64,17 +65,6 @@ const StyledCollapseContent = styled.div`
   overflow: hidden;
   max-height: ${(props) => (props.open ? '500px' : '0')};
 `;
-
-const createData = (ispinned, title, author, date, views, content) => {
-  return {
-    ispinned,
-    title,
-    author,
-    date,
-    views,
-    content,
-  };
-};
 
 const BoardWriteButtonLayout = styled.div`
   display: flex;
@@ -138,13 +128,30 @@ const BoardSearchLayout = styled.div`
 
 const ROWS_PER_PAGE = 10;
 
-const Row = ({ row }) => {
+const Row = ({ row, onPinChange }) => {
   const [open, setOpen] = useState(false);
+  const [ispinned, setIsPinned] = useState(() => {
+    const savedIsPinned = localStorage.getItem(`ispinned-${row.title}`);
+    return savedIsPinned ? JSON.parse(savedIsPinned) : false;
+  });
+
+  const handleCheckboxChange = (event) => {
+    const checked = event.target.checked;
+    setIsPinned(checked);
+    onPinChange(row.title, checked);
+    localStorage.setItem(`ispinned-${row.title}`, checked);
+  };
 
   return (
     <Fragment>
       <StyledTableRow>
-        <StyledTableCell>{row.ispinned}</StyledTableCell>
+        <StyledTableCell>
+          <input
+            type="checkbox"
+            checked={ispinned}
+            onChange={handleCheckboxChange}
+          />
+        </StyledTableCell>
         <StyledTitleColumn style={{ textAlign: 'left' }}>
           {row.title}
         </StyledTitleColumn>
@@ -172,46 +179,6 @@ const Row = ({ row }) => {
   );
 };
 
-// 대충 데이터들 모음 (여기에 JSON 서버 생기면 구현하면 될 듯...)
-const rows = [
-  createData(
-    false,
-    'ㅑㅓ랴ㅐ재래ㅑㅁㄹㅈㄹㅈ',
-    '작성자1',
-    '2021.10.01',
-    100,
-    '내용1',
-  ),
-  createData(false, '공지공지공공지', '작성자2', '2021.10.02', 200, '내용2'),
-  createData(false, '야야저래ㅑㅈㄹ', '작성자3', '2021.10.03', 300, '내용3'),
-  createData(
-    false,
-    '이제야 틀이 완성됬다에베벱ㅂ베벱ㅂ',
-    '작성자4',
-    '2021-10-04',
-    400,
-    '내용4',
-  ),
-  createData(false, '뉴뉴난ㄴ내', '작성자5', '2021.10.05', 500, '내용5'),
-  createData(false, '힘들어...', '작성자6', '2021.10.06', 600, '내용6'),
-  createData(false, '살려줘...', '작성자7', '2021.10.07', 700, '내용7'),
-  createData(false, '가나다라마바사', '작성자8', '2021.10.08', 800, '내용8'),
-  createData(false, '공지입다', '작성자9', '2021.10.09', 900, '내용9'),
-  createData(
-    false,
-    'ㅡ애버ㅡ재ㅔ러ㅐㅔㅈ',
-    '작성자10',
-    '2021.10.10',
-    1000,
-    '내용10',
-  ),
-  createData(false, 'ㅡㅏㅇ9394914', '작성자11', '2021.10.11', 1100, '내용11'),
-  createData(false, 'test', '작성자12', '2021.10.12', 1200, '내용12'),
-  createData(false, '낄낄낄', '작성자13', '2021.10.13', 1300, '내용13'),
-  createData(false, '안녕?', '작성자14', '2021.10.14', 1400, '내용14'),
-  createData(false, '제목15', '작성자15', '2021.10.15', 1500, '내용15'),
-];
-
 Row.propTypes = {
   row: PropTypes.exact({
     ispinned: PropTypes.bool.isRequired,
@@ -221,19 +188,47 @@ Row.propTypes = {
     views: PropTypes.number.isRequired,
     content: PropTypes.string.isRequired,
   }).isRequired,
+  onPinChange: PropTypes.func.isRequired,
 };
 
 const BoardTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [pinnedRows, setPinnedRows] = useState({});
+  const [rows, setRows] = useState(
+    ROWS_DATA.map((row) => ({
+      ...row,
+      ispinned: !!pinnedRows[row.title],
+    })),
+  );
+
+  useEffect(() => {
+    const savedPinnedRows = localStorage.getItem('pinnedRows');
+    if (savedPinnedRows) {
+      const savedPinnedRowsParsed = JSON.parse(savedPinnedRows);
+      setRows(
+        rows.map((row) => ({
+          ...row,
+          ispinned: !!savedPinnedRowsParsed[row.title],
+        })),
+      );
+    }
+  }, []);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
 
-  const filteredRows = rows.filter(
-    (row) => row.title.includes(searchTerm) || row.content.includes(searchTerm),
+  const sortedRows = rows.sort(
+    (a, b) => (b.ispinned === true) - (a.ispinned === true),
   );
+
+  const filteredRows = sortedRows
+    ? sortedRows.filter(
+        (row) =>
+          row.title.includes(searchTerm) || row.content.includes(searchTerm),
+      )
+    : [];
 
   const currentRows = filteredRows.slice(
     (currentPage - 1) * ROWS_PER_PAGE,
@@ -277,12 +272,32 @@ const BoardTable = () => {
     return buttons;
   };
 
+  const handlePinChange = (title, isPinned) => {
+    setPinnedRows((prev) => {
+      const newPinnedRows = { ...prev };
+      newPinnedRows[title] = isPinned;
+      return newPinnedRows;
+    });
+
+    setRows(
+      rows.map((row) => ({
+        ...row,
+        ispinned: row.title === title ? isPinned : row.ispinned,
+      })),
+    );
+  };
+
+  const handleConfirm = () => {
+    localStorage.setItem('pinnedRows', JSON.stringify(pinnedRows));
+    alert('공지 등록이 완료되었습니다!');
+  };
+
   return (
     <>
       <StyledTable>
         <StyledTableHeader>
           <StyledTableRow style={{ borderBottom: 0, paddingBottom: 0 }}>
-            <StyledTableCell /> {/* 여기가 고정핀 부분임 */}
+            <StyledTableCell />
             <StyledTitleColumn>제목</StyledTitleColumn>
             <StyledTableCell>작성자</StyledTableCell>
             <StyledTableCell>작성일</StyledTableCell>
@@ -292,7 +307,9 @@ const BoardTable = () => {
         </StyledTableHeader>
         <tbody>
           {filteredRows.length > 0 ? (
-            currentRows.map((row) => <Row key={row.title} row={row} />)
+            currentRows.map((row) => (
+              <Row key={row.title} row={row} onPinChange={handlePinChange} />
+            ))
           ) : (
             <StyledTableRow>
               <StyledTableCell colSpan={5}>
@@ -303,7 +320,7 @@ const BoardTable = () => {
         </tbody>
       </StyledTable>
       <BoardWriteButtonLayout>
-        <BoardWriteButton />
+        <AdminCompletionButton onClick={handleConfirm} />
       </BoardWriteButtonLayout>
       <PageButtonLayout>{renderPageButtons()}</PageButtonLayout>
       <BoardSearchLayout>

@@ -8,6 +8,7 @@ import BoardWrite from 'pages/BoardWrite/boardwrite';
 import SignUpForm from 'pages/SignUp/signup';
 import Management from 'pages/Management/management';
 import MyWrite from 'pages/MyWrite/MyWrite';
+import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
 
 function App() {
   return (
@@ -19,10 +20,12 @@ function App() {
         <Route path="/boardWrite" element={<BoardWrite />} />
         <Route path="/management" element={<Management />} />
         <Route path="/mywrite" element={<MyWrite />} />
-
+        <Route path="/boardpageroute" element={<BoardPageRoute />} />
 
         <Route path="/signup" element={<SignUpForm />} />
       </Routes>
+
+      <BoardPageRoute />
     </div>
   );
 } 
