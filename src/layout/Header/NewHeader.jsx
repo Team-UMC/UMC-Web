@@ -51,14 +51,10 @@ const Wrapper = styled.div`
 
 const NewHeader = () => {
   const dispatch = useDispatch();
-  // eslint-disable-next-line
   const canScrolled = useSelector(selectCanScrolled);
-  // eslint-disable-next-line
   const location = useLocation();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // eslint-disable-next-line
-  const [isScrolled, setIsScrolled] = useState(false);
 
   const handleLogin = () => {
     setIsLoggedIn(true);

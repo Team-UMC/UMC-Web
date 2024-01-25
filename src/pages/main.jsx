@@ -6,12 +6,12 @@ import Notification from 'components/Main/Notification/Notification';
 import Schedule from 'components/Main/Calendar/Schedule';
 
 const MainWrapper = styled.div`
-  margin-top: 25vh;
+  margin-top: 30vh;
 `;
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 3% auto;
+  margin: 4% auto;
   width: 70%;
   height: 80%;
   justify-content: space-between;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 const LeftWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 30%;
+  width: 40%;
 `;
 
 const RightWrapper = styled.div`
