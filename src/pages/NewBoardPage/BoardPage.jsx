@@ -9,8 +9,8 @@ const BoardPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 72px;
-  padding-bottom: 72px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 `;
 
 const BoardTitleLayout = styled(BoardTitle)`

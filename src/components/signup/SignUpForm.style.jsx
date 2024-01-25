@@ -1,16 +1,34 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+`;
 
 const SignUpFormWrapper = styled.form`
-  position: fixed;
+  color: white;
   height: 20vh;
-  width: 60%;
+  width: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
+  justify-content: space-evenly;
   border-radius: 8px;
-  margin: 10% auto;
+  margin-bottom: 150px;
 `;
 
-export default SignUpFormWrapper;
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StepButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const SignUpFormStyle = { Wrapper, SignUpFormWrapper, ButtonsWrapper, StepButtonWrapper };
+
+export default SignUpFormStyle;

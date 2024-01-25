@@ -10,8 +10,8 @@ const AdminPageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 72px;
-  padding-top: 72px;
-  padding-bottom: 72px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 `;
 
 const AdminTitleLayout = styled(AdminTitle)`
@@ -31,12 +31,12 @@ const AdminTableLayout = styled(AdminTable)`
 const AdminPage = () => {
   return (
     <div
-        className='admin-page'
-        style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
+      className="admin-page"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <AdminPageContainer>

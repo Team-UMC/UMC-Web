@@ -1,47 +1,31 @@
 import React, { useEffect } from 'react';
-import { useRoutes, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Main from 'pages/main.jsx';
 import BoardPage from 'pages/NewBoardPage/BoardPage';
 
-const RedirectTo = ({ navigate, to }) => {
+const RedirectTo = ({ to }) => {
+  let navigate = useNavigate();
+
   useEffect(() => {
     navigate(to);
   }, [navigate, to]);
-
   return null;
 };
 
 RedirectTo.propTypes = {
-  navigate: PropTypes.func.isRequired,
   to: PropTypes.string.isRequired,
 };
 
 const BoardPageRoute = () => {
-  let navigate = useNavigate();
-  let routes = useRoutes([
-    { path: '/', element: <Main /> },
-    { path: '/board/*', element: <BoardPage /> },
-    {
-      path: '/board/school',
-      element: <RedirectTo navigate={navigate} to="/board/school/notice" />,
-    },
-    {
-      path: '/board/branch',
-      element: <RedirectTo navigate={navigate} to="/board/branch/notice" />,
-    },
-    {
-      path: '/board/union',
-      element: <RedirectTo navigate={navigate} to="/board/union/notice" />,
-    },
-    {
-      path: '/board',
-      element: <RedirectTo navigate={navigate} to="/board/school/notice" />,
-    },
-  ]);
-
-  return <div>{routes}</div>;
+  return (
+    <Routes>
+      <Route path="/board/school/*" element={<BoardPage />} />
+      <Route path="/board/branch/*" element={<BoardPage />} />
+      <Route path="/board/union/*" element={<BoardPage />} />
+      <Route path="/board" element={<RedirectTo to="/board/school/notice" />} />
+    </Routes>
+  );
 };
 
 export default BoardPageRoute;

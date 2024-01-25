@@ -35,25 +35,23 @@ const BoardBoxBranchTitle = styled.h3`
 `;
 
 const BoardBoxBranchContentWrapper = styled.div`
-  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 
-const BoardBoxBranchContent = styled.div`
+const BoardBoxBranchLink = styled(NavLink).attrs({
+  activeStyle: { color: '#8784ff !important' },
+})`
   text-align: left;
   color: black;
   background: white;
+  text-decoration: none;
   font-size: 12px;
   font-weight: 400;
-  padding-bottom: 8px;
   word-wrap: break-word;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-
-  a {
-    background: white;
-    text-decoration: none;
-    color: inherit;
-  }
 
   &:hover {
     color: #8784ff;
@@ -69,40 +67,20 @@ const BoardBoxBranch = () => {
       <BoardBoxBranchImage>
         <img src={branch} alt="branch" />
       </BoardBoxBranchImage>
-      <BoardBoxBranchTitle>학교</BoardBoxBranchTitle>
+      <BoardBoxBranchTitle>지부</BoardBoxBranchTitle>
       <BoardBoxBranchContentWrapper>
-        <BoardBoxBranchContent>
-          <NavLink
-            to="/board/branch/notice"
-            activestyle={{ color: '#8784ff' }}
-          >
-            공지사항
-          </NavLink>
-        </BoardBoxBranchContent>
-        <BoardBoxBranchContent>
-          <NavLink
-            to="/board/branch/free"
-            activestyle={{ color: '#8784ff' }}
-          >
-            자유 게시판
-          </NavLink>
-        </BoardBoxBranchContent>
-        <BoardBoxBranchContent>
-          <NavLink
-            to="/board/branch/question"
-            activestyle={{ color: '#8784ff' }}
-          >
-            질문 게시판
-          </NavLink>
-        </BoardBoxBranchContent>
-        <BoardBoxBranchContent>
-          <NavLink
-            to="/board/branch/prev"
-            activestyle={{ color: '#8784ff' }}
-          >
-            이전 기수 게시판
-          </NavLink>
-        </BoardBoxBranchContent>
+        <BoardBoxBranchLink to="/board/branch/notice">
+          공지사항
+        </BoardBoxBranchLink>
+        <BoardBoxBranchLink to="/board/branch/free">
+          자유 게시판
+        </BoardBoxBranchLink>
+        <BoardBoxBranchLink to="/board/branch/question">
+          질문 게시판
+        </BoardBoxBranchLink>
+        <BoardBoxBranchLink to="/board/branch/prev">
+          이전 기수 게시판
+        </BoardBoxBranchLink>
       </BoardBoxBranchContentWrapper>
     </BoardBoxBranchContainer>
   );

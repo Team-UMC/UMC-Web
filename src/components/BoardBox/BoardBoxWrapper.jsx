@@ -10,6 +10,7 @@ const BoardBoxWrapperLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 40px;
 `;
 
 const BoardBoxSuggestionContainer = styled.div`

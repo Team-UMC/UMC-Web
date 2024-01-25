@@ -7,7 +7,7 @@ const Textarea = styled.textarea`
   display: flex;
   width:120vh;
   height: 300px;
-  padding: 16px;
+  padding: 1vh;
   font-size: 16px;
   align-items: flex-start;
   resize: none;
