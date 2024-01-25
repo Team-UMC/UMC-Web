@@ -9,6 +9,8 @@ const BoardPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 72px;
+  padding-bottom: 72px;
 `;
 
 const BoardTitleLayout = styled(BoardTitle)`
@@ -39,6 +41,7 @@ const StyledBoardTable = styled(BoardTable)`
 const BoardPage = () => {
   return (
     <div
+      className='board-page' 
       style={{
         display: 'flex',
         flexDirection: 'column',

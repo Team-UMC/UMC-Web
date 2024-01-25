@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const AdminCompletionButtonWrapper = styled.div`
   display: flex;
@@ -36,14 +37,18 @@ const AdminCompletionFont = styled.div`
   word-wrap: break-word;
 `;
 
-const AdminCompletionButton = () => {
+const AdminCompletionButton = ({ onClick }) => {
   return (
-    <AdminCompletionButtonWrapper>
+    <AdminCompletionButtonWrapper onClick={onClick}>
       <AdminCompletionButtonContent>
         <AdminCompletionFont>완료</AdminCompletionFont>
       </AdminCompletionButtonContent>
     </AdminCompletionButtonWrapper>
   );
+};
+
+AdminCompletionButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };
 
 export default AdminCompletionButton;
