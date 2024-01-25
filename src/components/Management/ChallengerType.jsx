@@ -5,40 +5,40 @@ const ChallengerTypeContainer = styled.div`
 width: 120vh;
 display: flex;
 flex-direction: column;
+justify-content: center;
+align-items: center; 
+
+border: 1px solid #232A6D;
 `;
 
 
-const ManagerContainer = styled.div`
-width: 100%;
+const TitleContainer = styled.div`
+width: 70%;
+border-radius: 12px;
+font-size: 16px;
+font-weight: 500;
+
+border: 1px solid #232A6D;
 `;
 
-const StageContainer = styled.div`
-width: 100%;
-
-`;
-
-const PartContainer = styled.div`
-width: 100%;
-
-`;
 
 const ChallengerType = () => {
 
     return (
         <ChallengerTypeContainer>
-        <ManagerContainer>
+        <TitleContainer>
             운영진 직책
             <div>학교</div>
             <div>중앙</div>
-        </ManagerContainer>
+        </TitleContainer>
 
-        <StageContainer>
+        <TitleContainer>
             기수
-        </StageContainer>
+        </TitleContainer>
 
-        <PartContainer>
+        <TitleContainer>
             파트
-        </PartContainer>
+        </TitleContainer>
         </ChallengerTypeContainer>
     );
 };
