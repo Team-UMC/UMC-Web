@@ -6,10 +6,11 @@ import BoardPage from 'pages/NewBoardPage/BoardPage';
 
 const RedirectTo = ({ to }) => {
   let navigate = useNavigate();
+  navigate(to);
 
   useEffect(() => {
     navigate(to);
-  }, [navigate, to]);
+  }, [navigate]);
   return null;
 };
 

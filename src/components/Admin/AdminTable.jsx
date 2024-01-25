@@ -67,10 +67,11 @@ const StyledCollapseContent = styled.div`
   max-height: ${(props) => (props.open ? '500px' : '0')};
 `;
 
-const BoardWriteButtonLayout = styled.div`
+const AdminCompletionButtonLayout = styled.div`
   display: flex;
   justify-content: end;
   padding-top: 24px;
+  padding-bottom: 80px;
 `;
 
 const PageButton = styled.div`
@@ -105,7 +106,6 @@ const PageButtonLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 64px;
 `;
 
 const PageArrowButton = styled.div`
@@ -409,9 +409,9 @@ const AdminTable = () => {
           )}
         </tbody>
       </StyledTable>
-      <BoardWriteButtonLayout>
+      <AdminCompletionButtonLayout>
         <AdminCompletionButton onClick={handleConfirm} />
-      </BoardWriteButtonLayout>
+      </AdminCompletionButtonLayout>
       <PageButtonLayout>{renderPageButtons()}</PageButtonLayout>
       <BoardSearchLayout>
         <SearchBar onSearch={handleSearch} />

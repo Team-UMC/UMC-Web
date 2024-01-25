@@ -9,7 +9,7 @@ const AdminCompletionButtonWrapper = styled.div`
   background: white;
   border: none;
   border-radius: 12px;
-  padding: 8px 16px;
+  padding: 16px 16px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
   &:hover {
