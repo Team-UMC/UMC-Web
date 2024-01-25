@@ -5,8 +5,8 @@ import SignUpStyles from 'pages/SignUp/signup.style';
 import BackgroundImage from 'assets/signup/background.svg';
 import NocontentsBackgroundImage from 'assets/signup/NoContentsBackground.svg';
 
-import InviteCode from 'components/SignUp/InviteCode';
-import School from 'components/SignUp/School';
+import InviteCode from 'components/signup/InviteCode';
+import School from 'components/signup/School';
 import Name from 'components/SignUp/Name';
 import Nickname from 'components/SignUp/Nickname';
 import Agreement from 'components/SignUp/Agreement';
