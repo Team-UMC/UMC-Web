@@ -9,6 +9,7 @@ import BoardWrite from 'pages/BoardWrite/BoardWrite';
 import SocialLogin from 'components/SignUp/SocialLogin';
 import BoardPage from 'pages/NewBoardPage/BoardPage';
 import AdminManagePage from 'pages/Admin/AdminManagePage';
+// import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
 
 function App() {
   return (

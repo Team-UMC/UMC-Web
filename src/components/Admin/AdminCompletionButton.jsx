@@ -38,8 +38,14 @@ const AdminCompletionFont = styled.div`
 `;
 
 const AdminCompletionButton = ({ onClick }) => {
+  const handleClick = () => {
+    onClick();
+    alert('변경된 데이터가 저장되었습니다.');
+    window.location.reload();
+  };
+
   return (
-    <AdminCompletionButtonWrapper onClick={onClick}>
+    <AdminCompletionButtonWrapper onClick={handleClick}>
       <AdminCompletionButtonContent>
         <AdminCompletionFont>완료</AdminCompletionFont>
       </AdminCompletionButtonContent>

@@ -1,32 +1,20 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { useParams, Redirect } from 'react-router-dom';
 
 import BoardPage from 'pages/NewBoardPage/BoardPage';
 
-const RedirectTo = ({ to }) => {
-  let navigate = useNavigate();
-  navigate(to);
-
-  useEffect(() => {
-    navigate(to);
-  }, [navigate]);
-  return null;
-};
-
-RedirectTo.propTypes = {
-  to: PropTypes.string.isRequired,
-};
-
 const BoardPageRoute = () => {
-  return (
-    <Routes>
-      <Route path="/board/school/*" element={<BoardPage />} />
-      <Route path="/board/branch/*" element={<BoardPage />} />
-      <Route path="/board/union/*" element={<BoardPage />} />
-      <Route path="/board" element={<RedirectTo to="/board/school/notice" />} />
-    </Routes>
-  );
+  const { boardType, boardPath } = useParams();
+
+  if (!boardType && !boardPath) {
+    return <Redirect to="/board/school/notice" />;
+  }
+
+  // 이제 boardType과 boardPath를 사용하여 해당 보드를 렌더링할 수 있습니다.
+  // 예를 들어, 데이터를 가져오거나, 특정 컴포넌트를 렌더링하는 등의 작업을 수행할 수 있습니다.
+  // 이 예제에서는 BoardPage 컴포넌트를 렌더링합니다.
+
+  return <BoardPage boardType={boardType} boardPath={boardPath} />;
 };
 
 export default BoardPageRoute;

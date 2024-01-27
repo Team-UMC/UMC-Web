@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 import AdminTitle from 'components/Admin/AdminTitle';
 import ManagementType from 'components/Management/ManagementType';
-import AdminTable from 'components/Admin/AdminTable';
+// import AdminTable from 'components/Admin/AdminTable';
+import NewAdminTable from 'components/Admin/NewAdminTable';
 
 const AdminManagementContainer = styled.div`
   display: flex;
@@ -31,7 +32,7 @@ const ButtonLayout = styled(ManagementType)`
   padding-bottom: 80px;
 `;
 
-const TableLayout = styled(AdminTable)`
+const TableLayout = styled(NewAdminTable)`
   display: flex;
   padding-bottom: 80px;
 `;
