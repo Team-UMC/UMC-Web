@@ -11,8 +11,6 @@ import UnionChecked from 'assets/board/write/UnionChecked.svg';
 import SuggestionUnchecked from 'assets/board/write/SuggestionUnchecked.svg';
 import SuggestionChecked from 'assets/board/write/SuggestionChecked.svg';
 
-
-
 import SchoolBoard from './BoardSchool';
 import CampBoard from './BoardCamp';
 //import UnionBoard from './BoardUnion';
@@ -36,8 +34,7 @@ const BoardLabel = () => {
 
   const handleClick = (buttonName) => {
     setButtonStates((prevStates) => ({
-      schoolButton:
-        buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
+      schoolButton: buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
       campButton: buttonName === 'campButton' ? !prevStates.campButton : false,
       unionButton: buttonName === 'unionButton' ? !prevStates.unionButton : false,
       suggestionButton: buttonName === 'suggestionButton' ? !prevStates.suggestionButton : false,

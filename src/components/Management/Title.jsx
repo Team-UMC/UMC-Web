@@ -9,7 +9,7 @@ flex-direction: row;
 justify-content: flex-start;
 align-items: flex-start;
 
-margin-top: 10vh;
+margin-top: 13vh;
 `;
 
 const Title = styled.div`

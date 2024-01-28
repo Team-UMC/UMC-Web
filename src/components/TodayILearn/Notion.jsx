@@ -8,6 +8,7 @@ const FileContainer = styled.div`
   padding: 1.5vh;
   flex-direction: column;
   border-radius: 12px;
+  margin-top: 1.5vh;
   border: 1px solid #232A6D;
 `;
 
@@ -53,7 +54,7 @@ const FileInput = styled.input`
   display: none;
 `;
 
-const BoardFile = () => {
+const NotionLink = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleFileChange = (event) => {
@@ -71,7 +72,7 @@ const BoardFile = () => {
     <FileContainer>
       
       <FileText>
-        첨부파일
+        노션연동
         <AddIcon src={Add} alt="Add" onClick={() => document.getElementById('fileInput').click()} />
       </FileText>
       <FileInput type="file" id="fileInput" onChange={handleFileChange} multiple />
@@ -88,4 +89,4 @@ const BoardFile = () => {
   );
 };
 
-export default BoardFile;
+export default NotionLink;
