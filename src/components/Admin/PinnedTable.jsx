@@ -115,7 +115,7 @@ const PinnedTable = ({ row }) => {
     <Fragment>
       <StyledTableRow>
         <StyledTableCheckBoxCell>
-          {location.pathname.startsWith('/board/') ? (
+          {location.pathname.startsWith('/board') ? (
             <img src={pin} alt="pinned" />
           ) : (
             <Checkbox checked={ispinned} onChange={handleCheckboxChange} />

@@ -1,3 +1,5 @@
+// React에서 로컬 스토리지를 사용하기 위한 커스텀 훅
+// Local Storage에 값 저장 & 가져오기 기능 수행
 import { useState } from 'react';
 
 const useLocalStorage = (key, initialValue) => {

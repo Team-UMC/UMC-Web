@@ -182,14 +182,24 @@ const NewAdminTable = () => {
 
   const Row = ({ row }) => {
     const [open, setOpen] = useState(false);
-    const [isPinned, setIsPinned] = useState(pinnedItems.includes(row.title));
+    const [isPinned, setIsPinned] = useState(
+      row.ispinned || pinnedItems.includes(row.title),
+    );
 
     const handleCheckboxChange = (event) => {
       setIsPinned(event.target.checked);
       if (event.target.checked) {
         setPinnedItems([...pinnedItems, row.title]);
+        const item = ROWS_DATA.find((item) => item.title === row.title);
+        if (item) {
+          item.ispinned = true;
+        }
       } else {
         setPinnedItems(pinnedItems.filter((item) => item !== row.title));
+        const item = ROWS_DATA.find((item) => item.title === row.title);
+        if (item) {
+          item.ispinned = false;
+        }
       }
     };
 
