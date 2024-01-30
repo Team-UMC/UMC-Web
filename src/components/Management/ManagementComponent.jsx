@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types"; // Import PropTypes
+import React from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 
 import BoardTitle from '../BoardWrite/BoardTitle';
 import BoardText from '../BoardWrite/BoardText';
@@ -7,7 +7,6 @@ import ManagementButton from 'components/Management/Button';
 import StartendDate from '../../components/Management/StartendDate';
 import Local from '../../components/Management/SelectLocal';
 import Classify from '../../components/Management/Classify';
-
 
 import SearchChallenger from "./SearchChallenger.jsx";
 import ChallengerType from "./ChallengerType";
@@ -30,13 +29,14 @@ align-items: center;
 margin-left: 16px;
 `;
 
-
-
 const TypeComponent = ({ buttonStates }) => {
   return (
     <div>
-      {/* {buttonStates.setnoticeButton && <MyList />} {' '} */}
-
+      {buttonStates.setnoticeButton && (
+        <>
+          <AdminPage />
+        </>
+      )}{' '}
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />
@@ -61,6 +61,7 @@ const TypeComponent = ({ buttonStates }) => {
 
      </>
      )} {' '} 
+
     </div>
   );
 };
