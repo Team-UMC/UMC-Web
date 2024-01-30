@@ -9,7 +9,7 @@ const AdminCompletionButtonWrapper = styled.div`
   background: white;
   border: none;
   border-radius: 12px;
-  padding: 16px 16px;
+  padding: 8px 16px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
   &:hover {
@@ -38,14 +38,8 @@ const AdminCompletionFont = styled.div`
 `;
 
 const AdminCompletionButton = ({ onClick }) => {
-  const handleClick = () => {
-    onClick();
-    alert('변경된 데이터가 저장되었습니다.');
-    window.location.reload();
-  };
-
   return (
-    <AdminCompletionButtonWrapper onClick={handleClick}>
+    <AdminCompletionButtonWrapper onClick={onClick}>
       <AdminCompletionButtonContent>
         <AdminCompletionFont>완료</AdminCompletionFont>
       </AdminCompletionButtonContent>
