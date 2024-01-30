@@ -12,11 +12,16 @@ const BoardWriteContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0vh 50vh;
+  margin: 15vh 50vh;
+
 `;
 
 const LeftContainer = styled.div`
-  margin-right: 40vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-start;
+  margin-bottom: 2vh;
 `;
 
 const Title = styled.div`

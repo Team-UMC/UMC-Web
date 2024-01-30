@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 const ContainerBoard = styled.div`
   display: flex;
+  margin-bottom: 5vh;
 
 `;
 

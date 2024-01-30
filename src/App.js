@@ -24,7 +24,7 @@ function App() {
           <Route path="/signupform" element={<SignUpForm />} />
           <Route path="/boardPage" element={<BoardPage />} />
           <Route path="/boardwrite" element={<BoardWrite />} />
-          <Route path="/management" element={<Management />} />
+          <Route path="/admin" element={<Management />} />
           <Route path="/mywrite" element={<MyWrite />} />
           <Route path="/todayilearn" element={<TodayILearn />} />
           <Route path="/todayilearn/detailpage" element={<NewTIL />} />
