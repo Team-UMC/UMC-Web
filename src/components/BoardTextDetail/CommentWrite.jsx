@@ -9,6 +9,7 @@ import {
 } from './TextDetail';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import SubmitBtn from 'assets/SubmitBtn.svg';
 
 const TextNBtnWrapper = styled.div`
   display: inline-flex;
@@ -19,7 +20,7 @@ const TextNBtnWrapper = styled.div`
 `;
 
 const CommentWriteContainer = styled(BoxContainer)`
-  margin-top: 10vh;
+  margin: 10vh 0;
 `;
 
 const CommentWrite = ({
@@ -30,7 +31,7 @@ const CommentWrite = ({
   setCommentCount,
 }) => {
   const [comment, setComment] = useState('');
-  const textareaRef = useRef(null);
+  const inputRef = useRef(null);
   const buttonRef = useRef(null);
 
   const handleCommentChange = (e) => {
@@ -48,17 +49,10 @@ const CommentWrite = ({
         });
         setComment('');
 
-        // 댓글 제출 후 textarea의 크기를 초기화
-        if (textareaRef.current) {
-          textareaRef.current.style.height = 'auto';
-        }
         // 댓글 수 업데이트
         setCommentCount(commentCount + 1);
       }
     }
-
-    // 엔터키를 눌렀을 때도 textarea의 크기를 조정
-    handleResizeHeight();
   };
 
   const handleCommentSubmit = () => {
@@ -70,25 +64,15 @@ const CommentWrite = ({
       });
       setComment('');
 
-      // 댓글 제출 후 textarea의 크기를 초기화
-      if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
-      }
-
       // 댓글 수 업데이트
       setCommentCount(commentCount + 1);
     }
   };
 
-  const handleResizeHeight = () => {
-    textareaRef.current.style.height = 'auto';
-    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-  };
-
   useEffect(() => {
     // 첫 렌더 이후에 버튼 높이를 설정
     if (buttonRef.current) {
-      buttonRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      buttonRef.current.style.height = `${inputRef.current.scrollHeight}px`;
     }
   }, []);
 
@@ -102,43 +86,31 @@ const CommentWrite = ({
         </ProfileSmallWrapper>
       </ProfileBigWrapper>
       <TextNBtnWrapper>
-        <textarea
-          ref={textareaRef}
+        <input
+          ref={inputRef}
+          type="text"
           placeholder="댓글을 입력해주세요"
           value={comment}
           onChange={handleCommentChange}
           onKeyDown={handleEnterPress}
-          onInput={handleResizeHeight}
-          rows={1}
           style={{
             width: '100%',
-            padding: '0.5%',
+            padding: '1%',
             backgroundColor: '#F0F4FF',
-            resize: 'none',
             border: 'none',
             borderRadius: '5px',
+            lineheight:'30%',
             '::placeholder': {
               color: '#4B4B4B',
             },
           }}
         />
-        <button
+        <img
+          src={SubmitBtn}
+          alt="등록버튼"
           ref={buttonRef}
-          style={{
-            backgroundColor: '#919CFF',
-            textAlign: 'left',
-            padding: '1%',
-            border: 'none',
-            borderRadius: '5px',
-            display: 'flex',
-            alignItems: 'center',
-            color: '#F0F4FF',
-            whiteSpace: 'nowrap',
-          }}
           onClick={handleCommentSubmit}
-        >
-          등록
-        </button>
+        />
       </TextNBtnWrapper>
     </CommentWriteContainer>
   );

@@ -5,13 +5,13 @@ import Like from 'assets/Like.svg';
 import Comment from 'assets/Comment.svg';
 import ViewCount from 'assets/ViewCount.svg';
 import MiniHambergerMenu from 'assets/MiniHamberMenu.svg';
-// import IncrementCount from 'components/BoardTextDetail/IncrementCount.jsx';
-// import IncrementBtn from 'components/BoardTextDetail/IncrementBtn';
-import LikeBtnImg from 'assets/LikeBtnImg.svg';
+import CommentBtnImg from 'assets/CommentBtnImg.svg';
+import LikeBtnImgNotLiked from 'assets/LikeBtnImgNotLiked.svg';
+import MiniHambergerMenuModal from './MiniHambergerMenuModal';
+import LikeBtnImgLiked from 'assets/LikeBtnImgLiked.svg';
 import {
   AllWrapper,
   ProfileTextControlWrapper,
-  MiniHambergerMenuImg,
   ProfileBigWrapper,
   ProfileSmallWrapper,
   NameNickname,
@@ -19,55 +19,23 @@ import {
   TextTitle,
   TextContent,
   LikeCommentDateWrapper,
-  DateWrapper,
   Date,
   LikeCommentViewCountWrapper,
   Wrapper,
 } from 'components/BoardTextDetail/TextDetail.style';
 
-// const LikeBtn = () => {
-//   const [likes, setLikes] = useState(0);
-//   const [liked, setLiked] = useState(false);
-
-//   const handleLikeClick = () => {
-//     const userConfirmed = confirm('이 글에 좋아요를 누르시겠습니까?');
-
-//     if (userConfirmed) {
-//       if (!liked) {
-//         setLikes(likes + 1);
-//         setLiked(true);
-//       } else {
-//         alert('이미 좋아요를 누른 글입니다.');
-//       }
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <IncrementBtn
-//         onClick={handleLikeClick}
-//         imageUrl={LikeBtnImg}
-//         style={{
-//           width: '30px',
-//           height: '30px',
-//           backgroundSize: 'contain',
-//           '&:hover': {
-//             cursor: 'pointer',
-//           },
-//         }}
-//       />
-//       <IncrementCount
-//         count={likes.toString()}
-//         onIncrement={handleLikeClick}
-//         style={{ color: '#000C76', fontSize: '18px' }}
-//       />
-//     </div>
-//   );
-// };
-
-const TextDetail = ({ NameNicknameText, CohortPartText, commentCount }) => {
+const TextDetail = ({
+  NameNicknameText,
+  CohortPartText,
+  commentCount,
+  date,
+}) => {
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModify, setIsModify] = useState(false);
 
   const handleLikeClick = () => {
     const userConfirmed = window.confirm('이 글에 좋아요를 누르시겠습니까?');
@@ -81,6 +49,30 @@ const TextDetail = ({ NameNicknameText, CohortPartText, commentCount }) => {
       }
     }
   };
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleButtonClick = () => {
+    setShowButtons(true);
+  };
+
+  const handleModifyClick = () => {
+    setIsModify(true);
+    setIsModalOpen(true);
+  };
+
+  const handleDeleteClick = () => {
+    setIsModify(false);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <AllWrapper>
       <ProfileTextControlWrapper>
@@ -91,7 +83,35 @@ const TextDetail = ({ NameNicknameText, CohortPartText, commentCount }) => {
             <CohortPart> {CohortPartText || '5기 Web'} </CohortPart>
           </ProfileSmallWrapper>
         </ProfileBigWrapper>
-        <MiniHambergerMenuImg src={MiniHambergerMenu} alt="더보기" />
+        <div style={{display:'flex', flexDirection:'row'}}>
+          <img
+            src={MiniHambergerMenu}
+            alt="더보기"
+            onClick={handleButtonClick}
+            style={{ cursor: 'pointer', position: 'relative' }}
+          />
+          {showButtons && (
+            <div>
+              <div
+                style={{
+                  position: 'absolute',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <button onClick={handleModifyClick}>수정</button>
+                <button onClick={handleDeleteClick}>삭제</button>
+              </div>
+            </div>
+          )}
+
+          {isModalOpen && (
+            <MiniHambergerMenuModal
+              onClose={closeModal}
+              content={isModify ? '수정하겠습니까?' : '삭제하겠습니까?'}
+            />
+          )}
+        </div>
       </ProfileTextControlWrapper>
       <TextTitle> 그냥 집에 보내주세요ㅠ.ㅠ </TextTitle>
       <TextContent>
@@ -101,9 +121,7 @@ const TextDetail = ({ NameNicknameText, CohortPartText, commentCount }) => {
       <LikeCommentViewCountWrapper>
         <Wrapper>
           <img src={Like} alt="좋아요" />
-          <span style={{ color: '#000C76', fontSize: '18px' }}>
-            {likes.toString()}
-          </span>
+          <span style={{ color: '#000C76' }}>{likes.toString()}</span>
         </Wrapper>
         <Wrapper>
           <img src={Comment} alt="댓글" />
@@ -111,16 +129,27 @@ const TextDetail = ({ NameNicknameText, CohortPartText, commentCount }) => {
         </Wrapper>
         <Wrapper>
           <img src={ViewCount} alt="조회수" />
+          <span style={{ color: '#4B4B4B' }}>2000</span>
         </Wrapper>
       </LikeCommentViewCountWrapper>
-      <LikeCommentViewCountWrapper>
-        <img src={LikeBtnImg} alt="좋아요버튼" onClick={handleLikeClick} />
-      </LikeCommentViewCountWrapper>
       <LikeCommentDateWrapper>
-        <DateWrapper>
-          <Date> 2023. 12. 16 </Date>
-        </DateWrapper>
+        <LikeCommentViewCountWrapper>
+          <img
+            src={liked ? LikeBtnImgLiked : LikeBtnImgNotLiked}
+            alt="좋아요버튼"
+            onClick={handleLikeClick}
+            style={{ cursor: 'pointer' }}
+          />
+          <img
+            src={CommentBtnImg}
+            alt="댓글 버튼"
+            onClick={scrollToBottom}
+            style={{ cursor: 'pointer' }}
+          />
+        </LikeCommentViewCountWrapper>
+        <Date>{date || '2023. 1. 16'}</Date>
       </LikeCommentDateWrapper>
+      {/* {showModal && <MiniHambergerMenuModal onClose={ModalClose} />} */}
     </AllWrapper>
   );
 };
@@ -132,6 +161,7 @@ TextDetail.propTypes = {
   IncrementCount: PropTypes.string.isRequired,
   commentCount: PropTypes.number.isRequired,
   setCommentCount: PropTypes.func,
+  date: PropTypes.string,
 };
 
 export {
@@ -142,7 +172,6 @@ export {
   ProfileImage,
   NameNickname,
   CohortPart,
-  MiniHambergerMenuImg,
   TextContent,
   Date,
 };

@@ -11,23 +11,13 @@ const ProfileTextControlWrapper = styled.div`
   width: 100%;
   flex-direction: row;
   gap: 0.1vw;
-  justify-content: flex-start;
-`;
-
-const MiniHambergerMenuImg = styled.img`
-  border: none;
-  display: inline-block; // 추가
-  padding: 0;
-  background-color: #ffffff;
-  &:hover {
-    cursor: pointer;
-  }
+  justify-content: space-between;
 `;
 
 const ProfileBigWrapper = styled.div`
   display: inline-flex;
   flex-direction: row;
-  width: 100%;
+  /* width: 100%; */
   gap: 1vw;
 `;
 
@@ -73,24 +63,19 @@ const LikeCommentDateWrapper = styled.div`
   display: inline-flex;
   width: 100%;
   flex-direction: row;
-  justify-content: flex-start;
+  padding-top: 0.5vh;
 `;
 
 const Wrapper = styled.div`
   display: inline-flex;
-  width: 5%;
+  /* width: 10%; */
   flex-direction: row;
-  gap: 0;
+  gap: 0.1vw;
 `;
 
-
-const DateWrapper = styled.div`
-  display: inline-flex;
-  justify-content: flex-end;
-`;
 const Date = styled.p`
   color: #bcbcbc;
-  width: 100%;
+  width: 15%;
 `;
 
 const LikeCommentViewCountWrapper = styled.div`
@@ -104,7 +89,6 @@ const LikeCommentViewCountWrapper = styled.div`
 export {
   AllWrapper,
   ProfileTextControlWrapper,
-  MiniHambergerMenuImg,
   ProfileBigWrapper,
   ProfileSmallWrapper,
   NameNickname,
@@ -112,7 +96,6 @@ export {
   TextTitle,
   TextContent,
   LikeCommentDateWrapper,
-  DateWrapper,
   Date,
   LikeCommentViewCountWrapper,
   Wrapper,

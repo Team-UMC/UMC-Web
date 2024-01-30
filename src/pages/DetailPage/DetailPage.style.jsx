@@ -3,11 +3,17 @@ import styled from 'styled-components';
 const BoardTitleBigWrapper = styled.div`
   padding-top: 10vh;
   display: inline-flex;
-  width: 100%;
-  padding-left: 20vw;
+  width: 60%;
   padding-bottom: 5%;
   flex-direction: row;
   gap: 0.1vw;
+`;
+
+const AlignWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10vw;
 `;
 
 const BoardTitleMediumWrapper = styled.div`
@@ -55,8 +61,6 @@ const BoardSubText = styled.p`
 
 const BoxContainer = styled.div`
   font-family: 'Pretendard';
-  margin-left: 20vw;
-  width: 60%;
   background-color: #fff;
   border-radius: 1.5vw;
   padding: 2vw;
@@ -71,4 +75,5 @@ export {
   BoardText,
   BoardSubText,
   BoxContainer,
+  AlignWrapper,
 };

@@ -8,17 +8,14 @@ import {
   NameNickname,
   CohortPart,
   TextContent,
-  MiniHambergerMenuImg,
 } from 'components/BoardTextDetail/TextDetail';
 import PropTypes from 'prop-types';
+import MiniHambergerMenu from 'assets/MiniHamberMenu.svg';
 
 const Container = styled.div`
   display: inline-flex;
   flex-direction: column;
-  width: 100%;
   font-family: 'Pretendard';
-  margin-left: 20vw;
-  width: 60%;
   padding: 2vw;
   word-wrap: break-word;
   border: 2px solid #d8d8ff;
@@ -49,7 +46,11 @@ const Comment = ({
             <CohortPart>{CohortPartText || '5기 Web'}</CohortPart>
           </ProfileSmallWrapper>
         </ProfileBigWrapper>
-        <MiniHambergerMenuImg />
+        <img
+          src={MiniHambergerMenu}
+          alt="더보기"
+          style={{ cursor: 'pointer' }}
+        />
       </ProfileTextControlWrapper>
       <TextContentWrapper>
         <TextContent>
