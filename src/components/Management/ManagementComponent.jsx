@@ -8,11 +8,11 @@ import StartendDate from '../../components/Management/StartendDate';
 import Local from '../../components/Management/SelectLocal';
 import Classify from '../../components/Management/Classify';
 
-
 import SearchChallenger from "./SearchChallenger.jsx";
 import ChallengerType from "./ChallengerType";
 import ChallengerPosition from "./ChallengerPosition";
 import styled from "styled-components";
+
 
 const ButtonContainer = styled.div`
 display: flex;
