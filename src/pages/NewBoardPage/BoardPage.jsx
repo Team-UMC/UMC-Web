@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import BoardTitle from '../../components/BoardTitle/BoardTitle';
 import BoardBox from '../../components/BoardBox/BoardBox';
-import BoardTable from '../../components/NewBoard/BoardTable';
+import BoardTable from '../../components/Board/BoardTable';
 
 const BoardPageContainer = styled.div`
   display: flex;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ROWS_DATA } from 'Data';
 import PinnedTable from './PinnedTable';
-import SearchBar from 'components/NewBoard/BoardSearch';
+import SearchBar from 'components/Board/BoardSearch';
 import AdminCompletionButton from 'components/Admin/AdminCompletionButton';
 
 import { IconButton } from '@mui/material';

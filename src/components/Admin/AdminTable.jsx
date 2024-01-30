@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import SearchBar from 'components/NewBoard/BoardSearch';
+import SearchBar from 'components/Board/BoardSearch';
 import AdminCompletionButton from 'components/Admin/AdminCompletionButton';
 import { ROWS_DATA } from 'Data';
 
