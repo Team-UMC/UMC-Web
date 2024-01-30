@@ -7,6 +7,7 @@ const ChallengerTypeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 12px;
   border: 1px solid #232A6D;
 `;
 
@@ -18,13 +19,6 @@ const TitleContainer = styled.div`
   padding: 16px;
   margin-top: 16px;
   border: 1px solid #232A6D;
-`;
-
-const SubTitle = styled.div`
-  font-size: 16px;
-  font-weight: 500;
-  color: #4B4B4B;
-  padding: 16px;
 `;
 
 const DropdownBox = styled.select`
@@ -43,6 +37,11 @@ const DropdownBox = styled.select`
 const DropBoxContainer = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+const AddRemoveButton = styled.button`
+  margin-right: 8px;
+  cursor: pointer;
 `;
 
 const ChallengerType = () => {
@@ -111,21 +110,19 @@ const ChallengerType = () => {
           <option value="iOS">iOS</option>
           <option value="Android">Android</option>
         </DropdownBox>
-        <button onClick={handleAddButtonClick}>+</button>
 
-        <button onClick={() => handleRemoveButtonClick(index)}>-</button>
+        <AddRemoveButton onClick={handleAddButtonClick}>+</AddRemoveButton>
+        {additionalDropdowns.length > 0 && (
+          <AddRemoveButton onClick={() => handleRemoveButtonClick(index)}>
+            {index === 0 ? '-' : ''}
+          </AddRemoveButton>
+        )}
       </DropBoxContainer>
     ));
   };
 
   return (
     <ChallengerTypeContainer>
-      <TitleContainer>
-        운영진 직책
-        <SubTitle>학교</SubTitle>
-        <SubTitle>중앙</SubTitle>
-      </TitleContainer>
-
       <TitleContainer>
         기수 및 파트
         <DropBoxContainer>
@@ -158,8 +155,12 @@ const ChallengerType = () => {
             <option value="Android">Android</option>
           </DropdownBox>
 
-          <button onClick={handleAddButtonClick}>+</button>
-          <button onClick={() => handleRemoveButtonClick(0)}>Remove Selection</button>
+          <AddRemoveButton onClick={handleAddButtonClick}>+</AddRemoveButton>
+          {additionalDropdowns.length > 0 && (
+            <AddRemoveButton onClick={() => handleRemoveButtonClick(0)}>
+              {additionalDropdowns.length === 1 ? '-' : ''}
+            </AddRemoveButton>
+          )}
         </DropBoxContainer>
         {renderAdditionalDropdowns()}
       </TitleContainer>

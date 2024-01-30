@@ -11,6 +11,26 @@ import Classify from '../../components/Management/Classify';
 
 import SearchChallenger from "./SearchChallenger.jsx";
 import ChallengerType from "./ChallengerType";
+import ChallengerPosition from "./ChallengerPosition";
+import styled from "styled-components";
+
+const ButtonContainer = styled.div`
+display: flex;
+width: 120vh;
+justify-content: flex-end;
+align-items: center;
+margin-left: 16px;
+`;
+
+const ButtonContainerChallenger = styled.div`
+display: flex;
+width: 120vh;
+justify-content: center;
+align-items: center;
+margin-left: 16px;
+`;
+
+
 
 const TypeComponent = ({ buttonStates }) => {
   return (
@@ -24,14 +44,20 @@ const TypeComponent = ({ buttonStates }) => {
           <StartendDate />
           <Local />
           <Classify />
-          <ManagementButton />
+          <ButtonContainer>
+            <ManagementButton />
+          </ButtonContainer>
         </>
       )}{' '}
 
      {buttonStates.challengerButton && (
      <>
         <SearchChallenger />
+        <ChallengerPosition />
         <ChallengerType />
+        <ButtonContainerChallenger>
+          <ManagementButton />
+        </ButtonContainerChallenger>
 
      </>
      )} {' '} 
