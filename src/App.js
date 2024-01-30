@@ -8,7 +8,8 @@ import SignUpForm from 'pages/SignUp/SignUp';
 import BoardWrite from 'pages/BoardWrite/BoardWrite';
 import SocialLogin from 'components/SignUp/SocialLogin';
 import BoardPage from 'pages/NewBoardPage/BoardPage';
-import AdminPage from 'layout/Admin/AdminPage';
+import AdminManagePage from 'pages/Admin/AdminManagePage';
+// import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
 
 import Management from 'pages/Management/Management';
 import MyWrite from 'pages/MyWrite/MyWrite';
@@ -32,7 +33,7 @@ function App() {
 
 
           <Route path="/kakaologin" element={<SocialLogin />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<AdminManagePage />} />
         </Routes>
       </BrowserRouter>
     </>
