@@ -88,7 +88,9 @@ const BoardBoxWrapperLayout = styled.div`
   gap: 40px;
 `;
 
+// BoardBoxItem: 게시판 박스의 각 항목
 const BoardBoxItem = ({ image, title, links }) => {
+  // activeStyle: 현재 페이지의 링크에 적용할 스타일
   const activeStyle = {
     color: '#8784ff',
   };
@@ -125,7 +127,9 @@ BoardBoxItem.propTypes = {
   ).isRequired,
 };
 
+// BoardBoxWrapper: 게시판 박스의 묶음
 const BoardBoxWrapper = () => {
+  // boardBoxes: 게시판 박스의 정보
   const boardBoxes = [
     {
       image: school,
@@ -179,6 +183,7 @@ const BoardBoxWrapper = () => {
   );
 };
 
+// BoardBox: 게시판 박스 (좌측 메뉴바)
 const BoardBox = () => {
   return (
     <Card>

@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import pencil from 'assets/board/pencil-fill.svg';
+import pencil from 'assets/photo/pencil-fill.svg';
 
-const BoardButtonWrapper = styled.div`
+const GalleryButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background: white;
   border: none;
   border-radius: 12px;
-  padding: 8px 16px;
+  padding: 6px 10px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
   &:hover {
@@ -20,7 +20,7 @@ const BoardButtonWrapper = styled.div`
   }
 `;
 
-const BoardButtonContent = styled.div`
+const GalleryButtonContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -28,25 +28,25 @@ const BoardButtonContent = styled.div`
   gap: 0 4px;
 `;
 
-const BoardWriteFont = styled.div`
+const GalleryWriteFont = styled.div`
   font-family: 'Pretendard';
   font-size: 14px;
   font-weight: 500;
-  color: #8784ff;
+  color: #000c76;
   line-height: 22.4px;
   word-wrap: break-word;
 `;
 
 // BoardWriteButton: 글쓰기 버튼
-const BoardWriteButton = () => {
+const GalleryWriteButton = () => {
   return (
-    <BoardButtonWrapper>
-      <BoardButtonContent>
+    <GalleryButtonWrapper>
+      <GalleryButtonContent>
         <img src={pencil} alt="pencil" />
-        <BoardWriteFont>글쓰기</BoardWriteFont>
-      </BoardButtonContent>
-    </BoardButtonWrapper>
+        <GalleryWriteFont>글쓰기</GalleryWriteFont>
+      </GalleryButtonContent>
+    </GalleryButtonWrapper>
   );
 };
 
-export default BoardWriteButton;
+export default GalleryWriteButton;

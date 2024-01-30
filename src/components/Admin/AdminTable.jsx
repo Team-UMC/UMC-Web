@@ -1,8 +1,10 @@
+// 운영자 페이지의 공지사항 테이블 컴포넌트
 import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import SearchBar from 'components/NewBoard/BoardSearch';
 import AdminCompletionButton from 'components/Admin/AdminCompletionButton';
+import PinnedTable from 'components/Admin/PinnedTable';
 import { ROWS_DATA } from 'Data';
 
 import { IconButton } from '@mui/material';
@@ -169,19 +171,30 @@ const StyledTableCheckBoxCell = styled.td`
   white-space: nowrap;
 `;
 
+// ROWS_PER_PAGE: 한 페이지에 보여줄 공지사항의 개수
 const ROWS_PER_PAGE = 10;
 
+// Row 컴포넌트: 공지사항 테이블의 각 행을 나타내는 컴포넌트
+// row: 공지사항 테이블의 각 행에 대한 정보를 담고 있는 props
+// onPinChange: 공지사항 테이블의 각 행의 고정 여부를 변경하는 함수 props
 const Row = ({ row, onPinChange }) => {
+  // open: 공지사항 테이블의 각 행의 펼침 여부를 나타내는 state
+  // ispinned: 공지사항 테이블의 각 행의 고정 여부를 나타내는 state
   const [open, setOpen] = useState(false);
+
+  // 공지사항 테이블의 각 행의 고정 여부를 localStorage에 저장 & 불러오는 state
   const [ispinned, setIsPinned] = useState(() => {
     const savedIsPinned = localStorage.getItem(`ispinned-${row.title}`);
     return savedIsPinned ? JSON.parse(savedIsPinned) : false;
   });
 
+  // handleCheckboxChange: 공지사항 테이블의 각 행의 고정 여부를 변경하는 함수
   const handleCheckboxChange = (event) => {
+    // checked: 공지사항 테이블의 각 행의 고정 여부를 나타내는 변수
     const checked = event.target.checked;
     setIsPinned(checked);
     onPinChange(row.title, checked);
+    // localStorage에 공지사항 테이블의 각 행의 고정 여부 저장
     localStorage.setItem(`ispinned-${row.title}`, checked);
   };
 
@@ -208,6 +221,7 @@ const Row = ({ row, onPinChange }) => {
         </StyledOpenToggle>
       </StyledTableRow>
       <StyledTableRow>
+        {/* colSpan: 테이블의 각 행의 셀을 병합하는 속성 */}
         <StyledCollapseCell colSpan={5}>
           <StyledCollapseContent open={open}>
             {row.content}
@@ -230,10 +244,15 @@ Row.propTypes = {
   onPinChange: PropTypes.func.isRequired,
 };
 
+// AdminTable: 공지사항 테이블을 나타내는 컴포넌트
 const AdminTable = () => {
+  // currentPage: 현재 페이지를 나타내는 state
   const [currentPage, setCurrentPage] = useState(1);
+  // searchTerm: 검색어를 나타내는 state
   const [searchTerm, setSearchTerm] = useState('');
+  // pinnedRows: 공지사항 테이블의 각 행의 고정 여부를 나타내는 state
   const [pinnedRows, setPinnedRows] = useState({});
+  // rows: 공지사항 테이블의 각 행에 대한 정보를 담고 있는 state
   const [rows, setRows] = useState(
     ROWS_DATA.map((row) => ({
       ...row,
@@ -242,7 +261,11 @@ const AdminTable = () => {
   );
 
   useEffect(() => {
+    // localStorage에 저장된 공지사항 테이블의 각 행의 고정 여부를 불러오는 함수
     const savedPinnedRows = localStorage.getItem('pinnedRows');
+
+    // savedPinnedRows: localStorage에 저장된 공지사항 테이블의 각 행의 고정 여부를 나타내는 변수
+    // savedPinnedRowsParsed: savedPinnedRows를 JSON 형태로 파싱한 변수
     if (savedPinnedRows) {
       const savedPinnedRowsParsed = JSON.parse(savedPinnedRows);
       setRows(
@@ -254,14 +277,19 @@ const AdminTable = () => {
     }
   }, []);
 
+  // handleSearch: 검색어를 변경하는 함수
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
 
+  // sortedRows: 공지사항 테이블의 각 행을 고정 여부에 따라 정렬한 변수
   const sortedRows = rows.sort(
+    // 고정 여부가 true인 행을 고정 여부가 false인 행보다 앞에 위치하도록 정렬
     (a, b) => (b.ispinned === true) - (a.ispinned === true),
   );
 
+  // filteredRows: 검색어에 따라 공지사항 테이블의 각 행을 필터링한 변수
+  // 검색어가 공지사항 테이블의 각 행의 제목 또는 내용에 포함되어 있으면 필터링
   const filteredRows = sortedRows
     ? sortedRows.filter(
         (row) =>
@@ -269,15 +297,21 @@ const AdminTable = () => {
       )
     : [];
 
+  // currentRows: 현재 페이지에 보여줄 공지사항 테이블의 각 행을 나타내는 변수
+  // currentPage: 현재 페이지를 나타내는 변수
   const currentRows = filteredRows.slice(
     (currentPage - 1) * ROWS_PER_PAGE,
     currentPage * ROWS_PER_PAGE,
   );
 
+  // renderPageButtons: 페이지 버튼을 렌더링하는 함수
   const renderPageButtons = () => {
+    // numberOfPages: 공지사항 테이블의 페이지 개수를 나타내는 변수
     const numberOfPages = Math.ceil(rows.length / ROWS_PER_PAGE);
+    // buttons: 페이지 버튼을 나타내는 배열
     const buttons = [];
 
+    // currentPage가 1보다 크면 이전 페이지로 이동하는 버튼을 buttons 배열에 추가
     buttons.push(
       <PageArrowButton
         key="prev"
@@ -287,6 +321,7 @@ const AdminTable = () => {
       />,
     );
 
+    // buttons 배열에 페이지 버튼을 추가
     for (let i = 1; i <= numberOfPages; i++) {
       buttons.push(
         <PageButton
@@ -299,6 +334,7 @@ const AdminTable = () => {
       );
     }
 
+    // currentPage가 numberOfPages보다 작으면 다음 페이지로 이동하는 버튼을 buttons 배열에 추가
     buttons.push(
       <PageArrowButton
         key="next"
@@ -311,9 +347,12 @@ const AdminTable = () => {
     return buttons;
   };
 
+  // handlePinChange: 공지사항 테이블의 각 행의 고정 여부를 변경하는 함수
   const handlePinChange = (title, isPinned) => {
     console.log('handlePinChange called with', title, isPinned);
 
+    // setPinnedRows: 공지사항 테이블의 각 행의 고정 여부를 나타내는 state를 변경하는 함수
+    // newPinnedRows: 공지사항 테이블의 각 행의 고정 여부를 나타내는 state를 변경한 변수
     setPinnedRows((prev) => {
       const newPinnedRows = { ...prev };
       if (isPinned) {
@@ -324,6 +363,7 @@ const AdminTable = () => {
       return newPinnedRows;
     });
 
+    // setRows: 공지사항 테이블의 각 행에 대한 정보를 담고 있는 state를 변경하는 함수
     setRows(
       rows.map((row) => ({
         ...row,
@@ -333,10 +373,14 @@ const AdminTable = () => {
     localStorage.setItem(`ispinned-${title}`, isPinned);
   };
 
+  // handleConfirm: 완료 버튼 클릭 시 실행되는 함수
+  // 완료 버튼 클릭 시, 알림창이 뜨고 페이지를 새로고침하는 함수
+  // localStorage에 저장된 공지사항 테이블의 각 행의 고정 여부를 불러오는 함수
   const handleConfirm = () => {
     const savedPinnedRows = localStorage.getItem('pinnedRows');
     let mergedPinnedRows = { ...pinnedRows };
 
+    // savedPinnedRows: localStorage에 저장된 공지사항 테이블의 각 행의 고정 여부를 나타내는 변수
     if (savedPinnedRows) {
       const savedPinnedRowsParsed = JSON.parse(savedPinnedRows);
       mergedPinnedRows = { ...savedPinnedRowsParsed, ...pinnedRows };
@@ -358,6 +402,7 @@ const AdminTable = () => {
     window.location.reload();
   };
 
+  // fetchData: 공지사항 테이블의 각 행에 대한 정보를 불러오는 함수
   const fetchData = async () => {
     const response = await fetch('http://localhost:3000/admin');
     const data = await response.json();
@@ -369,6 +414,7 @@ const AdminTable = () => {
       (row) => localStorage.getItem(`ispinned-${row.title}`) !== 'true',
     );
 
+    // setRows: 공지사항 테이블의 각 행에 대한 정보를 담고 있는 state를 변경하는 함수
     const sortedData = [...pinnedData, ...unpinnedData];
 
     setRows(sortedData);
@@ -396,17 +442,26 @@ const AdminTable = () => {
           </StyledTableRow>
         </StyledTableHeader>
         <tbody>
-          {filteredRows.length > 0 ? (
-            currentRows.map((row) => (
-              <Row key={row.title} row={row} onPinChange={handlePinChange} />
-            ))
-          ) : (
-            <StyledTableRow>
-              <StyledTableCell colSpan={5}>
-                검색 결과가 없습니다.
-              </StyledTableCell>
-            </StyledTableRow>
-          )}
+          {
+            /* PinnedTable 있는 곳 */
+            rows.map((row) =>
+              row.ispinned ? <PinnedTable key={row.title} row={row} /> : null,
+            )
+          }
+          {
+            /* 전체 데이터가 있는 곳 */
+            filteredRows.length > 0 ? (
+              currentRows.map((row) => (
+                <Row key={row.title} row={row} onPinChange={handlePinChange} />
+              ))
+            ) : (
+              <StyledTableRow>
+                <StyledTableCell colSpan={5}>
+                  검색 결과가 없습니다.
+                </StyledTableCell>
+              </StyledTableRow>
+            )
+          }
         </tbody>
       </StyledTable>
       <AdminCompletionButtonLayout>

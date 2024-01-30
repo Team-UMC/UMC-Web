@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -51,7 +51,9 @@ const TitleWithDot = styled.div`
   }
 `;
 
+// BoardTitleMain: children을 받아서 게시판 이름 출력
 const BoardTitleMain = ({ children }) => {
+  // 게시판 이름에 '게시판'이 포함되어 있으면 '게시판'을 하이라이트
   const parts = children.split(/(게시판)/);
 
   return (
@@ -82,6 +84,25 @@ const BoardTitleSub = styled.p`
   word-wrap: break-word;
 `;
 
+const CATEGORY_LISTS = [
+  {
+    path: 'school',
+    title: '학교',
+    image: SchoolIcon,
+  },
+  {
+    path: 'branch',
+    title: '지부',
+    image: BranchIcon,
+  },
+  {
+    path: 'union',
+    title: '연합',
+    image: UnionIcon,
+  },
+];
+
+// 게시판 이름과 설명을 담은 배열
 const TITLE_LISTS = [
   {
     path: 'notice',
@@ -110,73 +131,104 @@ const TITLE_LISTS = [
   },
 ];
 
-const SchoolTitle = () => {
-  const location = useLocation();
-  const boardPath = location.pathname.split('/').pop();
-  const board = TITLE_LISTS.find((board) => board.path === boardPath);
+// // SchoolTitle: 학교 게시판의 제목 컴포넌트
+// const SchoolTitle = () => {
+//   // 현재 경로에서 게시판 이름을 가져옴
+//   const location = useLocation();
+//   // 게시판 이름을 가져옴
+//   const boardPath = location.pathname.split('/').pop();
+//   // 게시판 이름과 설명을 담은 배열에서 게시판 이름과 일치하는 배열을 찾음
+//   const board = TITLE_LISTS.find((board) => board.path === boardPath);
 
-  return (
-    <BoardTitleContainer>
-      <div className="board-title-icon">
-        <img src={SchoolIcon} alt="school-icon" />
-      </div>
-      <BoardTitleWrapper>
-        <BoardTitleMain>{board?.title}</BoardTitleMain>
-        <BoardTitleSub>{board?.subtitle}</BoardTitleSub>
-      </BoardTitleWrapper>
-    </BoardTitleContainer>
-  );
-};
+//   return (
+//     <BoardTitleContainer>
+//       <div className="board-title-icon">
+//         <img src={SchoolIcon} alt="school-icon" />
+//       </div>
+//       <BoardTitleWrapper>
+//         <BoardTitleMain>{board?.title}</BoardTitleMain>
+//         <BoardTitleSub>{board?.subtitle}</BoardTitleSub>
+//       </BoardTitleWrapper>
+//     </BoardTitleContainer>
+//   );
+// };
 
-const BranchTitle = () => {
-  const location = useLocation();
-  const boardPath = location.pathname.split('/').pop();
-  const board = TITLE_LISTS.find((board) => board.path === boardPath);
+// // BranchTitle: 지부 게시판의 제목 컴포넌트
+// const BranchTitle = () => {
+//   const location = useLocation();
+//   const boardPath = location.pathname.split('/').pop();
+//   const board = TITLE_LISTS.find((board) => board.path === boardPath);
 
-  return (
-    <BoardTitleContainer>
-      <div className="board-title-icon">
-        <img src={BranchIcon} alt="branch-icon" />
-      </div>
-      <BoardTitleWrapper>
-        <BoardTitleMain>{board?.title}</BoardTitleMain>
-        <BoardTitleSub>{board?.subtitle}</BoardTitleSub>
-      </BoardTitleWrapper>
-    </BoardTitleContainer>
-  );
-};
+//   return (
+//     <BoardTitleContainer>
+//       <div className="board-title-icon">
+//         <img src={BranchIcon} alt="branch-icon" />
+//       </div>
+//       <BoardTitleWrapper>
+//         <BoardTitleMain>{board?.title}</BoardTitleMain>
+//         <BoardTitleSub>{board?.subtitle}</BoardTitleSub>
+//       </BoardTitleWrapper>
+//     </BoardTitleContainer>
+//   );
+// };
 
-const UnionTitle = () => {
-  const location = useLocation();
-  const boardPath = location.pathname.split('/').pop();
-  const board = TITLE_LISTS.find((board) => board.path === boardPath);
+// // UnionTitle: 연합 게시판의 제목 컴포넌트
+// const UnionTitle = () => {
+//   const location = useLocation();
+//   const boardPath = location.pathname.split('/').pop();
+//   const board = TITLE_LISTS.find((board) => board.path === boardPath);
 
-  return (
-    <BoardTitleContainer>
-      <div className="board-title-icon">
-        <img src={UnionIcon} alt="union-icon" />
-      </div>
-      <BoardTitleWrapper>
-        <BoardTitleMain>{board?.title}</BoardTitleMain>
-        <BoardTitleSub>{board?.subtitle}</BoardTitleSub>
-      </BoardTitleWrapper>
-    </BoardTitleContainer>
-  );
-};
+//   return (
+//     <BoardTitleContainer>
+//       <div className="board-title-icon">
+//         <img src={UnionIcon} alt="union-icon" />
+//       </div>
+//       <BoardTitleWrapper>
+//         <BoardTitleMain>{board?.title}</BoardTitleMain>
+//         <BoardTitleSub>{board?.subtitle}</BoardTitleSub>
+//       </BoardTitleWrapper>
+//     </BoardTitleContainer>
+//   );
+// };
 
+// BoardTitle: 게시판 제목 컴포넌트
 const BoardTitle = () => {
-  const location = useLocation();
-  const path = location.pathname.split('/')[2];
+  // // 현재 경로에서 게시판 이름을 가져옴
+  // const location = useLocation();
+  // // 게시판 이름을 가져옴
+  // const path = location.pathname.split('/')[2];
 
-  if (path === 'school') {
-    return <SchoolTitle />;
-  } else if (path === 'branch') {
-    return <BranchTitle />;
-  } else if (path === 'union') {
-    return <UnionTitle />;
-  } else {
+  // if (path === 'school') {
+  //   return <SchoolTitle />;
+  // } else if (path === 'branch') {
+  //   return <BranchTitle />;
+  // } else if (path === 'union') {
+  //   return <UnionTitle />;
+  // } else {
+  //   return null;
+  // }
+
+  const { category, boardPath } = useParams();
+  const categoryInfo = CATEGORY_LISTS.find(
+    (categoryInfo) => categoryInfo.path === category,
+  );
+  const board = TITLE_LISTS.find((link) => link.path === boardPath);
+
+  if (!categoryInfo || !board) {
     return null;
   }
+
+  return (
+    <BoardTitleContainer>
+      <div className="board-title-icon">
+        <img src={categoryInfo.image} alt={`${category}-icon`} />
+      </div>
+      <BoardTitleWrapper>
+        <BoardTitleMain>{board.title}</BoardTitleMain>
+        <BoardTitleSub>{board.subtitle}</BoardTitleSub>
+      </BoardTitleWrapper>
+    </BoardTitleContainer>
+  );
 };
 
 export default BoardTitle;

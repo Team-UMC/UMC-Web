@@ -1,3 +1,4 @@
+// 관리자 운영 페이지 - 공지사항 핀 고정에서 사용되는 완료 버튼 컴포넌트
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -37,6 +38,8 @@ const AdminCompletionFont = styled.div`
   word-wrap: break-word;
 `;
 
+// onClick: 완료 버튼 클릭 시 실행되는 함수
+// 완료 버튼 클릭 시, 알림창이 뜨고 페이지를 새로고침하는 함수
 const AdminCompletionButton = ({ onClick }) => {
   const handleClick = () => {
     onClick();

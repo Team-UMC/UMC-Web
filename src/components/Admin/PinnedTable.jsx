@@ -1,3 +1,4 @@
+// 공지사항 게시판의 고정된 글 목록을 보여주는 컴포넌트
 import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -99,10 +100,12 @@ const PinnedTable = ({ row }) => {
   const [ispinned, setIspinned] = useState(row.ispinned);
   const location = useLocation();
 
+  // 게시글이 고정되었는지 여부를 감지하여 상태를 업데이트
   useEffect(() => {
     setIspinned(row.ispinned);
   }, [row.ispinned]);
 
+  // 체크박스의 체크 여부를 감지하여 상태를 업데이트
   const handleCheckboxChange = (event) => {
     setIspinned(event.target.checked);
   };

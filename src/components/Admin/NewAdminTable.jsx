@@ -1,3 +1,4 @@
+// 운영자 페이지 공지사항 테이블 컴포넌트
 import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -170,22 +171,34 @@ const StyledTableCheckBoxCell = styled.td`
   white-space: nowrap;
 `;
 
+// 한 페이지에 표시할 게시글 수
 const ROWS_PER_PAGE = 10;
 
+// 게시글 테이블의 행 컴포넌트
 const NewAdminTable = () => {
+  // 현재 페이지
   const [currentPage, setCurrentPage] = useState(1);
+  // 검색어
   const [searchTerm, setSearchTerm] = useState('');
+  // 고정된 게시글
   const [pinnedItems, setPinnedItems] = useState(() => {
+    // 로컬 스토리지에서 고정된 게시글을 불러옴
     const saved = localStorage.getItem('pinnedItems');
+    // 고정된 게시글이 없으면 빈 배열을 반환
     return saved ? JSON.parse(saved) : [];
   });
 
+  // 게시글 테이블의 행 컴포넌트
   const Row = ({ row }) => {
+    // 게시글 펼치기/접기 상태
     const [open, setOpen] = useState(false);
+    // 고정된 게시글인지 여부
     const [isPinned, setIsPinned] = useState(
       row.ispinned || pinnedItems.includes(row.title),
     );
 
+    // 고정된 게시글인지 여부를 로컬 스토리지에 저장
+    // 고정된 게시글 목록을 로컬 스토리지에 저장 & 불러옴
     const handleCheckboxChange = (event) => {
       setIsPinned(event.target.checked);
       if (event.target.checked) {
@@ -251,27 +264,33 @@ const NewAdminTable = () => {
     }).isRequired,
   };
 
+  // 저장 버튼 클릭 핸들러
   const handleCompletion = () => {
     localStorage.setItem('pinnedItems', JSON.stringify(pinnedItems));
   };
 
+  // 검색어 변경 핸들러
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
 
+  // 검색어가 포함된 게시글만 필터링
   const filteredRows = ROWS_DATA.filter(
     (row) => row.title.includes(searchTerm) || row.content.includes(searchTerm),
   );
 
+  // 현재 페이지에 표시할 게시글
   const currentRows = filteredRows.slice(
     (currentPage - 1) * ROWS_PER_PAGE,
     currentPage * ROWS_PER_PAGE,
   );
 
+  // 페이지 버튼 렌더링
   const renderPageButtons = () => {
     const numberOfPages = Math.ceil(ROWS_DATA.length / ROWS_PER_PAGE);
     const buttons = [];
 
+    // 이전 페이지 버튼
     buttons.push(
       <PageArrowButton
         key="prev"
@@ -281,6 +300,7 @@ const NewAdminTable = () => {
       />,
     );
 
+    // 페이지 버튼 목록
     for (let i = 1; i <= numberOfPages; i++) {
       buttons.push(
         <PageButton
@@ -293,6 +313,7 @@ const NewAdminTable = () => {
       );
     }
 
+    // 다음 페이지 버튼
     buttons.push(
       <PageArrowButton
         key="next"
