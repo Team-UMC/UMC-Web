@@ -12,6 +12,7 @@ import BoardPage from 'pages/NewBoardPage/BoardPage';
 import HomePage from 'pages/HomePage';
 import Management from 'pages/Management/Management';
 import MyWrite from 'pages/MyWrite/MyWrite';
+import KakaoAuth from 'apis/app/KakaoAuth';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/OAuth2/kakao" element={<KakaoAuth />} />
           <Route path="/signupform" element={<SignUpForm />} />
 
           <Route element={<MainLayout />}>

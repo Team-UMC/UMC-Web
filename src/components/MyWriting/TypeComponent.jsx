@@ -16,7 +16,6 @@ const TypeComponent = ({ activeType }) => {
   );
 };
 
-// Define PropTypes for TypeComponent
 TypeComponent.propTypes = {
   activeType: PropTypes.shape({
     writingButton: PropTypes.bool,

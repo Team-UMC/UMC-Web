@@ -9,7 +9,7 @@ const ManagmentContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 0vh 50vh;
+  margin: 5vh 50vh;
 `;
 
 const Management = () => {

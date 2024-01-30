@@ -8,18 +8,20 @@ import BoardText from 'components/BoardWrite/BoardText';
 import BoardButton from 'components/BoardWrite/BoardButton';
 
 const BoardWriteContainer = styled.div`
-  margin-top: 100%;   
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 15vh 50vh;
+
 `;
 
 const LeftContainer = styled.div`
-  max-width: 120vh;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-
-  margin-right: 32px;
+  justify-content: flex-start;
+  margin-bottom: 2vh;
 `;
 
 const Title = styled.div`

@@ -3,6 +3,8 @@ import React,{useState} from 'react';
 
 const ContainerBoard = styled.div`
   display: flex;
+  margin-bottom: 5vh;
+
 `;
 
 const Board = styled.div`
@@ -19,6 +21,8 @@ const Board = styled.div`
   margin-top: 0.7em;
   cursor: pointer;
   font-size: 14px;
+  white-space: nowrap;
+
 
   &.selected {
     background-color: #fff;

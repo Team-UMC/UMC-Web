@@ -1,14 +1,18 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env.development' });
-
-const CustomAxios = axios.create({
+const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_TEST_SERVER_URL,
-  headers: {
-    accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
+  withCredentials: true,
 });
 
-export default CustomAxios;
+axiosInstance.interceptors.request.use(
+  (config) => {
+    config.headers['Authorization'] = localStorage.getItem('accessToken');
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+)
+
+export default axiosInstance;

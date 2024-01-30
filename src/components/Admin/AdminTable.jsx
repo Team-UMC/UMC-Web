@@ -67,10 +67,11 @@ const StyledCollapseContent = styled.div`
   max-height: ${(props) => (props.open ? '500px' : '0')};
 `;
 
-const BoardWriteButtonLayout = styled.div`
+const AdminCompletionButtonLayout = styled.div`
   display: flex;
   justify-content: end;
   padding-top: 24px;
+  padding-bottom: 80px;
 `;
 
 const PageButton = styled.div`
@@ -105,7 +106,6 @@ const PageButtonLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 64px;
 `;
 
 const PageArrowButton = styled.div`
@@ -140,7 +140,7 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   transition: border 0.3s ease-in-out;
 
   &:hover {
-    border: 1px solid #8784FF;
+    border: 1px solid #8784ff;
   }
 
   &:active {
@@ -148,11 +148,11 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   }
 
   &:checked {
-    border: 1px solid #8784FF;
+    border: 1px solid #8784ff;
   }
 
   &:checked::after {
-    content: "";
+    content: '';
     display: block;
     width: 100%;
     height: 100%;
@@ -312,6 +312,8 @@ const AdminTable = () => {
   };
 
   const handlePinChange = (title, isPinned) => {
+    console.log('handlePinChange called with', title, isPinned);
+
     setPinnedRows((prev) => {
       const newPinnedRows = { ...prev };
       if (isPinned) {
@@ -340,7 +342,7 @@ const AdminTable = () => {
       mergedPinnedRows = { ...savedPinnedRowsParsed, ...pinnedRows };
     }
 
-    rows.forEach(row => {
+    rows.forEach((row) => {
       if (row.ispinned) {
         mergedPinnedRows[row.title] = true;
         localStorage.setItem(`ispinned-${row.title}`, true);
@@ -376,6 +378,10 @@ const AdminTable = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log('ROWS_DATA has been updated: ', ROWS_DATA);
+  }, [ROWS_DATA]);
+
   return (
     <>
       <StyledTable>
@@ -403,9 +409,9 @@ const AdminTable = () => {
           )}
         </tbody>
       </StyledTable>
-      <BoardWriteButtonLayout>
+      <AdminCompletionButtonLayout>
         <AdminCompletionButton onClick={handleConfirm} />
-      </BoardWriteButtonLayout>
+      </AdminCompletionButtonLayout>
       <PageButtonLayout>{renderPageButtons()}</PageButtonLayout>
       <BoardSearchLayout>
         <SearchBar onSearch={handleSearch} />
