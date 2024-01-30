@@ -8,9 +8,10 @@ border: none;
 font-size: 18px;
 font-weight: bold;
 width: 100%;
-padding: 1.5vh;
+padding: 1vh 1.6vh;
 border-radius: 12px;
 margin-top: 1.6vh;
+font-weight: 500;
 
 border: 1px solid #232A6D;
 
@@ -21,13 +22,13 @@ border: 1px solid #232A6D;
 }
 `;
 
-const BoardTitle = () => {
+const SubTitle = () => {
 
   return(
-      <TitleInput className='title' placeholder="제목을 입력해주세요" />
+      <TitleInput className='title' placeholder="소제목을 입력해주세요" />
 
   );
 };
 
 
-export default BoardTitle; 
+export default SubTitle; 

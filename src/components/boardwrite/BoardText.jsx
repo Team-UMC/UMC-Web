@@ -5,9 +5,9 @@ const Textarea = styled.textarea`
   color: black;
   border: none;
   display: flex;
-  width:120vh;
+  width:100%;
   height: 300px;
-  padding: 1vh;
+  padding: 1.5vh;
   font-size: 16px;
   align-items: flex-start;
   resize: none;

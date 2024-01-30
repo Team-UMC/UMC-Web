@@ -11,6 +11,11 @@ import BoardPage from 'pages/NewBoardPage/BoardPage';
 import AdminManagePage from 'pages/Admin/AdminManagePage';
 // import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
 
+import Management from 'pages/Management/Management';
+import MyWrite from 'pages/MyWrite/MyWrite';
+import TodayILearn from 'pages/TodayILearn/TodayILearn';
+import NewTIL from 'components/TodayILearn/NewTIL';
+
 function App() {
   return (
     <>
@@ -21,6 +26,12 @@ function App() {
           <Route path="/signupform" element={<SignUpForm />} />
           <Route path="/board/*" element={<BoardPage />} />
           <Route path="/boardwrite" element={<BoardWrite />} />
+          <Route path="/admin" element={<Management />} />
+          <Route path="/mywrite" element={<MyWrite />} />
+          <Route path="/todayilearn" element={<TodayILearn />} />
+          <Route path="/todayilearn/detailpage" element={<NewTIL />} />
+
+
           <Route path="/kakaologin" element={<SocialLogin />} />
           <Route path="/admin" element={<AdminManagePage />} />
         </Routes>
