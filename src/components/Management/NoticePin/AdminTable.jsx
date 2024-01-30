@@ -1,8 +1,8 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import SearchBar from 'components/NewBoard/BoardSearch';
-import AdminCompletionButton from 'components/Admin/AdminCompletionButton';
+import SearchBar from 'components/Board/BoardSearch';
+import AdminCompletionButton from 'components/Management/NoticePin/AdminCompletionButton';
 import { ROWS_DATA } from 'Data';
 
 import { IconButton } from '@mui/material';
@@ -10,7 +10,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
-import Checked from 'assets/admin/checked.svg';
+import Checked from 'assets/management/checked.svg';
 
 const StyledTable = styled.table`
   width: 100%;

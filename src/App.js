@@ -7,8 +7,8 @@ import Main from 'pages/Main.jsx';
 import SignUpForm from 'pages/SignUp/SignUp';
 import BoardWrite from 'pages/BoardWrite/BoardWrite';
 import SocialLogin from 'components/SignUp/SocialLogin';
-import BoardPage from 'pages/NewBoardPage/BoardPage';
-import AdminManagePage from 'pages/Admin/AdminManagePage';
+import BoardPage from 'pages/BoardPage/BoardPage';
+import AdminManagePage from 'pages/Management/NoticePin/AdminManagePage';
 // import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
 
 import Management from 'pages/Management/Management';
@@ -31,9 +31,8 @@ function App() {
           <Route path="/todayilearn" element={<TodayILearn />} />
           <Route path="/todayilearn/detailpage" element={<NewTIL />} />
 
-
           <Route path="/kakaologin" element={<SocialLogin />} />
-          <Route path="/admin" element={<AdminManagePage />} />
+          <Route path="/management" element={<AdminManagePage />} />
         </Routes>
       </BrowserRouter>
     </>

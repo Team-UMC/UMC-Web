@@ -1,17 +1,16 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ROWS_DATA } from 'Data';
-import PinnedTable from './PinnedTable';
-import SearchBar from 'components/NewBoard/BoardSearch';
-import AdminCompletionButton from 'components/Admin/AdminCompletionButton';
+import SearchBar from './BoardSearch';
+import BoardWriteButton from './BoardWriteButton';
+import PinnedTable from 'components/Management/NoticePin/PinnedTable';
 
 import { IconButton } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
-import Checked from 'assets/admin/checked.svg';
 
 const StyledTable = styled.table`
   width: 100%;
@@ -68,11 +67,10 @@ const StyledCollapseContent = styled.div`
   max-height: ${(props) => (props.open ? '500px' : '0')};
 `;
 
-const AdminCompletionButtonLayout = styled.div`
+const BoardWriteButtonLayout = styled.div`
   display: flex;
   justify-content: end;
   padding-top: 24px;
-  padding-bottom: 80px;
 `;
 
 const PageButton = styled.div`
@@ -107,6 +105,7 @@ const PageButtonLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 64px;
 `;
 
 const PageArrowButton = styled.div`
@@ -128,39 +127,6 @@ const BoardSearchLayout = styled.div`
   align-items: center;
 `;
 
-const Checkbox = styled.input.attrs({ type: 'checkbox' })`
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 1px solid #bcbcbc;
-  padding: 2px 4px;
-  position: relative;
-  -webkit-appearance: none;
-  outline: none;
-  cursor: pointer;
-  transition: border 0.3s ease-in-out;
-
-  &:hover {
-    border: 1px solid #8784ff;
-  }
-
-  &:active {
-    transform: scale(0.9);
-  }
-
-  &:checked {
-    border: 1px solid #8784ff;
-  }
-
-  &:checked::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: url(${Checked}) no-repeat center center;
-  }
-`;
-
 const StyledTableCheckBoxCell = styled.td`
   max-width: 10rem;
   padding-left: 10px;
@@ -172,94 +138,62 @@ const StyledTableCheckBoxCell = styled.td`
 
 const ROWS_PER_PAGE = 10;
 
-const NewAdminTable = () => {
+const rows = ROWS_DATA;
+
+const Row = ({ row }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Fragment>
+      <StyledTableRow>
+        <StyledTableCheckBoxCell />
+        <StyledTitleColumn style={{ textAlign: 'left' }}>
+          {row.title}
+        </StyledTitleColumn>
+        <StyledTableCell>{row.author}</StyledTableCell>
+        <StyledTableCell>{row.date}</StyledTableCell>
+        <StyledTableCell>{row.views}</StyledTableCell>
+        <StyledOpenToggle>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </StyledOpenToggle>
+      </StyledTableRow>
+      <StyledTableRow>
+        <StyledCollapseCell colSpan={5}>
+          <StyledCollapseContent open={open}>
+            {row.content}
+          </StyledCollapseContent>
+        </StyledCollapseCell>
+      </StyledTableRow>
+    </Fragment>
+  );
+};
+
+Row.propTypes = {
+  row: PropTypes.exact({
+    ispinned: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    views: PropTypes.number.isRequired,
+    content: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+const BoardTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [pinnedItems, setPinnedItems] = useState(() => {
-    const saved = localStorage.getItem('pinnedItems');
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  const Row = ({ row }) => {
-    const [open, setOpen] = useState(false);
-    const [isPinned, setIsPinned] = useState(
-      row.ispinned || pinnedItems.includes(row.title),
-    );
-
-    const handleCheckboxChange = (event) => {
-      setIsPinned(event.target.checked);
-      if (event.target.checked) {
-        setPinnedItems([...pinnedItems, row.title]);
-        const item = ROWS_DATA.find((item) => item.title === row.title);
-        if (item) {
-          item.ispinned = true;
-        }
-      } else {
-        setPinnedItems(pinnedItems.filter((item) => item !== row.title));
-        const item = ROWS_DATA.find((item) => item.title === row.title);
-        if (item) {
-          item.ispinned = false;
-        }
-      }
-    };
-
-    useEffect(() => {
-      localStorage.setItem(row.title, JSON.stringify(isPinned));
-    }, [isPinned]);
-
-    return (
-      <Fragment>
-        <StyledTableRow>
-          <StyledTableCheckBoxCell>
-            <Checkbox checked={isPinned} onChange={handleCheckboxChange} />
-          </StyledTableCheckBoxCell>
-          <StyledTitleColumn style={{ textAlign: 'left' }}>
-            {row.title}
-          </StyledTitleColumn>
-          <StyledTableCell>{row.author}</StyledTableCell>
-          <StyledTableCell>{row.date}</StyledTableCell>
-          <StyledTableCell>{row.views}</StyledTableCell>
-          <StyledOpenToggle>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </StyledOpenToggle>
-        </StyledTableRow>
-        <StyledTableRow>
-          <StyledCollapseCell colSpan={5}>
-            <StyledCollapseContent open={open}>
-              {row.content}
-            </StyledCollapseContent>
-          </StyledCollapseCell>
-        </StyledTableRow>
-      </Fragment>
-    );
-  };
-
-  Row.propTypes = {
-    row: PropTypes.exact({
-      ispinned: PropTypes.bool.isRequired,
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      views: PropTypes.number.isRequired,
-      content: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
-  const handleCompletion = () => {
-    localStorage.setItem('pinnedItems', JSON.stringify(pinnedItems));
-  };
 
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
 
-  const filteredRows = ROWS_DATA.filter(
+  const filteredRows = rows.filter(
     (row) => row.title.includes(searchTerm) || row.content.includes(searchTerm),
   );
 
@@ -269,7 +203,7 @@ const NewAdminTable = () => {
   );
 
   const renderPageButtons = () => {
-    const numberOfPages = Math.ceil(ROWS_DATA.length / ROWS_PER_PAGE);
+    const numberOfPages = Math.ceil(rows.length / ROWS_PER_PAGE);
     const buttons = [];
 
     buttons.push(
@@ -319,10 +253,9 @@ const NewAdminTable = () => {
           </StyledTableRow>
         </StyledTableHeader>
         <tbody>
-          {pinnedItems.map((item) => {
-            const row = ROWS_DATA.find((row) => row.title === item);
-            return row ? <PinnedTable key={row.title} row={row} /> : null;
-          })}
+          {rows.map((row) =>
+            row.ispinned ? <PinnedTable key={row.title} row={row} /> : null,
+          )}
           {filteredRows.length > 0 ? (
             currentRows.map((row) => <Row key={row.title} row={row} />)
           ) : (
@@ -334,9 +267,9 @@ const NewAdminTable = () => {
           )}
         </tbody>
       </StyledTable>
-      <AdminCompletionButtonLayout>
-        <AdminCompletionButton onClick={handleCompletion} />
-      </AdminCompletionButtonLayout>
+      <BoardWriteButtonLayout>
+        <BoardWriteButton />
+      </BoardWriteButtonLayout>
       <PageButtonLayout>{renderPageButtons()}</PageButtonLayout>
       <BoardSearchLayout>
         <SearchBar onSearch={handleSearch} />
@@ -345,4 +278,4 @@ const NewAdminTable = () => {
   );
 };
 
-export default NewAdminTable;
+export default BoardTable;

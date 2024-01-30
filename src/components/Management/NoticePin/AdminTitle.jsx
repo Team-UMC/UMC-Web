@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import AdminTitleIcon from 'assets/admin/AdminTitle.svg';
+import AdminTitleIcon from 'assets/management/AdminTitle.svg';
 
 const BoardTitleContainer = styled.div`
   display: flex;
@@ -34,17 +34,17 @@ const BoardTitleSub = styled.p`
 `;
 
 const AdminTitle = () => {
-    return (
-      <BoardTitleContainer>
-        <div className="admin-title-icon">
-          <img src={AdminTitleIcon} alt="admin-icon" />
-        </div>
-        <BoardTitleWrapper>
-          <BoardTitleMainStyle>운영진 관리 페이지</BoardTitleMainStyle>
-          <BoardTitleSub>반가워요 운영진님!</BoardTitleSub>
-        </BoardTitleWrapper>
-      </BoardTitleContainer>
-    );
+  return (
+    <BoardTitleContainer>
+      <div className="admin-title-icon">
+        <img src={AdminTitleIcon} alt="admin-icon" />
+      </div>
+      <BoardTitleWrapper>
+        <BoardTitleMainStyle>운영진 관리 페이지</BoardTitleMainStyle>
+        <BoardTitleSub>반가워요 운영진님!</BoardTitleSub>
+      </BoardTitleWrapper>
+    </BoardTitleContainer>
+  );
 };
 
 export default AdminTitle;

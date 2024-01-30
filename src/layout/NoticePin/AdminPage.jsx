@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import AdminTitle from 'components/Admin/AdminTitle';
+import AdminTitle from 'components/Management/NoticePin/AdminTitle';
 
-import AdminTable from 'components/Admin/AdminTable';
+import AdminTable from 'components/Management/NoticePin/NewAdminTable';
 
 const AdminPageContainer = styled.div`
   display: flex;

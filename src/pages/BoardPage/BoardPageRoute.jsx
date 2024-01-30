@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 
-import BoardPage from 'pages/NewBoardPage/BoardPage';
+import BoardPage from 'pages/BoardPage/BoardPage';
 
 const BoardPageRoute = () => {
   const { boardType, boardPath } = useParams();
