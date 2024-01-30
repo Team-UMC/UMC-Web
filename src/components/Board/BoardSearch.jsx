@@ -67,12 +67,9 @@ const SearchButton = styled.button`
   }
 `;
 
-// SearchBar: onSearch를 받아서 검색어를 검색하는 컴포넌트
 const SearchBar = ({ onSearch }) => {
-  // 검색어를 저장하는 state
   const [searchTerm, setSearchTerm] = useState('');
 
-  // 검색어를 입력하고 검색 버튼을 누르면 onSearch를 호출
   const handleSearch = (e) => {
     e.preventDefault();
     onSearch(searchTerm);

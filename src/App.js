@@ -8,10 +8,13 @@ import SignUpForm from 'pages/SignUp/SignUp';
 import BoardWrite from 'pages/BoardWrite/BoardWrite';
 import SocialLogin from 'components/SignUp/SocialLogin';
 import BoardPage from 'pages/BoardPage/BoardPage';
-import AdminManagePage from 'pages/Admin/AdminManagePage';
-import GalleryPage from 'pages/Gallery/GalleryPage';
-// import BoardTitle from 'components/BoardTitle/BoardTitle';
+import AdminManagePage from 'pages/Management/NoticePin/AdminManagePage';
 // import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
+
+import Management from 'pages/Management/Management';
+import MyWrite from 'pages/MyWrite/MyWrite';
+import TodayILearn from 'pages/TodayILearn/TodayILearn';
+import NewTIL from 'components/TodayILearn/NewTIL';
 
 function App() {
   return (
@@ -27,9 +30,13 @@ function App() {
           />
           <Route path="/board/:category/:boardPath" Component={BoardPage} />
           <Route path="/boardwrite" element={<BoardWrite />} />
+          <Route path="/admin" element={<Management />} />
+          <Route path="/mywrite" element={<MyWrite />} />
+          <Route path="/todayilearn" element={<TodayILearn />} />
+          <Route path="/todayilearn/detailpage" element={<NewTIL />} />
+
           <Route path="/kakaologin" element={<SocialLogin />} />
-          <Route path="/admin" element={<AdminManagePage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/management" element={<AdminManagePage />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Checked from 'assets/admin/checked.svg';
+import Checked from 'assets/management/checked.svg';
 import pin from 'assets/board/list/Pinned.svg';
 
 const StyledTableRow = styled.tr`

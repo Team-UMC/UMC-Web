@@ -8,7 +8,7 @@ const ListContainer = styled.div`
 `;
 const ListItem = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 2fr 2fr 1fr; /* 5개의 열을 추가하고 각 열의 너비를 조절 */
+  grid-template-columns: 1fr 3fr 2fr 2fr 1fr; 
   padding: 10px;
   margin-bottom: 10px;
   align-items: center;
@@ -22,10 +22,10 @@ const HeaderContainer = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   align-items: center;
-  width: 100%; /* 수정된 부분: 너비를 100%로 지정 */
+  width: 100%;
 `;
 const Header = styled.div`
-  justify-self: center; /* 수평 가운데 정렬 */
+  justify-self: center; 
   align-self: center;
   font-weight:600;
 `;

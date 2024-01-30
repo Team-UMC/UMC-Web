@@ -1,13 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonContainer = styled.div`
-display: flex;
-width: 120vh;
-justify-content: flex-end;
-align-items: center;
-margin-left: 16px;
-`;
 
 const Button = styled.button`
   
@@ -29,9 +22,7 @@ const Button = styled.button`
 const ManagementButton = () => {
     
   return(
-    <ButtonContainer>
     <Button>완료</Button>
-    </ButtonContainer>
     );
 };
 

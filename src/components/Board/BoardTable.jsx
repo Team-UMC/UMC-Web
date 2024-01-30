@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ROWS_DATA } from 'Data';
 import SearchBar from './BoardSearch';
 import BoardWriteButton from './BoardWriteButton';
-import PinnedTable from 'components/Admin/PinnedTable';
+import PinnedTable from 'components/Management/NoticePin/PinnedTable';
 
 import { IconButton } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';

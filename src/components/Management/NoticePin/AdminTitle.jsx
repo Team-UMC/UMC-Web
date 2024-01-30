@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import AdminTitleIcon from 'assets/admin/AdminTitle.svg';
+import AdminTitleIcon from 'assets/management/AdminTitle.svg';
 
 const BoardTitleContainer = styled.div`
   display: flex;
