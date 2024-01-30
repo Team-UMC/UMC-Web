@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types"; // Import PropTypes
 
-import BoardTitle from '../../components/boardwrite/BoardTitle';
-import BoardText from '../../components/boardwrite/BoardText';
+import BoardTitle from 'components/BoardWrite/BoardTitle';
+import BoardText from 'components/BoardWrite/BoardText';
 import ManagementButton from 'components/Management/Button';
-import StartendDate from '../../components/Management/StartendDate';
-import Local from '../../components/Management/SelectLocal';
-import Classify from '../../components/Management/Classify';
+import StartendDate from 'components/Management/StartendDate';
+import Local from 'components/Management/SelectLocal';
+import Classify from 'components/Management/Classify';
 
 
 import SearchChallenger from "./SearchChallenger.jsx";

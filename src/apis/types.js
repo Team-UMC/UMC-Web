@@ -1,18 +1,22 @@
-import axios from 'axios';
-import cookies from 'js-cookie';
-
-const TEST_SERVER_URL = process.env.REACT_APP_TEST_SERVER_URL;
-
-const getAccessToken = () => {
-  const accessToken = cookies.get('access_token');
-  return accessToken ? { access_token: accessToken } : {};
+export const TokenReturnType = {
+    success: false,
+    user: {
+        user_index: 0,
+        newUser: false,
+        email: '',
+        nickname: '',
+        profileImg: '',
+    },
+    access_token: '',
+    refresh_token: '',
 };
 
-const customAxios = axios.create({
-  baseURL: `${TEST_SERVER_URL}`,
-  headers: {
-    ...getAccessToken(),
-  },
-});
+export const RefreshReturnType = {
+    success: false,
+    access_token: '',
+    refresh_token: '',
+};
 
-export default customAxios;
+export const LogoutReturnType = {
+    message: '',
+};

@@ -11,8 +11,8 @@ import UnionChecked from 'assets/mywrite/mywriteUnionChecked.svg';
 import SuggestionUnchecked from 'assets/mywrite/mywriteSuggestionUnchecked.svg';
 import SuggestionChecked from 'assets/mywrite/mywriteSuggestionChecked.svg';
 
-import SchoolBoard from '../boardwrite/BoardSchool';
-import CampBoard from '../boardwrite/BoardCamp';
+import SchoolBoard from 'components/BoardWrite/BoardSchool';
+import CampBoard from 'components/BoardWrite/BoardCamp';
 
 import ResetImg from 'assets/mywrite/reset.svg';
 
@@ -27,8 +27,6 @@ const AllContainer = styled.div`
   width: 85%;
   border-radius: 12px;
   background-color: white;
-
-
 `;
 
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
-import PrevButton from './PrevButton';
 import NextButton from './NextButton';
 
 const Input = styled.input`
@@ -12,7 +11,7 @@ const Input = styled.input`
   border-radius: 7px;
 `;
 
-const InviteCode = ({ nextStep, prevStep }) => {
+const InviteCode = ({ nextStep }) => {
   const [invitationCode, setInvitationCode] = useState('');
   const [isValid, setIsValid] = useState(false);
 
@@ -40,8 +39,7 @@ const InviteCode = ({ nextStep, prevStep }) => {
         {!isValid && <p style={{ color: 'red' }}>유효한 초대코드를 입력해주세요.</p>}
       </SignUpFormStyle.SignUpFormWrapper>
 
-      <SignUpFormStyle.StepButtonWrapper>
-        <PrevButton nextStep={prevStep} />
+      <SignUpFormStyle.StepButtonWrapper step={1}>
         {isValid && <NextButton nextStep={nextStep} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
@@ -50,7 +48,6 @@ const InviteCode = ({ nextStep, prevStep }) => {
 
 InviteCode.propTypes = {
   nextStep: PropTypes.func.isRequired,
-  prevStep: PropTypes.func.isRequired,
 };
 
 export default InviteCode;

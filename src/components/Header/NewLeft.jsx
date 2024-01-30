@@ -13,7 +13,6 @@ const NavWrapper = styled.nav`
 
   // 전체 화면 width(100%)의 60% 사용
   width: 60%;
-  height: 10%;
 `;
 
 const StyledLink = styled(Link)`
