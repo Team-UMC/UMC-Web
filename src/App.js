@@ -11,6 +11,7 @@ import BoardPage from 'pages/NewBoardPage/BoardPage';
 import HomePage from 'pages/HomePage';
 import Management from 'pages/Management/Management';
 import MyWrite from 'pages/MyWrite/MyWrite';
+import BoardPage from 'pages/NewBoardPage/BoardPage';
 
 function App() {
   return (
