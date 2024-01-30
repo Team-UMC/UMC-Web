@@ -35,25 +35,23 @@ const BoardBoxUnionTitle = styled.div`
 `;
 
 const BoardBoxUnionContentWrapper = styled.div`
-  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 
-const BoardBoxUnionContent = styled.div`
+const BoardBoxUnionLink = styled(NavLink).attrs({
+  activeStyle: { color: '#8784ff !important' },
+})`
   text-align: left;
   color: black;
   background: white;
+  text-decoration: none;
   font-size: 12px;
   font-weight: 400;
-  padding-bottom: 8px;
   word-wrap: break-word;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-
-  a {
-    background: white;
-    text-decoration: none;
-    color: inherit;
-  }
 
   &:hover {
     color: #8784ff;
@@ -69,40 +67,32 @@ const BoardBoxUnion = () => {
       <BoardBoxUnionImage>
         <img src={union} alt="union" />
       </BoardBoxUnionImage>
-      <BoardBoxUnionTitle>학교</BoardBoxUnionTitle>
+      <BoardBoxUnionTitle>연합</BoardBoxUnionTitle>
       <BoardBoxUnionContentWrapper>
-        <BoardBoxUnionContent>
-          <NavLink
-            to="/board/union/notice"
-            activestyle={{ color: '#8784ff' }}
-          >
-            공지사항
-          </NavLink>
-        </BoardBoxUnionContent>
-        <BoardBoxUnionContent>
-          <NavLink
-            to="/board/union/free"
-            activestyle={{ color: '#8784ff' }}
-          >
-            자유 게시판
-          </NavLink>
-        </BoardBoxUnionContent>
-        <BoardBoxUnionContent>
-          <NavLink
-            to="/board/union/question"
-            activestyle={{ color: '#8784ff' }}
-          >
-            질문 게시판
-          </NavLink>
-        </BoardBoxUnionContent>
-        <BoardBoxUnionContent>
-          <NavLink
-            to="/board/union/prev"
-            activestyle={{ color: '#8784ff' }}
-          >
-            이전 기수 게시판
-          </NavLink>
-        </BoardBoxUnionContent>
+        <BoardBoxUnionLink
+          to="/board/union/notice"
+          activestyle={{ color: '#8784ff' }}
+        >
+          공지사항
+        </BoardBoxUnionLink>
+        <BoardBoxUnionLink
+          to="/board/union/free"
+          activestyle={{ color: '#8784ff' }}
+        >
+          자유 게시판
+        </BoardBoxUnionLink>
+        <BoardBoxUnionLink
+          to="/board/union/question"
+          activestyle={{ color: '#8784ff' }}
+        >
+          질문 게시판
+        </BoardBoxUnionLink>
+        <BoardBoxUnionLink
+          to="/board/union/prev"
+          activestyle={{ color: '#8784ff' }}
+        >
+          이전 기수 게시판
+        </BoardBoxUnionLink>
       </BoardBoxUnionContentWrapper>
     </BoardBoxUnionContainer>
   );
