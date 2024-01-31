@@ -11,7 +11,7 @@ const Input = styled.input`
   border-radius: 7px;
 `;
 
-const InviteCode = ({ nextStep }) => {
+const InviteCode = ({ handleNextStep }) => {
   const [invitationCode, setInvitationCode] = useState('');
   const [isValid, setIsValid] = useState(false);
 
@@ -40,14 +40,14 @@ const InviteCode = ({ nextStep }) => {
       </SignUpFormStyle.SignUpFormWrapper>
 
       <SignUpFormStyle.StepButtonWrapper step={1}>
-        {isValid && <NextButton nextStep={nextStep} />}
+        {isValid && <NextButton handleNextStep={handleNextStep} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
 InviteCode.propTypes = {
-  nextStep: PropTypes.func.isRequired,
+  handleNextStep: PropTypes.func.isRequired,
 };
 
 export default InviteCode;

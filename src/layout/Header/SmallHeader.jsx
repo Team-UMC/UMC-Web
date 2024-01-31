@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import NewRight from 'components/Header/NewRight';
-import NewLeft from 'components/Header/NewLeft';
+import LeftContainer from 'components/Header/LeftContainer';
+import RightContainer from 'components/Header/RightContainer';
 
-import SmallHeaderImage from 'assets/header/smallheader.svg';
+import SmallHeaderImage from 'assets/header/SmallHeader.png';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ const HeaderWrapper = styled.div`
   // 화면 width 전체
   width: 100%;
 
-  // smallHeader.svg 높이만큼으로 설정
+  // SmallHeader.png 높이만큼으로 설정
   height: auto;
 
   // 스크롤 시에도 위치 최상단 고정
@@ -48,8 +48,8 @@ const SmallHeader = () => {
     <>
       <HeaderWrapper>
         <Wrapper>
-          <NewLeft />
-          <NewRight />
+          <LeftContainer />
+          <RightContainer />
         </Wrapper>
       </HeaderWrapper>
     </>

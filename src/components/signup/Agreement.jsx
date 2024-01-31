@@ -65,7 +65,7 @@ const Modal = ({ content, handleClose, onModalCheckboxChange }) => {
   );
 };
 
-const Agreement = ({ prevStep, nextStep, handleSubmit }) => {
+const Agreement = ({ handleNextStep, handlePrevStep, handleSubmit }) => {
   const [termsAgreement, setTermsAgreement] = useState(false);
   const [privacyAgreement, setPrivacyAgreement] = useState(false);
 
@@ -150,8 +150,8 @@ const Agreement = ({ prevStep, nextStep, handleSubmit }) => {
       )}
 
       <SignUpFormStyle.StepButtonWrapper>
-        <PrevButton nextStep={prevStep} />
-        {termsAgreement && privacyAgreement && <NextButton nextStep={nextStep} onClick={handleSubmit}/>}
+        <PrevButton handlePrevStep={handlePrevStep} />
+        {termsAgreement && privacyAgreement && <NextButton handleNextStep={handleNextStep} handleSubmit={handleSubmit}/>}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
@@ -164,8 +164,8 @@ Modal.propTypes = {
 };
 
 Agreement.propTypes = {
-  prevStep: PropTypes.func.isRequired,
-  nextStep: PropTypes.func.isRequired,
+  handleNextStep: PropTypes.func.isRequired,
+  handlePrevStep: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 

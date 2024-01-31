@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
@@ -12,19 +12,25 @@ const Wrapper = styled.select`
   border-radius: 7px;
 `;
 
-const School = ({ nextStep, prevStep }) => {
-  const [selectedSchool, setSelectedSchool] = useState('');
-
+const University = ({
+  userData,
+  handleChange,
+  handleNextStep,
+  handlePrevStep,
+}) => {
   return (
     <SignUpFormStyle.Wrapper>
       <SignUpFormStyle.SignUpFormWrapper>
         <h2> 학교를 선택해주세요 </h2>
         <Wrapper
-          value={selectedSchool}
-          onChange={(e) => setSelectedSchool(e.target.value)}
+          name="universityName"
+          value={userData.universityName}
+          onChange={handleChange}
         >
-          <option value="" disabled hidden> 학교 선택하기 </option>
-          
+          <option value="" disabled hidden>
+            학교 선택하기
+          </option>
+
           <option value="가천대학교">가천대학교</option>
           <option value="가톨릭대학교">가톨릭대학교</option>
           <option value="경기대학교">경기대학교</option>
@@ -58,16 +64,18 @@ const School = ({ nextStep, prevStep }) => {
       </SignUpFormStyle.SignUpFormWrapper>
 
       <SignUpFormStyle.StepButtonWrapper>
-        <PrevButton nextStep={prevStep} />
-        {selectedSchool && <NextButton nextStep={nextStep} />}
+        <PrevButton handlePrevStep={handlePrevStep} />
+        {userData.universityName && <NextButton handleNextStep={handleNextStep} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
-School.propTypes = {
-  nextStep: PropTypes.func.isRequired,
-  prevStep: PropTypes.func.isRequired,
+University.propTypes = {
+  userData: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleNextStep: PropTypes.func.isRequired,
+  handlePrevStep: PropTypes.func.isRequired,
 };
 
-export default School;
+export default University;

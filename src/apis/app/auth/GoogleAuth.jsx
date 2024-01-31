@@ -2,40 +2,45 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const KakaoAuth = () => {
-  const [kakaoToken, setKakaoToken] = useState('');
+const GoogleAuth = () => {
+  const [googleToken, setGoogleTokenToken] = useState('');
   const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getKakaoToken = async () => {
+    const getGoogleToken = async () => {
       try {
         const res = await axios.post(
-          `https://kauth.kakao.com/oauth/tokengrant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&code=${code}`,
+          `https://accounts.google.com/o/oauth2/v2/auth?
+          scope=https://www.googleapis.com/auth/drive.metadata.readonly&
+          include_granted_scopes=true&
+          response_type=token&
+          state=state_parameter_passthrough_value&
+          redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URI}&
+          client_id=${process.env.REACT_APP_GOOGLE_REST_API_KEY}`,
           {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
           },
         );
-        setKakaoToken(res.data.access_token);
-        console.log('Kakao Token Received');
+        setGoogleTokenToken(res.data.access_token);
       } catch (error) {
         console.log(error);
       }
     };
 
     if (code) {
-      getKakaoToken();
+      getGoogleToken();
     }
   }, [code]);
 
   useEffect(() => {
-    const loginWithKakao = async () => {
-      if (kakaoToken) {
+    const loginWithGoogle = async () => {
+      if (googleToken) {
         try {
           const response = await axios.post(
-            `http://umcservice.shop:8000/members/login?accessToken=${kakaoToken}&socialType=KAKAO`,
+            `http://umcservice.shop:8000/members/login?accessToken=${googleToken}&socialType=GOOGLE`,
             {
               headers: {
                 'Content-Type': 'application/json;charset=utf-8',
@@ -44,20 +49,19 @@ const KakaoAuth = () => {
           );
 
           const accessToken = response.data.result.accessToken;
-          console.log(accessToken);
 
-          localStorage.setItem('accessToken', accessToken);
-          navigate('/mainPage');
+          localStorage.setItem('server Token', accessToken);
+          navigate('/signupform');
         } catch (error) {
           console.log(error);
         }
       }
     };
 
-    loginWithKakao();
-  }, [kakaoToken, navigate]);
+    loginWithGoogle();
+  }, [googleToken, navigate]);
 
   return <div>{code}</div>;
 };
 
-export default KakaoAuth;
+export default GoogleAuth;

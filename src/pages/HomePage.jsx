@@ -24,7 +24,8 @@ const LoginButtonImage = styled.img`
 `;
 
 const HomePage = () => {
-  const KakaoLoginURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}`
+  const KakaoLoginURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
+  const NaverLoginURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_REST_API_KEY}&state=test&redirect_uri=${process.env.REACT_APP_NAVER_REDIRECT_URI}`;
 
   return (
     <Background>
@@ -34,7 +35,7 @@ const HomePage = () => {
       <Button to="/signupform">
         <LoginButtonImage src={GoogleLoginImage} />
       </Button>
-      <Button to="/signupform">
+      <Button href={NaverLoginURL}>
         <LoginButtonImage src={NaverLoginImage} />
       </Button>
     </Background>

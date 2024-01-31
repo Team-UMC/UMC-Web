@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import styled from 'styled-components';
 import NocontentsBackgroundImage from 'assets/signup/NoContentsBackground.svg';
 
 import InviteCode from 'components/SignUp/InviteCode';
-import School from 'components/SignUp/School';
+import University from 'components/SignUp/University';
 import Name from 'components/SignUp/Name';
 import Nickname from 'components/SignUp/Nickname';
 import Agreement from 'components/SignUp/Agreement';
-import GenerationPart from 'components/SignUp/GenerationPart';
+import SemesterParts from 'components/SignUp/SemesterParts';
 import SignUpComplete from 'components/SignUp/SignUpComplete';
 
 const SignUpPageContainer = styled.div`
@@ -18,86 +18,78 @@ const SignUpPageContainer = styled.div`
 `;
 
 const SignUp = () => {
-  const [step, nextStep] = useState(0);
+  const [step, setStep] = useState(0);
 
   const [userData, setUserData] = useState({
-    inviteCode: '',
-    universityName: '',
-    semester: '',
     name: '',
     nickname: '',
-    selectedPart: [],
+    semesterParts: [{ part: '', semester: '' }],
+    universityName: '',
+    campusPositions: [],
+    centerPositions: [],
   });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleNextStep = () => {
-    nextStep(step + 1);
+    setStep((prevStep) => prevStep + 1);
   };
 
   const handlePrevStep = () => {
-    nextStep(step - 1);
+    setStep((prevStep) => prevStep - 1);
   };
 
   const handleSubmit = async () => {
-    try {
-      const response = await axios.post('http://umcservice.shop:8000/members'.userData);
-
-      console.log(response);
-
-      if (response.status === 200) {
-        console.log('회원 가입 성공');
-      } else {
-        console.error('회원 가입 실패:', response.data);
-      }
-    } catch (error) {
-      console.error(
-        '회원 가입을 하는 동안 에러가 발생했습니다: ',
-        error.message,
-      );
-    }
+    console.log('Form Data Submitted:', userData);
   };
 
   return (
     <SignUpPageContainer step={step}>
-      {step === 0 && <InviteCode nextStep={handleNextStep} />}
+      {step === 0 && <InviteCode handleNextStep={handleNextStep} />}
 
       {step === 1 && (
-        <School
-          setUserData={setUserData}
+        <University
           userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
+          handleChange={handleChange}
+          handleNextStep={handleNextStep}
+          handlePrevStep={handlePrevStep}
         />
       )}
       {step === 2 && (
-        <GenerationPart
-          setUserData={setUserData}
+        <SemesterParts
           userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
+          setUserData={setUserData}
+          handleChange={handleChange}
+          handleNextStep={handleNextStep}
+          handlePrevStep={handlePrevStep}
         />
       )}
       {step === 3 && (
         <Name
-          setUserData={setUserData}
           userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
+          handleChange={handleChange}
+          handleNextStep={handleNextStep}
+          handlePrevStep={handlePrevStep}
         />
       )}
       {step === 4 && (
         <Nickname
-          setUserData={setUserData}
           userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
+          handleChange={handleChange}
+          handleNextStep={handleNextStep}
+          handlePrevStep={handlePrevStep}
         />
       )}
       {step === 5 && (
         <Agreement
-          setUserData={setUserData}
-          userData={userData}
-          nextStep={handleNextStep}
-          prevStep={handlePrevStep}
+          handleNextStep={handleNextStep}
+          handlePrevStep={handlePrevStep}
           handleSubmit={handleSubmit}
         />
       )}

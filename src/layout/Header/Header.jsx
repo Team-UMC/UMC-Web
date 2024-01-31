@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import NewRight from 'components/Header/NewRight';
-import NewLeft from 'components/Header/NewLeft';
+import LeftContainer from 'components/Header/LeftContainer';
+import RightContainer from 'components/Header/RightContainer';
 
-import HeaderImage from 'assets/header/header.svg';
-import SmallHeaderImage from 'assets/header/smallheader.svg';
+import LargeHeaderImage from 'assets/header/LargeHeader.svg';
+import SmallHeaderImage from 'assets/header/SmallHeader.png';
 
 const HeaderWrapper = styled.div`
   // Header 배경 이미지 설정
-  background: url(${HeaderImage}) no-repeat center center;
+  background: url(${LargeHeaderImage}) no-repeat center center;
   background-size: cover;
 
   display: flex;
@@ -27,7 +27,7 @@ const HeaderWrapper = styled.div`
   width: 100%;
 
   // header.svg와 smallHeader.svg 높이만큼으로 설정
-  height: ${(props) => (props.isScrolled ? '84px' : '100vh')};
+  height: ${(props) => (props.isScrolled ? 'auto' : '100vh')};
 
   // 스크롤 시에도 위치 최상단 고정
   position: fixed;
@@ -39,11 +39,12 @@ const HeaderWrapper = styled.div`
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
+  height: 20%;
   justify-content: space-evenly;
   align-items: center;
 `;
 
-const NewHeader = () => {
+const Header = () => {
   const [canScrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -64,18 +65,18 @@ const NewHeader = () => {
       <HeaderWrapper
         style={{
           background: `url(${
-            canScrolled ? SmallHeaderImage : HeaderImage
+            canScrolled ? SmallHeaderImage : LargeHeaderImage
           }) no-repeat center center`,
         }}
         isScrolled={canScrolled}
       >
         <Wrapper>
-          <NewLeft />
-          <NewRight />
+          <LeftContainer />
+          <RightContainer isScrolled={canScrolled}/>
         </Wrapper>
       </HeaderWrapper>
     </>
   );
 };
 
-export default NewHeader;
+export default Header;
