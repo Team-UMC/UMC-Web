@@ -15,6 +15,7 @@ import MyWrite from 'pages/MyWrite/MyWrite';
 import KakaoAuth from 'apis/app/auth/KakaoAuth';
 import NaverAuth from 'apis/app/auth/NaverAuth';
 import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
+import Profile from 'components/Profile/Profile';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/mywrite" element={<MyWrite />} />
 
             <Route path="/profilesetting" element={<ProfileSettingPage />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
       </BrowserRouter>
