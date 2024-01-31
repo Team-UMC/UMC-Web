@@ -15,6 +15,7 @@ import Management from 'pages/Management/Management';
 import MyWrite from 'pages/MyWrite/MyWrite';
 import TodayILearn from 'pages/TodayILearn/TodayILearn';
 import NewTIL from 'components/TodayILearn/NewTIL';
+import GalleryPage from 'pages/Gallery/GalleryPage';
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
           <Route path="/mywrite" element={<MyWrite />} />
           <Route path="/todayilearn" element={<TodayILearn />} />
           <Route path="/todayilearn/detailpage" element={<NewTIL />} />
-
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/kakaologin" element={<SocialLogin />} />
           <Route path="/management" element={<AdminManagePage />} />
         </Routes>

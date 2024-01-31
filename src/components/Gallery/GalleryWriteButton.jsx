@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import pencil from 'assets/photo/pencil-fill.svg';
+import pencil from 'assets/gallery/pencil-fill.svg';
 
 const GalleryButtonWrapper = styled.div`
   display: flex;
