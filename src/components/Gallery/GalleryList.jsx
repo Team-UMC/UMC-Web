@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -30,7 +31,7 @@ const GalleryItem = styled.div`
 
 const GalleryItemImg = styled.img`
   width: 100%;
-  height: 100%;
+  height: 200px;
   object-fit: cover;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -146,6 +147,10 @@ const ArrowButton = styled.img`
   display: ${(props) => (props.isHidden ? 'none' : 'block')};
 `;
 
+const GalleryLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const GallerySearchBarLayout = styled(GallerySearchBar)`
   display: flex;
   flex-direction: row;
@@ -187,30 +192,37 @@ const GalleryItemComponent = ({ item, index }) => {
   }, []);
 
   return (
-    <GalleryItem ref={itemRef} key={index}>
-      <GalleryItemImg src={item.src[0]} alt={item.alt} />
-      <GalleryItemViewCountWrapper>
-        <GalleryItemView>
-          <img src={ViewIcon} alt="view-icon" />
-          {item.view}
-        </GalleryItemView>
-        <GalleryItemCount>{item.count}</GalleryItemCount>
-      </GalleryItemViewCountWrapper>
-      <GalleryItemInfoWrapper>
-        <GalleryItemInfoTitle>{item.title}</GalleryItemInfoTitle>
-        <GalleryItemInfoAuthorDateLayout>
-          <GalleryItemInfoAuthor>{item.author}</GalleryItemInfoAuthor>
-          <GalleryItemInfoDate>{item.time}</GalleryItemInfoDate>
-        </GalleryItemInfoAuthorDateLayout>
-      </GalleryItemInfoWrapper>
-    </GalleryItem>
+    <GalleryLink to={`/gallery/${item.id}`}>
+      <GalleryItem ref={itemRef} key={index}>
+        <GalleryItemImg src={item.src[0]} alt={item.alt} />
+        <GalleryItemViewCountWrapper>
+          <GalleryItemView>
+            <img src={ViewIcon} alt="view-icon" />
+            {item.view}
+          </GalleryItemView>
+          <GalleryItemCount>{item.count}</GalleryItemCount>
+        </GalleryItemViewCountWrapper>
+        <GalleryItemInfoWrapper>
+          <GalleryItemInfoTitle>{item.title}</GalleryItemInfoTitle>
+          <GalleryItemInfoAuthorDateLayout>
+            <GalleryItemInfoAuthor>{item.author.name}</GalleryItemInfoAuthor>
+            <GalleryItemInfoDate>{item.time}</GalleryItemInfoDate>
+          </GalleryItemInfoAuthorDateLayout>
+        </GalleryItemInfoWrapper>
+      </GalleryItem>
+    </GalleryLink>
   );
 };
 
 GalleryItemComponent.propTypes = {
   item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    author: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      profile: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+    }).isRequired,
     time: PropTypes.string.isRequired,
     src: PropTypes.arrayOf(PropTypes.string).isRequired,
     alt: PropTypes.string.isRequired,
