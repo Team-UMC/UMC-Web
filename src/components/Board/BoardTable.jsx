@@ -116,15 +116,20 @@ const PageButton = styled.div`
   padding: 4px 8px;
   border: none;
   border-radius: 6px;
+
+  /* 페이지 버튼의 배경 색상: 활성화(클릭) 시 색상 변경 */
   background-color: ${(props) => (props.$isActive ? '#FFFFFF' : '')};
 
   /* 페이지 버튼의 텍스트 스타일링 */
   color: ${(props) => (props.$isActive ? '#000C76' : '#4B4B4B')};
+
+  /* 폰트 스타일링 */
   font-size: 12px;
   font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
 
+  /* 커서 모양 변경 */
   cursor: pointer;
 
   /* 애니메이션 효과 */
@@ -161,7 +166,7 @@ const PageArrowButton = styled.div`
   /* 페이지 이동 버튼의 아이콘 이미지 */
   background-image: url(${(props) => props.$icon});
 
-  /* 페이지 이동 버튼의 배경 색상 */
+  /* 페이지 이동 버튼 활성화(클릭)시 배경/폰트 색상/커서 모양/투명도 변경 */
   background-color: ${(props) => (props.$isActive ? '#FFFFFF' : '#EBEBEB')};
   color: ${(props) => (props.$isActive ? '#000C76' : '#4B4B4B')};
   cursor: ${(props) => (props.$isActive ? 'pointer' : 'default')};
@@ -332,18 +337,25 @@ const BoardTable = () => {
           </StyledTableRow>
         </StyledTableHeader>
         <tbody>
-          {rows.map((row) =>
-            row.ispinned ? <PinnedTable key={row.title} row={row} /> : null,
-          )}
-          {filteredRows.length > 0 ? (
-            currentRows.map((row) => <Row key={row.title} row={row} />)
-          ) : (
-            <StyledTableRow>
-              <StyledTableCell colSpan={5}>
-                검색 결과가 없습니다.
-              </StyledTableCell>
-            </StyledTableRow>
-          )}
+          {
+            // 공지사항 고정 게시글
+            rows.map((row) =>
+              row.ispinned ? <PinnedTable key={row.title} row={row} /> : null,
+            )
+          }
+          {
+            // 공지사항 전체 게시글
+            filteredRows.length > 0 ? (
+              currentRows.map((row) => <Row key={row.title} row={row} />)
+            ) : (
+              // 검색 결과가 없을 경우
+              <StyledTableRow>
+                <StyledTableCell colSpan={5}>
+                  검색 결과가 없습니다.
+                </StyledTableCell>
+              </StyledTableRow>
+            )
+          }
         </tbody>
       </StyledTable>
       <BoardWriteButtonLayout>
