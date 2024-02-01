@@ -71,8 +71,13 @@ const Header = () => {
         isScrolled={canScrolled}
       >
         <Wrapper>
+<<<<<<< HEAD:src/layout/Header/Header.jsx
           <LeftContainer />
           <RightContainer isScrolled={canScrolled}/>
+=======
+          <NewLeft />
+          <NewRight />
+>>>>>>> 219b6b241a15c8e5feb3626f4dfb5dd766288423:src/layout/Header/NewHeader.jsx
         </Wrapper>
       </HeaderWrapper>
     </>
