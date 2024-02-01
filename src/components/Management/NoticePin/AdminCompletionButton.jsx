@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+// 완료 버튼을 감싸는 컴포넌트
 const AdminCompletionButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -13,14 +14,19 @@ const AdminCompletionButtonWrapper = styled.div`
   padding: 16px 16px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+
+  /* 완료 버튼 호버 시 효과 */
   &:hover {
     background-color: #f5f5f5;
   }
+
+  /* 완료 버튼 활성화(클릭) 시 효과 */
   &:active {
     background-color: #ebebeb;
   }
 `;
 
+// 완료 버튼 내용을 감싸는 컴포넌트
 const AdminCompletionButtonContent = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,6 +35,7 @@ const AdminCompletionButtonContent = styled.div`
   gap: 0 4px;
 `;
 
+// 완료 버튼의 텍스트 스타일링
 const AdminCompletionFont = styled.div`
   font-family: 'Pretendard';
   font-size: 14px;
@@ -41,6 +48,7 @@ const AdminCompletionFont = styled.div`
 // onClick: 완료 버튼 클릭 시 실행되는 함수
 // 완료 버튼 클릭 시, 알림창이 뜨고 페이지를 새로고침하는 함수
 const AdminCompletionButton = ({ onClick }) => {
+  // 완료 버튼 클릭 시 실행되는 함수
   const handleClick = () => {
     onClick();
     alert('변경된 데이터가 저장되었습니다.');

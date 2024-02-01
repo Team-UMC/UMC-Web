@@ -14,28 +14,36 @@ import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
 import Checked from 'assets/management/checked.svg';
 
+// 게시글 테이블 컴포넌트 스타일링
 const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
   text-align: center;
 `;
 
+// 게시글 테이블 헤더 스타일링
 const StyledTableHeader = styled.thead`
   border-bottom: none;
   padding: 0;
   font-weight: 600;
 `;
 
+// 게시글 테이블 행 스타일링
 const StyledTableRow = styled.tr`
   border-bottom: 1px solid #d8d8ff;
+
+  /* 마지막 행 선택하는 CSS 선택자 - 마지막 행의 경계선 제거 */
   &:last-child {
     border: none;
   }
+
+  /* 마지막 요소 선택하는 CSS 선택자 - 같은 유형의 마지막 요소의 상단 경계선 제거 */
   &:last-of-type {
     border-top: none;
   }
 `;
 
+// 게시글 테이블 셀(글 제목) 스타일링
 const StyledTitleColumn = styled.td`
   width: 20rem;
   padding: 10px 40px 10px 4px;
@@ -44,6 +52,7 @@ const StyledTitleColumn = styled.td`
   white-space: nowrap;
 `;
 
+// 게시글 테이블 셀(글 제목 외) 스타일링
 const StyledTableCell = styled.td`
   max-width: 10rem;
   padding: 10px 40px;
@@ -52,23 +61,29 @@ const StyledTableCell = styled.td`
   white-space: nowrap;
 `;
 
+// 게시글 테이블 펼치기/접기 버튼 스타일링
 const StyledOpenToggle = styled.td`
   padding: 10px 10px;
 `;
 
+// 게시글 테이블 펼치기/접기 셀 스타일링
 const StyledCollapseCell = styled.td`
   border: none;
   padding: 0;
 `;
 
+// 게시글 테이블 펼치기/접기 내용 스타일링
 const StyledCollapseContent = styled.div`
   border: none;
   margin: 0;
   transition: max-height 0.3s ease;
   overflow: hidden;
+
+  /* 게시글 펼치기/접기 상태에 따라 max-height 속성 변경 */
   max-height: ${(props) => (props.open ? '500px' : '0')};
 `;
 
+// 게시글 테이블 펼치기/접기 버튼 스타일링
 const AdminCompletionButtonLayout = styled.div`
   display: flex;
   justify-content: end;
@@ -76,40 +91,52 @@ const AdminCompletionButtonLayout = styled.div`
   padding-bottom: 80px;
 `;
 
+// 페이지 버튼 스타일링
 const PageButton = styled.div`
+  /* 페이지 버튼 간격 */
   display: inline-block;
   margin: 0 5px;
   padding: 4px 8px;
   border: none;
   border-radius: 6px;
+
+  /* 페이지 버튼 활성화 시 효과 */
   background-color: ${(props) => (props.$isActive ? '#FFFFFF' : '')};
+
+  /* 폰트 스타일링 */
   color: ${(props) => (props.$isActive ? '#000C76' : '#4B4B4B')};
   font-size: 12px;
   font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
   cursor: pointer;
+
+  /* 페이지 버튼 효과 */
   transition:
     background-color 0.3s ease-in-out,
     color 0.3s ease-in-out,
     transform 0.2s ease-in-out;
 
+  /* 페이지 버튼 호버 시 효과 */
   &:hover {
     background-color: #ebebeb;
     color: #000c76;
   }
 
+  /* 페이지 버튼 활성화(클릭) 시 효과 */
   &:active {
     transform: scale(0.9);
   }
 `;
 
+// 페이지 버튼 레이아웃 스타일링
 const PageButtonLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
+// 페이지 버튼 화살표 스타일링
 const PageArrowButton = styled.div`
   display: inline-block;
   background-image: url(${(props) => props.$icon});
@@ -123,12 +150,14 @@ const PageArrowButton = styled.div`
     transform 0.2s ease-in-out;
 `;
 
+// 검색 바 레이아웃 스타일링
 const BoardSearchLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
+// 체크박스 스타일링
 const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   width: 18px;
   height: 18px;
@@ -136,23 +165,30 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   border: 1px solid #bcbcbc;
   padding: 2px 4px;
   position: relative;
+
+  /* 웹킷 기반의 브라우저에서 선택한 요소의 기본 스타일을 제거 */
   -webkit-appearance: none;
+
   outline: none;
   cursor: pointer;
   transition: border 0.3s ease-in-out;
 
+  /* 체크박스 호버 시 효과 */
   &:hover {
     border: 1px solid #8784ff;
   }
 
+  /* 체크박스 활성화(클릭) 시 효과 */
   &:active {
     transform: scale(0.9);
   }
 
+  /* 체크박스 체크 시 효과 */
   &:checked {
     border: 1px solid #8784ff;
   }
 
+  /* 체크박스 체크 시 체크 표시 */
   &:checked::after {
     content: '';
     display: block;
@@ -162,6 +198,7 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   }
 `;
 
+// 체크박스 셀 스타일링
 const StyledTableCheckBoxCell = styled.td`
   max-width: 10rem;
   padding-left: 10px;
@@ -216,6 +253,7 @@ const NewAdminTable = () => {
       }
     };
 
+    // 고정된 게시글인지 여부를 로컬 스토리지에 저장
     useEffect(() => {
       localStorage.setItem(row.title, JSON.stringify(isPinned));
     }, [isPinned]);
@@ -253,6 +291,7 @@ const NewAdminTable = () => {
     );
   };
 
+  // 게시글 테이블의 행 컴포넌트의 props 검사
   Row.propTypes = {
     row: PropTypes.exact({
       ispinned: PropTypes.bool.isRequired,

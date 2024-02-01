@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import pencil from 'assets/board/pencil-fill.svg';
 
+// 글쓰기 버튼을 감싸는 컴포넌트
 const BoardButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -12,14 +13,19 @@ const BoardButtonWrapper = styled.div`
   padding: 8px 16px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+
+  /* 글쓰기 버튼 호버 시 효과 */
   &:hover {
     background-color: #f5f5f5;
   }
+
+  /* 글쓰기 버튼 활성화(클릭) 시 효과 */
   &:active {
     background-color: #ebebeb;
   }
 `;
 
+// 글쓰기 버튼 내용을 감싸는 컴포넌트
 const BoardButtonContent = styled.div`
   display: flex;
   flex-direction: row;
@@ -28,6 +34,7 @@ const BoardButtonContent = styled.div`
   gap: 0 4px;
 `;
 
+// 글쓰기 버튼의 텍스트 스타일링
 const BoardWriteFont = styled.div`
   font-family: 'Pretendard';
   font-size: 14px;

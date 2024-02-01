@@ -8,6 +8,7 @@ import BranchIcon from 'assets/titleIcon/branchIcon.svg';
 import UnionIcon from 'assets/titleIcon/unionIcon.svg';
 import TitleDot from 'assets/titleIcon/titledot.svg';
 
+// 게시판 제목 컴포넌트 스타일링
 const BoardTitleContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -16,12 +17,14 @@ const BoardTitleContainer = styled.div`
   padding-bottom: 72px;
 `;
 
+// 게시판 제목 아이콘 스타일링
 const BoardTitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
 `;
 
+// 게시판 제목 스타일링
 const BoardTitleMainStyle = styled.h1`
   color: #7682f6;
   font-size: 34px;
@@ -30,14 +33,17 @@ const BoardTitleMainStyle = styled.h1`
   word-wrap: break-word;
 `;
 
+// 게시판 제목 하이라이트 스타일링
 const HighlightedText = styled.span`
   color: #00095c;
 `;
 
+// 게시판 제목 점 스타일링
 const TitleWithDot = styled.div`
   position: relative;
   padding-top: 24px;
 
+  /* 점 스타일링 */
   &::before {
     content: '';
     position: absolute;
@@ -51,7 +57,7 @@ const TitleWithDot = styled.div`
   }
 `;
 
-// BoardTitleMain: children을 받아서 게시판 이름 출력
+// children을 받아서 게시판 이름 출력
 const BoardTitleMain = ({ children }) => {
   // 게시판 이름에 '게시판'이 포함되어 있으면 '게시판'을 하이라이트
   const parts = children.split(/(게시판)/);
@@ -72,10 +78,12 @@ const BoardTitleMain = ({ children }) => {
   );
 };
 
+// children의 타입을 검사
 BoardTitleMain.propTypes = {
   children: PropTypes.node,
 };
 
+// 게시판 제목 설명 스타일링
 const BoardTitleSub = styled.p`
   color: #9d9d9d;
   font-size: 18px;
@@ -84,6 +92,10 @@ const BoardTitleSub = styled.p`
   word-wrap: break-word;
 `;
 
+// 카테고리와 게시판 이름을 담은 배열
+// path: 게시판 경로명
+// title: 게시판 소속
+// image: 게시판 아이콘 이미지
 const CATEGORY_LISTS = [
   {
     path: 'school',
@@ -103,6 +115,9 @@ const CATEGORY_LISTS = [
 ];
 
 // 게시판 이름과 설명을 담은 배열
+// path: 게시판 경로명
+// title: 게시판 이름
+// subtitle: 게시판 이름에 해당하는 설명
 const TITLE_LISTS = [
   {
     path: 'notice',
@@ -131,14 +146,20 @@ const TITLE_LISTS = [
   },
 ];
 
-// BoardTitle: 게시판 제목 컴포넌트
+// 게시판 제목 컴포넌트
 const BoardTitle = () => {
+  // 카테고리와 게시판 이름을 가져옴
   const { category, boardPath } = useParams();
+
+  // 카테고리와 게시판 이름에 해당하는 정보를 가져옴
   const categoryInfo = CATEGORY_LISTS.find(
     (categoryInfo) => categoryInfo.path === category,
   );
+
+  // 게시판 이름에 해당하는 정보를 가져옴
   const board = TITLE_LISTS.find((link) => link.path === boardPath);
 
+  // 카테고리와 게시판 이름이 없으면 null 반환
   if (!categoryInfo || !board) {
     return null;
   }

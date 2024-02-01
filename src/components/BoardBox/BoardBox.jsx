@@ -9,6 +9,7 @@ import school from 'assets/boardCard/school.svg';
 import branch from 'assets/boardCard/branch.svg';
 import union from 'assets/boardCard/union.svg';
 
+// 게시판 박스를 감싸는 컴포넌트
 const Card = styled(MuiCard)`
   height: 100%;
   border-radius: 12px;
@@ -21,11 +22,13 @@ const Card = styled(MuiCard)`
   gap: 16px;
 `;
 
+// MuiCardContent 스타일링 컴포넌트
 const CardContent = styled(MuiCardContent)`
   padding: 0px;
   background: white;
 `;
 
+// 게시판 박스의 내용을 감싸는 컴포넌트
 const BoardBoxContainer = styled.div`
   height: 100%;
   padding-bottom: 30px;
@@ -37,6 +40,7 @@ const BoardBoxContainer = styled.div`
   display: inline-flex;
 `;
 
+// 게시판 박스의 이미지 스타일링 컴포넌트
 const BoardBoxImage = styled.div`
   background: white;
   width: 100%;
@@ -45,6 +49,7 @@ const BoardBoxImage = styled.div`
   gap: 8px;
 `;
 
+// 게시판 박스의 제목 스타일링 컴포넌트
 const BoardBoxTitle = styled.h3`
   padding-bottom: 10px;
   text-align: left;
@@ -56,12 +61,14 @@ const BoardBoxTitle = styled.h3`
   word-wrap: break-word;
 `;
 
+// 게시판 박스의 내용(학교/지부/연합)을 감싸는 컴포넌트
 const BoardBoxContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `;
 
+// 게시판 박스의 링크 스타일링 컴포넌트
 const BoardBoxLink = styled(NavLink)`
   text-align: left;
   color: black;
@@ -73,14 +80,18 @@ const BoardBoxLink = styled(NavLink)`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
+  /* 링크 호버 시 효과 */
   &:hover {
     color: #8784ff;
   }
+
+  /* 링크 활성화(클릭) 시 효과 */
   &:active {
     color: #000c76;
   }
 `;
 
+// 게시판 박스 묶음의 레이아웃 스타일링 컴포넌트
 const BoardBoxWrapperLayout = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,9 +99,9 @@ const BoardBoxWrapperLayout = styled.div`
   gap: 40px;
 `;
 
-// BoardBoxItem: 게시판 박스의 각 항목
+// 게시판 박스의 각 항목
 const BoardBoxItem = ({ image, title, links }) => {
-  // activeStyle: 현재 페이지의 링크에 적용할 스타일
+  // 현재 페이지의 링크에 적용할 스타일
   const activeStyle = {
     color: '#8784ff',
   };
@@ -116,6 +127,7 @@ const BoardBoxItem = ({ image, title, links }) => {
   );
 };
 
+// props 검사
 BoardBoxItem.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
@@ -127,9 +139,9 @@ BoardBoxItem.propTypes = {
   ).isRequired,
 };
 
-// BoardBoxWrapper: 게시판 박스의 묶음
+// 게시판 박스의 묶음
 const BoardBoxWrapper = () => {
-  // boardBoxes: 게시판 박스의 정보
+  // 게시판 박스의 정보
   const boardBoxes = [
     {
       image: school,
@@ -183,7 +195,7 @@ const BoardBoxWrapper = () => {
   );
 };
 
-// BoardBox: 게시판 박스 (좌측 메뉴바)
+// 게시판 박스 (좌측 메뉴바)
 const BoardBox = () => {
   return (
     <Card>
