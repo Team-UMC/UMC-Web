@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import TypeComponent from 'components/Management/ManagementComponent';
@@ -12,9 +12,7 @@ const ManagmentContainer = styled.div`
   margin: 5vh 50vh;
 `;
 
-
 const Management = () => {
-    
   const [buttonStates, setButtonStates] = useState({
     setnoticeButton: false,
     calenderButton: true,
@@ -23,23 +21,26 @@ const Management = () => {
 
   const handleClick = (buttonName) => {
     setButtonStates((prevStates) => ({
-      setnoticeButton: buttonName === 'setnoticeButton' ? !prevStates.setnoticeButton : false,
-      calenderButton: buttonName === 'calenderButton' ? !prevStates.calenderButton : false,
-      challengerButton: buttonName === 'challengerButton' ? !prevStates.challengerButton : false,
+      setnoticeButton:
+        buttonName === 'setnoticeButton' ? !prevStates.setnoticeButton : false,
+      calenderButton:
+        buttonName === 'calenderButton' ? !prevStates.calenderButton : false,
+      challengerButton:
+        buttonName === 'challengerButton'
+          ? !prevStates.challengerButton
+          : false,
     }));
   };
 
-    return(
-      <ManagmentContainer>
-  
-        <ManagementTitle />
-        
-        <ManagementType buttonStates={buttonStates} handleClick={handleClick}/> 
+  return (
+    <ManagmentContainer>
+      <ManagementTitle />
 
-        <TypeComponent buttonStates={buttonStates} />
+      <ManagementType buttonStates={buttonStates} handleClick={handleClick} />
 
-      </ManagmentContainer>
-      );
-    };
-  
-  export default Management;
+      <TypeComponent buttonStates={buttonStates} />
+    </ManagmentContainer>
+  );
+};
+
+export default Management;

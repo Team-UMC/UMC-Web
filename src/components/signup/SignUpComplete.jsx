@@ -33,12 +33,10 @@ const Description = styled.div`
 `;
 
 const SignUpComplete = () => {
-  //const handleSubmit = () => {};
-
   const navigate = useNavigate();
 
   const handleSubmitButtonClick = () => {
-    navigate('/');
+    navigate('/main');
   };
 
   return (

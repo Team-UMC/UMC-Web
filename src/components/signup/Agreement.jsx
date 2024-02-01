@@ -7,13 +7,19 @@ import NextButton from './NextButton';
 
 const ABC = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 const Wrap = styled.div`
   color: white;
+  height: 20vh;
+  width: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 8px;
+  margin-bottom: 150px;
 `;
 
 const Container = styled.div`
@@ -59,7 +65,7 @@ const Modal = ({ content, handleClose, onModalCheckboxChange }) => {
   );
 };
 
-const Agreement = ({ prevStep, nextStep }) => {
+const Agreement = ({ handleNextStep, handlePrevStep, handleSubmit }) => {
   const [termsAgreement, setTermsAgreement] = useState(false);
   const [privacyAgreement, setPrivacyAgreement] = useState(false);
 
@@ -144,8 +150,8 @@ const Agreement = ({ prevStep, nextStep }) => {
       )}
 
       <SignUpFormStyle.StepButtonWrapper>
-        <PrevButton nextStep={prevStep} />
-        {termsAgreement && privacyAgreement && <NextButton nextStep={nextStep} />}
+        <PrevButton handlePrevStep={handlePrevStep} />
+        {termsAgreement && privacyAgreement && <NextButton handleNextStep={handleNextStep} handleSubmit={handleSubmit}/>}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
@@ -158,8 +164,9 @@ Modal.propTypes = {
 };
 
 Agreement.propTypes = {
-  prevStep: PropTypes.func.isRequired,
-  nextStep: PropTypes.func.isRequired,
+  handleNextStep: PropTypes.func.isRequired,
+  handlePrevStep: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default Agreement;

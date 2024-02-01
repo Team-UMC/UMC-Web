@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
-import DeletePart from 'assets/signup/DeletePart.svg';
+//import DeletePart from 'assets/signup/DeletePart.svg';
 import PrevButton from './PrevButton';
 import NextButton from './NextButton';
 
@@ -31,62 +31,56 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const AddButton = styled.div`
-  width: 40%;
-  height: 30px;
-  display: flex;
-  background-color: white;
-  color: black;
-  border: none;
-  border-radius: 15px;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
+// const AddButton = styled.div`
+//   width: 40%;
+//   height: 30px;
+//   display: flex;
+//   background-color: white;
+//   color: black;
+//   border: none;
+//   border-radius: 15px;
+//   justify-content: center;
+//   align-items: center;
+//   cursor: pointer;
+// `;
 
-const DeleteButton = styled.img`
-  display: flex;
-  cursor: pointer;
-`;
+// const DeleteButton = styled.img`
+//   display: flex;
+//   cursor: pointer;
+// `;
 
-const GenerationPart = ({ nextStep, prevStep }) => {
-  const [semesterParts, setSemesterParts] = useState([
-    { generation: '', part: '', id: '1' },
-  ]);
+const SemesterParts = ({ userData, setUserData, handleNextStep, handlePrevStep }) => {
+  const { semesterParts } = userData;
 
-  const addPair = () => {
-    setSemesterParts([
-      ...semesterParts,
-      { generation: '', part: '', id: semesterParts.length + 1 },
-    ]);
-  };
+  const handlePairChange = (e, index, property) => {
+    const { value } = e.target;
 
-  const deletePair = (id) => {
-    const updatedPairs = semesterParts.filter((pair) => pair.id !== id);
-    setSemesterParts(updatedPairs);
+    setUserData((prevData) => ({
+      ...prevData,
+      semesterParts: prevData.semesterParts.map((pair, i) =>
+        i === index ? { ...pair, [property]: value } : pair
+      ),
+    }));
   };
 
   const canMoveToNextStep = semesterParts.some(
-    (pair) => pair.generation !== '' && pair.part !== ''
+    (pair) => pair.part !== '' && pair.semester !== '',
   );
 
   return (
     <SignUpFormStyle.Wrapper>
       <SignUpFormStyle.SignUpFormWrapper>
         <h1> 기수 및 파트를 선택해주세요 </h1>
-        <Description> 여러 기수에 참여한 경우, 모든 기수와 파트를 추가해주세요! </Description>
+        <Description>
+          여러 기수에 참여한 경우, 모든 기수와 파트를 추가해주세요!
+        </Description>
 
         <DropdownWrapper>
-          {semesterParts.map((pair) => (
-            <Wrapper key={pair.id}>
+          {semesterParts.map((pair, index) => (
+            <Wrapper key={index}>
               <Dropdown
-                value={pair.generation}
-                onChange={(e) => {
-                  const updatedPairs = semesterParts.map((p) =>
-                    p.id === pair.id ? { ...p, generation: e.target.value } : p,
-                  );
-                  setSemesterParts(updatedPairs);
-                }}
+                value={pair.semester}
+                onChange={(e) => handlePairChange(e, index, 'semester')}
               >
                 <option value="" disabled hidden>
                   기수
@@ -101,12 +95,7 @@ const GenerationPart = ({ nextStep, prevStep }) => {
 
               <Dropdown
                 value={pair.part}
-                onChange={(e) => {
-                  const updatedPairs = semesterParts.map((p) =>
-                    p.id === pair.id ? { ...p, part: e.target.value } : p,
-                  );
-                  setSemesterParts(updatedPairs);
-                }}
+                onChange={(e) => handlePairChange(e, index, 'part')}
               >
                 <option value="" disabled hidden>
                   파트
@@ -120,28 +109,30 @@ const GenerationPart = ({ nextStep, prevStep }) => {
                 <option value="Android">Android</option>
               </Dropdown>
 
-              <DeleteButton
+              {/*<DeleteButton
                 src={DeletePart}
-                onClick={() => deletePair(pair.id)}
-              />
+                onClick={() => deletePair(index)}
+          />*/}
             </Wrapper>
           ))}
         </DropdownWrapper>
 
-        <AddButton onClick={addPair}>기수 추가</AddButton>
+        {/*<AddButton onClick={addPair}>기수 추가</AddButton>*/}
       </SignUpFormStyle.SignUpFormWrapper>
 
       <SignUpFormStyle.StepButtonWrapper>
-        <PrevButton nextStep={prevStep} />
-        {canMoveToNextStep && <NextButton nextStep={nextStep} />}
+        <PrevButton handlePrevStep={handlePrevStep} />
+        {canMoveToNextStep && <NextButton handleNextStep={handleNextStep} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
-GenerationPart.propTypes = {
-  nextStep: PropTypes.func.isRequired,
-  prevStep: PropTypes.func.isRequired,
+SemesterParts.propTypes = {
+  userData: PropTypes.object.isRequired,
+  setUserData: PropTypes.func.isRequired,
+  handleNextStep: PropTypes.func.isRequired,
+  handlePrevStep: PropTypes.func.isRequired,
 };
 
-export default GenerationPart;
+export default SemesterParts;

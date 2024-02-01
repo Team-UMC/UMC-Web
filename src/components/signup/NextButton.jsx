@@ -14,16 +14,12 @@ const Button = styled.img`
   }
 `;
 
-const NextButton = ({ nextStep }) => {
-  const handleNextStep = () => {
-    nextStep((prevStep) => prevStep + 1);
-  };
-
+const NextButton = ({ handleNextStep }) => {
   return <Button src={NextButtonImage} alt="다음" onClick={handleNextStep} />;
 };
 
 NextButton.propTypes = {
-  nextStep: PropTypes.func.isRequired,
+  handleNextStep: PropTypes.func.isRequired,
 };
 
 export default NextButton;

@@ -4,6 +4,7 @@ import MyCalendar from 'components/Main/Calendar/calendar';
 import MainDescription from 'components/Main/MainDescription';
 import Notification from 'components/Main/Notification/Notification';
 import Schedule from 'components/Main/Calendar/Schedule';
+import DateSelectCalendar from 'components/DateSelectCalendar';
 
 const MainWrapper = styled.div`
   margin-top: 30vh;
@@ -28,7 +29,7 @@ const RightWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 40%;
+  width: 50%;
 `;
 
 const Main = () => {
@@ -58,6 +59,11 @@ const Main = () => {
         <Wrapper>
           <Notification />
         </Wrapper>
+
+        <Wrapper>
+          <DateSelectCalendar />
+        </Wrapper>
+
       </MainWrapper>
     </div>
   );
