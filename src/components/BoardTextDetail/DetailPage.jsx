@@ -13,7 +13,7 @@ import {
   BoardSubText,
   BoxContainer,
   AlignWrapper,
-} from 'pages/DetailPage/DetailPage.style';
+} from 'components/BoardTextDetail/DetailPage.style';
 // import BoardTitleSchool from 'components/BoardTitle/BoardTitleSchool';
 
 const DetailPage = () => {

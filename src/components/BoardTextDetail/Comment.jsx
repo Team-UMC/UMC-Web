@@ -1,57 +1,38 @@
+// 댓글 파일
+
 import React from 'react';
 import styled from 'styled-components';
 import {
-  ProfileBigWrapper,
-  ProfileSmallWrapper,
-  ProfileTextControlWrapper,
-  ProfileImage,
-  NameNickname,
-  CohortPart,
   TextContent,
 } from 'components/BoardTextDetail/TextDetail';
 import PropTypes from 'prop-types';
-import MiniHambergerMenu from 'assets/MiniHamberMenu.svg';
+import ProfileContainer from './ProfileContainer';
+import ProfileImg from 'assets/ProfileImg.svg';
 
-const Container = styled.div`
-  display: inline-flex;
-  flex-direction: column;
+const Container = styled.div`            // 댓글의 전체를 감싸는 박스
+  display: flex;
+  flex-direction: column;                // 박스 요소를 column으로 배열
   font-family: 'Pretendard';
-  padding: 2vw;
-  word-wrap: break-word;
-  border: 2px solid #d8d8ff;
+  padding: 2vw;                          // padding을 2vw로 준다
+  border: 2px solid #d8d8ff;           // 박스 경계 표시
 `;
 
-const TextContentWrapper = styled.div`
-  padding-top: 1%;
+const TextContentWrapper = styled.div`   // 댓글의 내용을 스타일링 하기 위해 사용
+  padding-top: 1%;                       // 댓글과 ProfileContainer 사이의 간격을 조절하기 위해 사용
 `;
 
-const Date = styled.span`
-  font-size: 0.8em;
-  color: #9d9d9d;
+const Date = styled.span`                // 댓글이 달린 날짜를 표시하기 위해 사용
+  font-size: 0.8em;                      // 글씨 크기 설정
+  color: #9d9d9d;                      // 글씨 색 설정
 `;
 
-const Comment = ({
-  NameNicknameText,
-  CohortPartText,
+const Comment = ({                         // 댓글내용과 날짜를 프롭으로 사용하는 댓글 컴포넌트
   CustomTextContent,
   date,
 }) => {
   return (
-    <Container>
-      <ProfileTextControlWrapper>
-        <ProfileBigWrapper>
-          <ProfileImage alt="프로필 사진" />
-          <ProfileSmallWrapper>
-            <NameNickname>{NameNicknameText || '리오 이원영'}</NameNickname>
-            <CohortPart>{CohortPartText || '5기 Web'}</CohortPart>
-          </ProfileSmallWrapper>
-        </ProfileBigWrapper>
-        <img
-          src={MiniHambergerMenu}
-          alt="더보기"
-          style={{ cursor: 'pointer' }}
-        />
-      </ProfileTextControlWrapper>
+    <Container >
+      <ProfileContainer ProfileImgFile={ProfileImg} NameNicknameText="리오/이원영" CohortPartText="5기 &#124; Web"/>
       <TextContentWrapper>
         <TextContent>
           {CustomTextContent ||
@@ -64,8 +45,6 @@ const Comment = ({
 };
 
 Comment.propTypes = {
-  NameNicknameText: PropTypes.string.isRequired,
-  CohortPartText: PropTypes.string.isRequired,
   CustomTextContent: PropTypes.string.isRequired,
   date: PropTypes.string,
 };

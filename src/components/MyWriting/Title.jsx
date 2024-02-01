@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const MainTitleContainer = styled.div`
-  margin-top: 1000px; /* 수정된 부분 */
+  margin-top: 15vh; /* 수정된 부분 */
   display: flex;
   flex-direction: row;
 `;

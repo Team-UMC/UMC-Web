@@ -4,11 +4,10 @@ import Add from '../../assets/add.svg';
 
 const FileContainer = styled.div`
   display: flex;
-  width: 120vh;
-  padding: 16px;
+  width: 100%;
+  padding: 1.5vh;
   flex-direction: column;
   border-radius: 12px;
-  margin-top: 5vh;
   border: 1px solid #232A6D;
 `;
 

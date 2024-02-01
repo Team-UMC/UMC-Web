@@ -6,9 +6,8 @@ import NewHeader from 'layout/Header/NewHeader';
 import Main from 'pages/Main.jsx';
 import SignUpForm from 'pages/SignUp/SignUp';
 import BoardWrite from 'pages/BoardWrite/BoardWrite';
-import BoardPage from 'pages/NewBoardPage/BoardPage';
 import SocialLogin from 'components/SignUp/SocialLogin';
-import {DetailPage} from 'pages/DetailPage/DetailPage';
+import TextDetailPage from 'pages/DetailPage/TextDetailPage';
 
 function App() {
   return (
@@ -18,8 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signupform" element={<SignUpForm />} />
-          <Route path="/boardPage" element={<BoardPage />} />
-          <Route path="/DetailPage" element={<DetailPage />} />
+          <Route path="/TextDetailPage" element={<TextDetailPage />} />
           <Route path="/boardwrite" element={<BoardWrite />} />
           <Route path="/kakaologin" element={<SocialLogin />} />
         </Routes>

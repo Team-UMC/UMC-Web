@@ -15,9 +15,9 @@ const MiniHambergerMenuModal = ({ onClose, content }) => {
   return (
     <WhiteBackground className="white-bg">
       <h4>{content}</h4>
-      <button onClick={onClose}>모달 닫기</button>
-      <button>예</button>
-      <button>아니오</button>
+      <div onClick={onClose}>모달 닫기</div>
+      <div>예</div>
+      <div>아니오</div>
     </WhiteBackground>
   );
 };

@@ -41,7 +41,7 @@ display: flex;
 flex-direction: row;
 align-items: center;
 
-margin-right: 5vh;
+margin-right: 7vh;
 font-weight: bold;
 `;
 

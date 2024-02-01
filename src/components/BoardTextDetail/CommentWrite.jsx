@@ -1,26 +1,39 @@
+// 댓글 작성하는 부분을 구현한 파일
+
 import React, { useState, useRef, useEffect } from 'react';
-import { BoxContainer } from 'pages/DetailPage/DetailPage.style';
-import {
-  ProfileBigWrapper,
-  ProfileSmallWrapper,
-  ProfileImage,
-  NameNickname,
-  CohortPart,
-} from './TextDetail';
+import { BoxContainer } from 'components/BoardTextDetail/DetailPage.style';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import SubmitBtn from 'assets/SubmitBtn.svg';
-
-const TextNBtnWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: flex-end;
-  width: 100%;
-  gap: 1vw;
-`;
+import { ReactComponent as SubmitBtn } from 'assets/SubmitBtn.svg';
+import ProfileContainer from './ProfileContainer';
+import ProfileImg from 'assets/ProfileImg.svg';
 
 const CommentWriteContainer = styled(BoxContainer)`
   margin: 10vh 0;
+`;
+
+const CommentInputNBtnWrapper = styled.div`                    // CommentInput과 등록버튼을 그룹화하기 위해 사용
+  display: flex;
+  flex-direction: row;                                         // row로 배열
+  width: 100%;                                                 // 
+  gap: 1vw;
+  padding-top: 1%;
+`;
+
+const CommentInput = styled.input`
+  width: 100%;
+  padding: 1%;
+  background-color: #f0f4ff;
+  border: none;
+  border-radius: 5px;
+  line-height: 30%;
+  &::placeholder {
+    color: #4b4b4b;
+  }
+`;
+
+const SubmitBtnImg = styled(SubmitBtn)`
+  cursor: pointer;
 `;
 
 const CommentWrite = ({
@@ -78,40 +91,27 @@ const CommentWrite = ({
 
   return (
     <CommentWriteContainer>
-      <ProfileBigWrapper>
-        <ProfileImage alt="프로필 사진" />
-        <ProfileSmallWrapper>
-          <NameNickname> {NameNicknameText || '리오 이원영'} </NameNickname>
-          <CohortPart> {CohortPartText || '5기 Web'} </CohortPart>
-        </ProfileSmallWrapper>
-      </ProfileBigWrapper>
-      <TextNBtnWrapper>
-        <input
+      <ProfileContainer
+          ProfileImgFile={ProfileImg}
+          NameNicknameText="리오/이원영"
+          CohortPartText="5기 &#124; Web"
+        />
+      <CommentInputNBtnWrapper>
+        <CommentInput
           ref={inputRef}
           type="text"
           placeholder="댓글을 입력해주세요"
           value={comment}
           onChange={handleCommentChange}
           onKeyDown={handleEnterPress}
-          style={{
-            width: '100%',
-            padding: '1%',
-            backgroundColor: '#F0F4FF',
-            border: 'none',
-            borderRadius: '5px',
-            lineheight:'30%',
-            '::placeholder': {
-              color: '#4B4B4B',
-            },
-          }}
         />
-        <img
+        <SubmitBtnImg
           src={SubmitBtn}
           alt="등록버튼"
           ref={buttonRef}
           onClick={handleCommentSubmit}
         />
-      </TextNBtnWrapper>
+      </CommentInputNBtnWrapper>
     </CommentWriteContainer>
   );
 };

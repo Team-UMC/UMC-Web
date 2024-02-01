@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import { ROWS_DATA } from 'Data';
 import SearchBar from './BoardSearch';
 import BoardWriteButton from './BoardWriteButton';
+import PinnedTable from 'components/Admin/PinnedTable';
 
 import { IconButton } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
-import pin from 'assets/board/list/Pinned.svg';
 
 const StyledTable = styled.table`
   width: 100%;
@@ -146,9 +146,7 @@ const Row = ({ row }) => {
   return (
     <Fragment>
       <StyledTableRow>
-        <StyledTableCheckBoxCell>
-          {row.ispinned ? <img src={pin} alt='pinned' /> : null}
-        </StyledTableCheckBoxCell>
+        <StyledTableCheckBoxCell />
         <StyledTitleColumn style={{ textAlign: 'left' }}>
           {row.title}
         </StyledTitleColumn>
@@ -246,7 +244,7 @@ const BoardTable = () => {
       <StyledTable>
         <StyledTableHeader>
           <StyledTableRow style={{ borderBottom: 0, paddingBottom: 0 }}>
-            <StyledTableCheckBoxCell /> {/* 여기가 고정핀 부분임 */}
+            <StyledTableCheckBoxCell />
             <StyledTitleColumn>제목</StyledTitleColumn>
             <StyledTableCell>작성자</StyledTableCell>
             <StyledTableCell>작성일</StyledTableCell>
@@ -255,6 +253,9 @@ const BoardTable = () => {
           </StyledTableRow>
         </StyledTableHeader>
         <tbody>
+          {rows.map((row) =>
+            row.ispinned ? <PinnedTable key={row.title} row={row} /> : null,
+          )}
           {filteredRows.length > 0 ? (
             currentRows.map((row) => <Row key={row.title} row={row} />)
           ) : (
