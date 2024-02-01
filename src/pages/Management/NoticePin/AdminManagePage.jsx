@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import AdminTitle from 'components/Management/NoticePin/AdminTitle';
 import ManagementType from 'components/Management/ManagementType';
-// import AdminTable from 'components/Admin/AdminTable';
 import NewAdminTable from 'components/Management/NoticePin/NewAdminTable';
 
 const AdminManagementContainer = styled.div`
