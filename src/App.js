@@ -20,28 +20,30 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
+        <>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
 
-          {/* path는 Redirect URI*/}
-          <Route path="/OAuth2/kakao" element={<KakaoAuth />} />
-          <Route path="/oauth2/naver" element={<NaverAuth />} />
-          
-          <Route path="/signupform" element={<SignUpForm />} />
+            {/* path는 Redirect URI*/}
+            <Route path="/OAuth2/kakao" element={<KakaoAuth />} />
+            <Route path="/oauth2/naver" element={<NaverAuth />} />
 
-          <Route element={<MainLayout />}>
-            <Route path="/main" element={<Main />} />
-          </Route>
+            <Route path="/signupform" element={<SignUpForm />} />
 
-          <Route element={<BasicLayout />}>
-            <Route path="/board/*" element={<BoardPage />} />
-            <Route path="/boardwrite" element={<BoardWrite />} />
-            <Route path="/management" element={<Management />} />
-            <Route path="/mywrite" element={<MyWrite />} />
+            <Route element={<MainLayout />}>
+              <Route path="/main" element={<Main />} />
+            </Route>
 
-            <Route path="/profilesetting" element={<ProfileSettingPage />} />
-          </Route>
-        </Routes>
+            <Route element={<BasicLayout />}>
+              <Route path="/board/*" element={<BoardPage />} />
+              <Route path="/boardwrite" element={<BoardWrite />} />
+              <Route path="/management" element={<Management />} />
+              <Route path="/mywrite" element={<MyWrite />} />
+
+              <Route path="/profilesetting" element={<ProfileSettingPage />} />
+            </Route>
+          </Routes>
+        </>
       </BrowserRouter>
     </>
   );

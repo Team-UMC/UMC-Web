@@ -3,17 +3,24 @@ import React, { useState } from 'react';
 //import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-import RightModal from './RightModal';
+//import RightModal from './RightModal';
 
-import Friend from 'assets/header/friend.svg';
-import Setting from 'assets/header/setting.svg';
-import Notification from 'assets/header/notification.svg';
+import Profile from 'components/Profile/Profile';
 
 import MyProfileImage from 'assets/header/ProfileImage.png';
 
-const RightWrapper = styled.div`
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.62);
+  z-index: 999;
+`;
+
+const Container = styled.div`
   display: flex;
   width: 15%;
   height: 50%;
@@ -22,18 +29,11 @@ const RightWrapper = styled.div`
   align-items: center;
 `;
 
-const UpWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  margin-right: 10%;
-  margin-left: auto;
-  width: 50%;
-`;
-
-const DownWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+  cursor: pointer;
 `;
 
 const ProfileImage = styled.img`
@@ -42,11 +42,10 @@ const ProfileImage = styled.img`
   height: 30px;
 `;
 
-const Profile = styled.div`
+const ProfileNickname = styled.div`
   display: flex;
   align-items: center;
   color: white;
-  cursor: pointer;
 `;
 
 const RightContainer = ({ isScrolled }) => {
@@ -72,36 +71,22 @@ const RightContainer = ({ isScrolled }) => {
 */
   }
 
-  const handleModalToggle = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
   return (
-    <RightWrapper onClick={handleModalToggle}>
-      <UpWrapper isScrolled={isScrolled}>
-        <Link to="/setting">
-          <img src={Setting} alt="설정" />
-        </Link>
-
-        <Link to="/notification">
-          <img src={Notification} alt="알림" />
-        </Link>
-
-        <Link to="/friend">
-          <img src={Friend} alt="친구" />
-        </Link>
-      </UpWrapper>
-      <DownWrapper>
+    <Container>
+      <Wrapper onClick={() => setIsModalOpen(true)}>
         <ProfileImage src={MyProfileImage} isScrolled={isScrolled} />
 
-        <Profile> 눈꽃님 안녕하세요! </Profile>
+        <ProfileNickname> 눈꽃님 안녕하세요! </ProfileNickname>
         {/*서버와 연결 시 아래 코드로 변경 */}
         {/*<Profile> {`${nickname}님 안녕하세요!`} </Profile>*/}
-      </DownWrapper>
+      </Wrapper>
       {isModalOpen && (
-        <RightModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <>
+          <Overlay />
+          <Profile isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        </>
       )}
-    </RightWrapper>
+    </Container>
   );
 };
 
