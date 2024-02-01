@@ -85,10 +85,8 @@ const NewHeader = () => {
         }}
       >
         <Wrapper>
-
           <NewLeft />
           <NewRight />
-
         </Wrapper>
       </HeaderWrapper>
     </>
