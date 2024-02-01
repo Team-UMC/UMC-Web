@@ -5,9 +5,9 @@ import AdminPage from 'layout/NoticePin/AdminPage';
 import BoardTitle from '../BoardWrite/BoardTitle';
 import BoardText from '../BoardWrite/BoardText';
 import ManagementButton from 'components/Management/Button';
-import StartendDate from '../../components/Management/StartendDate';
-import Local from '../../components/Management/SelectLocal';
-import Classify from '../../components/Management/Classify';
+import StartendDate from 'components/Management/StartendDate';
+import Local from 'components/Management/SelectLocal';
+import Classify from 'components/Management/Classify';
 
 import SearchChallenger from './SearchChallenger.jsx';
 import ChallengerType from './ChallengerType';

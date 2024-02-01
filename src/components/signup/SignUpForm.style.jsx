@@ -26,7 +26,7 @@ const ButtonsWrapper = styled.div`
 
 const StepButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${props => (props.step === 1 ? 'flex-end' : 'space-between')};
 `;
 
 const SignUpFormStyle = { Wrapper, SignUpFormWrapper, ButtonsWrapper, StepButtonWrapper };

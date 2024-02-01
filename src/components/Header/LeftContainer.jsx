@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
+import LeftModal from './LeftModal';
 
 import NavStyleStar from 'assets/header/NavStyleStar.svg';
 import NavTextStyle from 'assets/header/NavTextStyle.svg';
@@ -12,8 +14,9 @@ const NavWrapper = styled.nav`
   justify-content: space-between;
 
   // 전체 화면 width(100%)의 60% 사용
-  width: 60%;
-  height: 10%;
+  width: 50%;
+
+  position: relative;
 `;
 
 const StyledLink = styled(Link)`
@@ -36,22 +39,26 @@ const TextWrapper = styled.div`
   height: 39px;
   transition: background 0.3s ease;
 
-  &:hover,
-  &.active {
+  &:hover {
     background: url(${NavTextStyle}) no-repeat center center;
   }
 `;
 
-const NewLeft = () => {
+const LeftContainer = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <NavWrapper>
+    <NavWrapper
+      onMouseEnter={() => setIsModalOpen(true)}
+      onMouseLeave={() => setIsModalOpen(false)}
+    >
       <>
-        <StyledLink to="/">
+        <StyledLink to="/main">
           <img src={NavStyleStar} alt="별" />
           <TextWrapper>홈</TextWrapper>
         </StyledLink>
 
-        <StyledLink to="/board">
+        <StyledLink to="/board/school/notice">
           <img src={NavStyleStar} alt="별" />
           <TextWrapper>게시판</TextWrapper>
         </StyledLink>
@@ -65,9 +72,10 @@ const NewLeft = () => {
           <img src={NavStyleStar} alt="별" />
           <TextWrapper>사진첩</TextWrapper>
         </StyledLink>
+        {isModalOpen && <LeftModal />}
       </>
     </NavWrapper>
   );
 };
 
-export default NewLeft;
+export default LeftContainer;

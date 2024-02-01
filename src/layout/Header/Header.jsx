@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { setScrolled, selectCanScrolled } from 'app/headerSlice';
-import { useLocation } from 'react-router-dom';
+import LeftContainer from 'components/Header/LeftContainer';
+import RightContainer from 'components/Header/RightContainer';
 
-import NewRight from 'components/Header/NewRight';
-import NewLeft from 'components/Header/NewLeft';
-
-import Header from 'assets/header/header.svg';
-import SmallHeader from 'assets/header/smallheader.svg';
+import LargeHeaderImage from 'assets/header/LargeHeader.svg';
+import SmallHeaderImage from 'assets/header/SmallHeader.png';
 
 const HeaderWrapper = styled.div`
+  // Header 배경 이미지 설정
+  background: url(${LargeHeaderImage}) no-repeat center center;
+  background-size: cover;
+
   display: flex;
 
   // 왼쪽 요소와 오른쪽 요소의 각 좌우 여백 생성
@@ -22,9 +22,6 @@ const HeaderWrapper = styled.div`
 
   // 왼쪽 요소와 오른쪽 요소 가로로 정렬
   flex-direction: row;
-
-  // Header 배경 이미지 설정
-  background: url(${Header});
 
   // 화면 width 전체
   width: 100%;
@@ -37,60 +34,54 @@ const HeaderWrapper = styled.div`
   top: 0;
 
   transition: background 0.3s ease;
-
-  background-size: cover;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
+  height: 20%;
   justify-content: space-evenly;
   align-items: center;
 `;
 
-const NewHeader = () => {
-  const dispatch = useDispatch();
-  const canScrolled = useSelector(selectCanScrolled);
-  const location = useLocation();
+const Header = () => {
+  const [canScrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      dispatch(setScrolled(scrollY > 0));
+      setScrolled(scrollY > 0);
     };
 
-    const currentRoute = location.pathname;
-
-    // 현재 경로가 홈 페이지("/")인지 확인
-    if (currentRoute === '/') {
-      window.addEventListener('scroll', handleScroll);
-    } else {
-      // 홈 페이지가 아닌 경우 isScrolled를 true로 설정
-      dispatch(setScrolled(true));
-    }
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [dispatch, location]);
+  }, []);
 
   return (
     <>
       <HeaderWrapper
-        isScrolled={canScrolled}
         style={{
           background: `url(${
-            canScrolled ? SmallHeader : Header
+            canScrolled ? SmallHeaderImage : LargeHeaderImage
           }) no-repeat center center`,
         }}
+        isScrolled={canScrolled}
       >
         <Wrapper>
+<<<<<<< HEAD:src/layout/Header/Header.jsx
+          <LeftContainer />
+          <RightContainer isScrolled={canScrolled}/>
+=======
           <NewLeft />
           <NewRight />
+>>>>>>> 219b6b241a15c8e5feb3626f4dfb5dd766288423:src/layout/Header/NewHeader.jsx
         </Wrapper>
       </HeaderWrapper>
     </>
   );
 };
 
-export default NewHeader;
+export default Header;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
@@ -11,31 +11,37 @@ const Input = styled.input`
   text-align: center;
 `;
 
-const Nickname = ({ nextStep, prevStep }) => {
-  const [nickname, setNickname] = useState('');
-
+const Nickname = ({
+  userData,
+  handleChange,
+  handleNextStep,
+  handlePrevStep,
+}) => {
   return (
     <SignUpFormStyle.Wrapper>
       <SignUpFormStyle.SignUpFormWrapper>
         <h2> 닉네임을 입력해주세요 </h2>
         <Input
           type="text"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-          placeholder='예시) 눈꽃'
+          name="nickname"
+          value={userData.nickname}
+          onChange={handleChange}
+          placeholder="예시) 눈꽃"
         />
       </SignUpFormStyle.SignUpFormWrapper>
       <SignUpFormStyle.StepButtonWrapper>
-        <PrevButton nextStep={prevStep} />
-        {nickname && <NextButton nextStep={nextStep} />}
+        <PrevButton handlePrevStep={handlePrevStep} />
+        {userData.nickname && <NextButton handleNextStep={handleNextStep} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
 Nickname.propTypes = {
-  nextStep: PropTypes.func.isRequired,
-  prevStep: PropTypes.func.isRequired,
+  userData: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleNextStep: PropTypes.func.isRequired,
+  handlePrevStep: PropTypes.func.isRequired,
 };
 
 export default Nickname;
