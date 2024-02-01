@@ -14,16 +14,12 @@ const Button = styled.img`
   }
 `;
 
-const PrevButton = ({ nextStep }) => {
-  const handlePrevStep = () => {
-    nextStep((prevStep) => prevStep - 1);
-  };
-
+const PrevButton = ({ handlePrevStep }) => {
   return <Button src={PrevButtonImage} alt="이전" onClick={handlePrevStep} />;
 };
 
 PrevButton.propTypes = {
-  nextStep: PropTypes.func.isRequired,
+  handlePrevStep: PropTypes.func.isRequired,
 };
 
 export default PrevButton;
