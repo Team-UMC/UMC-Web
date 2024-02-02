@@ -109,74 +109,45 @@ const BoardWriteButtonLayout = styled.div`
   padding-top: 24px;
 `;
 
-// 페이지 버튼 스타일링
-const PageButton = styled.div`
-  display: inline-block;
-  margin: 0 5px;
-  padding: 4px 8px;
-  border: none;
-  border-radius: 6px;
-
-  /* 페이지 버튼의 배경 색상: 활성화(클릭) 시 색상 변경 */
-  background-color: ${(props) => (props.$isActive ? '#FFFFFF' : '')};
-
-  /* 페이지 버튼의 텍스트 스타일링 */
-  color: ${(props) => (props.$isActive ? '#000C76' : '#4B4B4B')};
+// 게시글 테이블 페이지네이션 스타일링
+const BoardPaginateStyle = styled.div`
+  /* 레이아웃 정렬 */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 58px;
+  gap: 0 24px;
 
   /* 폰트 스타일링 */
   font-size: 12px;
   font-family: 'Pretendard';
-  font-weight: 600;
   word-wrap: break-word;
-
-  /* 커서 모양 변경 */
   cursor: pointer;
+`;
+
+// 게시글 테이블 페이지네이션 페이지 번호 스타일링
+const PageNumber = styled.div`
+  /* 활성화(클릭) 시, 스타일링 변화 */
+  color: ${(props) => (props.isActive ? '#000C76' : '#4B4B4B')};
+  font-weight: ${(props) => (props.isActive ? '600' : '400')};
+  padding: ${(props) => (props.isActive ? '4px 8px' : '0')};
+  background: ${(props) => (props.isActive ? 'white' : 'none')};
+  border-radius: ${(props) => (props.isActive ? '6px' : '0')};
 
   /* 애니메이션 효과 */
-  transition:
-    background-color 0.3s ease-in-out,
-    color 0.3s ease-in-out,
-    transform 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
-  /* 페이지 버튼 호버 시 효과 */
+  /* 호버 시, 크기 애니메이션 변화 */
   &:hover {
-    background-color: #ebebeb;
-    color: #000c76;
-  }
-
-  /* 페이지 버튼 활성화(클릭) 시 효과 */
-  &:active {
-    transform: scale(0.9);
+    transform: ${(props) => (props.isActive ? 'scale(1.1)' : 'none')};
   }
 `;
 
-// 페이지 버튼 레이아웃 스타일링
-const PageButtonLayout = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 64px;
-`;
-
-// 페이지 이동 버튼 스타일링
-const PageArrowButton = styled.div`
-  /* 페이지 이동 버튼의 아이콘 스타일링 */
-  display: inline-block;
-
-  /* 페이지 이동 버튼의 아이콘 이미지 */
-  background-image: url(${(props) => props.$icon});
-
-  /* 페이지 이동 버튼 활성화(클릭)시 배경/폰트 색상/커서 모양/투명도 변경 */
-  background-color: ${(props) => (props.$isActive ? '#FFFFFF' : '#EBEBEB')};
-  color: ${(props) => (props.$isActive ? '#000C76' : '#4B4B4B')};
-  cursor: ${(props) => (props.$isActive ? 'pointer' : 'default')};
-  opacity: ${(props) => (props.$isActive ? '1' : '0.5')};
-
-  /* 페이지 이동 버튼의 크기 */
-  transition:
-    background-color 0.3s ease-in-out,
-    color 0.3s ease-in-out,
-    transform 0.2s ease-in-out;
+// 게시글 테이블 페이지네이션 화살표 스타일링
+const ArrowButton = styled.img`
+  /* 이전 및 다음 페이지 없을 경우, 화살표 숨김 애니메이션 효과 */
+  display: ${(props) => (props.isHidden ? 'none' : 'block')};
 `;
 
 // 검색창 레이아웃 스타일링
@@ -259,13 +230,19 @@ Row.propTypes = {
 // 게시글 테이블 컴포넌트
 const BoardTable = () => {
   // 현재 페이지
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   // 검색어
   const [searchTerm, setSearchTerm] = useState('');
+
+  // 페이지네이션 클릭 이벤트 핸들러
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   // 검색어 변경 핸들러
   const handleSearch = (term) => {
     setSearchTerm(term);
+    setCurrentPage(0);
   };
 
   // 검색어가 포함된 게시글만 필터링
@@ -273,55 +250,12 @@ const BoardTable = () => {
     (row) => row.title.includes(searchTerm) || row.content.includes(searchTerm),
   );
 
-  // 현재 페이지에 표시할 게시글만 추출
-  const currentRows = filteredRows.slice(
-    // 현재 페이지의 첫 번째 게시글 인덱스
-    (currentPage - 1) * ROWS_PER_PAGE,
-    // 현재 페이지의 마지막 게시글 인덱스
-    currentPage * ROWS_PER_PAGE,
-  );
+  // 페이지네이션 상수에 따른 갤러리 아이템 데이터 필터링
+  const offset = currentPage * ROWS_PER_PAGE;
 
   // 페이지 버튼 렌더링
-  const renderPageButtons = () => {
-    // 전체 페이지 수
-    const numberOfPages = Math.ceil(rows.length / ROWS_PER_PAGE);
-    const buttons = [];
-
-    // 이전 페이지 버튼
-    buttons.push(
-      <PageArrowButton
-        key="prev"
-        onClick={() => setCurrentPage(currentPage - 1)}
-        $isActive={currentPage > 1}
-        $icon={LeftArrowIcon}
-      />,
-    );
-
-    // 페이지 버튼
-    for (let i = 1; i <= numberOfPages; i++) {
-      buttons.push(
-        <PageButton
-          key={i}
-          onClick={() => setCurrentPage(i)}
-          $isActive={i === currentPage}
-        >
-          {i}
-        </PageButton>,
-      );
-    }
-
-    // 다음 페이지 버튼
-    buttons.push(
-      <PageArrowButton
-        key="next"
-        onClick={() => setCurrentPage(currentPage + 1)}
-        $isActive={currentPage < numberOfPages}
-        $icon={RightArrowIcon}
-      />,
-    );
-
-    return buttons;
-  };
+  const pageCount = Math.ceil(filteredRows.length / ROWS_PER_PAGE);
+  const pages = new Array(pageCount).fill(null).map((_, i) => i);
 
   return (
     <>
@@ -344,24 +278,42 @@ const BoardTable = () => {
             )
           }
           {
-            // 공지사항 전체 게시글
-            filteredRows.length > 0 ? (
-              currentRows.map((row) => <Row key={row.title} row={row} />)
-            ) : (
-              // 검색 결과가 없을 경우
-              <StyledTableRow>
-                <StyledTableCell colSpan={5}>
-                  검색 결과가 없습니다.
-                </StyledTableCell>
-              </StyledTableRow>
-            )
+            // 페이지네이션 상수에 따른 갤러리 아이템 데이터 출력
+            filteredRows.slice(offset, offset + ROWS_PER_PAGE).map((row) => (
+              <Row key={row.title} row={row} />
+            ))
           }
         </tbody>
       </StyledTable>
       <BoardWriteButtonLayout>
         <BoardWriteButton />
       </BoardWriteButtonLayout>
-      <PageButtonLayout>{renderPageButtons()}</PageButtonLayout>
+      <BoardPaginateStyle>
+        <ArrowButton
+          src={LeftArrowIcon}
+          alt="previous"
+          isHidden={currentPage === 0}
+          onClick={() => handlePageClick(currentPage - 1)}
+        />
+        {
+          // 페이지네이션 상수에 따른 페이지 번호 출력
+          pages.map((pageNumber) => (
+            <PageNumber
+              key={pageNumber}
+              onClick={() => handlePageClick(pageNumber)}
+              isActive={pageNumber === currentPage}
+            >
+              {pageNumber + 1}
+            </PageNumber>
+          ))
+        }
+        <ArrowButton
+          src={RightArrowIcon}
+          alt="next"
+          isHidden={currentPage === pageCount - 1}
+          onClick={() => handlePageClick(currentPage + 1)}
+        />
+      </BoardPaginateStyle>
       <BoardSearchLayout>
         <SearchBar onSearch={handleSearch} />
       </BoardSearchLayout>

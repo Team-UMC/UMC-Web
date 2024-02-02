@@ -14,7 +14,7 @@ import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
 import Checked from 'assets/management/checked.svg';
 
-// 게시글 테이블 컴포넌트 스타일링
+// 운영자 관리 게시글 테이블 컴포넌트 스타일링
 const StyledTable = styled.table`
   /* 레이아웃 스타일링 */
   width: 100%;
@@ -26,7 +26,7 @@ const StyledTable = styled.table`
   text-align: center;
 `;
 
-// 게시글 테이블 헤더 스타일링
+// 운영자 관리 게시글 테이블 헤더 스타일링
 const StyledTableHeader = styled.thead`
   /* 테두리 스타일링 */
   border-bottom: none;
@@ -36,7 +36,7 @@ const StyledTableHeader = styled.thead`
   font-weight: 600;
 `;
 
-// 게시글 테이블 행 스타일링
+// 운영자 관리 게시글 테이블 행 스타일링
 const StyledTableRow = styled.tr`
   /* 테두리 스타일링 */
   border-bottom: 1px solid #d8d8ff;
@@ -52,7 +52,7 @@ const StyledTableRow = styled.tr`
   }
 `;
 
-// 게시글 테이블 셀(글 제목) 스타일링
+// 운영자 관리 게시글 테이블 셀(글 제목) 스타일링
 const StyledTitleColumn = styled.td`
   /* 레이아웃 스타일링 */
   width: 20rem;
@@ -64,7 +64,7 @@ const StyledTitleColumn = styled.td`
   white-space: nowrap;
 `;
 
-// 게시글 테이블 셀(글 제목 외) 스타일링
+// 운영자 관리 게시글 테이블 셀(글 제목 외) 스타일링
 const StyledTableCell = styled.td`
   /* 레이아웃 스타일링 */
   max-width: 10rem;
@@ -76,18 +76,18 @@ const StyledTableCell = styled.td`
   white-space: nowrap;
 `;
 
-// 게시글 테이블 펼치기/접기 버튼 스타일링
+// 운영자 관리 게시글 테이블 펼치기/접기 버튼 스타일링
 const StyledOpenToggle = styled.td`
   padding: 10px 10px;
 `;
 
-// 게시글 테이블 펼치기/접기 셀 스타일링
+// 운영자 관리 게시글 테이블 펼치기/접기 셀 스타일링
 const StyledCollapseCell = styled.td`
   border: none;
   padding: 0;
 `;
 
-// 게시글 테이블 펼치기/접기 내용 스타일링
+// 운영자 관리 게시글 테이블 펼치기/접기 내용 스타일링
 const StyledCollapseContent = styled.div`
   /* 레이아웃 스타일링 */
   border: none;
@@ -103,7 +103,7 @@ const StyledCollapseContent = styled.div`
   max-height: ${(props) => (props.open ? '500px' : '0')};
 `;
 
-// 게시글 테이블 펼치기/접기 버튼 스타일링
+// 운영자 관리 게시글 테이블 펼치기/접기 버튼 스타일링
 const AdminCompletionButtonLayout = styled.div`
   /* 레이아웃 스타일링 */
   display: flex;
@@ -112,77 +112,45 @@ const AdminCompletionButtonLayout = styled.div`
   padding-bottom: 80px;
 `;
 
-// 페이지 버튼 스타일링
-const PageButton = styled.div`
-  /* 페이지 버튼 간격 */
-  display: inline-block;
-  margin: 0 5px;
-  padding: 4px 8px;
-  border: none;
-  border-radius: 6px;
-
-  /* 페이지 버튼 활성화 시 효과 */
-  background-color: ${(props) => (props.$isActive ? '#FFFFFF' : '')};
-
-  /* 폰트 스타일링 */
-  color: ${(props) => (props.$isActive ? '#000C76' : '#4B4B4B')};
-  font-size: 12px;
-  font-family: 'Pretendard';
-  font-weight: 600;
-  word-wrap: break-word;
-  cursor: pointer;
-
-  /* 페이지 버튼 효과 */
-  transition:
-    background-color 0.3s ease-in-out,
-    color 0.3s ease-in-out,
-    transform 0.2s ease-in-out;
-
-  /* 페이지 버튼 호버 시 효과 */
-  &:hover {
-    background-color: #ebebeb;
-    color: #000c76;
-  }
-
-  /* 페이지 버튼 활성화(클릭) 시 효과 */
-  &:active {
-    transform: scale(0.9);
-  }
-`;
-
-// 페이지 버튼 레이아웃 스타일링
-const PageButtonLayout = styled.div`
-  /* 레이아웃 스타일링 */
+// 운영자 관리 게시글 테이블 페이지네이션 스타일링
+const BoardPaginateStyle = styled.div`
+  /* 레이아웃 정렬 */
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding-top: 58px;
+  gap: 0 24px;
+
+  /* 폰트 스타일링 */
+  font-size: 12px;
+  font-family: 'Pretendard';
+  word-wrap: break-word;
+  cursor: pointer;
 `;
 
-// 페이지 버튼 화살표 스타일링
-const PageArrowButton = styled.div`
-  /* 레이아웃 스타일링 */
-  display: inline-block;
+// 운영자 관리 게시글 테이블 페이지네이션 페이지 번호 스타일링
+const PageNumber = styled.div`
+  /* 활성화(클릭) 시, 스타일링 변화 */
+  color: ${(props) => (props.isActive ? '#000C76' : '#4B4B4B')};
+  font-weight: ${(props) => (props.isActive ? '600' : '400')};
+  padding: ${(props) => (props.isActive ? '4px 8px' : '0')};
+  background: ${(props) => (props.isActive ? 'white' : 'none')};
+  border-radius: ${(props) => (props.isActive ? '6px' : '0')};
 
-  /* 아이콘 스타일링 */
-  background-image: url(${(props) => props.$icon});
+  /* 애니메이션 효과 */
+  transition: all 0.3s ease-in-out;
 
-  /* 활성화 시 배경색 변화 */
-  background-color: ${(props) => (props.$isActive ? '#FFFFFF' : '#EBEBEB')};
+  /* 호버 시, 크기 애니메이션 변화 */
+  &:hover {
+    transform: ${(props) => (props.isActive ? 'scale(1.1)' : 'none')};
+  }
+`;
 
-  /* 활성화 시 폰트 변화 */
-  color: ${(props) => (props.$isActive ? '#000C76' : '#4B4B4B')};
-
-  /* 활성화 시 커서 모양 변화 */
-  cursor: ${(props) => (props.$isActive ? 'pointer' : 'default')};
-
-  /* 활성화 시 투명도 변화 */
-  opacity: ${(props) => (props.$isActive ? '1' : '0.5')};
-
-  /* 페이지 버튼 효과 */
-  transition:
-    background-color 0.3s ease-in-out,
-    color 0.3s ease-in-out,
-    transform 0.2s ease-in-out;
+// 운영자 관리 게시글 테이블 페이지네이션 화살표 스타일링
+const ArrowButton = styled.img`
+  /* 이전 및 다음 페이지 없을 경우, 화살표 숨김 애니메이션 효과 */
+  display: ${(props) => (props.isHidden ? 'none' : 'block')};
 `;
 
 // 검색 바 레이아웃 스타일링
@@ -252,10 +220,10 @@ const StyledTableCheckBoxCell = styled.td`
 // 한 페이지에 표시할 게시글 수
 const ROWS_PER_PAGE = 10;
 
-// 게시글 테이블의 행 컴포넌트
+// 운영자 관리 게시글 테이블의 행 컴포넌트
 const NewAdminTable = () => {
   // 현재 페이지
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   // 검색어
   const [searchTerm, setSearchTerm] = useState('');
   // 고정된 게시글
@@ -266,9 +234,9 @@ const NewAdminTable = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  // 게시글 테이블의 행 컴포넌트
+  // 운영자 관리 게시글 테이블의 행 컴포넌트
   const Row = ({ row }) => {
-    // 게시글 펼치기/접기 상태
+    // 운영자 관리 게시글 펼치기/접기 상태
     const [open, setOpen] = useState(false);
     // 고정된 게시글인지 여부
     const [isPinned, setIsPinned] = useState(
@@ -340,7 +308,7 @@ const NewAdminTable = () => {
     );
   };
 
-  // 게시글 테이블의 행 컴포넌트의 props 검사
+  // 운영자 관리 게시글 테이블의 행 컴포넌트의 props 검사
   Row.propTypes = {
     row: PropTypes.exact({
       ispinned: PropTypes.bool.isRequired,
@@ -360,6 +328,7 @@ const NewAdminTable = () => {
   // 검색어 변경 핸들러
   const handleSearch = (term) => {
     setSearchTerm(term);
+    setCurrentPage(0);
   };
 
   // 검색어가 포함된 게시글만 필터링
@@ -367,52 +336,17 @@ const NewAdminTable = () => {
     (row) => row.title.includes(searchTerm) || row.content.includes(searchTerm),
   );
 
-  // 현재 페이지에 표시할 게시글
-  const currentRows = filteredRows.slice(
-    (currentPage - 1) * ROWS_PER_PAGE,
-    currentPage * ROWS_PER_PAGE,
-  );
+  // 페이지네이션 클릭 이벤트 핸들러
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // 페이지네이션 상수에 따른 갤러리 아이템 데이터 필터링
+  const offset = currentPage * ROWS_PER_PAGE;
 
   // 페이지 버튼 렌더링
-  const renderPageButtons = () => {
-    const numberOfPages = Math.ceil(ROWS_DATA.length / ROWS_PER_PAGE);
-    const buttons = [];
-
-    // 이전 페이지 버튼
-    buttons.push(
-      <PageArrowButton
-        key="prev"
-        onClick={() => setCurrentPage(currentPage - 1)}
-        $isActive={currentPage > 1}
-        $icon={LeftArrowIcon}
-      />,
-    );
-
-    // 페이지 버튼 목록
-    for (let i = 1; i <= numberOfPages; i++) {
-      buttons.push(
-        <PageButton
-          key={i}
-          onClick={() => setCurrentPage(i)}
-          $isActive={i === currentPage}
-        >
-          {i}
-        </PageButton>,
-      );
-    }
-
-    // 다음 페이지 버튼
-    buttons.push(
-      <PageArrowButton
-        key="next"
-        onClick={() => setCurrentPage(currentPage + 1)}
-        $isActive={currentPage < numberOfPages}
-        $icon={RightArrowIcon}
-      />,
-    );
-
-    return buttons;
-  };
+  const pageCount = Math.ceil(filteredRows.length / ROWS_PER_PAGE);
+  const pages = new Array(pageCount).fill(null).map((_, i) => i);
 
   return (
     <>
@@ -436,23 +370,42 @@ const NewAdminTable = () => {
             })
           }
           {
-            // 게시글 테이블
-            filteredRows.length > 0 ? (
-              currentRows.map((row) => <Row key={row.title} row={row} />)
-            ) : (
-              <StyledTableRow>
-                <StyledTableCell colSpan={5}>
-                  검색 결과가 없습니다.
-                </StyledTableCell>
-              </StyledTableRow>
-            )
+            // 페이지네이션 상수에 따른 갤러리 아이템 데이터 출력
+            filteredRows.slice(offset, offset + ROWS_PER_PAGE).map((row) => (
+              <Row key={row.title} row={row} />
+            ))
           }
         </tbody>
       </StyledTable>
       <AdminCompletionButtonLayout>
         <AdminCompletionButton onClick={handleCompletion} />
       </AdminCompletionButtonLayout>
-      <PageButtonLayout>{renderPageButtons()}</PageButtonLayout>
+      <BoardPaginateStyle>
+        <ArrowButton
+          src={LeftArrowIcon}
+          alt="previous"
+          isHidden={currentPage === 0}
+          onClick={() => handlePageClick(currentPage - 1)}
+        />
+        {
+          // 페이지네이션 상수에 따른 페이지 번호 출력
+          pages.map((pageNumber) => (
+            <PageNumber
+              key={pageNumber}
+              onClick={() => handlePageClick(pageNumber)}
+              isActive={pageNumber === currentPage}
+            >
+              {pageNumber + 1}
+            </PageNumber>
+          ))
+        }
+        <ArrowButton
+          src={RightArrowIcon}
+          alt="next"
+          isHidden={currentPage === pageCount - 1}
+          onClick={() => handlePageClick(currentPage + 1)}
+        />
+      </BoardPaginateStyle>
       <BoardSearchLayout>
         <SearchBar onSearch={handleSearch} />
       </BoardSearchLayout>
