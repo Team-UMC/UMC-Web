@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types"; // Import PropTypes
 
-import AdminPage from 'layout/NoticePin/AdminPage';
+//import AdminPage from 'layout/NoticePin/AdminPage';
 import BoardTitle from '../BoardWrite/BoardTitle';
 import BoardText from '../BoardWrite/BoardText';
 import ManagementButton from 'components/Management/Button';

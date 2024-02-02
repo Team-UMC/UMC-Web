@@ -8,6 +8,7 @@ import SubTitle from './SubTitle';
 import BoardText from 'components/BoardWrite/BoardText';
 import OptionTIL from './OptionTIL';
 import ButtonTIL from './ButtonTIL';
+import TILCalender from './Calender';
 
 const NewTILContainer = styled.div`
 display: flex;
@@ -20,6 +21,7 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 600;
   margin-top: 15vh;
+  margin-bottom: 5vh;
   color: #00095C;
 `;
 
@@ -28,7 +30,7 @@ const NewTIL = () => {
 
     <NewTILContainer>
         <Title>TodayILearn</Title>
-        
+        <TILCalender />
         <OptionTIL />
         <BoardFile />
         <NotionLink />
