@@ -31,7 +31,7 @@ const MessageBoxStyle = styled.div`
 `;
 
 const MessageBox = styled.div`
-  width: 30%;
+  width: 40%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: #ffffff;
