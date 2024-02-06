@@ -19,6 +19,8 @@ const HeaderWrapper = styled.div`
   position: fixed;
   top: 0;
   transition: background 0.3s ease;
+
+  z-index: 999;
 `;
 
 const Wrapper = styled.div`
