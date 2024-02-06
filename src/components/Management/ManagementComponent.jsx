@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes
+import React from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 
-import AdminPage from 'layout/NoticePin/AdminPage';
+//import AdminPage from 'layout/NoticePin/AdminPage';
 import BoardTitle from '../BoardWrite/BoardTitle';
 import BoardText from '../BoardWrite/BoardText';
 import ManagementButton from 'components/Management/Button';
@@ -9,10 +9,10 @@ import StartendDate from 'components/Management/StartendDate';
 import Local from 'components/Management/SelectLocal';
 import Classify from 'components/Management/Classify';
 
-import SearchChallenger from './SearchChallenger.jsx';
-import ChallengerType from './ChallengerType';
-import ChallengerPosition from './ChallengerPosition';
-import styled from 'styled-components';
+import SearchChallenger from "./SearchChallenger.jsx";
+import ChallengerType from "./ChallengerType";
+import ChallengerPosition from "./ChallengerPosition";
+import styled from "styled-components";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -30,14 +30,13 @@ const ButtonContainerChallenger = styled.div`
   margin-left: 16px;
 `;
 
+
+
 const TypeComponent = ({ buttonStates }) => {
   return (
     <div>
-      {buttonStates.setnoticeButton && (
-        <>
-          <AdminPage />
-        </>
-      )}{' '}
+      {/* {buttonStates.setnoticeButton && <MyList />} {' '} */}
+
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />
@@ -50,16 +49,19 @@ const TypeComponent = ({ buttonStates }) => {
           </ButtonContainer>
         </>
       )}{' '}
-      {buttonStates.challengerButton && (
-        <>
-          <SearchChallenger />
-          <ChallengerPosition />
-          <ChallengerType />
-          <ButtonContainerChallenger>
-            <ManagementButton />
-          </ButtonContainerChallenger>
-        </>
-      )}{' '}
+
+     {buttonStates.challengerButton && (
+     <>
+        <SearchChallenger />
+        <ChallengerPosition />
+        <ChallengerType />
+        <ButtonContainerChallenger>
+          <ManagementButton />
+        </ButtonContainerChallenger>
+
+     </>
+     )} {' '} 
+
     </div>
   );
 };

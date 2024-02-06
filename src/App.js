@@ -23,6 +23,11 @@ import NaverAuth from 'apis/app/auth/NaverAuth';
 import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
 import HomePage from 'pages/HomePage';
 
+import TodayILearn from 'pages/TodayILearn/TodayILearn';
+import NewTIL from 'components/TodayILearn/NewTIL';
+import DetailTIL from 'components/TodayILearn/DetailTIL';
+import TodoList from 'pages/ToDoList/TodoList';
+
 function App() {
   return (
     <>
@@ -46,10 +51,16 @@ function App() {
               <Route path="/boardwrite" element={<BoardWrite />} />
               <Route path="/management" element={<Management />} />
               <Route path="/mywrite" element={<MyWrite />} />
+
               <Route path="/textdetail" element={<TextDetailPage />} />
               <Route path="/messagepreview" element={<MessagePreviewPage />} />
               <Route path="/messagedetail" element={<MessageDetailPage />} />
               <Route path="/message" element={<MessagePage />} />
+              <Route path="/todayilearn" element={<TodayILearn/>} />
+              <Route path="todayilearn/detailpage" element={<NewTIL/>} />
+              <Route path="todayilearn/detail" element={<DetailTIL/>} />
+              <Route path="todolist" element={<TodoList/>} />
+
 
               <Route path="/profilesetting" element={<ProfileSettingPage />} />
             </Route>
