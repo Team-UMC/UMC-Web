@@ -15,6 +15,7 @@ import MyWrite from 'pages/MyWrite/MyWrite';
 import KakaoAuth from 'apis/app/auth/KakaoAuth';
 import NaverAuth from 'apis/app/auth/NaverAuth';
 import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
+import SettingPage from 'pages/Setting/SettingPage';
 
 import TodayILearn from 'pages/TodayILearn/TodayILearn';
 import NewTIL from 'components/TodayILearn/NewTIL';
@@ -44,11 +45,11 @@ function App() {
               <Route path="/boardwrite" element={<BoardWrite />} />
               <Route path="/management" element={<Management />} />
               <Route path="/mywrite" element={<MyWrite />} />
-              <Route path="/todayilearn" element={<TodayILearn/>} />
-              <Route path="todayilearn/detailpage" element={<NewTIL/>} />
-              <Route path="todayilearn/detail" element={<DetailTIL/>} />
-              <Route path="todolist" element={<TodoList/>} />
-
+              <Route path="/todayilearn" element={<TodayILearn />} />
+              <Route path="todayilearn/detailpage" element={<NewTIL />} />
+              <Route path="todayilearn/detail" element={<DetailTIL />} />
+              <Route path="todolist" element={<TodoList />} />
+              <Route path="/setting/:contents" element={<SettingPage />} />
 
               <Route path="/profilesetting" element={<ProfileSettingPage />} />
             </Route>
