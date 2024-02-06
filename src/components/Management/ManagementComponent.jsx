@@ -52,7 +52,6 @@ const TypeComponent = ({ buttonStates }) => {
             <ManagementButton />
           </ButtonContainer>
         </>
-<<<<<<< HEAD
       )}
       {buttonStates.challengerButton && (
         <>
@@ -64,22 +63,6 @@ const TypeComponent = ({ buttonStates }) => {
           </ButtonContainerChallenger>
         </>
       )}
-=======
-      )}{' '}
-
-     {buttonStates.challengerButton && (
-     <>
-        <SearchChallenger />
-        <ChallengerPosition />
-        <ChallengerType />
-        <ButtonContainerChallenger>
-          <ManagementButton />
-        </ButtonContainerChallenger>
-
-     </>
-     )} {' '} 
-
->>>>>>> 72e43e36ea1fc3f1f369c8138cc3923c0955c721
     </div>
   );
 };
