@@ -24,9 +24,7 @@ const TILCalender = () => {
     <>
       <TodayDate>
         <img src={CalenderImg} alt='캘린더 이미지' onClick={openModal} />
-        <DateContainer>
-          {selectedDate.toLocaleDateString('ko-KR')} {/* 선택된 날짜 표시 */}
-        </DateContainer>
+        <DateSelectCalendar />
       </TodayDate>
 
       {isModalOpen && (
@@ -50,14 +48,6 @@ const TodayDate = styled.div`
   align-items: center;
 `;
 
-const DateContainer = styled.div`
-  color: #373C6B;
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 600;
-  white-space: nowrap;
-  margin-left: 0.5vh;
-`;
 
 const ModalContainer = styled.div`
   position: fixed;
