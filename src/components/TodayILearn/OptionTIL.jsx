@@ -22,8 +22,7 @@ border-radius: 12px;
 width: 100%;
 padding: 1vh 1.6vh;
 border-radius: 12px;
-margin-top: 5vh;
-margin-bottom: 1.5vh;
+margin: 1.5vh 0vh;
 
 border: 1px solid #232A6D;
 `;

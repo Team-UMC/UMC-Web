@@ -1,73 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 import CalenderImg from 'assets/todayilearn/calender.svg';
-import AddButtonImg from 'assets/todayilearn/addbutton.svg';
-
-const CalenderContainer = styled.div`
-  margin-top: 5vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
-const TodayDate = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center; /* 추가된 부분 */
-`;
-
-const DateContainer = styled.div`
-  color: #373C6B;
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 600;
-  white-space: nowrap;
-  margin-left: 0.5vh;
-`;
-
-const AddButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 4px 8px 4px 6px;
-  align-items: center;
-  border-radius: 12px;
-  border: 1px solid #232A6D;
-  text-decoration: none; /* 밑줄 제거 */
-  color: #373C6B;
-`;
-
-const AddTIL = styled.div`
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  margin-left: 0.5vh;
-`;
-
-const SVGImage = styled.img`
-  margin-right: 0.5vh; /* 이미지와의 간격 조절 */
-`;
+import DateSelectCalendar from 'components/DateSelectCalendar';
 
 const TILCalender = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date()); 
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+    closeModal(); // 날짜 선택 후 모달 닫기
+  };
+
   return (
-    <CalenderContainer>
+    <>
       <TodayDate>
-        <img src={CalenderImg} alt='캘린더 이미지' />
-        <DateContainer>2023.12.12(목)</DateContainer>
+        <img src={CalenderImg} alt='캘린더 이미지' onClick={openModal} />
+        <DateSelectCalendar />
       </TodayDate>
 
-      <Link to="/todayilearn/detailpage" style={{ textDecoration: 'none' }}>
-        <AddButtonContainer>
-          <SVGImage src={AddButtonImg} alt='추가 버튼' />
-          <AddTIL>TIL 추가</AddTIL>
-        </AddButtonContainer>
-      </Link>
-    </CalenderContainer>
+      {isModalOpen && (
+        <ModalContainer>
+          <ModalContent>
+            <CloseModalButton onClick={closeModal}>X</CloseModalButton>
+            <DateSelectCalendar onSelect={handleDateSelect} selected={selectedDate} />
+          </ModalContent>
+        </ModalContainer>
+      )}
+    </>
   );
 };
 
 export default TILCalender;
+
+
+const TodayDate = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+
+const ModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+  padding: 36px 32px 24px 32px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CloseModalButton = styled.button`
+  cursor: pointer;
+  align-self: flex-end;
+`;

@@ -25,7 +25,6 @@ const BoardTitle = () => {
 
   return(
       <TitleInput className='title' placeholder="제목을 입력해주세요" />
-
   );
 };
 
