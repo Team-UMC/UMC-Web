@@ -49,4 +49,4 @@ Comment.propTypes = {
   date: PropTypes.string,
 };
 
-export default Comment;
+export {Comment,Date};

@@ -34,6 +34,8 @@ const HeaderWrapper = styled.div`
   transition: background 0.3s ease;
 
   background-size: cover;
+
+  z-index: 999;
 `;
 
 const Wrapper = styled.div`

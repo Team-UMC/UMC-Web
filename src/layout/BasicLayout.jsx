@@ -1,5 +1,5 @@
 import React from 'react';
-import SmallHeader from './Header/SmallHeader';
+import SmallHeader from 'layout/Header/SmallHeader';
 import { Outlet } from 'react-router-dom';
 
 const BasicLayout = () => {

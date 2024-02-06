@@ -12,20 +12,21 @@ const CommentWriteContainer = styled(BoxContainer)`
   margin: 10vh 0;
 `;
 
-const CommentInputNBtnWrapper = styled.div`                    // CommentInput과 등록버튼을 그룹화하기 위해 사용
+const CommentInputNBtnWrapper = styled.div`
+  // CommentInput과 등록버튼을 그룹화하기 위해 사용
   display: flex;
-  flex-direction: row;                                         // row로 배열
-  width: 100%;                                                 // 
+  flex-direction: row; // row로 배열
+  width: 100%; //
   gap: 1vw;
   padding-top: 1%;
 `;
 
 const CommentInput = styled.input`
-  width: 100%;
+  flex: 1;
   padding: 1%;
   background-color: #f0f4ff;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   line-height: 30%;
   &::placeholder {
     color: #4b4b4b;
@@ -34,6 +35,7 @@ const CommentInput = styled.input`
 
 const SubmitBtnImg = styled(SubmitBtn)`
   cursor: pointer;
+  height: fit-content;
 `;
 
 const CommentWrite = ({
@@ -92,10 +94,10 @@ const CommentWrite = ({
   return (
     <CommentWriteContainer>
       <ProfileContainer
-          ProfileImgFile={ProfileImg}
-          NameNicknameText="리오/이원영"
-          CohortPartText="5기 &#124; Web"
-        />
+        ProfileImgFile={ProfileImg}
+        NameNicknameText="리오/이원영"
+        CohortPartText="5기 &#124; Web"
+      />
       <CommentInputNBtnWrapper>
         <CommentInput
           ref={inputRef}
@@ -124,4 +126,11 @@ CommentWrite.propTypes = {
   setCommentCount: PropTypes.func.isRequired,
 };
 
-export default CommentWrite;
+export {
+  CommentWrite,
+  CommentInput,
+  CommentInputNBtnWrapper,
+  SubmitBtnImg,
+  SubmitBtn,
+  CommentWriteContainer,
+};

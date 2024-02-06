@@ -34,6 +34,8 @@ const HeaderWrapper = styled.div`
   top: 0;
 
   transition: background 0.3s ease;
+
+  z-index: 999;
 `;
 
 const Wrapper = styled.div`
@@ -71,13 +73,8 @@ const Header = () => {
         isScrolled={canScrolled}
       >
         <Wrapper>
-<<<<<<< HEAD:src/layout/Header/Header.jsx
           <LeftContainer />
           <RightContainer isScrolled={canScrolled}/>
-=======
-          <NewLeft />
-          <NewRight />
->>>>>>> 219b6b241a15c8e5feb3626f4dfb5dd766288423:src/layout/Header/NewHeader.jsx
         </Wrapper>
       </HeaderWrapper>
     </>

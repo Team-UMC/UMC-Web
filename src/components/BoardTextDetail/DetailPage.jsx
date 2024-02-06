@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import schoolIcon from 'assets/titleIcon/schoolIcon.svg';
 import { TextDetail } from 'components/BoardTextDetail/TextDetail.jsx';
-import Comment from 'components/BoardTextDetail/Comment';
-import CommentWrite from 'components/BoardTextDetail/CommentWrite';
+import {Comment} from 'components/BoardTextDetail/Comment';
+import {CommentWrite} from 'components/BoardTextDetail/CommentWrite';
 import BoardBox from 'components/BoardBox/BoardBox';
 import {
   BoardTitleBigWrapper,
