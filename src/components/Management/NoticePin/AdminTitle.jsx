@@ -6,6 +6,7 @@ import AdminTitleIcon from 'assets/management/AdminTitle.svg';
 
 // 게시판 제목 컴포넌트 스타일링
 const BoardTitleContainer = styled.div`
+  /* 레이아웃 스타일링 */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -15,6 +16,7 @@ const BoardTitleContainer = styled.div`
 
 // 게시판 제목 아이콘 스타일링
 const BoardTitleWrapper = styled.div`
+  /* 레이아웃 스타일링 */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -22,6 +24,7 @@ const BoardTitleWrapper = styled.div`
 
 // 게시판 제목 스타일링
 const BoardTitleMainStyle = styled.h1`
+  /* 폰트 스타일링 */
   color: #7682f6;
   font-size: 34px;
   font-family: 'Pretendard';
@@ -31,6 +34,7 @@ const BoardTitleMainStyle = styled.h1`
 
 // 게시판 제목 하이라이트 스타일링
 const BoardTitleSub = styled.p`
+  /* 폰트 스타일링 */
   color: #9d9d9d;
   font-size: 18px;
   font-family: 'Pretendard';

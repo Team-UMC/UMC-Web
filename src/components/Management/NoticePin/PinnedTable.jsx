@@ -27,8 +27,11 @@ const StyledTableRow = styled.tr`
 
 // 고정된 글 목록의 제목 컬럼 스타일링
 const StyledTitleColumn = styled.td`
+  /* 레이아웃 스타일링 */
   width: 20rem;
   padding: 10px 40px 10px 4px;
+
+  /* 텍스트 스타일링 */
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -36,8 +39,11 @@ const StyledTitleColumn = styled.td`
 
 // 고정된 글 목록의 제목 컬럼 스타일링
 const StyledTableCell = styled.td`
+  /* 레이아웃 스타일링 */
   max-width: 10rem;
   padding: 10px 40px;
+
+  /* 텍스트 스타일링 */
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -56,8 +62,11 @@ const StyledCollapseCell = styled.td`
 
 // 고정된 글 목록의 내용 컬럼 스타일링
 const StyledCollapseContent = styled.div`
+  /* 레이아웃 스타일링 */
   border: none;
   margin: 0;
+
+  /* 펼치기/접기 애니메이션 */
   transition: max-height 0.3s ease;
   overflow: hidden;
   max-height: ${(props) => (props.open ? '500px' : '0')};
@@ -65,15 +74,26 @@ const StyledCollapseContent = styled.div`
 
 // 고정된 글 목록의 체크박스 스타일링
 const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+  /* 레이아웃 스타일링 */
   width: 18px;
   height: 18px;
+
+  /* 외형 스타일링 */
   border-radius: 50%;
   border: 1px solid #bcbcbc;
   padding: 2px 4px;
   position: relative;
+
+  /* 웹킷 기반의 브라우저에서 선택한 요소의 기본 스타일을 제거 */
   -webkit-appearance: none;
+
+  /* 외곽선(outline)을 제거 */
   outline: none;
+
+  /* 커서 스타일링 */
   cursor: pointer;
+
+  /* 체크박스의 체크 아이콘 스타일링 */
   transition: border 0.3s ease-in-out;
 
   /* 체크박스의 호버 시 스타일링 */
@@ -93,19 +113,27 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
 
   /* 체크박스의 체크 시 체크 아이콘 스타일링 */
   &:checked::after {
+    /* 가상 요소 생략 */
     content: '';
+
+    /* 레이아웃 스타일링 */
     display: block;
     width: 100%;
     height: 100%;
+
+    /* 배경 스타일링 */
     background: url(${Checked}) no-repeat center center;
   }
 `;
 
 // 고정된 글 목록의 체크박스 컬럼 스타일링
 const StyledTableCheckBoxCell = styled.td`
+  /* 레이아웃 스타일링 */
   max-width: 10rem;
   padding-left: 10px;
   padding-right: 8px;
+
+  /* 텍스트 스타일링 */
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -139,11 +167,15 @@ const PinnedTable = ({ row }) => {
     <Fragment>
       <StyledTableRow>
         <StyledTableCheckBoxCell>
-          {location.pathname.startsWith('/board') ? (
-            <img src={pin} alt="pinned" />
-          ) : (
-            <Checkbox checked={ispinned} onChange={handleCheckboxChange} />
-          )}
+          {
+            // 현재 경로가 /board로 시작하면 고정된 글 목록의 체크박스를 보여줌
+            location.pathname.startsWith('/board') ? (
+              <img src={pin} alt="pinned" />
+            ) : (
+              // 현재 경로가 /board로 시작하지 않으면 고정된 글 목록의 체크박스를 보여주지 않음
+              <Checkbox checked={ispinned} onChange={handleCheckboxChange} />
+            )
+          }
         </StyledTableCheckBoxCell>
         <StyledTitleColumn style={{ textAlign: 'left' }}>
           {row.title}
@@ -157,7 +189,10 @@ const PinnedTable = ({ row }) => {
             size="small"
             onClick={() => setOpen(!open)}
           >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {
+              // 펼치기/접기 상태에 따라 아이콘 변경
+              open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />
+            }
           </IconButton>
         </StyledOpenToggle>
       </StyledTableRow>
