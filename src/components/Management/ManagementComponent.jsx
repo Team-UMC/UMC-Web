@@ -36,16 +36,11 @@ const ButtonContainerChallenger = styled.div`
 const TypeComponent = ({ buttonStates }) => {
   return (
     <div>
-<<<<<<< HEAD
       {buttonStates.setnoticeButton && (
         <>
           <AdminPage />
         </>
       )}
-=======
-      {/* {buttonStates.setnoticeButton && <MyList />} {' '} */}
-
->>>>>>> 72e43e36ea1fc3f1f369c8138cc3923c0955c721
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />
