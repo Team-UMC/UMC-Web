@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes
+import React from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 
 import BoardTitle from 'components/BoardWrite/BoardTitle';
 import BoardText from 'components/BoardWrite/BoardText';
@@ -10,10 +10,10 @@ import StartendDate from 'components/Management/StartendDate';
 import Local from 'components/Management/SelectLocal';
 import Classify from 'components/Management/Classify';
 
-import SearchChallenger from './SearchChallenger.jsx';
-import ChallengerType from './ChallengerType';
-import ChallengerPosition from './ChallengerPosition';
-import styled from 'styled-components';
+import SearchChallenger from "./SearchChallenger.jsx";
+import ChallengerType from "./ChallengerType";
+import ChallengerPosition from "./ChallengerPosition";
+import styled from "styled-components";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -31,14 +31,21 @@ const ButtonContainerChallenger = styled.div`
   margin-left: 16px;
 `;
 
+
+
 const TypeComponent = ({ buttonStates }) => {
   return (
     <div>
+<<<<<<< HEAD
       {buttonStates.setnoticeButton && (
         <>
           <AdminPage />
         </>
       )}
+=======
+      {/* {buttonStates.setnoticeButton && <MyList />} {' '} */}
+
+>>>>>>> 72e43e36ea1fc3f1f369c8138cc3923c0955c721
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />
@@ -50,6 +57,7 @@ const TypeComponent = ({ buttonStates }) => {
             <ManagementButton />
           </ButtonContainer>
         </>
+<<<<<<< HEAD
       )}
       {buttonStates.challengerButton && (
         <>
@@ -61,6 +69,22 @@ const TypeComponent = ({ buttonStates }) => {
           </ButtonContainerChallenger>
         </>
       )}
+=======
+      )}{' '}
+
+     {buttonStates.challengerButton && (
+     <>
+        <SearchChallenger />
+        <ChallengerPosition />
+        <ChallengerType />
+        <ButtonContainerChallenger>
+          <ManagementButton />
+        </ButtonContainerChallenger>
+
+     </>
+     )} {' '} 
+
+>>>>>>> 72e43e36ea1fc3f1f369c8138cc3923c0955c721
     </div>
   );
 };
