@@ -9,6 +9,8 @@ import AftertimeChecked from 'assets/todolist/aftertimechecked.svg';
 import Complete from 'assets/todolist/complete.svg';
 import UnComplete from 'assets/todolist/uncomplete.svg';
 
+import DateSelectCalendar from 'components/DateSelectCalendar';
+
 
 const AddButtonContainer = styled.div`
   display: flex;
@@ -60,15 +62,6 @@ const ModalContent = styled.div`
   flex-wrap: wrap;
   //align-content: space-evenly;
 `;
-
-const DateTDL = styled.div`
-  color: #373C6B;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 1vh;
-`;
-
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -176,7 +169,8 @@ const TDLAdd = () => {
         <ModalContainer onClick={closeModal}>
           <ModalStyle>
           <ModalContent onClick={(event) => event.stopPropagation()}>
-            <DateTDL>2023.12.12(목)</DateTDL>
+            
+            <DateSelectCalendar />
             <img src={ImgChoose} alt="이모티콘 선택" />
             
             <RowContainer>제목
