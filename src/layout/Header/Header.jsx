@@ -74,7 +74,7 @@ const Header = () => {
       >
         <Wrapper>
           <LeftContainer />
-          <RightContainer isScrolled={canScrolled}/>
+          <RightContainer isScrolled={canScrolled} />
         </Wrapper>
       </HeaderWrapper>
     </>
