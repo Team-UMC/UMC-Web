@@ -63,19 +63,21 @@ const Header = () => {
   }, []);
 
   return (
-    <HeaderWrapper
-      style={{
-        background: `url(${
-          canScrolled ? SmallHeaderImage : LargeHeaderImage
-        }) no-repeat center center`,
-      }}
-      isScrolled={canScrolled}
-    >
-      <Wrapper>
-        <LeftContainer />
-        <RightContainer isScrolled={canScrolled} />
-      </Wrapper>
-    </HeaderWrapper>
+    <>
+      <HeaderWrapper
+        style={{
+          background: `url(${
+            canScrolled ? SmallHeaderImage : LargeHeaderImage
+          }) no-repeat center center`,
+        }}
+        isScrolled={canScrolled}
+      >
+        <Wrapper>
+          <LeftContainer />
+          <RightContainer isScrolled={canScrolled} />
+        </Wrapper>
+      </HeaderWrapper>
+    </>
   );
 };
 

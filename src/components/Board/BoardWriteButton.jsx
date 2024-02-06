@@ -4,14 +4,19 @@ import pencil from 'assets/board/pencil-fill.svg';
 
 // 글쓰기 버튼을 감싸는 컴포넌트
 const BoardButtonWrapper = styled.div`
+  /* 레이아웃 정렬 */
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* 글쓰기 버튼 색상/테두리 스타일링 */
   background: white;
   border: none;
   border-radius: 12px;
   padding: 8px 16px;
   cursor: pointer;
+
+  /* 애니메이션 효과 */
   transition: all 0.1s ease-in-out;
 
   /* 글쓰기 버튼 호버 시 효과 */

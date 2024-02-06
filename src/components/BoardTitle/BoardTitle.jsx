@@ -10,6 +10,7 @@ import TitleDot from 'assets/titleIcon/titledot.svg';
 
 // 게시판 제목 컴포넌트 스타일링
 const BoardTitleContainer = styled.div`
+  /* 레이아웃 정렬 */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -19,6 +20,7 @@ const BoardTitleContainer = styled.div`
 
 // 게시판 제목 아이콘 스타일링
 const BoardTitleWrapper = styled.div`
+  /* 레이아웃 정렬 */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -26,6 +28,7 @@ const BoardTitleWrapper = styled.div`
 
 // 게시판 제목 스타일링
 const BoardTitleMainStyle = styled.h1`
+  /* 제목 폰트 스타일링 */
   color: #7682f6;
   font-size: 34px;
   font-family: 'Pretendard';
@@ -64,16 +67,23 @@ const BoardTitleMain = ({ children }) => {
 
   return (
     <BoardTitleMainStyle>
-      {parts.map((part, i) => (
-        <React.Fragment key={i}>
-          {part === '게시판' ? <HighlightedText>{part}</HighlightedText> : part}
-          {(part === '공지' ||
-            part === '자유' ||
-            part === '질문' ||
-            part === '워크북' ||
-            part === '이전 기수') && <TitleWithDot>{part}</TitleWithDot>}
-        </React.Fragment>
-      ))}
+      {
+        // 게시판 이름 하이라이트
+        parts.map((part, i) => (
+          <React.Fragment key={i}>
+            {part === '게시판' ? (
+              <HighlightedText>{part}</HighlightedText>
+            ) : (
+              part
+            )}
+            {(part === '공지' ||
+              part === '자유' ||
+              part === '질문' ||
+              part === '워크북' ||
+              part === '이전 기수') && <TitleWithDot>{part}</TitleWithDot>}
+          </React.Fragment>
+        ))
+      }
     </BoardTitleMainStyle>
   );
 };
@@ -85,6 +95,7 @@ BoardTitleMain.propTypes = {
 
 // 게시판 제목 설명 스타일링
 const BoardTitleSub = styled.p`
+  /* 설명 폰트 스타일링 */
   color: #9d9d9d;
   font-size: 18px;
   font-family: 'Pretendard';

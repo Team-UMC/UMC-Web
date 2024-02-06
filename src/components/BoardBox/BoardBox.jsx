@@ -11,11 +11,14 @@ import center from 'assets/boardCard/union.svg';
 
 // 게시판 박스를 감싸는 컴포넌트
 const Card = styled(MuiCard)`
+  /* 박스 크기 & 외형 스타일링 */
   height: 100%;
   border-radius: 12px;
   padding: 40px 16px;
   font-family: 'Pretendard';
   background: white;
+
+  /* 레이아웃 정렬 */
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -34,6 +37,8 @@ const BoardBoxContainer = styled.div`
   padding-bottom: 30px;
   border-color: white;
   background: white;
+
+  /* 레이아웃 정렬 */
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -51,10 +56,13 @@ const BoardBoxImage = styled.div`
 
 // 게시판 박스의 제목 스타일링 컴포넌트
 const BoardBoxTitle = styled.h3`
+  /* 제목 레이아웃 & 색상 스타일링 */
   padding-bottom: 10px;
   text-align: left;
   color: #000c76;
   background: white;
+
+  /* 폰트 스타일링 */
   font-size: 14px;
   font-weight: 600;
   gap: 10px;
@@ -70,13 +78,17 @@ const BoardBoxContentWrapper = styled.div`
 
 // 게시판 박스의 링크 스타일링 컴포넌트
 const BoardBoxLink = styled(NavLink)`
-  text-align: left;
   color: black;
   background: white;
+
+  /* 링크 폰트 스타일링 */
+  text-align: left;
   text-decoration: none;
   font-size: 12px;
   font-weight: 400;
   word-wrap: break-word;
+
+  /* 애니메이션 효과 */
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
@@ -113,15 +125,24 @@ const BoardBoxItem = ({ image, title, links }) => {
       </BoardBoxImage>
       <BoardBoxTitle>{title[0]}</BoardBoxTitle>
       <BoardBoxContentWrapper>
-        {links.map((link, index) => (
-          <BoardBoxLink
-            key={index}
-            to={`/board/${title[1]}/${link.path}`}
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            {link.name}
-          </BoardBoxLink>
-        ))}
+        {
+          // 링크 목록을 순회하며 각 링크를 렌더링
+          links.map((link, index) => (
+            // 링크 렌더링
+            <BoardBoxLink
+              key={index}
+              to={`/board/${title[1]}/${link.path}` /* 링크 경로 */}
+              style={
+                ({ isActive }) =>
+                  isActive
+                    ? activeStyle
+                    : undefined /* 현재 페이지의 링크에 적용할 스타일 */
+              }
+            >
+              {link.name}
+            </BoardBoxLink>
+          ))
+        }
       </BoardBoxContentWrapper>
     </BoardBoxContainer>
   );
@@ -183,14 +204,17 @@ const BoardBoxWrapper = () => {
 
   return (
     <BoardBoxWrapperLayout>
-      {boardBoxes.map((box, index) => (
-        <BoardBoxItem
-          key={index}
-          image={box.image}
-          title={box.title}
-          links={box.links}
-        />
-      ))}
+      {
+        // 게시판 박스 목록을 순회하며 각 박스를 렌더링
+        boardBoxes.map((box, index) => (
+          <BoardBoxItem
+            key={index}
+            image={box.image}
+            title={box.title}
+            links={box.links}
+          />
+        ))
+      }
     </BoardBoxWrapperLayout>
   );
 };
