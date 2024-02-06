@@ -5,22 +5,27 @@ import PropTypes from 'prop-types';
 
 // 완료 버튼을 감싸는 컴포넌트
 const AdminCompletionButtonWrapper = styled.div`
+  /* 레이아웃 정렬 */
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* 외형 스타일링 */
   background: white;
   border: none;
   border-radius: 12px;
   padding: 16px 16px;
   cursor: pointer;
+
+  /* 애니메이션 */
   transition: all 0.1s ease-in-out;
 
-  /* 완료 버튼 호버 시 효과 */
+  /* 호버 시, 배경색 효과 */
   &:hover {
     background-color: #f5f5f5;
   }
 
-  /* 완료 버튼 활성화(클릭) 시 효과 */
+  /* 활성화(클릭) 시, 배경색 효과 */
   &:active {
     background-color: #ebebeb;
   }
@@ -28,6 +33,7 @@ const AdminCompletionButtonWrapper = styled.div`
 
 // 완료 버튼 내용을 감싸는 컴포넌트
 const AdminCompletionButtonContent = styled.div`
+  /* 레이아웃 정렬 */
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -37,6 +43,7 @@ const AdminCompletionButtonContent = styled.div`
 
 // 완료 버튼의 텍스트 스타일링
 const AdminCompletionFont = styled.div`
+  /* 폰트 스타일링 */
   font-family: 'Pretendard';
   font-size: 14px;
   font-weight: 500;
@@ -45,10 +52,10 @@ const AdminCompletionFont = styled.div`
   word-wrap: break-word;
 `;
 
+// 완료 버튼 컴포넌트
 // onClick: 완료 버튼 클릭 시 실행되는 함수
-// 완료 버튼 클릭 시, 알림창이 뜨고 페이지를 새로고침하는 함수
 const AdminCompletionButton = ({ onClick }) => {
-  // 완료 버튼 클릭 시 실행되는 함수
+  // 완료 버튼 클릭 시, 실행되는 함수
   const handleClick = () => {
     onClick();
     alert('변경된 데이터가 저장되었습니다.');
@@ -64,6 +71,7 @@ const AdminCompletionButton = ({ onClick }) => {
   );
 };
 
+// 완료 버튼 props 검사
 AdminCompletionButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 };

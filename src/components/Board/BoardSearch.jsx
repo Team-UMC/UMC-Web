@@ -6,7 +6,7 @@ import SearchIcon from 'assets/board/search.svg';
 
 // 검색창 감싸는 컴포넌트
 const SearchWrapper = styled.form`
-  /* 정렬 */
+  /* 레이아웃 정렬 */
   display: flex;
   justify-content: row;
   align-items: center;
@@ -22,11 +22,14 @@ const SearchWrapper = styled.form`
 
 // 검색창
 const SearchInput = styled.input`
+  /* 레이아웃 정렬 */
   width: 32rem;
   padding: 8px;
   padding-left: 34px;
   border-radius: 12px;
   border: none;
+
+  /* 폰트 스타일링 */
   color: #4b4b4b;
   font-weight: 400;
 
@@ -54,6 +57,7 @@ const SearchInput = styled.input`
 
 // 검색 버튼
 const SearchButton = styled.button`
+  /* 레이아웃 정렬 */
   padding: 8px 16px;
   border-radius: 12px;
   border: none;
@@ -61,9 +65,13 @@ const SearchButton = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
+
+  /* 폰트 스타일링 */
   color: white;
   font-size: 14;
   font-weight: 500;
+
+  /* 애니메이션 효과 */
   transition:
     background-color 0.3s ease-in-out,
     color 0.3s ease-in-out,
