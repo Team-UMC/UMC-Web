@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
@@ -11,20 +11,18 @@ const Input = styled.input`
   border-radius: 7px;
 `;
 
-const InviteCode = ({ handleNextStep }) => {
-  const [invitationCode, setInvitationCode] = useState('');
-  const [isValid, setIsValid] = useState(false);
-
-  const handleInvitationCodeChange = (e) => {
-    const code = e.target.value.trim();
-    setInvitationCode(code);
-
-    if (code === "123456") {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-  }
+const InviteCode = ({
+  inviteCode,
+  setInviteCode,
+  isValidCode,
+  handleInviteCode,
+}) => {
+  const inviteCodeInput = useCallback(
+    (e) => {
+      setInviteCode(e.target.value);
+    },
+    [inviteCode],
+  );
 
   return (
     <SignUpFormStyle.Wrapper>
@@ -32,22 +30,27 @@ const InviteCode = ({ handleNextStep }) => {
         <h2> 초대코드를 입력해주세요 </h2>
         <Input
           type="text"
-          value={invitationCode}
-          onChange={handleInvitationCodeChange}
-          placeholder='운영진에게 받은 코드를 입력해주세요!'
+          value={inviteCode}
+          onChange={inviteCodeInput}
+          placeholder="운영진에게 받은 코드를 입력해주세요!"
         />
-        {!isValid && <p style={{ color: 'red' }}>유효한 초대코드를 입력해주세요.</p>}
+        {!isValidCode && (
+          <p style={{ color: 'red' }}>유효한 초대코드를 입력해주세요.</p>
+        )}
       </SignUpFormStyle.SignUpFormWrapper>
 
       <SignUpFormStyle.StepButtonWrapper step={1}>
-        {isValid && <NextButton handleNextStep={handleNextStep} />}
+        {isValidCode && <NextButton handleInviteCode={handleInviteCode} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
 InviteCode.propTypes = {
-  handleNextStep: PropTypes.func.isRequired,
+  inviteCode: PropTypes.string.isRequired,
+  setInviteCode: PropTypes.func.isRequired,
+  isValidCode: PropTypes.bool.isRequired,
+  handleInviteCode: PropTypes.func.isRequired,
 };
 
 export default InviteCode;

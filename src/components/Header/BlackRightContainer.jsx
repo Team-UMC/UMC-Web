@@ -42,7 +42,7 @@ const ProfileImage = styled.img`
 const ProfileNickname = styled.div`
   display: flex;
   align-items: center;
-  color: white;
+  color: black;
 `;
 
 const LogoutButton = styled.div`
@@ -50,13 +50,13 @@ const LogoutButton = styled.div`
   align-items: center;
   cursor: pointer;
 
-  color: white;
+  color: black;
 
-  border: 1px solid white;
+  border: 1px solid black;
   border-radius: 5px;
 `;
 
-const RightContainer = () => {
+const BlackRightContainer = () => {
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -106,4 +106,4 @@ const RightContainer = () => {
   );
 };
 
-export default RightContainer;
+export default BlackRightContainer;

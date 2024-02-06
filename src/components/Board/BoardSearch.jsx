@@ -12,7 +12,6 @@ const SearchWrapper = styled.form`
   align-items: center;
   gap: 0 16px;
   padding-top: 24px;
-
   /* 폰트 스타일링 */
   font-size: 14px;
   font-family: 'Pretendard';
@@ -29,23 +28,19 @@ const SearchInput = styled.input`
   border: none;
   color: #4b4b4b;
   font-weight: 400;
-
   /* 좌측 돋보기 아이콘 표시 */
   background-image: url(${SearchIcon});
   background-repeat: no-repeat;
   background-position: 8px center;
-
   /* 애니메이션 효과 */
   transition:
     background-color 0.3s ease-in-out,
     color 0.3s ease-in-out,
     transform 0.3s ease-in-out;
-
   /* 검색창 호버 시 효과 */
   &:hover {
     background-color: #f2f2f2;
   }
-
   /* 검색창 활성화(클릭) 시 효과 */
   &:active {
     transform: scale(0.95);
@@ -68,12 +63,10 @@ const SearchButton = styled.button`
     background-color 0.3s ease-in-out,
     color 0.3s ease-in-out,
     transform 0.3s ease-in-out;
-
   /* 검색창 버튼 호버 시 효과 */
   &:hover {
     background-color: #7f7cff;
   }
-
   /* 검색창 버튼 활성화(클릭) 시 효과 */
   &:active {
     transform: scale(0.95);

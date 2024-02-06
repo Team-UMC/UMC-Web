@@ -38,7 +38,7 @@ const TypeComponent = ({ buttonStates }) => {
         <>
           <AdminPage />
         </>
-      )}{' '}
+      )}
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />
@@ -50,7 +50,7 @@ const TypeComponent = ({ buttonStates }) => {
             <ManagementButton />
           </ButtonContainer>
         </>
-      )}{' '}
+      )}
       {buttonStates.challengerButton && (
         <>
           <SearchChallenger />
@@ -60,7 +60,7 @@ const TypeComponent = ({ buttonStates }) => {
             <ManagementButton />
           </ButtonContainerChallenger>
         </>
-      )}{' '}
+      )}
     </div>
   );
 };

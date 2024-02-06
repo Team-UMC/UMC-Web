@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
@@ -11,7 +11,14 @@ const Input = styled.input`
   text-align: center;
 `;
 
-const Name = ({ userData, handleChange, handleNextStep, handlePrevStep }) => {
+const Name = ({ name, setName, handleNextStep, handlePrevStep }) => {
+  const nameChange = useCallback(
+    (e) => {
+      setName(e.target.value);
+    },
+    [name],
+  );
+
   return (
     <SignUpFormStyle.Wrapper>
       <SignUpFormStyle.SignUpFormWrapper>
@@ -19,22 +26,22 @@ const Name = ({ userData, handleChange, handleNextStep, handlePrevStep }) => {
         <Input
           type="text"
           name="name"
-          value={userData.name}
-          onChange={handleChange}
+          value={name}
+          onChange={nameChange}
           placeholder="예시) 정진혁"
         />
       </SignUpFormStyle.SignUpFormWrapper>
       <SignUpFormStyle.StepButtonWrapper>
         <PrevButton handlePrevStep={handlePrevStep} />
-        {userData.name && <NextButton handleNextStep={handleNextStep} />}
+        {name && <NextButton handleNextStep={handleNextStep} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
 Name.propTypes = {
-  userData: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  setName: PropTypes.func.isRequired,
   handleNextStep: PropTypes.func.isRequired,
   handlePrevStep: PropTypes.func.isRequired,
 };

@@ -7,7 +7,7 @@ const BoardPageRoute = () => {
   const { boardType, boardPath } = useParams();
 
   if (!boardType && !boardPath) {
-    return <Redirect to="/board/school/notice" />;
+    return <Redirect to="/board/campus/notice" />;
   }
 
   // 이제 boardType과 boardPath를 사용하여 해당 보드를 렌더링할 수 있습니다.

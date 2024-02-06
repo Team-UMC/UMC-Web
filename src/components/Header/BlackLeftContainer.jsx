@@ -27,7 +27,7 @@ const StyledLink = styled(Link)`
 
   // 스타일링 요소와 Link 가운데 정렬
   align-items: center;
-  color: white;
+  color: black;
 `;
 
 const TextWrapper = styled.div`
@@ -43,7 +43,7 @@ const TextWrapper = styled.div`
 
 `;
 
-const LeftContainer = () => {
+const BlackLeftContainer = () => {
   return (
     <NavWrapper>
       <>
@@ -71,4 +71,4 @@ const LeftContainer = () => {
   );
 };
 
-export default LeftContainer;
+export default BlackLeftContainer;

@@ -1,6 +1,5 @@
 // BoardTable: 게시판 테이블 컴포넌트
-import React, { useState, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, Fragment } from 'react';
 import styled from 'styled-components';
 import { ROWS_DATA } from 'Data';
 import SearchBar from './BoardSearch';
@@ -12,6 +11,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
+import axiosInstance from 'apis/setting';
 
 // 게시글 테이블 컴포넌트 스타일링
 const StyledTable = styled.table`
@@ -204,54 +204,66 @@ const ROWS_PER_PAGE = 10;
 const rows = ROWS_DATA;
 
 // 게시글 테이블의 행 컴포넌트
-const Row = ({ row }) => {
+const Row = () => {
   // 게시글 펼치기/접기 상태
   const [open, setOpen] = useState(false);
+  const [boardData, setBoardData] = useState({});
+
+  useEffect(() => {
+    const getBoardData = async () => {
+
+      // 현재 주소 받아오기 [ex) localhost:3000/board/campus/notice]
+      const currentURL = window.location.href;
+
+      // /로 구분하여 배열로 저장하고 host 값과 board 값 변수에 저장하기
+      const urlParts = currentURL.split('/');
+      const host = urlParts[4];
+      const board = urlParts[5];
+
+      // Page 부분 수정 필요
+      const res = await axiosInstance.get(
+        `/boards?host=${host}&board=${board}&page=0`,
+      );
+      setBoardData(res.data.result);
+    };
+    getBoardData();
+  }, []);
 
   return (
     <Fragment>
-      <StyledTableRow>
-        <StyledTableCheckBoxCell />
-        <StyledTitleColumn style={{ textAlign: 'left' }}>
-          {row.title}
-        </StyledTitleColumn>
-        <StyledTableCell>{row.author}</StyledTableCell>
-        <StyledTableCell>{row.date}</StyledTableCell>
-        <StyledTableCell>{row.views}</StyledTableCell>
-        <StyledOpenToggle>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </StyledOpenToggle>
-      </StyledTableRow>
-      <StyledTableRow>
-        <StyledCollapseCell colSpan={5}>
-          <StyledCollapseContent open={open}>
-            {row.content}
-          </StyledCollapseContent>
-        </StyledCollapseCell>
-      </StyledTableRow>
+      {boardData.map((boardData) => (
+        <Fragment key={boardData.boardPageResponses.boardId}>
+          <StyledTableRow>
+            <StyledTableCheckBoxCell />
+            <StyledTitleColumn style={{ textAlign: 'left' }}>
+              {boardData.boardPageResponses.title}
+            </StyledTitleColumn>
+            <StyledTableCell>{boardData.boardPageResponses.writer}</StyledTableCell>
+            <StyledTableCell>{boardData.boardPageResponses.createdAt}</StyledTableCell>
+            <StyledTableCell>{boardData.boardPageResponses.hitCount}</StyledTableCell>
+            <StyledOpenToggle>
+              <IconButton
+                aria-label="expand row"
+                size="small"
+                onClick={() => setOpen(!open)}
+              >
+                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              </IconButton>
+            </StyledOpenToggle>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledCollapseCell colSpan={5}>
+              <StyledCollapseContent open={open}>
+                {boardData.boardPageResponses.content}
+              </StyledCollapseContent>
+            </StyledCollapseCell>
+          </StyledTableRow>
+        </Fragment>
+      ))}
     </Fragment>
   );
 };
 
-// 게시글 테이블의 행 컴포넌트의 props 검사
-Row.propTypes = {
-  row: PropTypes.exact({
-    ispinned: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    views: PropTypes.number.isRequired,
-    content: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
-// 게시글 테이블 컴포넌트
 const BoardTable = () => {
   // 현재 페이지
   const [currentPage, setCurrentPage] = useState(1);

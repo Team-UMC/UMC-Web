@@ -11,10 +11,11 @@ const Container = styled.div`
 
 const DataContainer = styled.div`
   display: flex;
+  justify-content: space-around;
 `;
 
 const Rectangle = styled.div`
-  width: 200px;
+  width: 20%;
   height: 120px;
   margin: 15px;
   border: 1px solid black;

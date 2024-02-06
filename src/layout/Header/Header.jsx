@@ -34,6 +34,8 @@ const HeaderWrapper = styled.div`
   top: 0;
 
   transition: background 0.3s ease;
+
+  z-index: 999;
 `;
 
 const Wrapper = styled.div`
@@ -61,22 +63,21 @@ const Header = () => {
   }, []);
 
   return (
-    <>
-      <HeaderWrapper
-        style={{
-          background: `url(${
-            canScrolled ? SmallHeaderImage : LargeHeaderImage
-          }) no-repeat center center`,
-        }}
-        isScrolled={canScrolled}
-      >
-        <Wrapper>
-          <LeftContainer />
-          <RightContainer isScrolled={canScrolled}/>
-        </Wrapper>
-      </HeaderWrapper>
-    </>
+    <HeaderWrapper
+      style={{
+        background: `url(${
+          canScrolled ? SmallHeaderImage : LargeHeaderImage
+        }) no-repeat center center`,
+      }}
+      isScrolled={canScrolled}
+    >
+      <Wrapper>
+        <LeftContainer />
+        <RightContainer isScrolled={canScrolled} />
+      </Wrapper>
+    </HeaderWrapper>
   );
 };
+
 
 export default Header;

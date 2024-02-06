@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
@@ -12,11 +12,18 @@ const Input = styled.input`
 `;
 
 const Nickname = ({
-  userData,
-  handleChange,
+  nickname,
+  setNickname,
   handleNextStep,
   handlePrevStep,
 }) => {
+  const nicknameChange = useCallback(
+    (e) => {
+      setNickname(e.target.value);
+    },
+    [nickname],
+  );
+
   return (
     <SignUpFormStyle.Wrapper>
       <SignUpFormStyle.SignUpFormWrapper>
@@ -24,22 +31,22 @@ const Nickname = ({
         <Input
           type="text"
           name="nickname"
-          value={userData.nickname}
-          onChange={handleChange}
+          value={nickname}
+          onChange={nicknameChange}
           placeholder="예시) 눈꽃"
         />
       </SignUpFormStyle.SignUpFormWrapper>
       <SignUpFormStyle.StepButtonWrapper>
         <PrevButton handlePrevStep={handlePrevStep} />
-        {userData.nickname && <NextButton handleNextStep={handleNextStep} />}
+        {nickname && <NextButton handleNextStep={handleNextStep} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
 Nickname.propTypes = {
-  userData: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  nickname: PropTypes.string.isRequired,
+  setNickname: PropTypes.func.isRequired,
   handleNextStep: PropTypes.func.isRequired,
   handlePrevStep: PropTypes.func.isRequired,
 };

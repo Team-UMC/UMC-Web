@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import SchoolUnchecked from 'assets/board/write/SchoolUnchecked.svg'
+import SchoolUnchecked from 'assets/board/write/SchoolUnchecked.svg';
 import SchoolChecked from 'assets/board/write/SchoolChecked.svg';
 import CampUnchecked from 'assets/board/write/CampUnchecked.svg';
 import CampChecked from 'assets/board/write/CampChecked.svg';
@@ -32,15 +32,25 @@ const BoardLabel = () => {
     suggestionButton: false,
   });
 
-  const handleClick = (buttonName) => {
+  const [selectedHost, setSelectedHost] = useState('school');
+  const [selectedBoard, setSelectedBoard] = useState('NOTICE');
+
+  const handleClick = (buttonName, host, board) => {
     setButtonStates((prevStates) => ({
-      schoolButton: buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
+      schoolButton:
+        buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
       campButton: buttonName === 'campButton' ? !prevStates.campButton : false,
-      unionButton: buttonName === 'unionButton' ? !prevStates.unionButton : false,
-      suggestionButton: buttonName === 'suggestionButton' ? !prevStates.suggestionButton : false,
+      unionButton:
+        buttonName === 'unionButton' ? !prevStates.unionButton : false,
+      suggestionButton:
+        buttonName === 'suggestionButton'
+          ? !prevStates.suggestionButton
+          : false,
     }));
+
+    setSelectedHost(host);
+    setSelectedBoard(board);
   };
-  
 
   return (
     <div>
@@ -77,20 +87,21 @@ const BoardLabel = () => {
               <img src={SuggestionUnchecked} alt="연합" />
             )}
           </TypeLink>
-
-
         </div>
       </ContainerType>
-      {buttonStates.schoolButton && <SchoolBoard />}{' '}
-      {/* Conditionally render SchoolBoard */}
-      {buttonStates.campButton && <CampBoard />}{' '}
-      {/* Conditionally render SchoolBoard */}
-      {buttonStates.unionButton && <CampBoard />}{' '}
-      {/* Conditionally render SchoolBoard */}
-      {buttonStates.suggestionButton && <CampBoard />}{' '}
-      {/* Conditionally render SchoolBoard */}
-
-
+      
+      {buttonStates.schoolButton && (
+        <SchoolBoard host={selectedHost} board={selectedBoard} />
+      )}
+      {buttonStates.campButton && (
+        <CampBoard host={selectedHost} board={selectedBoard} />
+      )}
+      {buttonStates.unionButton && (
+        <CampBoard host={selectedHost} board={selectedBoard} />
+      )}
+      {buttonStates.suggestionButton && (
+        <CampBoard host={selectedHost} board={selectedBoard} />
+      )}
     </div>
   );
 };
