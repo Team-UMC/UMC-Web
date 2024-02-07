@@ -8,14 +8,21 @@ import BasicLayout from 'layout/BasicLayout';
 import Main from 'pages/Main.jsx';
 import SignUpForm from 'pages/SignUp/SignUp';
 import BoardWrite from 'pages/BoardWrite/BoardWrite';
+import TextDetailPage from 'pages/DetailPage/TextDetailPage';
 import BoardPage from 'pages/BoardPage/BoardPage';
-import HomePage from 'pages/HomePage';
+import MessagePreviewPage from 'pages/Message/MessagePreviewPage';
+import MessageDetailPage from 'pages/Message/MessageDetailPage';
+import MessagePage from 'pages/Message/MessagePage';
+// import Cake from 'pages/Message/Cake'
+// import BoardPageRoute from 'pages/NewBoardPage/BoardPageRoute';
+
 import Management from 'pages/Management/Management';
 import MyWrite from 'pages/MyWrite/MyWrite';
 import KakaoAuth from 'apis/app/auth/KakaoAuth';
 import NaverAuth from 'apis/app/auth/NaverAuth';
 import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
 import SettingPage from 'pages/Setting/SettingPage';
+import HomePage from 'pages/HomePage';
 
 import TodayILearn from 'pages/TodayILearn/TodayILearn';
 import NewTIL from 'components/TodayILearn/NewTIL';
@@ -45,6 +52,10 @@ function App() {
               <Route path="/boardwrite" element={<BoardWrite />} />
               <Route path="/management" element={<Management />} />
               <Route path="/mywrite" element={<MyWrite />} />
+              <Route path="/textdetail" element={<TextDetailPage />} />
+              <Route path="/messagepreview" element={<MessagePreviewPage />} />
+              <Route path="/messagedetail" element={<MessageDetailPage />} />
+              <Route path="/message" element={<MessagePage />} />
               <Route path="/todayilearn" element={<TodayILearn />} />
               <Route path="todayilearn/detailpage" element={<NewTIL />} />
               <Route path="todayilearn/detail" element={<DetailTIL />} />
