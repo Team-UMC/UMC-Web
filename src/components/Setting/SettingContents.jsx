@@ -5,10 +5,31 @@ import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import styles from 'components/Setting/Setting.module.css';
 import SendIcon from 'assets/Setting/paper-plane.svg';
 import QuestionIcon from 'assets/Setting/question.svg';
 import CloseCircleIcon from 'assets/Setting/close-circle.svg';
+import {
+  IconWithNumber,
+  NumberOnIcon,
+  SettingContentsContainer,
+  SettingContentsTitle,
+  SettingDetailBlock,
+  SettingDetailBlockContent,
+  SettingDetailBlockTitle,
+  SettingDetailButtonLayout,
+  SettingDetailEtcLogoutButton,
+  SettingDetailEtcWithdrawButton,
+  SettingDetailFeedbackToDevButton,
+  SettingDetailFeedbackToDevTextArea,
+  SettingDetailFeedbackToDevWrapper,
+  SettingDetailTitle,
+  SettingDetailUmcInfoLinkBlock,
+  SettingDetailUmcInfoLinkBlockWrapper,
+  SettingDetailUmcInfoLinkCopyButton,
+  SettingDetailWebInfoContentsBox,
+  SettingDetailWebInfoGap,
+  SettingDetailWrapper,
+} from './Setting.style';
 
 // 스위치 컨테이너
 const SwitchContainer = styled.label`
@@ -66,7 +87,7 @@ const SwitchCheckedSlider = styled(SwitchSlider)`
 // 스위치 컴포넌트
 const Switch = () => (
   <SwitchContainer>
-    <SwitchInput type="checkbox" />
+    <SwitchInput type="checkbox" checked disabled />
     <SwitchCheckedSlider />
   </SwitchContainer>
 );
@@ -122,21 +143,19 @@ const AccordionSummaryStyle = styled(AccordionSummary)`
 const CustomSetting = () => {
   return (
     <>
-      <div className={styles.settingContentsTitle}>맞춤 설정</div>
-      <div className={styles.settingDetailWrapper}>
-        <div className={styles.settingDetailTitle}>자동 로그인</div>
-        <div className={styles.settingDetailBlock}>
+      <SettingContentsTitle>맞춤 설정</SettingContentsTitle>
+      <SettingDetailWrapper>
+        <SettingDetailTitle>자동 로그인</SettingDetailTitle>
+        <SettingDetailBlock>
           <div>
-            <div className={styles.settingDetailBlockTitle}>
-              자동 로그인 허용
-            </div>
-            <div className={styles.settingDetailBlockContent}>
+            <SettingDetailBlockTitle>자동 로그인 허용</SettingDetailBlockTitle>
+            <SettingDetailBlockContent>
               자동 로그인을 설정하면, 다음부터는 로그인을 하지 않아도 됩니다.
-            </div>
+            </SettingDetailBlockContent>
           </div>
           <Switch />
-        </div>
-      </div>
+        </SettingDetailBlock>
+      </SettingDetailWrapper>
     </>
   );
 };
@@ -181,12 +200,9 @@ const CustomerServiceSetting = () => {
 
   return (
     <>
-      <div className={styles.settingContentsTitle}>고객 센터</div>
-      <div
-        className={styles.settingDetailWrapper}
-        style={{ marginBottom: '48px' }}
-      >
-        <div className={styles.settingDetailTitle}>자주 묻는 질문</div>
+      <SettingContentsTitle>고객 센터</SettingContentsTitle>
+      <SettingDetailWrapper style={{ marginBottom: '48px' }}>
+        <SettingDetailTitle>자주 묻는 질문</SettingDetailTitle>
         {faqList.map((faq, index) => (
           <Accordion
             key={faq.id}
@@ -205,39 +221,32 @@ const CustomerServiceSetting = () => {
                   alt="question-icon"
                 />
               ) : (
-                <div className={styles.iconWithNumber}>
+                <IconWithNumber>
                   <SettingCustomerServiceQuestionImg
                     src={CloseCircleIcon}
                     alt="close-circle-icon"
                   />
-                  <span className={styles.numberOnIcon}>
-                    {faqList.length - index}
-                  </span>
-                </div>
+                  <NumberOnIcon>{faqList.length - index}</NumberOnIcon>
+                </IconWithNumber>
               )}
               {faq.question}
             </AccordionSummaryStyle>
             <AccordionDetails>{faq.answer}</AccordionDetails>
           </Accordion>
         ))}
-      </div>
-      <div className={styles.settingDetailWrapper}>
-        <div className={styles.settingDetailFeedbackToDevWrapper}>
-          <div className={styles.settingDetailTitle}>
-            개발자에게 피드백 보내기
-          </div>
-          <textarea
-            className={styles.settingDetailFeedbackToDevInput}
-            placeholder="개선이 필요한 부분을 적어주세요."
-          />
-          <div className={styles.settingDetailButtonLayout}>
-            <div className={styles.settingDetailFeedbackToDevButton}>
+      </SettingDetailWrapper>
+      <SettingDetailWrapper>
+        <SettingDetailFeedbackToDevWrapper>
+          <SettingDetailTitle>개발자에게 피드백 보내기</SettingDetailTitle>
+          <SettingDetailFeedbackToDevTextArea placeholder="개선이 필요한 부분을 적어주세요." />
+          <SettingDetailButtonLayout>
+            <SettingDetailFeedbackToDevButton>
               전송
               <img src={SendIcon} alt="send-icon" />
-            </div>
-          </div>
-        </div>
-      </div>
+            </SettingDetailFeedbackToDevButton>
+          </SettingDetailButtonLayout>
+        </SettingDetailFeedbackToDevWrapper>
+      </SettingDetailWrapper>
     </>
   );
 };
@@ -262,17 +271,17 @@ const WebInfoSetting = () => {
 
   return (
     <>
-      <div className={styles.settingContentsTitle}>웹 정보</div>
-      <div className={styles.settingDetailWebInfoGap}>
+      <SettingContentsTitle>웹 정보</SettingContentsTitle>
+      <SettingDetailWebInfoGap>
         {webInfoList.map((info) => (
-          <div className={styles.settingDetailWrapper} key={info.id}>
-            <div className={styles.settingDetailTitle}>{info.title}</div>
-            <div className={styles.settingDetailWebInfoContentsBox}>
+          <SettingDetailWrapper key={info.id}>
+            <SettingDetailTitle>{info.title}</SettingDetailTitle>
+            <SettingDetailWebInfoContentsBox>
               {info.content}
-            </div>
-          </div>
+            </SettingDetailWebInfoContentsBox>
+          </SettingDetailWrapper>
         ))}
-      </div>
+      </SettingDetailWebInfoGap>
     </>
   );
 };
@@ -304,13 +313,13 @@ const UMCInfoSetting = () => {
 
   return (
     <>
-      <div className={styles.settingContentsTitle}>Welcome UMC</div>
-      <div className={styles.settingDetailUmcInfoLinkBlockWrapper}>
+      <SettingContentsTitle>Welcome UMC</SettingContentsTitle>
+      <SettingDetailUmcInfoLinkBlockWrapper>
         {linkInfoList.map((info, index) => (
-          <div className={styles.settingDetailWrapper} key={info.id}>
-            <div className={styles.settingDetailTitle}>{info.title}</div>
-            <div className={styles.settingDetailUmcInfoLinkBlock}>
-              <div className={styles.settingDetailBlockTitle}>
+          <SettingDetailWrapper key={info.id}>
+            <SettingDetailTitle>{info.title}</SettingDetailTitle>
+            <SettingDetailUmcInfoLinkBlock>
+              <SettingDetailBlockTitle>
                 <a
                   style={{ color: 'black' }}
                   href={info.url}
@@ -320,17 +329,16 @@ const UMCInfoSetting = () => {
                 >
                   {info.url}
                 </a>
-              </div>
-              <div
-                className={styles.settingDetailUmcInfoLinkCopyButton}
+              </SettingDetailBlockTitle>
+              <SettingDetailUmcInfoLinkCopyButton
                 onClick={() => handleCopy(index)}
               >
                 복사
-              </div>
-            </div>
-          </div>
+              </SettingDetailUmcInfoLinkCopyButton>
+            </SettingDetailUmcInfoLinkBlock>
+          </SettingDetailWrapper>
         ))}
-      </div>
+      </SettingDetailUmcInfoLinkBlockWrapper>
     </>
   );
 };
@@ -339,38 +347,34 @@ const UMCInfoSetting = () => {
 const EtcSetting = () => {
   return (
     <>
-      <div className={styles.settingContentsTitle}>기타</div>
-      <div
-        className={styles.settingDetailWrapper}
-        style={{ marginBottom: '48px' }}
-      >
-        <div className={styles.settingDetailTitle}>로그아웃</div>
-        <div
-          className={styles.settingDetailBlock}
+      <SettingContentsTitle>기타</SettingContentsTitle>
+      <SettingDetailWrapper style={{ marginBottom: '48px' }}>
+        <SettingDetailTitle>로그아웃</SettingDetailTitle>
+        <SettingDetailBlock
           style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
           }}
         >
-          <div className={styles.settingDetailBlockTitle}>로그아웃</div>
-          <div className={styles.settingDetailBlockContent}>
+          <SettingDetailBlockTitle>로그아웃</SettingDetailBlockTitle>
+          <SettingDetailBlockContent>
             이 웹사이트에서 로그아웃할 수 있습니다.
-          </div>
-        </div>
-        <div className={styles.settingDetailButtonLayout}>
-          <div className={styles.settingDetailEtcLogoutButton}>로그아웃</div>
-        </div>
-      </div>
-      <div className={styles.settingDetailWrapper}>
-        <div className={styles.settingDetailTitle}>탈퇴 약관</div>
-        <div className={styles.settingDetailWebInfoContentsBox}>
+          </SettingDetailBlockContent>
+        </SettingDetailBlock>
+        <SettingDetailButtonLayout>
+          <SettingDetailEtcLogoutButton>로그아웃</SettingDetailEtcLogoutButton>
+        </SettingDetailButtonLayout>
+      </SettingDetailWrapper>
+      <SettingDetailWrapper>
+        <SettingDetailTitle>탈퇴 약관</SettingDetailTitle>
+        <SettingDetailWebInfoContentsBox>
           탈퇴 약관입니다.
-        </div>
-        <div className={styles.settingDetailButtonLayout}>
-          <div className={styles.settingDetailEtcWithdrawButton}>탈퇴</div>
-        </div>
-      </div>
+        </SettingDetailWebInfoContentsBox>
+        <SettingDetailButtonLayout>
+          <SettingDetailEtcWithdrawButton>탈퇴</SettingDetailEtcWithdrawButton>
+        </SettingDetailButtonLayout>
+      </SettingDetailWrapper>
     </>
   );
 };
@@ -381,13 +385,13 @@ const SettingContents = () => {
   const { contents } = useParams();
 
   return (
-    <div className={styles.settingContentsContainer}>
+    <SettingContentsContainer>
       {contents === 'custom' && <CustomSetting />}
       {contents === 'customer-service' && <CustomerServiceSetting />}
       {contents === 'web-info' && <WebInfoSetting />}
       {contents === 'umc-sns' && <UMCInfoSetting />}
       {contents === 'etc' && <EtcSetting />}
-    </div>
+    </SettingContentsContainer>
   );
 };
 
