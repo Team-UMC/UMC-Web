@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'; // Add this import
 
 import setnoticeUnchecked from 'assets/management/setnoticeUnchecked.svg';
 import setnoticeChecked from 'assets/management/setnoticeChecked.svg';
@@ -18,42 +18,38 @@ const ManagmentContainer = styled.div`
   margin-bottom: 5vh;
 `;
 
-const TypeLink = styled(Link)`
+const ManagementLink = styled(Link)`
   margin-right: 10px;
   cursor: pointer;
+  text-decoration: none;
 `;
 
 const ManagementType = ({ buttonStates, handleClick }) => {
-
-  const handleItemClick = (type) => {
-    handleClick(type);
-  };
-
   return (
     <ManagmentContainer>
-      <TypeLink to="#" onClick={() => handleItemClick('setnoticeButton')}>
+      <ManagementLink to="/management/notice" onClick={() => handleClick('setnoticeButton')}>
         {buttonStates.setnoticeButton ? (
-          <img src={setnoticeChecked} alt="Inactive Image" />
+          <img src={setnoticeChecked} alt="활성 이미지" />
         ) : (
-          <img src={setnoticeUnchecked} alt="공지" />
+          <img src={setnoticeUnchecked} alt="비활성 이미지" />
         )}
-      </TypeLink>
+      </ManagementLink>
 
-      <TypeLink to="#" onClick={() => handleItemClick('calenderButton')}>
+      <ManagementLink to="/management/calendar" onClick={() => handleClick('calenderButton')}>
         {buttonStates.calenderButton ? (
-          <img src={calenderChecked} alt="Inactive Image" />
+          <img src={calenderChecked} alt="활성 이미지" />
         ) : (
-          <img src={calenderUnchecked} alt="캘린더" />
+          <img src={calenderUnchecked} alt="비활성 이미지" />
         )}
-      </TypeLink>
+      </ManagementLink>
 
-      <TypeLink to="#" onClick={() => handleItemClick('challengerButton')}>
+      <ManagementLink to="/management/challenger" onClick={() => handleClick('challengerButton')}>
         {buttonStates.challengerButton ? (
-          <img src={challengerChecked} alt="Inactive Image" />
+          <img src={challengerChecked} alt="활성 이미지" />
         ) : (
-          <img src={challengerUnchecked} alt="챌린저" />
+          <img src={challengerUnchecked} alt="비활성 이미지" />
         )}
-      </TypeLink>
+      </ManagementLink>
     </ManagmentContainer>
   );
 };

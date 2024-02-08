@@ -2,98 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SearchImg from "assets/search.svg";
 
-const ListContainer = styled.div`
-  margin-top: 20px;
-  width: 85%; /* 수정된 부분: 너비를 퍼센트로 지정 */
-`;
-const ListItem = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr 2fr 2fr 1fr; 
-  padding: 10px;
-  margin-bottom: 10px;
-  align-items: center;
-  border-bottom: 1px solid #D8D8FF;
-  width: 100%;
-`;
-
-const HeaderContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr 2fr 2fr 1fr;
-  padding: 10px;
-  margin-bottom: 10px;
-  align-items: center;
-  width: 100%;
-`;
-const Header = styled.div`
-  justify-self: center; 
-  align-self: center;
-  font-weight:600;
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-`;
-
-const PaginationButton = styled.button`
-  margin: 0 5px;
-  cursor: pointer;
-  border: none;
-  padding: 4px 8px;
-  background-color: ${(props) => (props.isActive ? '#FFFFFF' : 'transparent')};
-  font-weight: ${(props) => (props.isActive ? 'bold' : 'normal')};
-
-  &:hover {
-    background-color: #EDEDED; /* Set the hover background color as needed */
-  }
-`;
-
-
-const SearchContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  justify-content: center;
-  align-self: center; 
-  margin: 3vh 0vh;
-  background: var(--white, #FFF); /*여기가 왜 적용이 안되지*/
-  border-radius: 12px;
-
-  border: 1px solid #D8D8FF;
-`;
-const SearchInput = styled.input`
-  padding: 1vh;
-  width: 100%; /* 수정된 부분: 너비를 100%로 지정 */
-  border: none;
-`;
-
-const SearchButton = styled.button`
-  margin-left: 10px;
-  cursor: pointer;
-
-  padding: 8px 16px;
-  border: none;
-  color: var(--white, #FFF);
-
-  font-family: Pretendard;
-  font-size: 14px;
-  border-radius: 12px;
-  background: #919CFF;
-`;
-
-const Center = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-font-weight:500;
-
-`;
-
-const Left = styled.div`
-display: flex;
-align-items: flex-start;
-`;
 
 const MyList = () => {
   const dataList = [
@@ -142,9 +50,9 @@ const MyList = () => {
       <HeaderContainer>
         <Header>번호</Header>
         <Header>제목</Header>
-        <Center>작성일</Center>
-        <Center>조회수</Center>
-        <Center>좋아요</Center>
+        <Header>작성일</Header>
+        <Header>조회수</Header>
+        <Header>좋아요</Header>
       </HeaderContainer>
 
       {currentList.slice().reverse().map((item) => (
@@ -187,3 +95,95 @@ const MyList = () => {
 };
 
 export default MyList;
+
+const ListContainer = styled.div`
+  margin-top: 20px;
+  width: 85%; /* 수정된 부분: 너비를 퍼센트로 지정 */
+`;
+const ListItem = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr 2fr 1fr; 
+  padding: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  border-bottom: 1px solid #D8D8FF;
+  width: 100%;
+`;
+
+const HeaderContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr 2fr 1fr;
+  padding: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  width: 100%;
+`;
+const Header = styled.div`
+  justify-self: center; 
+  align-self: center;
+  font-weight:600;
+`;
+
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+`;
+
+const PaginationButton = styled.button`
+  margin: 0 5px;
+  cursor: pointer;
+  border: none;
+  padding: 4px 8px;
+  background-color: ${(props) => (props.isActive ? '#FFFFFF' : 'transparent')};
+  font-weight: ${(props) => (props.isActive ? 'bold' : 'normal')};
+
+  &:hover {
+    background-color: #EDEDED; 
+  }
+`;
+
+
+const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  align-self: center; 
+  margin: 3vh 0vh;
+  background:#FFF; 
+  border-radius: 12px;
+
+  border: 1px solid #D8D8FF;
+`;
+const SearchInput = styled.input`
+  padding: 1vh;
+  width: 100%; /* 수정된 부분: 너비를 100%로 지정 */
+  border: none;
+`;
+
+const SearchButton = styled.button`
+  margin-left: 10px;
+  cursor: pointer;
+
+  padding: 8px 16px;
+  border: none;
+  color: var(--white, #FFF);
+
+  font-family: Pretendard;
+  font-size: 14px;
+  border-radius: 12px;
+  background: #919CFF;
+`;
+
+const Center = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+font-weight:500;
+`;
+
+const Left = styled.div`
+display: flex;
+align-items: flex-start;
+`;

@@ -6,13 +6,12 @@ import PositionCheckedImg from 'assets/management/positionChecked.svg';
 import AddImg from 'assets/management/addPosition.svg';
 
 const ChallengerPositionContainer = styled.div`
-  width: 120vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  border: 1px solid #232A6D;
 `;
 
 const TitleContainer = styled.div`
@@ -22,6 +21,8 @@ const TitleContainer = styled.div`
   font-weight: 500;
   padding: 16px;
   margin-top: 16px;
+  background-color: #fff;
+
   border: 1px solid #232A6D;
 `;
 
