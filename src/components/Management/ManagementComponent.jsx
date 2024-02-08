@@ -3,6 +3,7 @@ import PropTypes from "prop-types"; // Import PropTypes
 
 //import AdminPage from 'layout/NoticePin/AdminPage';
 import BoardTitle from '../BoardWrite/BoardTitle';
+//import AdminTitle from 'components/Management/NoticePin/AdminTitle';
 import BoardText from '../BoardWrite/BoardText';
 import ManagementButton from 'components/Management/Button';
 import StartendDate from 'components/Management/StartendDate';
@@ -35,8 +36,6 @@ const ButtonContainerChallenger = styled.div`
 const TypeComponent = ({ buttonStates }) => {
   return (
     <div>
-      {/* {buttonStates.setnoticeButton && <MyList />} {' '} */}
-
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />
