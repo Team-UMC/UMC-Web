@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import BoardType from "components/MyWriting/BoardType";
-//import Title from "components/MyWriting/Title";
+import Title from "components/MyWriting/Title";
 import Type from "components/MyWriting/Type";
 import TypeComponent from "components/MyWriting/TypeComponent";
 
 //import CommentList from './CommentList.jsx';
-import AdminTitle from 'components/Management/NoticePin/AdminTitle';
+//import AdminTitle from 'components/Management/NoticePin/AdminTitle';
 
 const ContainerGrid = styled.div`
 display:flex;  
@@ -20,12 +20,10 @@ const TypeContainer = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
+
 `;
 
-const TitleLayout = styled(AdminTitle)`
-  display: flex;
-  padding-bottom: 80px;
-`;
+
 
 const MyWrite = () => {
 
@@ -46,10 +44,8 @@ const MyWrite = () => {
   return (
     <ContainerGrid>
     
-    <TitleLayout /> 
-
+    <Title />
     
-
       <TypeContainer>
         <Type activeType={activeType} handleTypeClick={handleTypeClick}/>
       </TypeContainer>
