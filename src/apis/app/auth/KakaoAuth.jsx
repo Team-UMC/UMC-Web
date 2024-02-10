@@ -18,6 +18,9 @@ const KakaoAuth = () => {
             },
           },
         );
+
+        console.log(res.data.access_token);
+        localStorage.setItem('kakaoToken', res.data.access_token);
         setKakaoToken(res.data.access_token);
       } catch (error) {
         console.log(error);
