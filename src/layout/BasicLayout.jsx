@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const Div = styled.div`
   background-color: #f2f5fc;
+  height: 100%;
 `;
 
 const BasicLayout = () => {

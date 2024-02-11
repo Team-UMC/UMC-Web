@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes for prop validation
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { ReactComponent as Line } from 'assets/main/line.svg';
@@ -16,6 +16,8 @@ const ScheduleWrapper = styled.div`
 const UpperWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 17px;
+  align-items: flex-end;
 `;
 
 const ButtonContainer = styled.div`
@@ -33,14 +35,16 @@ const ScheduleWrap = styled.div`
 const Schedule = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 const ScheduleView = styled.div`
+  display: flex;
   font-size: 12px;
 `;
 
 const ScheduleInfo = styled.div`
+  display: flex;
   font-size: 16px;
 `;
 
@@ -61,7 +65,7 @@ const ScheduleItem = ({ title, scheduleImage, altText, data }) => {
   return (
     <ScheduleWrapper>
       <UpperWrapper>
-        <img src={scheduleImage} alt={altText} />
+        <img src={scheduleImage} alt={altText} style={{ marginRight: '4px' }} />
         <div>{title}</div>
       </UpperWrapper>
       <ScheduleWrap>
@@ -73,7 +77,7 @@ const ScheduleItem = ({ title, scheduleImage, altText, data }) => {
           )}
         </ButtonContainer>
 
-        <Line />
+        <Line style={{marginBottom: "6px"}}/>
 
         <ButtonContainer>
           {isRightArrowGray ? (
@@ -86,12 +90,12 @@ const ScheduleItem = ({ title, scheduleImage, altText, data }) => {
 
       <Schedule>
         <div>
-          <ScheduleView> 하이 </ScheduleView>
-          <ScheduleInfo> 바이 </ScheduleInfo>
+          <ScheduleView> 02.19 (월) ~ 02.21 (수) </ScheduleView>
+          <ScheduleInfo> UMC 5기 데모데이 </ScheduleInfo>
         </div>
         <div>
-          <ScheduleView> 하이 </ScheduleView>
-          <ScheduleInfo> 바이 </ScheduleInfo>
+          <ScheduleView> 02.19 (월) ~ 02.21 (수) </ScheduleView>
+          <ScheduleInfo> UMC 5기 데모데이 </ScheduleInfo>
         </div>
       </Schedule>
     </ScheduleWrapper>

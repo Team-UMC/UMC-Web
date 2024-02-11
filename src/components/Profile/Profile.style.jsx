@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Modal = styled.div`
   position: fixed;
@@ -6,7 +6,7 @@ const Modal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 25%;
-  height: 65vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,6 +30,9 @@ const ProfileImageWrapper = styled.div`
 const ProfileImage = styled.img`
   position: relative;
   z-index: 100;
+
+  width: 254px;
+  height: 254px;
 `;
 
 const ProfileSettingImage = styled.img`
@@ -45,6 +48,7 @@ const ProfileSettingImage = styled.img`
 const SettingIconWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const School = styled.div`
@@ -65,18 +69,6 @@ const School = styled.div`
   text-align: center;
 `;
 
-// const Role = styled.div`
-//   background-color: #414463;
-//   border: 1px solid #414463;
-//   border-radius: 15px;
-
-//   color: white;
-
-//   width: 50px;
-
-//   text-align: center;
-// `;
-
 const SemesterPart = styled.div`
   display: flex;
   flex-direction: row;
@@ -86,6 +78,10 @@ const SemesterPart = styled.div`
 
 const PartNSemesterWrapper = styled.div`
   width: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   background-color: white;
   border: 1px solid white;
@@ -107,20 +103,28 @@ const StatusMessageWrapper = styled.div`
 `;
 
 const IconWrapper = styled.div`
+  width: 50%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const IconDescription = styled.p`
+  font-size: 10px;
 `;
 
 export {
-    Modal,
-    ExitButton,
-    ProfileImageWrapper,
-    ProfileImage,
-    ProfileSettingImage,
-    SettingIconWrapper,
-    School,
-    SemesterPart,
-    PartNSemesterWrapper,
-    StatusMessageWrapper,
-    IconWrapper,
+  Modal,
+  ExitButton,
+  ProfileImageWrapper,
+  ProfileImage,
+  ProfileSettingImage,
+  SettingIconWrapper,
+  School,
+  SemesterPart,
+  PartNSemesterWrapper,
+  StatusMessageWrapper,
+  IconWrapper,
+  IconDescription,
 };

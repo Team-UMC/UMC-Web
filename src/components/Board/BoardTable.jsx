@@ -183,40 +183,44 @@ const rows = ROWS_DATA;
 const Row = () => {
   // 게시글 펼치기/접기 상태
   const [open, setOpen] = useState(false);
-  const [boardData, setBoardData] = useState({});
+  const [boardData, setBoardData] = useState([]);
 
   useEffect(() => {
     const getBoardData = async () => {
-
       // 현재 주소 받아오기 [ex) localhost:3000/board/campus/notice]
       const currentURL = window.location.href;
 
       // /로 구분하여 배열로 저장하고 host 값과 board 값 변수에 저장하기
       const urlParts = currentURL.split('/');
-      const host = urlParts[4];
-      const board = urlParts[5];
+      const host = urlParts[4].toUpperCase();
+      const board = urlParts[5].toUpperCase();
 
       // Page 부분 수정 필요
       const res = await axiosInstance.get(
         `/boards?host=${host}&board=${board}&page=0`,
       );
-      setBoardData(res.data.result);
+
+      setBoardData(res.data.result.boardPageElement);
     };
     getBoardData();
   }, []);
 
+  if (!boardData || boardData.length === 0) {
+    return null;
+  }
+
   return (
     <Fragment>
-      {boardData.map((boardData) => (
-        <Fragment key={boardData.boardPageResponses.boardId}>
+      {boardData.map((boardItem) => (
+        <Fragment key={boardItem.boardId}>
           <StyledTableRow>
             <StyledTableCheckBoxCell />
             <StyledTitleColumn style={{ textAlign: 'left' }}>
-              {boardData.boardPageResponses.title}
+              {boardItem.title}
             </StyledTitleColumn>
-            <StyledTableCell>{boardData.boardPageResponses.writer}</StyledTableCell>
-            <StyledTableCell>{boardData.boardPageResponses.createdAt}</StyledTableCell>
-            <StyledTableCell>{boardData.boardPageResponses.hitCount}</StyledTableCell>
+            <StyledTableCell>{boardItem.writer}</StyledTableCell>
+            <StyledTableCell>{boardItem.createdAt}</StyledTableCell>
+            <StyledTableCell>{boardItem.hitCount}</StyledTableCell>
             <StyledOpenToggle>
               <IconButton
                 aria-label="expand row"
@@ -230,7 +234,7 @@ const Row = () => {
           <StyledTableRow>
             <StyledCollapseCell colSpan={5}>
               <StyledCollapseContent open={open}>
-                {boardData.boardPageResponses.content}
+                {boardItem.content}
               </StyledCollapseContent>
             </StyledCollapseCell>
           </StyledTableRow>

@@ -19,11 +19,13 @@ import GalleryPage from 'pages/Gallery/GalleryPage';
 import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
 import BoardPage from 'pages/BoardPage/BoardPage';
 import MascotPage from 'pages/Mascot/MascotPage';
+import TextDetailPage from 'pages/DetailPage/TextDetailPage';
 
 import TodayILearn from 'pages/TodayILearn/TodayILearn';
 import NewTIL from 'components/TodayILearn/NewTIL';
 import DetailTIL from 'components/TodayILearn/DetailTIL';
 import TodoList from 'pages/ToDoList/TodoList';
+import RankingPage from 'pages/Mascot/RankingPage';
 
 function App() {
   return (
@@ -31,48 +33,55 @@ function App() {
       <BrowserRouter>
         <>
           <Routes>
+            {/* 소셜 로그인으로 시작하기 페이지 (초기 화면) */}
             <Route path="/" element={<HomePage />} />
 
-            {/* path는 Redirect URI*/}
+            {/* 소셜 로그인 페이지 (path는 Redirect URI)*/}
             <Route path="/OAuth2/kakao" element={<KakaoAuth />} />
             <Route path="/oauth2/naver" element={<NaverAuth />} />
 
+            {/* 회원 가입 페이지 */}
             <Route path="/signupform" element={<SignUpForm />} />
 
             <Route element={<MainLayout />}>
+              {/* 메인 페이지*/}
               <Route path="/main" element={<Main />} />
             </Route>
 
             <Route element={<BasicLayout />}>
-              <Route
-                path="/board"
-                element={<Navigate to="/board/school/notice" />}
-              />
+              {/* 게시판 관련 페이지*/}
               <Route
                 path="/board/:category/:boardPath"
                 element={<BoardPage />}
               />
+              <Route path="/boardwrite/:host/:board" element={<BoardWrite />} />
+              <Route path="/detailpage" element={<TextDetailPage />} />
 
-              <Route path="/boardwrite" element={<BoardWrite />} />
+              {/* 운영진 관리 페이지 */}
               <Route path="/management" element={<Management />} />
               <Route path="/mywrite" element={<MyWrite />} />
 
-              <Route path="/textdetail" element={<TextDetailPage />} />
-              <Route path="/messagepreview" element={<MessagePreviewPage />} />
-              <Route path="/messagedetail" element={<MessageDetailPage />} />
-              <Route path="/message" element={<MessagePage />} />
-              <Route path="/todayilearn" element={<TodayILearn/>} />
-              <Route path="todayilearn/detailpage" element={<NewTIL/>} />
-              <Route path="todayilearn/detail" element={<DetailTIL/>} />
-              <Route path="todolist" element={<TodoList/>} />
+              {/* Today-I-Learned */}
+              <Route path="/todayilearn" element={<TodayILearn />} />
+              <Route path="/todayilearn/detailpage" element={<NewTIL />} />
+              <Route path="/todayilearn/detail" element={<DetailTIL />} />
 
+              {/* TodoList */}
+              <Route path="/todolist" element={<TodoList />} />
 
+              {/* 사진첩 */}
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/gallery/:id" element={<GalleryDetailPage />} />
 
+              {/* 프로필 설정 페이지 */}
               <Route path="/profilesetting" element={<ProfileSettingPage />} />
+
+              {/* 히스토리(프로젝트) 페이지 */}
               <Route path="/history" element={<HistoryPage />} />
+
+              {/* 마스코트 키우기 페이지 */}
               <Route path="/mascot" element={<MascotPage />} />
+              <Route path="/ranking" element={<RankingPage />} />
             </Route>
           </Routes>
         </>

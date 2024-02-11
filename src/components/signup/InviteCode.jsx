@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
@@ -23,6 +23,10 @@ const InviteCode = ({
     },
     [inviteCode],
   );
+
+  useEffect(() => {
+    handleInviteCode();
+  }, [inviteCode]);
 
   return (
     <SignUpFormStyle.Wrapper>

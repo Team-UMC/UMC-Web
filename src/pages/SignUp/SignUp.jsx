@@ -27,6 +27,9 @@ const SignUp = () => {
   const [inviteCode, setInviteCode] = useState('');
   const [isValidCode, setIsValidCode] = useState(false);
 
+  // 중앙운영진 여부를 관리하는 상태
+  const [isCenterStaff, setIsCenterStaff] = useState(false);
+
   /* POST로 보내야 하는 내용들 */
   const [campusPositions, setCampusPositions] = useState([]);
   const [centerPositions, setCenterPositions] = useState([]);
@@ -45,16 +48,30 @@ const SignUp = () => {
 
   const handleInviteCode = async () => {
     console.log('Invite Code: ', inviteCode);
-
     try {
-      const res = await axiosInstance.post(`/invites`, {
+      const res = await axiosInstance.post(`/invites/${inviteCode}`, {
         inviteCode: inviteCode,
       });
 
       if (res.data.code === 'COMMON200') {
         setIsValidCode(true);
 
+        // 서버 응답에서 result의 role이 "member"인 경우 Operator 단계를 건너뛰기
+        if (res.data.result.role === 'MEMBER') {
+          handleNextStep(); // Operator 단계를 건너뛰고 다음 단계로 이동
+          return; // Operator 단계를 건너뛰었으므로 여기서 함수 종료
+        }
+
+        if (
+          res.data.result.role === 'CENTER_STAFF' ||
+          res.data.result.role === 'TOTAL_STAFF'
+        ) {
+          setIsCenterStaff(true);
+        }
+        // Operator 단계를 건너뛰지 않고 다음 단계로 이동
         handleNextStep();
+      } else {
+        setIsValidCode(false);
       }
     } catch (error) {
       console.error('InviteCode error:', error);
@@ -93,6 +110,7 @@ const SignUp = () => {
           inviteCode={inviteCode}
           setInviteCode={setInviteCode}
           isValidCode={isValidCode}
+          setIsValidCode={setIsValidCode}
           handleInviteCode={handleInviteCode}
         />
       )}
@@ -103,6 +121,7 @@ const SignUp = () => {
           setCampusPositions={setCampusPositions}
           centerPositions={centerPositions}
           setCenterPositions={setCenterPositions}
+          isCenterStaff={isCenterStaff}
           handleNextStep={handleNextStep}
           handlePrevStep={handlePrevStep}
         />

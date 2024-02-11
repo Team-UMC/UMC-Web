@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import DetailImg from 'assets/todayilearn/detail.svg'; /* 상세보기버튼 이미지 */
 import ModalImg from 'assets/todayilearn/modalimg.svg'; /*모달 느낌표 버튼 */
-import FigmaImg from "assets/todayilearn/figma.svg";
-
+import FigmaImg from 'assets/todayilearn/figma.svg';
 
 const OptionsContainer = styled.div`
   display: none;
@@ -31,6 +30,7 @@ const ComponentContainer = styled.div`
   padding: 1vh;
   margin-top: 2vh;
   position: relative;
+  width: 70%;
 
   &:hover ${OptionsContainer} {
     display: flex;
@@ -52,7 +52,7 @@ const ModalContainer = styled.div`
   position: fixed;
   top: 0; /*모달 배경을 화면 다 채우게 */
   left: 0;
-  width: 100%; 
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.51);
   display: flex;
@@ -60,7 +60,8 @@ const ModalContainer = styled.div`
   align-items: center;
 `;
 
-const ModalContent = styled.div` /*모달 화면*/
+const ModalContent = styled.div`
+  /*모달 화면*/
   background: white;
   padding: 36px 32px 24px 32px;
   border-radius: 20px;
@@ -69,8 +70,7 @@ const ModalContent = styled.div` /*모달 화면*/
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  align-content: space-evenly; 
-
+  align-content: space-evenly;
 `;
 
 const ModalButtonContainer = styled.div`
@@ -78,90 +78,91 @@ const ModalButtonContainer = styled.div`
   flex-direction: row;
   /* align-items: center; */
   justify-content: space-evenly;
-  width:70%;
+  width: 70%;
 `;
 
 const ModalDeleteShape = styled.div`
-display: flex;
-padding: 0.5vh 2vh;
-justify-content: center;
-align-items: center;
-border: none;
-background-color: #373C6B;
-border-radius: 8px;
-color: #fff;
+  display: flex;
+  padding: 0.5vh 2vh;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #373c6b;
+  border-radius: 8px;
+  color: #fff;
 `;
 
 const ModalCancelShape = styled.div`
-display: flex;
-padding: 0.5vh 2vh;
-justify-content: center;
-align-items: center;
-border: none;
-background-color: #E1E1EA;;
-border-radius: 8px;
-color: #373C6B;
+  display: flex;
+  padding: 0.5vh 2vh;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #e1e1ea;
+  border-radius: 8px;
+  color: #373c6b;
 `;
 
 const StyleImg = styled.img`
-width: 24px;
-height:32px;
-margin-right: 2vh;
-display: flex;
-align-items: center;
+  width: 24px;
+  height: 32px;
+  margin-right: 2vh;
+  display: flex;
+  align-items: center;
 `;
 
 const ImgTitleContainer = styled.div`
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 1vh 2vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1vh 2vh;
 `;
 
 const TitleContainer = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `;
 
 const MainTitle = styled.div`
-font-size: 20px;
-font-weight: 500;
+  font-size: 20px;
+  font-weight: 500;
 `;
 
 const SubTitle = styled.div`
-color: #4B4B4B;
-font-size: 16px;
-font-weight: 500;
+  color: #4b4b4b;
+  font-size: 16px;
+  font-weight: 500;
 `;
 
 const TILComponent = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
-  const handleEdit = () => { //수정하기 클릭시 페이지 이동
+  const handleEdit = () => {
+    //수정하기 클릭시 페이지 이동
     navigate(`/todayilearn/detail`);
   };
 
-  const handleDelete = () => {   
+  const handleDelete = () => {
     //삭제 버튼 클릭시 모달창 보여줌, 삭제동작구현필요
     setShowModal(true);
   };
 
-  const closeModal = () => { //취소버튼 클릭시 모달창 끄기
+  const closeModal = () => {
+    //취소버튼 클릭시 모달창 끄기
     setShowModal(false);
   };
 
   return (
     <>
       <ComponentContainer>
-
-      <ImgTitleContainer>
-    <StyleImg src={FigmaImg} alt="선택로고" />
-    <TitleContainer>
-        <MainTitle>프로젝트 웹 디자인하기</MainTitle>
-        <SubTitle>TIL뷰 만들기</SubTitle>
-    </TitleContainer>
-    </ImgTitleContainer>
+        <ImgTitleContainer>
+          <StyleImg src={FigmaImg} alt="선택로고" />
+          <TitleContainer>
+            <MainTitle>프로젝트 웹 디자인하기</MainTitle>
+            <SubTitle>TIL뷰 만들기</SubTitle>
+          </TitleContainer>
+        </ImgTitleContainer>
 
         <StyledImage src={DetailImg} alt="상세보기 버튼" />
 
@@ -171,18 +172,19 @@ const TILComponent = () => {
         </OptionsContainer>
       </ComponentContainer>
 
-      {showModal && ( /* 모달 실행 */
+      {showModal /* 모달 실행 */ && (
         <ModalContainer>
           <ModalContent>
-            <img src={ModalImg} alt="느낌표 이미지"/>
+            <img src={ModalImg} alt="느낌표 이미지" />
             <p>정말로 해당 TIL을 삭제하시겠습니까?</p>
             <p>삭제 후에는 복구할 수 없습니다.</p>
 
             <ModalButtonContainer>
-            <ModalCancelShape onClick={closeModal}>취소</ModalCancelShape>
-            <ModalDeleteShape onClick={() => console.log('삭제 로직 실행')}>삭제</ModalDeleteShape>
+              <ModalCancelShape onClick={closeModal}>취소</ModalCancelShape>
+              <ModalDeleteShape onClick={() => console.log('삭제 로직 실행')}>
+                삭제
+              </ModalDeleteShape>
             </ModalButtonContainer>
-
           </ModalContent>
         </ModalContainer>
       )}

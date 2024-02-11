@@ -11,47 +11,46 @@ import UnionChecked from 'assets/mywrite/mywriteUnionChecked.svg';
 import SuggestionUnchecked from 'assets/mywrite/mywriteSuggestionUnchecked.svg';
 import SuggestionChecked from 'assets/mywrite/mywriteSuggestionChecked.svg';
 
-import SchoolBoard from 'components/BoardWrite/BoardSchool';
-import CampBoard from 'components/BoardWrite/BoardCamp';
+import SchoolBoard from 'components/BoardWrite/BoardCampus';
+import CampBoard from 'components/BoardWrite/BoardBranch';
 
 import ResetImg from 'assets/mywrite/reset.svg';
 
 const AllContainer = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   margin-top: 10vh;
-  
-  border: 1px solid #232A6D;
+
+  border: 1px solid #232a6d;
   padding: 8vh;
   width: 85%;
   border-radius: 12px;
   background-color: white;
 `;
 
-
 const ContainerType = styled.div`
-  display: flex;  
+  display: flex;
 `;
 
 const TypeName = styled.div`
-display: flex;  
-flex-direction: row;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-margin-right: 7vh;
-font-weight: bold;
+  margin-right: 7vh;
+  font-weight: bold;
 `;
 
 const BoardName = styled.div`
-display: flex;  
-flex-direction: row;
-align-items: center;
-flex-wrap: nowrap;
-width: 8vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 8vh;
 
-margin-right: 3vh;
-font-weight: bold;
+  margin-right: 3vh;
+  font-weight: bold;
 `;
 
 const TypeLink = styled(Link)`
@@ -60,7 +59,7 @@ const TypeLink = styled(Link)`
 `;
 
 const ResetContainer = styled.div`
-  display: flex; /* Add this line */
+  display: flex;
   justify-content: flex-end;
   width: 100%;
 `;
@@ -69,7 +68,6 @@ const Reset = styled.img`
   cursor: pointer;
   height: 14px;
 `;
-
 
 const BoardType = () => {
   const initialButtonStates = {
@@ -86,27 +84,28 @@ const BoardType = () => {
 
   const handleClick = (buttonName) => {
     setButtonStates((prevStates) => ({
-      schoolButton: buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
+      schoolButton:
+        buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
       campButton: buttonName === 'campButton' ? !prevStates.campButton : false,
-      unionButton: buttonName === 'unionButton' ? !prevStates.unionButton : false,
-      suggestionButton: buttonName === 'suggestionButton' ? !prevStates.suggestionButton : false,
+      unionButton:
+        buttonName === 'unionButton' ? !prevStates.unionButton : false,
+      suggestionButton:
+        buttonName === 'suggestionButton'
+          ? !prevStates.suggestionButton
+          : false,
     }));
   };
-
- 
-  
 
   return (
     <AllContainer>
       <ResetContainer>
-      <Reset src={ResetImg} alt="reset" onClick={resetButtonStates} />
+        <Reset src={ResetImg} alt="reset" onClick={resetButtonStates} />
       </ResetContainer>
 
       <ContainerType>
-      <TypeName>종류</TypeName>
+        <TypeName>종류</TypeName>
 
         <div>
-         
           <TypeLink to="#" onClick={() => handleClick('schoolButton')}>
             {buttonStates.schoolButton ? (
               <img src={SchoolChecked} alt="Inactive Image" />
@@ -139,7 +138,6 @@ const BoardType = () => {
             )}
           </TypeLink>
         </div>
-
       </ContainerType>
       <ContainerType>
         {!buttonStates.suggestionButton && <BoardName>게시판</BoardName>}
@@ -147,10 +145,7 @@ const BoardType = () => {
         {buttonStates.campButton && <CampBoard />}{' '}
         {buttonStates.unionButton && <CampBoard />}{' '}
         {buttonStates.suggestionButton && <div></div>}
-
       </ContainerType>
-
-
     </AllContainer>
   );
 };

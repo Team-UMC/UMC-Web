@@ -19,6 +19,7 @@ const Rectangle = styled.div`
   height: 120px;
   margin: 15px;
   border: 1px solid black;
+  background-color: white;
   padding: 10px;
   border-radius: 15px;
   box-shadow: 3px 3px 3px 3px #999;

@@ -5,7 +5,7 @@ import DateSelectCalendar from 'components/DateSelectCalendar';
 
 const TILCalender = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date()); 
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -23,7 +23,7 @@ const TILCalender = () => {
   return (
     <>
       <TodayDate>
-        <img src={CalenderImg} alt='캘린더 이미지' onClick={openModal} />
+        <img src={CalenderImg} alt="캘린더 이미지" onClick={openModal} />
         <DateSelectCalendar />
       </TodayDate>
 
@@ -31,7 +31,10 @@ const TILCalender = () => {
         <ModalContainer>
           <ModalContent>
             <CloseModalButton onClick={closeModal}>X</CloseModalButton>
-            <DateSelectCalendar onSelect={handleDateSelect} selected={selectedDate} />
+            <DateSelectCalendar
+              onSelect={handleDateSelect}
+              selected={selectedDate}
+            />
           </ModalContent>
         </ModalContainer>
       )}
@@ -41,13 +44,11 @@ const TILCalender = () => {
 
 export default TILCalender;
 
-
 const TodayDate = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
-
 
 const ModalContainer = styled.div`
   position: fixed;

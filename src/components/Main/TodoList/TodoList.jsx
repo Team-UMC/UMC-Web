@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ReactComponent as LeftArrow } from 'assets/main/LeftArrow.svg';
 import { ReactComponent as RightArrow } from 'assets/main/RightArrow.svg';
@@ -14,8 +15,11 @@ const DataContainer = styled.div`
 const Rectangle = styled.div`
   width: 100px;
   margin: 5px;
-  border: 1px solid black; /* 검정색 테두리 선 추가 */
-  padding: 5px; /* 옵션: 테두리와 내용 간격 조절 */
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 12px;
+  padding: 5px;
+  height: 118px;
 `;
 
 const ButtonContainer = styled.div`
@@ -25,7 +29,7 @@ const ButtonContainer = styled.div`
   margin-top: 10px;
 `;
 
-const TodoList = () => {
+const TodoList = ({ completed }) => {
   const data = [
     '1번입니다',
     '2번입니다',
@@ -34,33 +38,34 @@ const TodoList = () => {
     '5번입니다',
     '6번입니다',
   ];
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, data.length - 4));
-  };
+  const filteredData = data.filter((item, index) => {
+    if (completed) {
+      return index % 2 === 0; // completed가 true이면 index가 짝수인 항목만 필터링
+    } else {
+      return index % 2 !== 0; // completed가 false이면 index가 홀수인 항목만 필터링
+    }
+  });
 
   return (
     <Container>
       <ButtonContainer>
-        {currentIndex > 0 && <LeftArrow alt="이전" onClick={handlePrev} />}
+        <LeftArrow alt="이전" />
       </ButtonContainer>
       <DataContainer>
-        {data.slice(currentIndex, currentIndex + 4).map((item, index) => (
+        {filteredData.map((item, index) => (
           <Rectangle key={index}>{item}</Rectangle>
         ))}
       </DataContainer>
       <ButtonContainer>
-        {currentIndex < data.length - 4 && (
-          <RightArrow alt="다음" onClick={handleNext} />
-        )}
+        <RightArrow alt="다음" />
       </ButtonContainer>
     </Container>
   );
+};
+
+TodoList.propTypes = {
+  completed: PropTypes.bool.isRequired,
 };
 
 export default TodoList;
