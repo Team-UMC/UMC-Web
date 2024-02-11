@@ -52,7 +52,7 @@ function App() {
               <Route path="/management" element={<Management />} />
               <Route path="/mywrite" element={<MyWrite />} />
 
-              <Route path="/textdetail" element={<TextDetailPage />} />
+              <Route path="/textdetail/:category/:boardPath" element={<TextDetailPage />} />
               <Route path="/messagepreview" element={<MessagePreviewPage />} />
               <Route path="/messagedetail" element={<MessageDetailPage />} />
               <Route path="/message" element={<MessagePage />} />
@@ -60,6 +60,7 @@ function App() {
               <Route path="todayilearn/detailpage" element={<NewTIL/>} />
               <Route path="todayilearn/detail" element={<DetailTIL/>} />
               <Route path="todolist" element={<TodoList/>} />
+              
 
 
               <Route path="/profilesetting" element={<ProfileSettingPage />} />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import Like from 'assets/Like.svg';
 import Comment from 'assets/Comment.svg';
 import ViewCount from 'assets/ViewCount.svg';
@@ -18,29 +19,52 @@ import {
   RowAlignBox,
 } from 'components/BoardTextDetail/TextDetail.style';
 import ProfileContainer from './ProfileContainer';
-import MiniHambergerMenuBtn from './MiniHambergerMenuBtn';
+import MiniHambergerBtn from './MiniHambergerBtn';
+import ModifyDeleteModal from 'components/BoardTextDetail/ModifyDeleteModal';
+
 
 const TextDetail = ({ commentCount, date }) => {
+  // 좋아요 수와 좋아요 상태를 관리하는 state
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
 
-  const handleLikeClick = () => {
-    const userConfirmed = window.confirm('이 글에 좋아요를 누르시겠습니까?');
+  // 수정 모드와 모달 열림 상태를 관리하는 state
+  const [isModify, setIsModify] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    if (userConfirmed) {
-      if (!liked) {
-        setLikes(likes + 1);
-        setLiked(true);
-      } else {
-        alert('이미 좋아요를 누른 글입니다.');
-      }
+  // 수정하기 버튼 클릭 시 호출되는 함수
+  const handleModifyClickTextDetail = () => {
+    setIsModify(true);
+    setIsModalOpen(true);
+  };
+
+  // 삭제하기 버튼 클릭 시 호출되는 함수
+  const handleDeleteClickTextDetail = () => {
+    setIsModify(false);
+    setIsModalOpen(true);
+  };
+
+   // 좋아요 버튼 클릭 시 호출되는 함수
+  const handleLikeClick = () => {
+    setLiked(!liked);
+    if (liked) {
+      setLikes(likes - 1); // 좋아요 상태가 true였다면, 좋아요 수를 1 감소
+    } else {
+      setLikes(likes + 1); // 좋아요 상태가 false였다면, 좋아요 수를 1 증가
     }
   };
+
+  // 스크롤을 페이지 바닥으로 이동시키는 함수
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: 'smooth',
     });
+  };
+
+    // 모달을 닫는 함수
+  const onClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -51,7 +75,12 @@ const TextDetail = ({ commentCount, date }) => {
           NameNicknameText="리오/이원영"
           CohortPartText="5기 &#124; Web"
         />
-        <MiniHambergerMenuBtn />
+        <div>
+          <MiniHambergerBtn
+            handleModifyClick={handleModifyClickTextDetail}
+            handleDeleteClick={handleDeleteClickTextDetail}
+          />
+        </div>
       </RowAlignBox>
       <TextTitle> 그냥 집에 보내주세요ㅠ.ㅠ </TextTitle>
       <TextContent>
@@ -78,17 +107,20 @@ const TextDetail = ({ commentCount, date }) => {
             src={liked ? LikeBtnImgLiked : LikeBtnImgNotLiked}
             alt="좋아요버튼"
             onClick={handleLikeClick}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', height: '30px' }}
           />
           <img
             src={CommentBtnImg}
             alt="댓글 버튼"
             onClick={scrollToBottom}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', height: '30px' }}
           />
         </LikeCommentViewCountWrapper>
         <Date>{date || '2023. 1. 16'}</Date>
       </LikeCommentDateWrapper>
+      {isModalOpen && (
+        <ModifyDeleteModal isModify={isModify} closeModal={onClose} />
+      )}
     </AllWrapper>
   );
 };

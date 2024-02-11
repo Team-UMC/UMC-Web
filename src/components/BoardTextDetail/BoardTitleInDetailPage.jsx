@@ -1,3 +1,5 @@
+// 게시판명을 위에 표기하는 파일(BoardTitle에서 가져와서 조금 변경 후사용)
+
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
