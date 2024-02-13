@@ -7,10 +7,7 @@ import Type from 'components/MyWriting/Type';
 import TypeComponent from 'components/MyWriting/TypeComponent';
 
 //import CommentList from './CommentList.jsx';
-<<<<<<< HEAD
-=======
 //import AdminTitle from 'components/Management/NoticePin/AdminTitle';
->>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
 
 const ContainerGrid = styled.div`
   display: flex;
@@ -25,11 +22,6 @@ const TypeContainer = styled.div`
   align-items: center;
 `;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
 const MyWrite = () => {
   const [activeType, setActiveType] = useState({
     writingButton: true,
@@ -47,14 +39,8 @@ const MyWrite = () => {
 
   return (
     <ContainerGrid>
-<<<<<<< HEAD
       <Title />
 
-=======
-    
-    <Title />
-    
->>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
       <TypeContainer>
         <Type activeType={activeType} handleTypeClick={handleTypeClick} />
       </TypeContainer>
