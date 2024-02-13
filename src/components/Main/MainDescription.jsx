@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const HeaderWrapper = styled.div`
-  margin: 0 auto;
+  margin: 112px auto 65px auto;
   width: 70%;
 `;
 
@@ -30,7 +30,7 @@ const MainDescription = ({ title, subtitle }) => {
           color: index === 2 ? '#7682F6' : 'inherit',
         }}
       >
-        {word}{' '}
+        {word}
       </span>
     </React.Fragment>
   ));

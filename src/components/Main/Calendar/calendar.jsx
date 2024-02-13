@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import styled from 'styled-components';
 import Calendar from 'react-calendar';
 import './calendar.css';
 import { CalendarData } from 'components/Main/Calendar/CalendarData';
+
+const StyledCalendarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+`
 
 const MyCalendar = () => {
   const [value, onChange] = useState(new Date());
@@ -144,7 +152,7 @@ const MyCalendar = () => {
   };
 
   return (
-    <div className="calendar">
+    <StyledCalendarWrapper>
       <Calendar
         onChange={onChange}
         formatDay={(locale, date) => moment(date).format('D')}

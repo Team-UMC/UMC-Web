@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from 'apis/setting';
+
 import styled from 'styled-components';
 
 import Photo from 'components/Setting/Profile/Photo';
 import Text from 'components/Setting/Profile/Text';
-import { useNavigate } from 'react-router-dom';
+
+import ProfileSettingTitle from 'components/Setting/Profile/ProfileSettingTitle';
 
 const Div = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 30vh auto 0 auto;
+  margin: 5vh auto 0 auto;
   width: 60%;
+  height: 95vh;
+  justify-content: space-evenly;
 `;
 
 const Ddiv = styled.div`
@@ -24,11 +30,11 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 60%;
+  height: 40%;
 `;
 
 const Again = styled.div`
-  width: 50%;
+  width: 30%;
 `;
 
 const ButtonContainer = styled.div`
@@ -40,7 +46,13 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.div`
-  width: 10%;
+  width: 8%;
+  height: 40px;
+
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   // 흰색 네모 박스 형태로 만들기
   border: 1px solid white;
@@ -52,37 +64,109 @@ const Button = styled.div`
 `;
 
 const ProfileSettingPage = () => {
+  const [name, setName] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+
   const navigate = useNavigate();
 
   const ExitHandler = () => {
-    navigate('/');
+    navigate('/main');
   };
 
-  // API 연결하여 상태메시지가 수정될 수 있도록 구현해야 함.
-  //const ModifyHandler = () => {};
+  const handleImageChange = (file) => {
+    setImageFile(file);
+  };
+
+  // 서버로부터 내 프로필 정보 받아오는 함수
+  useEffect(() => {
+    const getProfile = async () => {
+      const res = await axiosInstance.get('/members');
+
+      setName(res.data.result.name);
+      setNickname(res.data.result.nickname);
+      setStatusMessage(res.data.result.statusMessage);
+    };
+    getProfile();
+  }, [name, nickname, statusMessage]);
+
+  // 적용 버튼을 통해 내 상태메세지 변경하기
+  const changeProfile = async () => {
+    const formData = new FormData();
+
+    if (imageFile) {
+      formData.append('profileImage', imageFile);
+    }
+
+    formData.append(
+      'request',
+      JSON.stringify({
+        name: name,
+        nickname: nickname,
+        statusMessage: statusMessage,
+      }),
+    );
+
+    console.log('FormData:', formData);
+    console.log('Status Message:', formData.get('request'));
+
+    try {
+      const res = await axiosInstance.post('/members/update', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Server response: ', res.data);
+
+    } catch (error) {
+      console.error('Error occurred: ', error);
+    }
+  };
 
   return (
-    <div style={{ backgroundColor: '#F2F5FC' }}>
+    <div
+      className="board-page"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       <Div>
-        <div>프로필 설정 화면입니다.</div>
+        <ProfileSettingTitle />
         <Wrapper>
           <Again>
-            <Photo />
+            <Photo onImageChange={handleImageChange} />
           </Again>
           <Ddiv>
-            <Text label="이름" description="10자 이내" placeholder="" />
-            <Text label="닉네임" description="10자 이내" placeholder="" />
+            <Text
+              label="이름"
+              description="10자 이내"
+              placeholder=""
+              defaultValue={name}
+              onChange={(event) => setName(event.target.value)}
+            />
+            <Text
+              label="닉네임"
+              description="10자 이내"
+              placeholder=""
+              defaultValue={nickname}
+              onChange={(event) => setNickname(event.target.value)}
+            />
             <Text
               label="상태메세지"
               description="50자 이내"
               placeholder="상태메세지를 입력해주세요"
               customheight="100px"
+              defaultValue={statusMessage}
+              onChange={(event) => setStatusMessage(event.target.value)}
             />
           </Ddiv>
         </Wrapper>
         <ButtonContainer>
           <Button onClick={ExitHandler}> 취소 </Button>
-          <Button onClick={ExitHandler}> 적용 </Button>
+          <Button onClick={changeProfile}> 적용 </Button>
         </ButtonContainer>
       </Div>
     </div>

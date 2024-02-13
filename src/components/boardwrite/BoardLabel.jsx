@@ -1,19 +1,20 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import SchoolUnchecked from 'assets/board/write/SchoolUnchecked.svg'
-import SchoolChecked from 'assets/board/write/SchoolChecked.svg';
-import CampUnchecked from 'assets/board/write/CampUnchecked.svg';
-import CampChecked from 'assets/board/write/CampChecked.svg';
-import UnionUnchecked from 'assets/board/write/UnionUnchecked.svg';
-import UnionChecked from 'assets/board/write/UnionChecked.svg';
+import CampusUnchecked from 'assets/board/write/SchoolUnchecked.svg';
+import CampusChecked from 'assets/board/write/SchoolChecked.svg';
+import BranchUnchecked from 'assets/board/write/CampUnchecked.svg';
+import BranchChecked from 'assets/board/write/CampChecked.svg';
+import CenterUnchecked from 'assets/board/write/UnionUnchecked.svg';
+import CenterChecked from 'assets/board/write/UnionChecked.svg';
 import SuggestionUnchecked from 'assets/board/write/SuggestionUnchecked.svg';
 import SuggestionChecked from 'assets/board/write/SuggestionChecked.svg';
 
-import SchoolBoard from './BoardSchool';
-import CampBoard from './BoardCamp';
-//import UnionBoard from './BoardUnion';
+import CampusBoard from './BoardCampus';
+import BranchBoard from './BoardBranch';
+import CenterBoard from './BoardCenter';
 
 const ContainerType = styled.div`
   display: flex;
@@ -24,75 +25,101 @@ const TypeLink = styled(Link)`
   cursor: pointer;
 `;
 
-const BoardLabel = () => {
-  const [buttonStates, setButtonStates] = useState({
-    schoolButton: true,
-    campButton: false,
-    unionButton: false,
-    suggestionButton: false,
-  });
+const BoardLabel = ({
+  selectedHost,
+  setSelectedHost,
+  selectedBoard,
+  setSelectedBoard,
+  buttonStates,
+  setButtonStates,
+}) => {
+  // const hostChange = useCallback(
+  //   (e) => {
+  //     setSelectedHost(e.target.value);
+  //   },
+  //   [selectedHost],
+  // );
 
-  const handleClick = (buttonName) => {
+  // const boardChange = useCallback(
+  //   (e) => {
+  //     setSelectedBoard(e.target.value);
+  //   },
+  //   [selectedBoard],
+  // );
+
+  const handleClick = (buttonName, host, board) => {
     setButtonStates((prevStates) => ({
-      schoolButton: buttonName === 'schoolButton' ? !prevStates.schoolButton : false,
-      campButton: buttonName === 'campButton' ? !prevStates.campButton : false,
-      unionButton: buttonName === 'unionButton' ? !prevStates.unionButton : false,
-      suggestionButton: buttonName === 'suggestionButton' ? !prevStates.suggestionButton : false,
+      ...prevStates,
+      campusButton: buttonName === 'campusButton',
+      branchButton: buttonName === 'branchButton',
+      centerButton: buttonName === 'centerButton',
+      suggestionButton: buttonName === 'suggestionButton',
     }));
+    setSelectedHost(host);
+    setSelectedBoard(board);
   };
-  
 
   return (
     <div>
       <ContainerType>
         <div>
-          <TypeLink to="#" onClick={() => handleClick('schoolButton')}>
-            {buttonStates.schoolButton ? (
-              <img src={SchoolChecked} alt="Inactive Image" />
+          <TypeLink to="#" onClick={() => handleClick('campusButton', 'CAMPUS', 'NOTICE')}>
+            {buttonStates.campusButton ? (
+              <img src={CampusChecked} alt="Inactive Image" />
             ) : (
-              <img src={SchoolUnchecked} alt="학교" />
+              <img src={CampusUnchecked} alt="학교" />
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('campButton')}>
-            {buttonStates.campButton ? (
-              <img src={CampChecked} alt="Inactive Image" />
+          <TypeLink to="#" onClick={() => handleClick('branchButton', 'BRANCH', 'NOTICE')}>
+            {buttonStates.branchButton ? (
+              <img src={BranchChecked} alt="Inactive Image" />
             ) : (
-              <img src={CampUnchecked} alt="지부" />
+              <img src={BranchUnchecked} alt="지부" />
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('unionButton')}>
-            {buttonStates.unionButton ? (
-              <img src={UnionChecked} alt="Inactive Image" />
+          <TypeLink to="#" onClick={() => handleClick('centerButton', 'CENTER', 'NOTICE')}>
+            {buttonStates.centerButton ? (
+              <img src={CenterChecked} alt="Inactive Image" />
             ) : (
-              <img src={UnionUnchecked} alt="연합" />
+              <img src={CenterUnchecked} alt="연합" />
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('suggestionButton')}>
+          <TypeLink to="#" onClick={() => handleClick('suggestionButton', 'CENTER', 'NOTICE')}>
             {buttonStates.suggestionButton ? (
               <img src={SuggestionChecked} alt="Inactive Image" />
             ) : (
               <img src={SuggestionUnchecked} alt="연합" />
             )}
           </TypeLink>
-
-
         </div>
       </ContainerType>
-      {buttonStates.schoolButton && <SchoolBoard />}{' '}
-      {/* Conditionally render SchoolBoard */}
-      {buttonStates.campButton && <CampBoard />}{' '}
-      {/* Conditionally render SchoolBoard */}
-      {buttonStates.unionButton && <CampBoard />}{' '}
-      {/* Conditionally render SchoolBoard */}
-      {buttonStates.suggestionButton && <CampBoard />}{' '}
-      {/* Conditionally render SchoolBoard */}
 
-
+      {buttonStates.campusButton && (
+        <CampusBoard host={selectedHost} board={selectedBoard} />
+      )}
+      {buttonStates.branchButton && (
+        <BranchBoard host={selectedHost} board={selectedBoard} />
+      )}
+      {buttonStates.centerButton && (
+        <CenterBoard host={selectedHost} board={selectedBoard} />
+      )}
+      {buttonStates.suggestionButton && (
+        <CampusBoard host={selectedHost} board={selectedBoard} />
+      )}
     </div>
   );
+};
+
+BoardLabel.propTypes = {
+  selectedHost: PropTypes.string.isRequired,
+  setSelectedHost: PropTypes.func.isRequired,
+  selectedBoard: PropTypes.string.isRequired,
+  setSelectedBoard: PropTypes.func.isRequired,
+  buttonStates: PropTypes.object.isRequired,
+  setButtonStates: PropTypes.func.isRequired,
 };
 
 export default BoardLabel;

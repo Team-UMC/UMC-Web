@@ -5,9 +5,9 @@ import { Card as MuiCard, CardContent as MuiCardContent } from '@mui/material';
 import styled from 'styled-components';
 
 import suggestion from 'assets/boardCard/suggestion.svg';
-import school from 'assets/boardCard/school.svg';
+import campus from 'assets/boardCard/school.svg';
 import branch from 'assets/boardCard/branch.svg';
-import union from 'assets/boardCard/union.svg';
+import center from 'assets/boardCard/union.svg';
 
 // 게시판 박스를 감싸는 컴포넌트
 const Card = styled(MuiCard)`
@@ -165,14 +165,14 @@ const BoardBoxWrapper = () => {
   // 게시판 박스의 정보
   const boardBoxes = [
     {
-      image: school,
-      title: ['학교', 'school'],
+      image: campus,
+      title: ['학교', 'campus'],
       links: [
         { name: '공지사항', path: 'notice' },
         { name: '자유 게시판', path: 'free' },
         { name: '질문 게시판', path: 'question' },
         { name: '워크북 게시판', path: 'workbook' },
-        { name: '이전 기수 게시판', path: 'prev' },
+        { name: '이전 기수 게시판', path: 'ob' },
       ],
     },
     {
@@ -182,17 +182,17 @@ const BoardBoxWrapper = () => {
         { name: '공지사항', path: 'notice' },
         { name: '자유 게시판', path: 'free' },
         { name: '질문 게시판', path: 'question' },
-        { name: '이전 기수 게시판', path: 'prev' },
+        { name: '이전 기수 게시판', path: 'ob' },
       ],
     },
     {
-      image: union,
-      title: ['연합', 'union'],
+      image: center,
+      title: ['연합', 'center'],
       links: [
         { name: '공지사항', path: 'notice' },
         { name: '자유 게시판', path: 'free' },
         { name: '질문 게시판', path: 'question' },
-        { name: '이전 기수 게시판', path: 'prev' },
+        { name: '이전 기수 게시판', path: 'ob' },
       ],
     },
     {

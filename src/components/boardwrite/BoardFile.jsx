@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Add from '../../assets/add.svg';
 
@@ -8,7 +9,7 @@ const FileContainer = styled.div`
   padding: 1.5vh;
   flex-direction: column;
   border-radius: 12px;
-  border: 1px solid #232A6D;
+  border: 1px solid #232a6d;
 `;
 
 const FileText = styled.div`
@@ -27,7 +28,7 @@ const AddIcon = styled.img`
 
 const FileNameContainer = styled.div`
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
 `;
 
 const FileName = styled.p`
@@ -35,16 +36,16 @@ const FileName = styled.p`
   color: #000000;
   display: inline-block;
   padding: 8px 16px;
-  margin-top:0.5em;
+  margin-top: 0.5em;
   border-radius: 12px;
-  background: #E3E3E3;
-  margin-bottom: 8px;  
+  background: #e3e3e3;
+  margin-bottom: 8px;
   margin-right: 8px;
   width: 35vh;
 `;
 
 const DeleteButton = styled.span`
-  color: #9D9D9D;
+  color: #9d9d9d;
   cursor: pointer;
   margin-left: 100px;
 `;
@@ -53,39 +54,55 @@ const FileInput = styled.input`
   display: none;
 `;
 
-const BoardFile = () => {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-
+const BoardFile = ({ file, setFile }) => {
   const handleFileChange = (event) => {
+    const newFiles = [...file]; // 기존 파일 배열을 복사합니다.
     const files = event.target.files;
-    setSelectedFiles([...selectedFiles, ...files]);
+    for (let i = 0; i < files.length; i++) {
+      newFiles.push(files[i]); // 새 파일을 기존 파일 배열에 추가합니다.
+    }
+    setFile(newFiles);
   };
 
   const handleDeleteFile = (index) => {
-    const newFiles = [...selectedFiles];
+    const newFiles = [...file];
     newFiles.splice(index, 1);
-    setSelectedFiles(newFiles);
+    setFile(newFiles);
   };
 
   return (
     <FileContainer>
-      
       <FileText>
         첨부파일
-        <AddIcon src={Add} alt="Add" onClick={() => document.getElementById('fileInput').click()} />
+        <AddIcon
+          src={Add}
+          alt="Add"
+          onClick={() => document.getElementById('fileInput').click()}
+        />
       </FileText>
-      <FileInput type="file" id="fileInput" onChange={handleFileChange} multiple />
-      
+      <FileInput
+        type="file"
+        id="fileInput"
+        onChange={handleFileChange}
+        multiple
+      />
       <FileNameContainer>
-      {selectedFiles.map((file, index) => (
-        <FileName key={index}>
-          {file.name}
-          <DeleteButton onClick={() => handleDeleteFile(index)}>X</DeleteButton>
-        </FileName>
-      ))}
+        {file.map((files, index) => (
+          <FileName key={index}>
+            {files.name}
+            <DeleteButton onClick={() => handleDeleteFile(index)}>
+              X
+            </DeleteButton>
+          </FileName>
+        ))}
       </FileNameContainer>
     </FileContainer>
   );
+};
+
+BoardFile.propTypes = {
+  file: PropTypes.array,
+  setFile: PropTypes.func.isRequired,
 };
 
 export default BoardFile;
