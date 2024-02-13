@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types"; // Import PropTypes
+import PropTypes from "prop-types"; 
 
 //import AdminPage from 'layout/NoticePin/AdminPage';
 import BoardTitle from '../BoardWrite/BoardTitle';
@@ -13,6 +13,8 @@ import SearchChallenger from "./SearchChallenger.jsx";
 import ChallengerType from "./ChallengerType";
 import ChallengerPosition from "./ChallengerPosition";
 import styled from "styled-components";
+
+import NewAdminTable from 'components/Management/NoticePin/NewAdminTable';
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -30,12 +32,19 @@ const ButtonContainerChallenger = styled.div`
   margin-left: 16px;
 `;
 
-
+const TableLayout = styled(NewAdminTable)`
+  display: flex;
+  padding-bottom: 80px;
+`;
 
 const TypeComponent = ({ buttonStates }) => {
   return (
     <div>
-      {/* {buttonStates.setnoticeButton && <MyList />} {' '} */}
+      {buttonStates.setnoticeButton && (
+        <>
+           <TableLayout /> 
+        </>
+      )}{' '}
 
       {buttonStates.calenderButton && (
         <>
@@ -66,7 +75,6 @@ const TypeComponent = ({ buttonStates }) => {
   );
 };
 
-// Define PropTypes for TypeComponent
 TypeComponent.propTypes = {
   buttonStates: PropTypes.shape({
     setnoticeButton: PropTypes.bool,
