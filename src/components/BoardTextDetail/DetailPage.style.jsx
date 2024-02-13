@@ -1,4 +1,14 @@
+// DetailPage, MessagePage(BoardTitleBigWrapper,BoardTitleMediumWrapper,BoardTitleSmallWrapper,BoardText,BoardSubText사용)를 
+// 스타일링 하는 파일
+
 import styled from 'styled-components';
+
+// BoardBox, TextDetail, CommentWrite, Comment를 정렬하기 위한 박스
+const AlignWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start; // 왼쪽 정렬
+  gap: 10vw;
+`;
 
 const BoardTitleBigWrapper = styled.div`
   padding-top: 10vh;
@@ -7,13 +17,6 @@ const BoardTitleBigWrapper = styled.div`
   padding-bottom: 5%;
   flex-direction: row;
   gap: 0.1vw;
-`;
-
-const AlignWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10vw;
 `;
 
 const BoardTitleMediumWrapper = styled.div`
@@ -27,16 +30,6 @@ const BoardTitleSmallWrapper = styled.div`
   width: 100%;
   flex-direction: row;
   gap: 0.1vw;
-`;
-
-const FreeText = styled.span`
-  color: #7682f6;
-  font-family: 'Pretendard';
-  font-size: 2em;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: -2.8px;
 `;
 
 const BoardText = styled.span`
@@ -59,6 +52,7 @@ const BoardSubText = styled.p`
   letter-spacing: -1.4px;
 `;
 
+// TextDetail을 스타일링하기 위한 박스
 const BoxContainer = styled.div`
   font-family: 'Pretendard';
   background-color: #fff;
@@ -67,13 +61,20 @@ const BoxContainer = styled.div`
   word-wrap: break-word;
 `;
 
+// BoardTitle, BoardBox, TextDetail, CommentWrite, Comment를 정렬하는 박스
+const AllAlignBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 10vw;
+`;
+
 export {
   BoardTitleBigWrapper,
   BoardTitleMediumWrapper,
   BoardTitleSmallWrapper,
-  FreeText,
   BoardText,
   BoardSubText,
   BoxContainer,
   AlignWrapper,
+  AllAlignBox,
 };

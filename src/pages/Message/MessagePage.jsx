@@ -1,5 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import {
+  BackgroundStyle,
+  UserName2,
+  MessageBoxStyle,
+  MessageBox,
+  AllDeleteBtn,
+  HambergerMenuAlignBox,
+  UserInfoAndMenu,
+  InputAlignBox,
+  //   MessageSelect,
+} from './MessagePage.style';
 import Message from 'components/Message/Message';
 import PropTypes from 'prop-types';
 import messageIcon from 'assets/messageIcon.svg';
@@ -11,44 +21,46 @@ import {
   BoardSubText,
 } from 'components/BoardTextDetail/DetailPage.style';
 import MessageWrite from 'components/Message/MessageWrite';
-// import BoardTitleSchool from 'components/BoardTitle/BoardTitleSchool';
+import { ReactComponent as MiniHambergerMenu } from 'assets/MiniHamberMenu.svg';
+// import styled from 'styled-components';
 
-const BackgroundStyle = styled.div`
-  background-color: #f2f5fc;
-  height: 100vh;
-  margin-top: 9vh;
-`;
-
-const UserName2 = styled.h2`
-  display: flex;
-  justify-content: center;
-`;
-
-const MessageBoxStyle = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2vw;
-`;
-
-const MessageBox = styled.div`
-  width: 40%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: #ffffff;
-`;
-
-const AlignContainer = styled.div`
-  margin: 0 20%;
-`;
+// const MessageSelect = styled(Message)`
+//   background-color: ${(props) => (props.selected ? '#FFFFFF' : '#EAEAFF')};
+// `;
 
 const MessagePage = ({ UserInformation }) => {
   //eslint-disable-next-line
   const [isVisible, setIsVisible] = useState(false);
   const messageWriteRef = useRef(null);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    // { user: 'User1', content: 'Hello, this is User1' },
+    // { user: 'User2', content: 'Hello, this is User2' },
+  ]);
+  const [showBtn, setshowBtn] = useState(false);
+  const [latestMessage, setLatestMessage] = useState(null);
+  //   const [selected, setSelected] = useState(null);
+  //   const [selectedUser, setSelectedUser] = useState(null);
+
+  //   const handleUserSelect = (user) => {
+  //     setSelectedUser(user);
+  //   };
+
+  //   const MessageClick = () => {
+  //     setSelected(!selected);
+  //   };
 
   const handleMessageSubmit = (newMessage) => {
     setMessages([...messages, newMessage]);
+    setLatestMessage(newMessage);
+  };
+
+  const handleShowBtnClick = () => {
+    setshowBtn(!showBtn);
+  };
+
+  const handleAllDeleteClick = () => {
+    setMessages([]);
+    setshowBtn(false);
   };
 
   useEffect(() => {
@@ -57,14 +69,22 @@ const MessagePage = ({ UserInformation }) => {
       messageWriteRef.current.setLatestMessage(messages[messages.length - 1]);
     }
   }, [messages]);
+
   const handleMessageClick = () => {
-    setIsVisible(true);
+    // setIsVisible(true);
     // background-color: #EAEAFF;
   };
 
   return (
-    <BackgroundStyle>
-      <AlignContainer>
+    <div
+      className="board-page"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <BackgroundStyle>
         <BoardTitleBigWrapper>
           <img src={messageIcon} alt="쪽지 아이콘" />
           <BoardTitleMediumWrapper>
@@ -77,30 +97,59 @@ const MessagePage = ({ UserInformation }) => {
         <MessageBoxStyle>
           <MessageBox>
             <UserName2>쪽지 목록</UserName2>
-
-            <Message onClick={handleMessageClick} />
-            <Message onClick={handleMessageClick} />
-          </MessageBox>
-
-          <MessageBox>
-            <UserName2> {UserInformation || '익명'} </UserName2>
-            {messages.map((message, index) => (
-              <Message
-                UserInformation={
-                  <h3 style={{ color: '#8784FF' }}>보낸 쪽지</h3>
-                }
-                key={index}
-                Content={message.content}
-              />
-            ))}
-            <MessageWrite
-              onMessageSubmit={handleMessageSubmit}
-              ref={messageWriteRef}
+            {/* {messages.map((message, index) => (
+    <MessageSelect
+      key={index}
+      selected={selected === index}
+      onClick={() => setSelected(index)}
+    />
+  ))} */}
+            <Message
+              onClick={handleMessageClick}
+              Content={latestMessage ? latestMessage.content : ''}
             />
+            <Message onClick={handleMessageClick} />
           </MessageBox>
+
+          {/* {isVisible && ( */}
+          <MessageBox>
+            <InputAlignBox>
+              <UserInfoAndMenu>
+                <UserName2> {UserInformation || '익명'} </UserName2>
+                <HambergerMenuAlignBox>
+                  <MiniHambergerMenu onClick={handleShowBtnClick} />
+                  {showBtn && (
+                    <AllDeleteBtn onClick={handleAllDeleteClick}>
+                      전체 삭제
+                    </AllDeleteBtn>
+                  )}
+                </HambergerMenuAlignBox>
+              </UserInfoAndMenu>
+              {/* {[...messages]
+              .reverse()
+              .filter((message) => message.user === selectedUser)
+              .map((message, index) => ( */}
+              {[...messages].reverse().map((message, index) => (
+                <Message
+                  UserInformation="보낸 쪽지"
+                  // {
+                  //   <h3 style={{ color: '#00B2B2' }}>보낸 쪽지</h3>
+                  // }
+                  key={index}
+                  Content={message.content}
+                />
+              ))}
+
+              <MessageWrite
+                onMessageSubmit={handleMessageSubmit}
+                ref={messageWriteRef}
+              />
+            </InputAlignBox>
+          </MessageBox>
+          {/* )} */}
         </MessageBoxStyle>
-      </AlignContainer>
-    </BackgroundStyle>
+      </BackgroundStyle>
+    </div>
   );
 };
 
