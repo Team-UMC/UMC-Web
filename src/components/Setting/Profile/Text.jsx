@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+const Container = styled.div`
+
+`;
+
 const UpperWrapper = styled.div`
   display: flex;
 
@@ -36,13 +40,15 @@ const Textarea = styled.textarea`
   border: 1px solid #4e4e4e;
   border-radius: 10px;
 
+  padding: 7px 0 0 10px;
+
   // 상태메세지 textarea 크기 조절
   height: ${(props) => props.customheight || '30px'};
 `;
 
-const Text = ({ label, description, placeholder, customheight }) => {
+const Text = ({ label, description, placeholder, customheight, defaultValue, onChange }) => {
   return (
-    <>
+    <Container>
       <UpperWrapper>
         <Title> {label} </Title>
         <CharacterLimit> {description} </CharacterLimit>
@@ -52,8 +58,10 @@ const Text = ({ label, description, placeholder, customheight }) => {
         type="text"
         placeholder={placeholder}
         customheight={customheight}
+        defaultValue={defaultValue}
+        onChange={onChange}
       />
-    </>
+    </Container>
   );
 };
 
@@ -62,6 +70,8 @@ Text.propTypes = {
   description: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   customheight: PropTypes.string,
+  defaultValue: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default Text;

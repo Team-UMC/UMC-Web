@@ -31,8 +31,7 @@ const ButtonTIL = () => {
   return (
     <ButtonContainer>
       <Button>작성</Button>
-      {/* "/todayilearn" 경로로 이동하는 Link */}
-      <StyledLink to="/todayilearn">
+      <StyledLink to="/todayilearn">       {/* "/todayilearn" 경로로 이동하는 Link */}
         <Button>취소</Button>
       </StyledLink>
     </ButtonContainer>

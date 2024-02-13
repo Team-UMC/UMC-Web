@@ -6,6 +6,9 @@ import RightContainer from 'components/Header/RightContainer';
 
 import LargeHeaderImage from 'assets/header/LargeHeader.svg';
 import SmallHeaderImage from 'assets/header/SmallHeader.png';
+import HamburgerMenuBtnImage from 'assets/header/HamburgerButton.svg';
+
+import HamburgerMenu from './Hamburgermenu';
 
 const HeaderWrapper = styled.div`
   background: url(${LargeHeaderImage}) no-repeat center center;
@@ -32,7 +35,12 @@ const Wrapper = styled.div`
 `;
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [canScrolled, setScrolled] = useState(false);
+
+  const toggleSide = () => {
+    setIsOpen(true);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,10 +66,17 @@ const Header = () => {
         isScrolled={canScrolled}
       >
         <Wrapper>
+          <img
+            src={HamburgerMenuBtnImage}
+            onClick={toggleSide}
+            style={{ cursor: 'pointer', color: 'white' }}
+          />
           <LeftContainer />
           <RightContainer isScrolled={canScrolled} />
         </Wrapper>
       </HeaderWrapper>
+
+      <HamburgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

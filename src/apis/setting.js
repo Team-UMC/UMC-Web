@@ -7,12 +7,12 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    config.headers['Authorization'] = localStorage.getItem('accessToken');
+    config.headers['Authorization'] = localStorage.getItem('server Token');
     return config;
   },
   (error) => {
     return Promise.reject(error);
-  }
-)
+  },
+);
 
 export default axiosInstance;

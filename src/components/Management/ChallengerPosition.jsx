@@ -6,13 +6,12 @@ import PositionCheckedImg from 'assets/management/positionChecked.svg';
 import AddImg from 'assets/management/addPosition.svg';
 
 const ChallengerPositionContainer = styled.div`
-  width: 120vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  border: 1px solid #232A6D;
 `;
 
 const TitleContainer = styled.div`
@@ -22,6 +21,8 @@ const TitleContainer = styled.div`
   font-weight: 500;
   padding: 16px;
   margin-top: 16px;
+  background-color: #fff;
+
   border: 1px solid #232A6D;
 `;
 
@@ -167,6 +168,94 @@ const ChallengerPosition = () => {
 
         </PositionContainer>
         <SubTitle>중앙</SubTitle>
+
+        <PositionContainer>
+
+          <Position
+            onClick={() => handlePositionClick('회장')}
+            checked={positionChecked.회장}
+          >
+            <img src={positionChecked.회장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            회장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('부회장')}
+            checked={positionChecked.부회장}
+          >
+            <img src={positionChecked.부회장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            부회장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('운영국장')}
+            checked={positionChecked.운영국장}
+          >
+            <img src={positionChecked.운영국장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            운영국장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('PM파트장')}
+            checked={positionChecked.PM파트장}
+          >
+            <img src={positionChecked.PM파트장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            PM파트장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('Design파트장')}
+            checked={positionChecked.Design파트장}
+          >
+            <img src={positionChecked.Design파트장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            Design파트장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('Spring파트장')}
+            checked={positionChecked.Spring파트장}
+          >
+            <img src={positionChecked.Spring파트장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            Spring파트장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('Node파트장')}
+            checked={positionChecked.Node파트장}
+          >
+            <img src={positionChecked.Node파트장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            Node파트장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('Web파트장')}
+            checked={positionChecked.Web파트장}
+          >
+            <img src={positionChecked.Web파트장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            Web파트장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('iOS파트장')}
+            checked={positionChecked.iOS파트장}
+          >
+            <img src={positionChecked.iOS파트장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            iOS파트장
+          </Position>
+
+          <Position
+            onClick={() => handlePositionClick('Android파트장')}
+            checked={positionChecked.Android파트장}
+          >
+            <img src={positionChecked.Android파트장 ? PositionCheckedImg : PositionUncheckedImg} alt='직책' />
+            Android파트장
+          </Position>
+
+          <Position>
+            <img src={AddImg} alt='직책추가' /> 직책추가
+          </Position>
+
+        </PositionContainer>
       </TitleContainer>
     </ChallengerPositionContainer>
   );

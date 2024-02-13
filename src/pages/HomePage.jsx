@@ -7,21 +7,23 @@ import NaverLoginImage from 'assets/signup/Naver_Login_Button.png';
 
 const Background = styled.div`
   background: url(${BackgroundImage}) no-repeat center center;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
 `;
 
-const Button = styled.a`
+const ButtonWrapper = styled.div`
   display: flex;
-  width: 30%;
+  flex-direction: column;
+  margin: 20% 15% 20% auto;
+`;
+
+const Button = styled.a`
   cursor: pointer;
 `;
 
-const LoginButtonImage = styled.img`
-  width: 100%;
-  height: 90px;
-`;
+const LoginButtonImage = styled.img``;
 
 const HomePage = () => {
   const KakaoLoginURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
@@ -29,15 +31,19 @@ const HomePage = () => {
 
   return (
     <Background>
-      <Button href={KakaoLoginURL}>
-        <LoginButtonImage src={KakaoLoginImage} />
-      </Button>
-      <Button to="/signupform">
-        <LoginButtonImage src={GoogleLoginImage} />
-      </Button>
-      <Button href={NaverLoginURL}>
-        <LoginButtonImage src={NaverLoginImage} />
-      </Button>
+      <ButtonWrapper>
+        <Button href={KakaoLoginURL}>
+          <LoginButtonImage src={KakaoLoginImage} />
+        </Button>
+
+        <a>
+          <LoginButtonImage src={GoogleLoginImage} />
+        </a>
+
+        <Button href={NaverLoginURL}>
+          <LoginButtonImage src={NaverLoginImage} />
+        </Button>
+      </ButtonWrapper>
     </Background>
   );
 };

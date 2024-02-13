@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
@@ -13,19 +13,26 @@ const Wrapper = styled.select`
 `;
 
 const University = ({
-  userData,
-  handleChange,
+  universityName,
+  setUniversityName,
   handleNextStep,
   handlePrevStep,
 }) => {
+  const universityChange = useCallback(
+    (e) => {
+      setUniversityName(e.target.value);
+    },
+    [universityName],
+  );
+
   return (
     <SignUpFormStyle.Wrapper>
       <SignUpFormStyle.SignUpFormWrapper>
         <h2> 학교를 선택해주세요 </h2>
         <Wrapper
           name="universityName"
-          value={userData.universityName}
-          onChange={handleChange}
+          value={universityName}
+          onChange={universityChange}
         >
           <option value="" disabled hidden>
             학교 선택하기
@@ -65,15 +72,15 @@ const University = ({
 
       <SignUpFormStyle.StepButtonWrapper>
         <PrevButton handlePrevStep={handlePrevStep} />
-        {userData.universityName && <NextButton handleNextStep={handleNextStep} />}
+        {universityName && <NextButton handleNextStep={handleNextStep} />}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
 University.propTypes = {
-  userData: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  universityName: PropTypes.string.isRequired,
+  setUniversityName: PropTypes.func.isRequired,
   handleNextStep: PropTypes.func.isRequired,
   handlePrevStep: PropTypes.func.isRequired,
 };

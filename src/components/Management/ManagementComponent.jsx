@@ -1,9 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types"; // Import PropTypes
+import PropTypes from "prop-types"; 
 
-//import AdminPage from 'layout/NoticePin/AdminPage';
-import BoardTitle from '../BoardWrite/BoardTitle';
-import BoardText from '../BoardWrite/BoardText';
+import BoardTitle from 'components/BoardWrite/BoardTitle';
+import BoardText from 'components/BoardWrite/BoardText';
+
+import AdminPage from 'layout/NoticePin/AdminPage.jsx';
 import ManagementButton from 'components/Management/Button';
 import StartendDate from 'components/Management/StartendDate';
 import Local from 'components/Management/SelectLocal';
@@ -13,6 +14,8 @@ import SearchChallenger from "./SearchChallenger.jsx";
 import ChallengerType from "./ChallengerType";
 import ChallengerPosition from "./ChallengerPosition";
 import styled from "styled-components";
+
+import NewAdminTable from 'components/Management/NoticePin/NewAdminTable';
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -30,13 +33,26 @@ const ButtonContainerChallenger = styled.div`
   margin-left: 16px;
 `;
 
-
+const TableLayout = styled(NewAdminTable)`
+  display: flex;
+  padding-bottom: 80px;
+`;
 
 const TypeComponent = ({ buttonStates }) => {
   return (
     <div>
-      {/* {buttonStates.setnoticeButton && <MyList />} {' '} */}
+      {buttonStates.setnoticeButton && (
+        <>
+<<<<<<< HEAD
+          <AdminPage />
+        </>
+      )}
+=======
+           <TableLayout /> 
+        </>
+      )}{' '}
 
+>>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />
@@ -48,25 +64,21 @@ const TypeComponent = ({ buttonStates }) => {
             <ManagementButton />
           </ButtonContainer>
         </>
-      )}{' '}
-
-     {buttonStates.challengerButton && (
-     <>
-        <SearchChallenger />
-        <ChallengerPosition />
-        <ChallengerType />
-        <ButtonContainerChallenger>
-          <ManagementButton />
-        </ButtonContainerChallenger>
-
-     </>
-     )} {' '} 
-
+      )}
+      {buttonStates.challengerButton && (
+        <>
+          <SearchChallenger />
+          <ChallengerPosition />
+          <ChallengerType />
+          <ButtonContainerChallenger>
+            <ManagementButton />
+          </ButtonContainerChallenger>
+        </>
+      )}
     </div>
   );
 };
 
-// Define PropTypes for TypeComponent
 TypeComponent.propTypes = {
   buttonStates: PropTypes.shape({
     setnoticeButton: PropTypes.bool,

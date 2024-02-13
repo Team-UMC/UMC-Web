@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import BoardFile from 'components/BoardWrite/BoardFile';
+//import BoardFile from 'components/BoardWrite/BoardFile';
 import NotionLink from './Notion';
 import BoardTitle from 'components/BoardWrite/BoardTitle';
 import SubTitle from './SubTitle';
@@ -11,9 +11,9 @@ import ButtonTIL from './ButtonTIL';
 import TILCalender from './Calender';
 
 const NewTILContainer = styled.div`
-display: flex;
-flex-direction: column;
-margin: 0vh 50vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0vh 50vh;
 `;
 
 const Title = styled.div`
@@ -22,25 +22,23 @@ const Title = styled.div`
   font-weight: 600;
   margin-top: 15vh;
   margin-bottom: 5vh;
-  color: #00095C;
+  color: #00095c;
 `;
 
 const NewTIL = () => {
-    return(
-
+  return (
     <NewTILContainer>
-        <Title>TodayILearn</Title>
-        <TILCalender />
-        <OptionTIL />
-        <BoardFile />
-        <NotionLink />
-        <BoardTitle />
-        <SubTitle />
-        <BoardText />
-        <ButtonTIL />
-
+      <Title>Today I Learned</Title>
+      <TILCalender />
+      <OptionTIL />
+      {/*<BoardFile />*/}
+      <NotionLink />
+      <BoardTitle />
+      <SubTitle />
+      <BoardText />
+      <ButtonTIL />
     </NewTILContainer>
-    );
+  );
 };
 
 export default NewTIL;
