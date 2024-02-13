@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-//import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //import axios from 'axios';
-import PropTypes from 'prop-types';
+import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
-//import RightModal from './RightModal';
-
 import Profile from 'components/Profile/Profile';
-
-import MyProfileImage from 'assets/header/ProfileImage.png';
+import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
+import { useNavigate } from 'react-router-dom';
 
 const Overlay = styled.div`
   position: fixed;
@@ -22,7 +19,7 @@ const Overlay = styled.div`
 
 const Container = styled.div`
   display: flex;
-  width: 15%;
+  width: 20%;
   height: 50%;
   flex-direction: column;
   justify-content: space-around;
@@ -48,37 +45,56 @@ const ProfileNickname = styled.div`
   color: white;
 `;
 
-const RightContainer = ({ isScrolled }) => {
+const LogoutButton = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  color: white;
+
+  border: 1px solid white;
+  border-radius: 5px;
+`;
+
+const RightContainer = () => {
+  const navigate = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  {
-    /* 서버와 연결 후에 사용
   const [nickname, setNickname] = useState('');
+  const [profileImage, setProfileImage] = useState('');
 
   useEffect(() => {
-    const getNickname = async () => {
+    const getProfile = async () => {
       try {
-        const res = await axios.get();
+        const res = await axiosInstance.get(`/members`);
 
-        setNickname(res.data.nickname);
+        setNickname(res.data.result.nickname);
+        setProfileImage(res.data.result.profileImage);
       } catch (error) {
         console.error('Error get nickname', error);
       }
     };
 
-    getNickname();
+    getProfile();
   }, []);
-*/
-  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('server Token');
+    navigate('/');
+  };
 
   return (
     <Container>
       <Wrapper onClick={() => setIsModalOpen(true)}>
-        <ProfileImage src={MyProfileImage} isScrolled={isScrolled} />
+        {profileImage ? (
+          <ProfileImage src={profileImage} />
+        ) : (
+          <ProfileImage src={BasicProfileImage} />
+        )}
+        <ProfileNickname> {`${nickname}님 반가워요!`} </ProfileNickname>
 
-        <ProfileNickname> 눈꽃님 안녕하세요! </ProfileNickname>
-        {/*서버와 연결 시 아래 코드로 변경 */}
-        {/*<Profile> {`${nickname}님 안녕하세요!`} </Profile>*/}
+        <LogoutButton onClick={handleLogout}> 로그아웃 </LogoutButton>
       </Wrapper>
       {isModalOpen && (
         <>
@@ -88,10 +104,6 @@ const RightContainer = ({ isScrolled }) => {
       )}
     </Container>
   );
-};
-
-RightContainer.propTypes = {
-  isScrolled: PropTypes.bool.isRequired,
 };
 
 export default RightContainer;

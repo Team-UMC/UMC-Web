@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 
 const Button = styled.div`
   height: 6vh;
@@ -32,13 +32,7 @@ const Description = styled.div`
   height: 400px;
 `;
 
-const SignUpComplete = () => {
-  const navigate = useNavigate();
-
-  const handleSubmitButtonClick = () => {
-    navigate('/main');
-  };
-
+const SignUpComplete = ({ handleSubmit }) => {
   return (
     <Description>
       <h1> 🎉 회원가입이 끝났어요 🥳 </h1>
@@ -48,9 +42,13 @@ const SignUpComplete = () => {
       <p> 수많은 챌린저가 함께할 거예요! </p>
       <p> 그럼 지금 바로 수많은 챌린저들을 만나러 가볼까요?!</p>
 
-      <Button onClick={handleSubmitButtonClick}> UMC 어플로 입장하기 </Button>
+      <Button onClick={handleSubmit}> UMC 어플로 입장하기 </Button>
     </Description>
   );
+};
+
+SignUpComplete.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default SignUpComplete;

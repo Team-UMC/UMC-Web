@@ -1,10 +1,9 @@
-import styled from 'styled-components';
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const ContainerBoard = styled.div`
   display: flex;
   margin-bottom: 5vh;
-
 `;
 
 const Board = styled.div`
@@ -21,15 +20,16 @@ const Board = styled.div`
   margin-top: 0.7em;
   cursor: pointer;
   font-size: 14px;
+  white-space: nowrap;
 
   &.selected {
     background-color: #fff;
-    color: #000C76;
-    border-color: #000C76;
+    color: #000c76;
+    border-color: #000c76;
   }
 `;
 
-const SchoolBoard = () => {
+const CenterBoard = () => {
   const [selectedBoard, setSelectedBoard] = useState(0);
 
   const handleBoardClick = (index) => {
@@ -38,7 +38,7 @@ const SchoolBoard = () => {
 
   return (
     <ContainerBoard>
-      {[0, 1, 2, 3, 4].map((index) => (
+      {[0, 1, 2, 3].map((index) => (
         <Board
           key={index}
           selected={selectedBoard === index}
@@ -47,12 +47,11 @@ const SchoolBoard = () => {
           {index === 0 && '공지 게시판'}
           {index === 1 && '자유 게시판'}
           {index === 2 && '질문 게시판'}
-          {index === 3 && '워크북 게시판'}
-          {index === 4 && '이전 기수 게시판'}
+          {index === 3 && '이전 기수 게시판'}
         </Board>
       ))}
     </ContainerBoard>
   );
 };
 
-export default SchoolBoard;
+export default CenterBoard;

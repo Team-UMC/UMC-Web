@@ -109,7 +109,7 @@ const BoardTitleSub = styled.p`
 // image: 게시판 아이콘 이미지
 const CATEGORY_LISTS = [
   {
-    path: 'school',
+    path: 'campus',
     title: '학교',
     image: SchoolIcon,
   },
@@ -119,7 +119,7 @@ const CATEGORY_LISTS = [
     image: BranchIcon,
   },
   {
-    path: 'union',
+    path: 'center',
     title: '연합',
     image: UnionIcon,
   },
@@ -151,7 +151,7 @@ const TITLE_LISTS = [
     subtitle: '워크북으로 공부 의지를 활활 불태워 봐요!',
   },
   {
-    path: 'prev',
+    path: 'ob',
     title: '이전 기수 게시판',
     subtitle: '이전 챌린저들과 함께 소통해봐요!',
   },

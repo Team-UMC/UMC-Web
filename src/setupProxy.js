@@ -15,4 +15,12 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
+  app.use(
+    "/boards",
+    createProxyMiddleware({
+      target: "http://umcservice.shop:8000",
+      changeOrigin: true,
+    })
+  );
 };

@@ -6,7 +6,7 @@ import DateSelectCalendar from 'components/DateSelectCalendar'; //날짜를 오�
 const TILCalender = () => {
   //달력을 클릭했을 때 나오는 모달의 작동을 위한 함수 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date()); 
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const openModal = () => { //모달 열기
     setIsModalOpen(true);
@@ -24,8 +24,12 @@ const TILCalender = () => {
   return (
     <>
       <TodayDate>
+<<<<<<< HEAD
+        <img src={CalenderImg} alt="캘린더 이미지" onClick={openModal} />
+=======
         {/*캘린더 클릭시 모달이 열리고 그 옆에 오늘 날을 적음 */}
         <img src={CalenderImg} alt='캘린더 이미지' onClick={openModal} /> 
+>>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
         <DateSelectCalendar />
       </TodayDate>
 
@@ -34,7 +38,10 @@ const TILCalender = () => {
         <ModalContainer>
           <ModalContent>
             <CloseModalButton onClick={closeModal}>X</CloseModalButton>
-            <DateSelectCalendar onSelect={handleDateSelect} selected={selectedDate} />
+            <DateSelectCalendar
+              onSelect={handleDateSelect}
+              selected={selectedDate}
+            />
           </ModalContent>
         </ModalContainer>
       )}
@@ -44,13 +51,11 @@ const TILCalender = () => {
 
 export default TILCalender;
 
-
 const TodayDate = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
-
 
 const ModalContainer = styled.div`
   position: fixed;

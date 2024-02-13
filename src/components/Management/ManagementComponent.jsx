@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types"; 
 
-//import AdminPage from 'layout/NoticePin/AdminPage';
-import BoardTitle from '../BoardWrite/BoardTitle';
-import BoardText from '../BoardWrite/BoardText';
+import BoardTitle from 'components/BoardWrite/BoardTitle';
+import BoardText from 'components/BoardWrite/BoardText';
+
+import AdminPage from 'layout/NoticePin/AdminPage.jsx';
 import ManagementButton from 'components/Management/Button';
 import StartendDate from 'components/Management/StartendDate';
 import Local from 'components/Management/SelectLocal';
@@ -42,10 +43,16 @@ const TypeComponent = ({ buttonStates }) => {
     <div>
       {buttonStates.setnoticeButton && (
         <>
+<<<<<<< HEAD
+          <AdminPage />
+        </>
+      )}
+=======
            <TableLayout /> 
         </>
       )}{' '}
 
+>>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />
@@ -57,20 +64,17 @@ const TypeComponent = ({ buttonStates }) => {
             <ManagementButton />
           </ButtonContainer>
         </>
-      )}{' '}
-
-     {buttonStates.challengerButton && (
-     <>
-        <SearchChallenger />
-        <ChallengerPosition />
-        <ChallengerType />
-        <ButtonContainerChallenger>
-          <ManagementButton />
-        </ButtonContainerChallenger>
-
-     </>
-     )} {' '} 
-
+      )}
+      {buttonStates.challengerButton && (
+        <>
+          <SearchChallenger />
+          <ChallengerPosition />
+          <ChallengerType />
+          <ButtonContainerChallenger>
+            <ManagementButton />
+          </ButtonContainerChallenger>
+        </>
+      )}
     </div>
   );
 };

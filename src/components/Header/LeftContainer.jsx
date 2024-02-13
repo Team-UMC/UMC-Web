@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
-import LeftModal from './LeftModal';
+import styled from 'styled-components';
 
 import NavStyleStar from 'assets/header/NavStyleStar.svg';
 import NavTextStyle from 'assets/header/NavTextStyle.svg';
@@ -45,20 +43,15 @@ const TextWrapper = styled.div`
 `;
 
 const LeftContainer = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
-    <NavWrapper
-      onMouseEnter={() => setIsModalOpen(true)}
-      onMouseLeave={() => setIsModalOpen(false)}
-    >
+    <NavWrapper>
       <>
         <StyledLink to="/main">
           <img src={NavStyleStar} alt="별" />
           <TextWrapper>홈</TextWrapper>
         </StyledLink>
 
-        <StyledLink to="/board/school/notice">
+        <StyledLink to="/board/campus/notice">
           <img src={NavStyleStar} alt="별" />
           <TextWrapper>게시판</TextWrapper>
         </StyledLink>
@@ -72,7 +65,6 @@ const LeftContainer = () => {
           <img src={NavStyleStar} alt="별" />
           <TextWrapper>사진첩</TextWrapper>
         </StyledLink>
-        {isModalOpen && <LeftModal />}
       </>
     </NavWrapper>
   );

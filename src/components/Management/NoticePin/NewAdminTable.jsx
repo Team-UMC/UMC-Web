@@ -1,5 +1,5 @@
 // 운영자 페이지 공지사항 테이블 컴포넌트
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ROWS_DATA } from 'Data';
@@ -266,11 +266,6 @@ const NewAdminTable = () => {
         }
       }
     };
-
-    // 고정된 게시글인지 여부를 로컬 스토리지에 저장
-    useEffect(() => {
-      localStorage.setItem(row.title, JSON.stringify(isPinned));
-    }, [isPinned]);
 
     return (
       <Fragment>

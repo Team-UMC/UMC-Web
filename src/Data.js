@@ -1,11 +1,11 @@
 // 대충 데이터들 모음 (여기에 JSON 서버 생기면 구현하면 될 듯...)
-let createData = (ispinned, title, author, date, views, content) => {
+let createData = (ispinned, title, writer, createdAt, hitCount, content) => {
   return {
     ispinned,
     title,
-    author,
-    date,
-    views,
+    writer,
+    createdAt,
+    hitCount,
     content,
   };
 };

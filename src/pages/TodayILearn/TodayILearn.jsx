@@ -7,10 +7,16 @@ import TILComponent from 'components/TodayILearn/ComponentTIL';
 import TILAdd from 'components/TodayILearn/AddTIL';
 
 const TILContainer = styled.div`
-margin: 0vh 50vh;
+  margin: 0 50vh;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const CalenderContainer = styled.div`
+  width: 70%;
   margin-top: 5vh;
   display: flex;
   flex-direction: row;
@@ -19,22 +25,28 @@ const CalenderContainer = styled.div`
 `;
 
 const TodayILearn = () => {
-    
-  
-    return(
-    
-    <TILContainer>
-      <TILTitle></TILTitle>
+  return (
+    <div
+      className="board-page"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <TILContainer>
+        <TILTitle />
 
-      <CalenderContainer>
-        <TILCalender/>
-        <TILAdd/>
-      </CalenderContainer>
-      
-      <TILComponent></TILComponent>
-    </TILContainer>
-  
-      );
-    };
-  
-  export default TodayILearn;
+        <CalenderContainer>
+          <TILCalender />
+          <TILAdd />
+        </CalenderContainer>
+
+        <TILComponent />
+      </TILContainer>
+    </div>
+  );
+};
+
+export default TodayILearn;

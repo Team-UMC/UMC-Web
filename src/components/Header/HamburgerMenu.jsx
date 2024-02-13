@@ -4,10 +4,10 @@ import styled from 'styled-components';
 const MenuContainer = styled.div`
   z-index: 5;
   border-radius: 15px;
-  background-color: #e7e4e1;
-  height: 100%;
-  width: 100%;
-  top: 100%;
+  background-color: #FFFFFF;
+  height: 50%;
+  width: 100vw;
+  top:20%;
   position: absolute;
   transition: 0.5s ease;
 `;
@@ -24,7 +24,7 @@ const DetailList = styled.section`
   flex-direction: column;
 `;
 
-const LeftModal = () => {
+const HamburgerMenu = () => {
   return (
     <MenuContainer>
       <MenuList>
@@ -52,4 +52,4 @@ const LeftModal = () => {
   );
 };
 
-export default LeftModal;
+export default HamburgerMenu;
