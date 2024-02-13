@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
@@ -12,6 +12,7 @@ const Description = styled.p`
 `;
 
 const DropdownWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 40%;
@@ -31,41 +32,34 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-// const AddButton = styled.div`
-//   width: 40%;
-//   height: 30px;
-//   display: flex;
-//   background-color: white;
-//   color: black;
-//   border: none;
-//   border-radius: 15px;
-//   justify-content: center;
-//   align-items: center;
-//   cursor: pointer;
-// `;
+const DropdownContainer = styled.div`
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+`;
 
-// const DeleteButton = styled.img`
-//   display: flex;
-//   cursor: pointer;
-// `;
+const SemesterParts = ({
+  semesterParts,
+  setSemesterParts,
+  handleNextStep,
+  handlePrevStep,
+}) => {
+  const [semester, setSemester] = useState('');
+  const [part, setPart] = useState('');
 
-const SemesterParts = ({ userData, setUserData, handleNextStep, handlePrevStep }) => {
-  const { semesterParts } = userData;
-
-  const handlePairChange = (e, index, property) => {
-    const { value } = e.target;
-
-    setUserData((prevData) => ({
-      ...prevData,
-      semesterParts: prevData.semesterParts.map((pair, i) =>
-        i === index ? { ...pair, [property]: value } : pair
-      ),
-    }));
+  const handleSemesterChange = (e) => {
+    setSemester(e.target.value);
+    if (e.target.value && part) {
+      setSemesterParts([...semesterParts, { part, semester: e.target.value }]);
+    }
   };
 
-  const canMoveToNextStep = semesterParts.some(
-    (pair) => pair.part !== '' && pair.semester !== '',
-  );
+  const handlePartChange = (e) => {
+    setPart(e.target.value);
+    if (semester && e.target.value) {
+      setSemesterParts([...semesterParts, { part: e.target.value, semester }]);
+    }
+  };
 
   return (
     <SignUpFormStyle.Wrapper>
@@ -76,12 +70,9 @@ const SemesterParts = ({ userData, setUserData, handleNextStep, handlePrevStep }
         </Description>
 
         <DropdownWrapper>
-          {semesterParts.map((pair, index) => (
-            <Wrapper key={index}>
-              <Dropdown
-                value={pair.semester}
-                onChange={(e) => handlePairChange(e, index, 'semester')}
-              >
+          <DropdownContainer>
+            <Wrapper>
+              <Dropdown onChange={handleSemesterChange}>
                 <option value="" disabled hidden>
                   기수
                 </option>
@@ -93,44 +84,34 @@ const SemesterParts = ({ userData, setUserData, handleNextStep, handlePrevStep }
                 <option value="SIXTH">6기</option>
               </Dropdown>
 
-              <Dropdown
-                value={pair.part}
-                onChange={(e) => handlePairChange(e, index, 'part')}
-              >
+              <Dropdown onChange={handlePartChange}>
                 <option value="" disabled hidden>
                   파트
                 </option>
                 <option value="PM">PM</option>
-                <option value="Design">Design</option>
-                <option value="Spring">Spring</option>
-                <option value="Node">Node</option>
-                <option value="Web">Web</option>
-                <option value="iOS">iOS</option>
-                <option value="Android">Android</option>
+                <option value="DESIGN">Design</option>
+                <option value="SPRING">Spring</option>
+                <option value="NODE">Node</option>
+                <option value="WEB">Web</option>
+                <option value="IOS">iOS</option>
+                <option value="ANDROID">Android</option>
               </Dropdown>
-
-              {/*<DeleteButton
-                src={DeletePart}
-                onClick={() => deletePair(index)}
-          />*/}
             </Wrapper>
-          ))}
+          </DropdownContainer>
         </DropdownWrapper>
-
-        {/*<AddButton onClick={addPair}>기수 추가</AddButton>*/}
       </SignUpFormStyle.SignUpFormWrapper>
 
       <SignUpFormStyle.StepButtonWrapper>
         <PrevButton handlePrevStep={handlePrevStep} />
-        {canMoveToNextStep && <NextButton handleNextStep={handleNextStep} />}
+        <NextButton handleNextStep={handleNextStep} />
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
 };
 
 SemesterParts.propTypes = {
-  userData: PropTypes.object.isRequired,
-  setUserData: PropTypes.func.isRequired,
+  semesterParts: PropTypes.array.isRequired,
+  setSemesterParts: PropTypes.func.isRequired,
   handleNextStep: PropTypes.func.isRequired,
   handlePrevStep: PropTypes.func.isRequired,
 };

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 0 auto;
+  margin-top: 250px;
 `;
 
 const SignUpFormWrapper = styled.form`

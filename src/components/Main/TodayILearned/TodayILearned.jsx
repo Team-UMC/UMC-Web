@@ -14,8 +14,11 @@ const DataContainer = styled.div`
 const Rectangle = styled.div`
   width: 100px;
   margin: 5px;
-  border: 1px solid black; /* 검정색 테두리 선 추가 */
-  padding: 5px; /* 옵션: 테두리와 내용 간격 조절 */
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 12px;
+  padding: 5px;
+  height: 118px;
 `;
 
 const ButtonContainer = styled.div`
@@ -37,27 +40,25 @@ const TodayILearned = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    setCurrentIndex((prevIndex) => prevIndex === 0 ? data.length - 1 : prevIndex - 1);
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, data.length - 4));
+    setCurrentIndex((prevIndex) => prevIndex === data.length - 1 ? 0 : prevIndex + 1);
   };
 
   return (
     <Container>
       <ButtonContainer>
-        {currentIndex > 0 && <LeftArrow alt="이전" onClick={handlePrev} />}
+        <LeftArrow alt="이전" onClick={handlePrev} />
       </ButtonContainer>
       <DataContainer>
-        {data.slice(currentIndex, currentIndex + 4).map((item, index) => (
+        {[data[currentIndex], data[(currentIndex + 1) % data.length], data[(currentIndex + 2) % data.length]].map((item, index) => (
           <Rectangle key={index}>{item}</Rectangle>
         ))}
       </DataContainer>
       <ButtonContainer>
-        {currentIndex < data.length - 4 && (
-          <RightArrow alt="다음" onClick={handleNext} />
-        )}
+        <RightArrow alt="다음" onClick={handleNext} />
       </ButtonContainer>
     </Container>
   );

@@ -1,120 +1,98 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axiosInstance from 'apis/setting';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import DetailImg from 'assets/todayilearn/detail.svg';
 import ModalImg from 'assets/todayilearn/modalimg.svg';
 
 import ListUnchecked from 'assets/todolist/listuncheckedimg.svg';
+import ListChecked from 'assets/todolist/listcheckedimg.svg';
 import Plant from 'assets/todolist/plant.svg';
 import Clock from 'assets/todolist/clock.svg';
 
-const TDLComponent = () => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
+const ComponentContainer = styled.div`
+  background-color: ${(props) => (props.complete ? '#E2E5FF' : 'white')};
+  border-radius: 12px;
 
-  const handleEdit = () => {
-    setShowEditModal(true);
-  };
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 
-  const closeEditModal = () => {
-    setShowEditModal(false);
-  };
+  padding: 1vh;
+  margin-top: 2vh;
+  position: relative;
+`;
 
-  const handleDelete = () => {
-    setShowDeleteModal(true);
-  };
+const TodoListWrapper = styled.div`
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+`;
 
-  const closeDeleteModal = () => {
-    setShowDeleteModal(false);
-  };
+const StyleImg = styled.img`
+  width: 10%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+`;
 
-  return (
-    <>
-      <ComponentContainer>
-        <ImgTitleContainer>
-          <img src={ListUnchecked} alt="선택로고" />
-          <StyleImg src={Plant} alt="식물사진" />
+const TitleContainer = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+`;
 
-          <TitleContainer>
-            <MainTitle>화분 물주기</MainTitle>
-            <SubTitle>
-              <img src={Clock} alt="시계이미지" /> 시간
-            </SubTitle>
-          </TitleContainer>
-        </ImgTitleContainer>
+const MainTitle = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+`;
 
-        <img src={DetailImg} alt="상세보기 버튼" />
-
-        <OptionsContainer>
-          <OptionButton onClick={handleEdit}>수정하기</OptionButton>
-          <OptionButton onClick={handleDelete}>삭제하기</OptionButton>
-        </OptionsContainer>
-      </ComponentContainer>
-
-      {showEditModal && (
-        <ModalContainer onClick={closeEditModal}>
-          <ModalContent>
-            {/* 내용 */}
-            <ButtonContainer>
-              <ActionButton onClick={closeEditModal}>취소</ActionButton>
-              <ActionButton>추가</ActionButton>
-            </ButtonContainer>
-          </ModalContent>
-        </ModalContainer>
-      )}
-
-      {showDeleteModal && (
-        <ModalContainer>
-          <ModalContent>
-            <img src={ModalImg} alt="느낌표 이미지" />
-            <p>정말로 해당 TIL을 삭제하시겠습니까?</p>
-            <p>삭제 후에는 복구할 수 없습니다.</p>
-
-            <ModalButtonContainer>
-              <ModalCancelShape onClick={closeDeleteModal}>취소</ModalCancelShape>
-              <ModalDeleteShape onClick={() => console.log('삭제 로직 실행')}>
-                삭제
-              </ModalDeleteShape>
-            </ModalButtonContainer>
-          </ModalContent>
-        </ModalContainer>
-      )}
-    </>
-  );
-};
-
-export default TDLComponent;
-
+const SubTitle = styled.div`
+  color: #4b4b4b;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+`;
 
 const OptionsContainer = styled.div`
-  display: none;
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
   position: absolute;
-  right: 0;
+  right: 215px;
+  top: 275px;
   flex-direction: column;
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.61);
   padding: 8px;
-`;
 
-const ComponentContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-radius: 12px;
-  border: solid 1px;
-  padding: 1vh;
-  margin-top: 2vh;
-  position: relative;
-  cursor: pointer; /* Added cursor pointer to indicate clickability */
-  &:hover ${OptionsContainer} {
-    display: flex;
+  ::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    margin: 8px 0;
   }
 `;
 
 const OptionButton = styled.div`
-  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: white;
   cursor: pointer;
+
+  &:first-child {
+    margin-top: -8px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const ModalContainer = styled.div`
@@ -130,12 +108,13 @@ const ModalContainer = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background: white;
-  padding: 36px 32px 24px 32px;
+  height: 40%;
+  background-color: white;
+  padding: 24px 32px 24px 32px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
   align-content: space-evenly;
@@ -172,40 +151,6 @@ const ModalCancelShape = styled.div`
   cursor: pointer;
 `;
 
-const StyleImg = styled.img`
-  display: flex;
-  align-items: center;
-  margin-left: 5vh;
-  margin-right: 2vh;
-`;
-
-const ImgTitleContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 1vh 2vh;
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const MainTitle = styled.div`
-  font-size: 20px;
-  font-weight: 500;
-`;
-
-const SubTitle = styled.div`
-  color: #4b4b4b;
-  font-size: 14px;
-  font-weight: 500;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -213,10 +158,192 @@ const ButtonContainer = styled.div`
   margin-top: 16px;
 `;
 
-const ActionButton = styled.button`
+const ActionButton = styled.div`
   padding: 8px 16px;
   margin-right: 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 `;
+
+const TDLComponent = ({ todoListData, setTodoListData, selectedDate }) => {
+  // 투두리스트 완료 여부
+  const [completeStates, setCompleteStates] = useState({});
+
+  // 삭제/수정하기 관련 모달 열기
+  const [openOption, setOpenOption] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  // 완료/미완료 함수
+  const handleComplete = (todoListId) => {
+    setCompleteStates((prevState) => ({
+      ...prevState,
+      [todoListId]: !prevState[todoListId],
+    }));
+  };
+
+  // 삭제/수정하기 옵션 모달 열기/닫기 함수
+  const handleOption = () => {
+    setOpenOption(!openOption);
+  };
+
+  // 삭제 모달 열기 함수
+  const handleDelete = () => {
+    setShowDeleteModal(true);
+  };
+
+  // 삭제 모달 닫기 함수
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
+  // 수정 모달 열기 함수
+  const handleEdit = () => {
+    setShowEditModal(true);
+  };
+
+  // 수정 모달 닫기 함수
+  const closeEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  // 서버로부터 투두리스트 정보 받아오기
+  useEffect(() => {
+    const getTodoList = async () => {
+      try {
+        const formattedDate = selectedDate.toISOString().slice(0, 10);
+
+        const res = await axiosInstance.get(
+          `/to-do-lists?date=${formattedDate}`,
+        );
+
+        const todoLists = res.data.result.todoLists;
+
+        setTodoListData(
+          todoLists.map((todo) => ({
+            todoListId: todo.todoListId,
+            title: todo.title,
+            deadline: new Date(todo.deadline).toLocaleString(),
+            completed: todo.completed,
+          })),
+        );
+      } catch (error) {
+        console.error();
+      }
+    };
+    getTodoList();
+  }, [selectedDate, setTodoListData]);
+
+  // 해당 날짜의 투두리스트가 없으면 아무것도 출력하지 않도록 함
+  if (!todoListData || todoListData.length === 0) {
+    return null;
+  }
+
+  // 서버를 통해서 투두리스트 삭제
+  const deleteTodoList = async (todoListId) => {
+    try {
+      await axiosInstance.delete(`/to-do-lists/${todoListId}`, {});
+      console.log('TodoList successfully deleted.');
+      // 삭제 후에는 화면에서 해당 아이템을 제거해줍니다.
+      setTodoListData(
+        todoListData.filter((item) => item.todoListId !== todoListId),
+      );
+      setOpenOption(false);
+      setShowDeleteModal(false);
+    } catch (error) {
+      console.error();
+    }
+  };
+
+  return (
+    <>
+      {todoListData.map((todoListItem) => (
+        <>
+          <ComponentContainer
+            key={todoListItem.todoListId}
+            complete={completeStates[todoListItem.todoListId]}
+          >
+            <img
+              src={
+                completeStates[todoListItem.todoListId]
+                  ? ListChecked
+                  : ListUnchecked
+              }
+              alt="선택로고"
+              onClick={() => handleComplete(todoListItem.todoListId)}
+              style={{ cursor: 'pointer' }}
+            />
+
+            <TodoListWrapper>
+              <StyleImg src={Plant} alt="식물사진" />
+              <TitleContainer>
+                <MainTitle>{todoListItem.title}</MainTitle>
+                <SubTitle>
+                  <img src={Clock} alt="시계이미지" /> {todoListItem.deadline}
+                </SubTitle>
+              </TitleContainer>
+            </TodoListWrapper>
+
+            <img
+              src={DetailImg}
+              alt="상세보기 버튼"
+              onClick={handleOption}
+              style={{ cursor: 'pointer' }}
+            />
+          </ComponentContainer>
+
+          <OptionsContainer visible={openOption}>
+            <OptionButton onClick={() => handleEdit(todoListItem)}>
+              수정하기
+            </OptionButton>
+
+            <OptionButton onClick={() => handleDelete(todoListItem.todoListId)}>
+              삭제하기
+            </OptionButton>
+          </OptionsContainer>
+
+          {showEditModal && (
+            <ModalContainer onClick={closeEditModal}>
+              <ModalContent>
+                <ButtonContainer>
+                  <ActionButton onClick={closeEditModal}>취소</ActionButton>
+                  <ActionButton onClick={handleEdit}>수정</ActionButton>
+                </ButtonContainer>
+              </ModalContent>
+            </ModalContainer>
+          )}
+
+          {showDeleteModal && (
+            <ModalContainer>
+              <ModalContent>
+                <img src={ModalImg} alt="느낌표 이미지" />
+                <p>정말로 해당 TIL을 삭제하시겠습니까?</p>
+                <p>삭제 후에는 복구할 수 없습니다.</p>
+
+                <ModalButtonContainer>
+                  <ModalCancelShape onClick={closeDeleteModal}>
+                    취소
+                  </ModalCancelShape>
+                  <ModalDeleteShape
+                    onClick={() => deleteTodoList(todoListItem.todoListId)}
+                  >
+                    삭제
+                  </ModalDeleteShape>
+                </ModalButtonContainer>
+              </ModalContent>
+            </ModalContainer>
+          )}
+        </>
+      ))}
+    </>
+  );
+};
+
+TDLComponent.propTypes = {
+  todoListData: PropTypes.array.isRequired,
+  setTodoListData: PropTypes.func.isRequired,
+  selectedDate: PropTypes.instanceOf(Date).isRequired,
+};
+
+export default TDLComponent;

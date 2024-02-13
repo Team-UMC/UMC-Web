@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import LoadingImage from 'assets/Loading.svg';
 import { useNavigate } from 'react-router-dom';
+
+const LoadingPageImage = styled.div`
+  background: url(${LoadingImage}) no-repeat center center;
+  background-size: cover;
+  width: 100%;
+`;
 
 const KakaoAuth = () => {
   const [kakaoToken, setKakaoToken] = useState('');
@@ -64,7 +72,9 @@ const KakaoAuth = () => {
     loginWithKakao();
   }, [kakaoToken, navigate]);
 
-  return <div>{code}</div>;
+  return (
+    <LoadingPageImage></LoadingPageImage> 
+  );
 };
 
 export default KakaoAuth;

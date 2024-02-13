@@ -7,7 +7,19 @@ import NextButton from './NextButton';
 
 const ABC = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+`;
+
+const Description = styled.p`
+  font-size: 14px;
+  color: gray;
+`;
+
+const CheckBoxWrapper = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 const Wrap = styled.div`
@@ -35,8 +47,9 @@ const Container = styled.div`
 `;
 
 const TermsButton = styled.div`
+  margin-left: auto;
+  font-size: 10px;
   cursor: pointer;
-  
 `;
 
 const Modal = ({ content, handleClose, onModalCheckboxChange }) => {
@@ -65,7 +78,7 @@ const Modal = ({ content, handleClose, onModalCheckboxChange }) => {
   );
 };
 
-const Agreement = ({ handleNextStep, handlePrevStep, handleSubmit }) => {
+const Agreement = ({ handleNextStep, handlePrevStep }) => {
   const [termsAgreement, setTermsAgreement] = useState(false);
   const [privacyAgreement, setPrivacyAgreement] = useState(false);
 
@@ -88,47 +101,50 @@ const Agreement = ({ handleNextStep, handlePrevStep, handleSubmit }) => {
     setPrivacyAgreement(value);
   };
 
-
   return (
     <SignUpFormStyle.Wrapper>
       <Wrap>
-        <h2>개인정보 이용 및 서비스 약관 동의</h2>
-        <h4>UMC 서비스 약관 및 개인정보 이용 안내에 대한 동의를 해주세요</h4>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={termsAgreement && privacyAgreement}
-              onChange={() => {
-                setTermsAgreement(!termsAgreement);
-                setPrivacyAgreement(!termsAgreement);
-              }}
-            />
-            약관 전체동의
-          </label>
-        </div>
-        <ABC>
-          <label>
-            <input
-              type="checkbox"
-              checked={termsAgreement}
-              onChange={() => setTermsAgreement(!termsAgreement)}
-            />
-            이용약관 동의(필수)
-          </label>
-          <TermsButton onClick={handleTermsModal}>약관 보기</TermsButton>
-        </ABC>
-        <ABC>
-          <label>
-            <input
-              type="checkbox"
-              checked={privacyAgreement}
-              onChange={() => setPrivacyAgreement(!privacyAgreement)}
-            />
-            개인정보 수집 및 이용동의(필수)
-          </label>
-          <TermsButton onClick={handlePrivacyModal}>약관 보기</TermsButton>
-        </ABC>
+        <h1>개인정보 이용 및 서비스 약관 동의</h1>
+        <Description>
+          UMC 서비스 약관 및 개인정보 이용 안내에 대한 동의를 해주세요
+        </Description>
+        <CheckBoxWrapper>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={termsAgreement && privacyAgreement}
+                onChange={() => {
+                  setTermsAgreement(!termsAgreement);
+                  setPrivacyAgreement(!termsAgreement);
+                }}
+              />
+              약관 전체동의
+            </label>
+          </div>
+          <ABC>
+            <label>
+              <input
+                type="checkbox"
+                checked={termsAgreement}
+                onChange={() => setTermsAgreement(!termsAgreement)}
+              />
+              이용약관 동의(필수)
+            </label>
+            <TermsButton onClick={handleTermsModal}>약관 보기</TermsButton>
+          </ABC>
+          <ABC>
+            <label>
+              <input
+                type="checkbox"
+                checked={privacyAgreement}
+                onChange={() => setPrivacyAgreement(!privacyAgreement)}
+              />
+              개인정보 수집 및 이용동의(필수)
+            </label>
+            <TermsButton onClick={handlePrivacyModal}>약관 보기</TermsButton>
+          </ABC>
+        </CheckBoxWrapper>
       </Wrap>
 
       {/* Popup for 이용약관 동의(필수) */}
@@ -151,7 +167,9 @@ const Agreement = ({ handleNextStep, handlePrevStep, handleSubmit }) => {
 
       <SignUpFormStyle.StepButtonWrapper>
         <PrevButton handlePrevStep={handlePrevStep} />
-        {termsAgreement && privacyAgreement && <NextButton handleNextStep={handleNextStep} handleSubmit={handleSubmit}/>}
+        {termsAgreement && privacyAgreement && (
+          <NextButton handleNextStep={handleNextStep} />
+        )}
       </SignUpFormStyle.StepButtonWrapper>
     </SignUpFormStyle.Wrapper>
   );
@@ -166,7 +184,6 @@ Modal.propTypes = {
 Agreement.propTypes = {
   handleNextStep: PropTypes.func.isRequired,
   handlePrevStep: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default Agreement;

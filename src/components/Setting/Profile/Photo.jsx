@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import axiosInstance from 'apis/setting';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import BasicProfileImageImage from 'assets/Setting/Profile/BasicProfileImage.svg';
+import BasicProfileImage from 'assets/Setting/Profile/BasicProfileImage.svg';
 import SelectPhotoImage from 'assets/Setting/Profile/SelectPhoto.svg';
 
 const MyPhoto = styled.div`
   display: inline-block;
-
   // 사진 2개를 겹치도록 하기
   position: relative;
+`;
+
+const MyprofileImage = styled.img`
+  width: 254px;
+  height: 254px;
 `;
 
 const Select = styled.div`
@@ -21,20 +27,58 @@ const Select = styled.div`
   right: 10px;
 `;
 
-const Photo = () => {
-  // 사진 변경 함수
-  //const EditPhoto = () => {};
+const Photo = ({ onImageChange }) => {
+  const [profileImage, setProfileImage] = useState('');
+
+  const fileInputRef = useRef(null);
+
+  // 내 프로필 이미지 받아오기
+  useEffect(() => {
+    const getProfileImage = async () => {
+      const res = await axiosInstance.get('/members');
+
+      setProfileImage(res.data.result.profileImage);
+    };
+    getProfileImage();
+  }, [profileImage]);
+
+  const handleFileInputChange = (event) => {
+    const selectedFile = event.target.files[0];
+    onImageChange(selectedFile);
+  };
+
+  const handleImageClick = () => {
+    fileInputRef.current.click();
+  };
 
   return (
     <div>
       <MyPhoto>
-        <img src={BasicProfileImageImage} />
-        <Select>
-          <img src={SelectPhotoImage} style={{ cursor: 'pointer' }} />
+        {profileImage ? (
+          <MyprofileImage src={profileImage} alt="Profile" />
+        ) : (
+          <MyprofileImage src={BasicProfileImage} alt="Basic Profile" />
+        )}
+        <Select onClick={handleImageClick}>
+          <img
+            src={SelectPhotoImage}
+            alt="Select Photo"
+            style={{ cursor: 'pointer' }}
+          />
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={handleFileInputChange}
+          />
         </Select>
       </MyPhoto>
     </div>
   );
+};
+
+Photo.propTypes = {
+  onImageChange: PropTypes.func,
 };
 
 export default Photo;
