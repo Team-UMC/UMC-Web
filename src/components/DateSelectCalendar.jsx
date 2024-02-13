@@ -35,7 +35,7 @@ const DateSelectCalendar = () => {
     <DatePicker
       className="datePicker"
       dateFormat="yyyy. MM. dd" // 날짜 형태
-      formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 3)} // 요일 형태 (ex. 'Mon')
+      formatWeekDay={(nameOfDay) => nameOfDay.substring(0, 3).toUpperCase()} // 요일 형태 (ex. 'Mon')
       showYearDropdown // 년도 선택 가능
       scrollableYearDropdown // 년도 선택 시 스크롤 가능
       shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
