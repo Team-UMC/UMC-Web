@@ -12,9 +12,9 @@ const ClassifyContainer = styled.div`
   border: 1px solid #232A6D;
 `;
 
+//분류 글
 const ClassifyTitle = styled.div`
-  color: var(--black, #000);
-  font-size: 18px;
+  color: #000;
 `;
 
 const CheckContainer = styled.div`
@@ -23,8 +23,8 @@ const CheckContainer = styled.div`
   margin: 0.3vh;
 `;
 
+//체크로 나타나야하는 타입 폰트
 const CheckType = styled.div`
-  font-size: 16px;
   color: ${(props) => (props.isActive ? "#8784FF" : "#BCBCBC")};
   cursor: pointer;
   margin: 0.3vh;
@@ -61,7 +61,7 @@ const Circle = styled.div`
 
   &::after {
     content: '';
-    width: 10px; /* Adjust the size of the inner circle as needed */
+    width: 10px; 
     height: 10px;
     background-color: ${(props) => (props.isActive ? "#8784FF" : "transparent")};
     border-radius: 50%;

@@ -7,7 +7,7 @@ import Type from "components/MyWriting/Type";
 import TypeComponent from "components/MyWriting/TypeComponent";
 
 //import CommentList from './CommentList.jsx';
-
+//import AdminTitle from 'components/Management/NoticePin/AdminTitle';
 
 const ContainerGrid = styled.div`
 display:flex;  
@@ -22,6 +22,7 @@ justify-content: center;
 align-items: center;
 
 `;
+
 
 
 const MyWrite = () => {
@@ -43,8 +44,8 @@ const MyWrite = () => {
   return (
     <ContainerGrid>
     
-      <Title />
-
+    <Title />
+    
       <TypeContainer>
         <Type activeType={activeType} handleTypeClick={handleTypeClick}/>
       </TypeContainer>
