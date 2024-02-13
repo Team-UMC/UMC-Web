@@ -173,7 +173,7 @@ const MyCalendar = () => {
           )}
         </div>
       )}
-    </div>
+    </StyledCalendarWrapper>
   );
 };
 
