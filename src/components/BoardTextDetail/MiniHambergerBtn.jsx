@@ -1,11 +1,12 @@
-// MiniHambergerMenuBtn을 구현한 파일
+// 미니햄버거메뉴 버튼(수정하기,삭제하기버튼 포함)을 구현한 파일
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as MiniHambergerMenu } from 'assets/MiniHamberMenu.svg';
-import MiniHambergerMenuModal from './MiniHambergerMenuModal';
+import PropTypes from 'prop-types';
 
-// MiniHambergerMenu 이미지를 스타일링해 사용함
+import { ReactComponent as MiniHambergerMenu } from 'assets/MiniHamberMenu.svg';
+
+//미니햄버거메뉴버튼을 스타일링
 const MiniHambergerMenuImg = styled(MiniHambergerMenu)`
   // 마우스를 올려놓으면 커서가 포인터로 변함
   cursor: pointer;
@@ -13,8 +14,6 @@ const MiniHambergerMenuImg = styled(MiniHambergerMenu)`
   // 수정버튼과 삭제버튼을 MiniHambergerMenu이미지를 기준으로 정렬하기 위해 사용
   position: relative;
 `;
-
-// 수정버튼과 삭제버튼을 그룹화하기 위해 사용
 const ModifyDeleteBtnWrapper = styled.div`
   // 마우스를 올려놓으면 커서가 포인터로 변함
   cursor: pointer;
@@ -30,41 +29,30 @@ const ModifyDeleteBtnWrapper = styled.div`
 
   // 박스그림자를 줘서 border없이도 외부요소와의 가독성이 좋게 함
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  
+
   // 박스의 배경색을 부여
   background-color: #ffffff;
-  /* right:0; */
 `;
 
-// 수정버튼과 삭제버튼에 padding값을 주기 위해 생성
-const ModifyDeleteBtn = styled.div`
-
-  // padding값을 할당
+// 수정버튼에 padding값을 주기 위해 생성
+const ModifyBtn = styled.div`
   padding: 10px;
 `;
 
-// 미니햄버거
-const MiniHambergerMenuBtn = () => {
+// 삭제버튼에 padding값을 주기 위해 생성
+const DeleteBtn = styled.div`
+  padding: 10px;
+
+  // 글씨에 색상 부여
+  color: red;
+`;
+
+const MiniHambergerBtn = ({ handleModifyClick, handleDeleteClick }) => {
+  // 미니햄버거메뉴버튼을 누르면 나올 버튼의 상태
   const [showButtons, setShowButtons] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModify, setIsModify] = useState(false);
 
   const handleButtonClick = () => {
-    setShowButtons(true);
-  };
-
-  const handleModifyClick = () => {
-    setIsModify(true);
-    setIsModalOpen(true);
-  };
-
-  const handleDeleteClick = () => {
-    setIsModify(false);
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setShowButtons(false);
+    setShowButtons(!showButtons);
   };
 
   return (
@@ -73,25 +61,19 @@ const MiniHambergerMenuBtn = () => {
       {showButtons && (
         <div>
           <ModifyDeleteBtnWrapper>
-            <ModifyDeleteBtn onClick={handleModifyClick}>
-              수정하기
-            </ModifyDeleteBtn>
+            <ModifyBtn onClick={handleModifyClick}>수정하기</ModifyBtn>
             <hr />
-            <ModifyDeleteBtn onClick={handleDeleteClick}>
-              삭제하기
-            </ModifyDeleteBtn>
+            <DeleteBtn onClick={handleDeleteClick}>삭제하기</DeleteBtn>
           </ModifyDeleteBtnWrapper>
         </div>
-      )}
-
-      {isModalOpen && (
-        <MiniHambergerMenuModal
-          onClose={closeModal}
-          content={isModify ? '수정하겠습니까?' : '삭제하겠습니까?'}
-        />
       )}
     </div>
   );
 };
 
-export default MiniHambergerMenuBtn;
+MiniHambergerBtn.propTypes = {
+  handleModifyClick: PropTypes.func.isRequired,
+  handleDeleteClick: PropTypes.func.isRequired,
+};
+
+export default MiniHambergerBtn;

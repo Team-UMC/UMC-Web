@@ -62,6 +62,11 @@ function App() {
               <Route path="/management" element={<Management />} />
               <Route path="/mywrite" element={<MyWrite />} />
 
+              <Route path="/textdetail/:category/:boardPath" element={<TextDetailPage />} />
+              <Route path="/messagepreview" element={<MessagePreviewPage />} />
+              <Route path="/messagedetail" element={<MessageDetailPage />} />
+              <Route path="/message" element={<MessagePage />} />
+              
               {/* Today-I-Learned */}
               <Route path="/todayilearn" element={<TodayILearn />} />
               <Route path="/todayilearn/addtil" element={<NewTIL />} />
