@@ -61,9 +61,11 @@ const Main = () => {
         </Wrapper>
 
         <Wrapper>
+          {/* 시작일 */}
+          <DateSelectCalendar />
+          {/* 종료일 */}
           <DateSelectCalendar />
         </Wrapper>
-
       </MainWrapper>
     </div>
   );
