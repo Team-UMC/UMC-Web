@@ -14,12 +14,17 @@ import MyWrite from 'pages/MyWrite/MyWrite';
 import KakaoAuth from 'apis/app/auth/KakaoAuth';
 import NaverAuth from 'apis/app/auth/NaverAuth';
 import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
+<<<<<<< HEAD
 import HistoryPage from 'pages/History/HistoryPage';
 import GalleryPage from 'pages/Gallery/GalleryPage';
 import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
 import BoardPage from 'pages/BoardPage/BoardPage';
 import MascotPage from 'pages/Mascot/MascotPage';
 import TextDetailPage from 'pages/DetailPage/TextDetailPage';
+=======
+import SettingPage from 'pages/Setting/SettingPage';
+import HomePage from 'pages/HomePage';
+>>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
 
 import TodayILearn from 'pages/TodayILearn/TodayILearn';
 import NewTIL from 'components/TodayILearn/NewTIL';

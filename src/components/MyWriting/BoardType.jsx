@@ -43,14 +43,14 @@ const TypeName = styled.div`
 `;
 
 const BoardName = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: nowrap;
-  width: 8vh;
-
-  margin-right: 3vh;
-  font-weight: bold;
+display: flex;  
+flex-direction: row;
+align-items: center;
+flex-wrap: nowrap;
+width: 8vh;
+margin-bottom: 4vh;
+margin-right: 3vh;
+font-weight: bold;
 `;
 
 const TypeLink = styled(Link)`
@@ -106,7 +106,8 @@ const BoardType = () => {
         <TypeName>종류</TypeName>
 
         <div>
-          <TypeLink to="#" onClick={() => handleClick('schoolButton')}>
+         
+          <TypeLink to="/mywrite/school" onClick={() => handleClick('schoolButton')}>
             {buttonStates.schoolButton ? (
               <img src={SchoolChecked} alt="Inactive Image" />
             ) : (
@@ -114,7 +115,7 @@ const BoardType = () => {
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('campButton')}>
+          <TypeLink to="/mywrite/camp" onClick={() => handleClick('campButton')}>
             {buttonStates.campButton ? (
               <img src={CampChecked} alt="Inactive Image" />
             ) : (
@@ -122,7 +123,7 @@ const BoardType = () => {
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('unionButton')}>
+          <TypeLink to="/mywrite/union" onClick={() => handleClick('unionButton')}>
             {buttonStates.unionButton ? (
               <img src={UnionChecked} alt="Inactive Image" />
             ) : (
@@ -130,7 +131,7 @@ const BoardType = () => {
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('suggestionButton')}>
+          <TypeLink to="/mywrite/suggestion" onClick={() => handleClick('suggestionButton')}>
             {buttonStates.suggestionButton ? (
               <img src={SuggestionChecked} alt="Inactive Image" />
             ) : (

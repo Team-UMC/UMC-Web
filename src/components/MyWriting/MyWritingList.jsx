@@ -5,7 +5,7 @@ import SearchImg from 'assets/search.svg';
 const ListContainer = styled.div`
   margin-top: 20px;
   width: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
 `;
@@ -196,9 +196,9 @@ const MyList = () => {
       <HeaderContainer>
         <Header>번호</Header>
         <Header>제목</Header>
-        <Center>작성일</Center>
-        <Center>조회수</Center>
-        <Center>좋아요</Center>
+        <Header>작성일</Header>
+        <Header>조회수</Header>
+        <Header>좋아요</Header>
       </HeaderContainer>
 
       {currentList

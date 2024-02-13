@@ -6,16 +6,26 @@ const LocalContainer = styled.div`
   width: 120vh;
   padding: 1vh;
   border-radius: 12px;
-  color: #BCBCBC;
   margin-top: 1.6vh;
-  
   border: 1px solid #232A6D;
+`;
+
+const LocalInput = styled.input`
+  display: flex;
+  width: 100%;
+  padding: 1vh;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  &::placeholder {
+    color: #BCBCBC; 
+  }
 `;
 
 const Local = () => {
     return(
         <LocalContainer>
-            장소설정
+            <LocalInput placeholder="장소설정" />
         </LocalContainer>
     );
 };
