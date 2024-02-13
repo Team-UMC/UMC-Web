@@ -40,7 +40,6 @@ const TextWrapper = styled.div`
   &:hover {
     background: url(${NavTextStyle}) no-repeat center center;
   }
-
 `;
 
 const LeftContainer = () => {

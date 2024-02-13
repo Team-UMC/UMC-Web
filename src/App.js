@@ -63,7 +63,7 @@ function App() {
 
               {/* Today-I-Learned */}
               <Route path="/todayilearn" element={<TodayILearn />} />
-              <Route path="/todayilearn/detailpage" element={<NewTIL />} />
+              <Route path="/todayilearn/addtil" element={<NewTIL />} />
               <Route path="/todayilearn/detail" element={<DetailTIL />} />
 
               {/* TodoList */}

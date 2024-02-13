@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -12,6 +12,7 @@ import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
 import HistorySearchBar from './HistorySearchBar';
 import SeeMoreImage from 'assets/History/SeeMore.svg';
+import axiosInstance from 'apis/setting';
 
 const TotalWrapper = styled.div`
   border-radius: 15px;
@@ -33,6 +34,8 @@ const HistoryItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between; /* 아이콘과 더보기 사이 공간 분배 */
+  height: 100%; /* 아이콘과 더보기가 있는 영역이 높이 100% 차지하도록 설정 */
 `;
 
 const SemesterNTypeWrapper = styled.div`
@@ -153,12 +156,11 @@ const SeeMoreIcon = styled.img`
 // item: 히스토리 아이템 데이터
 // index: 히스토리 아이템 데이터 인덱스
 const HistoryItemComponent = ({ item, index }) => {
-  // 마우스 커서에 따라 입체적으로 기울기 변화하는 애니메이션 구현
-  const itemRef = useRef(null);
+  const [historyData, setHistoryData] = useState([]);
 
   const renderTypeIconAndText = (type) => {
     switch (type) {
-      case 'iOS':
+      case 'IOS':
         return (
           <>
             <img src={iOSIcon} alt="iOS Icon" />
@@ -203,44 +205,75 @@ const HistoryItemComponent = ({ item, index }) => {
     }
   };
 
-  return (
-    <TotalWrapper backgroundColor={getBackgroundColor(item.semester)}>
-      <HistoryItem ref={itemRef} key={index}>
-        <SemesterNTypeWrapper>
-          <div> {item.semester} </div>
-          <HistoryItemInfoAuthorDateLayout>
-            {item.type.map((type, index) => (
-              <React.Fragment key={index}>
-                <TypeIconTextContainer>
-                  {renderTypeIconAndText(type)}
-                </TypeIconTextContainer>
-                {index !== item.type.length - 1 && ' '}
-              </React.Fragment>
-            ))}
-          </HistoryItemInfoAuthorDateLayout>
-        </SemesterNTypeWrapper>
-        <HistoryItemInfoWrapper>
-          {/* 아이디어 집합소와 같이 여러 줄을 한 줄로 표시하는 경우 */}
-          <HistoryItemInfoTitle>
-            {item.projectName.split(' ').map((word, index) => (
-              <React.Fragment key={index}>
-                {word}
-                <br />
-              </React.Fragment>
-            ))}
-            <div>
-              {item.hashtag.map((tag, index) => (
-                <HistoryItemHashtag key={index}>#{tag} </HistoryItemHashtag>
-              ))}
-            </div>
-          </HistoryItemInfoTitle>
+  useEffect(() => {
+    const getHistoryData = async () => {
+      try {
+        const res = await axiosInstance.get('/projects');
 
-          {/* 아이콘 이미지 등을 추가 */}
-        </HistoryItemInfoWrapper>
-        <HistoryItemIcon src={item.logoImage} />
-        <SeeMoreIcon src={SeeMoreImage} />
-      </HistoryItem>
-    </TotalWrapper>
+        const histories = res.data.result.projects;
+
+        setHistoryData(
+          histories.map((history) => ({
+            projectId: history.projectId,
+            name: history.name,
+            description: history.description,
+            logoImage: history.logoImage,
+            semester: history.semester,
+            types: history.types,
+            tags: history.tags,
+          })),
+        );
+      } catch (error) {
+        console.error();
+      }
+    };
+    getHistoryData();
+  });
+
+  if (!historyData || historyData.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      <TotalWrapper backgroundColor={getBackgroundColor(item.semester)}>
+        <HistoryItem key={index}>
+          <SemesterNTypeWrapper>
+            <div> {item.semester} </div>
+            <HistoryItemInfoAuthorDateLayout>
+              {item.type.map((type, index) => (
+                <React.Fragment key={index}>
+                  <TypeIconTextContainer>
+                    {renderTypeIconAndText(type)}
+                  </TypeIconTextContainer>
+                  {index !== item.type.length - 1 && ' '}
+                </React.Fragment>
+              ))}
+            </HistoryItemInfoAuthorDateLayout>
+          </SemesterNTypeWrapper>
+          <HistoryItemInfoWrapper>
+            {/* 아이디어 집합소와 같이 여러 줄을 한 줄로 표시하는 경우 */}
+            <HistoryItemInfoTitle>
+              {item.projectName.split(' ').map((word, index) => (
+                <React.Fragment key={index}>
+                  {word}
+                  <br />
+                </React.Fragment>
+              ))}
+              <div>
+                {item.hashtag.map((tag, index) => (
+                  <HistoryItemHashtag key={index}>#{tag} </HistoryItemHashtag>
+                ))}
+              </div>
+            </HistoryItemInfoTitle>
+
+            {/* 아이콘 이미지 등을 추가 */}
+          </HistoryItemInfoWrapper>
+          <HistoryItemIcon src={item.logoImage} />
+          <SeeMoreIcon src={SeeMoreImage} />
+        </HistoryItem>
+      </TotalWrapper>
+    </>
   );
 };
 
@@ -294,13 +327,11 @@ const HistoryList = () => {
   return (
     <>
       <HistoryListContainer>
-        {
-          // 페이지네이션 상수에 따른 히스토리 아이템 데이터 출력
-          filteredData.slice(offset, offset + PER_PAGE).map((item, index) => (
-            <HistoryItemComponent key={index} item={item} index={index} />
-          ))
-        }
+        {filteredData.slice(offset, offset + PER_PAGE).map((item, index) => (
+          <HistoryItemComponent key={index} item={item} index={index} />
+        ))}
       </HistoryListContainer>
+
       <HistoryItemPaginateStyle>
         <ArrowButton
           src={LeftArrowIcon}
@@ -308,18 +339,15 @@ const HistoryList = () => {
           isHidden={currentPage === 0}
           onClick={() => handlePageClick(currentPage - 1)}
         />
-        {
-          // 페이지네이션 상수에 따른 페이지 번호 출력
-          pages.map((pageNumber) => (
-            <PageNumber
-              key={pageNumber}
-              onClick={() => handlePageClick(pageNumber)}
-              isActive={pageNumber === currentPage}
-            >
-              {pageNumber + 1}
-            </PageNumber>
-          ))
-        }
+        {pages.map((pageNumber) => (
+          <PageNumber
+            key={pageNumber}
+            onClick={() => handlePageClick(pageNumber)}
+            isActive={pageNumber === currentPage}
+          >
+            {pageNumber + 1}
+          </PageNumber>
+        ))}
         <ArrowButton
           src={RightArrowIcon}
           alt="next"
@@ -327,6 +355,7 @@ const HistoryList = () => {
           onClick={() => handlePageClick(currentPage + 1)}
         />
       </HistoryItemPaginateStyle>
+      
       <HistorySearchBarLayout onSearch={handleSearch} />
     </>
   );

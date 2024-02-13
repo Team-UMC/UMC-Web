@@ -24,7 +24,7 @@ const Sub = styled.div`
 const TILTitle = () => {
   return (
     <Title>
-      <Main>Today-I-Learned</Main>
+      <Main>Today I Learned</Main>
       <Sub>오늘 내가 공부한 기록들을 확인해보세요!</Sub>
     </Title>
   );

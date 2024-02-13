@@ -9,6 +9,7 @@ import TILAdd from 'components/TodayILearn/AddTIL';
 const TILContainer = styled.div`
   margin: 0 50vh;
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

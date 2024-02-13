@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import LeftContainer from 'components/Header/LeftContainer';
 import RightContainer from 'components/Header/RightContainer';
 
 import SmallHeaderImage from 'assets/header/SmallHeader.png';
+
+import HamburgerMenuBtnImage from 'assets/header/HamburgerButton.svg';
+
+import HamburgerMenu from './Hamburgermenu';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -46,14 +50,27 @@ const Wrapper = styled.div`
 `;
 
 const SmallHeader = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSide = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
       <HeaderWrapper>
         <Wrapper>
+          <img
+            src={HamburgerMenuBtnImage}
+            onClick={toggleSide}
+            style={{ cursor: 'pointer', color: 'white' }}
+          />
           <LeftContainer />
           <RightContainer />
         </Wrapper>
       </HeaderWrapper>
+
+      <HamburgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };
