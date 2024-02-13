@@ -52,7 +52,7 @@ const NaverAuth = () => {
           const serviceMember = response.data.result.serviceMember;
 
           localStorage.setItem('server Token', accessToken);
-          
+
           if (serviceMember) {
             navigate('/main');
           } else {
