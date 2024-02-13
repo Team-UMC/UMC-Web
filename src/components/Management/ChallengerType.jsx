@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import ChallengerAdd from 'assets/management/challengeradd.svg';
+import ChallengerRemove from 'assets/management/challengerremove.svg';
+
 const ChallengerTypeContainer = styled.div`
-  width: 120vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  border: 1px solid #232A6D;
 `;
 
 const TitleContainer = styled.div`
@@ -18,6 +20,8 @@ const TitleContainer = styled.div`
   font-weight: 500;
   padding: 16px;
   margin-top: 16px;
+  background-color: #fff;
+
   border: 1px solid #232A6D;
 `;
 
@@ -25,8 +29,8 @@ const DropdownBox = styled.select`
   padding: 6px 16px;
   border-radius: 20px;
   border: none;
-  background-color: ${(props) => (props.selected ? '#9EE7FF' : '#EAEAEA')};
-  color: ${(props) => (props.selected ? '#fff' : '#999')};
+  background-color: ${(props) => (props.selected ? '#F0F4FF' : '#EAEAEA')};
+  color: ${(props) => (props.selected ? '#8784FF' : '#999')};
   margin-top: 8px;
   text-align: center;
   font-size: 16px;
@@ -39,9 +43,21 @@ const DropBoxContainer = styled.div`
   flex-direction: row;
 `;
 
-const AddRemoveButton = styled.button`
-  margin-right: 8px;
+const AddButton = styled.div`
+  margin-right: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8vh;
   cursor: pointer;
+`;
+
+const RemoveButton = styled.div`
+margin-right: 1vh;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
 `;
 
 const ChallengerType = () => {
@@ -82,6 +98,12 @@ const ChallengerType = () => {
   const renderAdditionalDropdowns = () => {
     return additionalDropdowns.map((dropdown, index) => (
       <DropBoxContainer key={index}>
+        {additionalDropdowns.length > 0 && (
+          <RemoveButton onClick={() => handleRemoveButtonClick(index)}>
+            <img src={ChallengerRemove} alt='챌린저 제거 버튼' />
+
+          </RemoveButton>
+        )}
         <DropdownBox
           value={dropdown.option}
           onChange={(event) => handleAdditionalDropdownChange(index, event)}
@@ -111,12 +133,10 @@ const ChallengerType = () => {
           <option value="Android">Android</option>
         </DropdownBox>
 
-        <AddRemoveButton onClick={handleAddButtonClick}>+</AddRemoveButton>
-        {additionalDropdowns.length > 0 && (
-          <AddRemoveButton onClick={() => handleRemoveButtonClick(index)}>
-            {index === 0 ? '-' : ''}
-          </AddRemoveButton>
-        )}
+        <AddButton onClick={handleAddButtonClick}>기수추가
+        <img src={ChallengerAdd} alt='더하기 버튼' />
+        </AddButton>
+        
       </DropBoxContainer>
     ));
   };
@@ -126,6 +146,11 @@ const ChallengerType = () => {
       <TitleContainer>
         기수 및 파트
         <DropBoxContainer>
+        {additionalDropdowns.length > 0 && (
+            <RemoveButton onClick={() => handleRemoveButtonClick(0)}>
+              <img src={ChallengerRemove} alt='챌린저 제거 버튼' />
+            </RemoveButton>
+          )}
           <DropdownBox
             value={selectedOption}
             onChange={handleDropdownChange}
@@ -155,12 +180,10 @@ const ChallengerType = () => {
             <option value="Android">Android</option>
           </DropdownBox>
 
-          <AddRemoveButton onClick={handleAddButtonClick}>+</AddRemoveButton>
-          {additionalDropdowns.length > 0 && (
-            <AddRemoveButton onClick={() => handleRemoveButtonClick(0)}>
-              {additionalDropdowns.length === 1 ? '-' : ''}
-            </AddRemoveButton>
-          )}
+          <AddButton onClick={handleAddButtonClick}>기수추가
+        <img src={ChallengerAdd} alt='더하기 버튼' />
+        </AddButton>          
+        
         </DropBoxContainer>
         {renderAdditionalDropdowns()}
       </TitleContainer>

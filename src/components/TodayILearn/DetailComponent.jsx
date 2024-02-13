@@ -5,6 +5,29 @@ import styled from "styled-components";
 import NotionImg from 'assets/todayilearn/notion.svg';
 import FileImg from 'assets/todayilearn/file.svg';
 
+const DetailComponent = () => {
+    return (
+    <div>
+        <TextComponent>축구축구구루국</TextComponent>
+        
+        <AddFileContainer>
+        <Notion>노션연동</Notion> <img src={NotionImg} />
+        </AddFileContainer>
+
+        <AddFileContainer>
+        <Notion>첨부파일 </Notion> <img src={FileImg} />
+        </AddFileContainer>
+        
+        <ButtonCon>
+        <ListButton>목록</ListButton>
+        </ButtonCon>
+    </div>
+    );
+};
+
+export default DetailComponent;
+
+
 const TextComponent = styled.textarea`
   color: black;
   border: none;
@@ -51,25 +74,3 @@ width: auto; /*글자의 크기에 맞춤 */
 border-radius: 12px;
 cursor: pointer;
 `;
-
-const DetailComponent = () => {
-    return (
-    <div>
-        <TextComponent>축구축구구루국</TextComponent>
-        
-        <AddFileContainer>
-        <Notion>노션연동</Notion> <img src={NotionImg} />
-        </AddFileContainer>
-
-        <AddFileContainer>
-        <Notion>첨부파일 </Notion> <img src={FileImg} />
-        </AddFileContainer>
-        
-        <ButtonCon>
-        <ListButton>목록</ListButton>
-        </ButtonCon>
-    </div>
-    );
-};
-
-export default DetailComponent;
