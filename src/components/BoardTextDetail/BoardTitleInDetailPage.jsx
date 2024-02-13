@@ -1,3 +1,5 @@
+// 게시판명을 위에 표기하는 파일(BoardTitle에서 가져와서 조금 변경 후사용)
+
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -109,7 +111,7 @@ const BoardTitleSub = styled.p`
 // image: 게시판 아이콘 이미지
 const CATEGORY_LISTS = [
   {
-    path: 'campus',
+    path: 'school',
     title: '학교',
     image: SchoolIcon,
   },
@@ -119,7 +121,7 @@ const CATEGORY_LISTS = [
     image: BranchIcon,
   },
   {
-    path: 'center',
+    path: 'union',
     title: '연합',
     image: UnionIcon,
   },
@@ -151,7 +153,7 @@ const TITLE_LISTS = [
     subtitle: '워크북으로 공부 의지를 활활 불태워 봐요!',
   },
   {
-    path: 'ob',
+    path: 'prev',
     title: '이전 기수 게시판',
     subtitle: '이전 챌린저들과 함께 소통해봐요!',
   },
