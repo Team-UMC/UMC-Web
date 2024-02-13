@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import { Date } from 'components/BoardTextDetail/Comment';
 
 const MessagePreview = styled.div`
-  /* width: 50%; */
   display: flex;
   justify-content: center;
   padding: 1vh;
   margin: auto;
-  /* border: 1px solid #000000; */
+  border: 2px solid #d8d8ff;
+  border-width: 0 0 2px;
+
+  word-wrap:break-word;
 `;
 
 const UserInfoDateWrapper = styled.div`
@@ -56,7 +58,6 @@ const Message = ({ date, UserInformation, Content }) => {
           </MessageContentPreview>
         </ColumnAlign>
       </MessagePreview>
-      <hr />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import {
   HambergerMenuAlignBox,
   UserInfoAndMenu,
   InputAlignBox,
+  // MessageUsingCursor,
   //   MessageSelect,
 } from './MessagePage.style';
 import Message from 'components/Message/Message';
@@ -82,6 +83,9 @@ const MessagePage = ({ UserInformation }) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        width: '100%',
+        backgroundColor: ' #f2f5fc',
+        height: '100vh',
       }}
     >
       <BackgroundStyle>
@@ -94,6 +98,7 @@ const MessagePage = ({ UserInformation }) => {
             <BoardSubText> 궁금한 점을 물어보세요 </BoardSubText>
           </BoardTitleMediumWrapper>
         </BoardTitleBigWrapper>
+
         <MessageBoxStyle>
           <MessageBox>
             <UserName2>쪽지 목록</UserName2>
@@ -139,12 +144,16 @@ const MessagePage = ({ UserInformation }) => {
                   Content={message.content}
                 />
               ))}
-
+              {/* 
               <MessageWrite
                 onMessageSubmit={handleMessageSubmit}
                 ref={messageWriteRef}
-              />
+              /> */}
             </InputAlignBox>
+            <MessageWrite
+              onMessageSubmit={handleMessageSubmit}
+              ref={messageWriteRef}
+            />
           </MessageBox>
           {/* )} */}
         </MessageBoxStyle>

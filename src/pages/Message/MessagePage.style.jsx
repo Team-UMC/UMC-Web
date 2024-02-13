@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 // import Message from 'components/Message/Message';
 
+// const MessageUsingCursor=styled(Message)`
+//   cursor:pointer;
+// `
+
 const BackgroundStyle = styled.div`
-  width: 100%;
-  background-color: #f2f5fc;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  /* align-items:flex-start; */
+  width: 70%;
 `;
 
 const UserName2 = styled.h2`
@@ -18,24 +20,31 @@ const UserName2 = styled.h2`
 
 const MessageBoxStyle = styled.div`
   display: flex;
-  justify-content: center;
   gap: 4vw;
   height: 70%;
+  width:100%;
 `;
 
 const MessageBox = styled.div`
-  width: 25%;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
   height: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: #ffffff;
+  /* word-wrap: break-word; */
 
+  overflow-wrap: break-word;
   overflow: auto;
 `;
 
 const AllDeleteBtn = styled.div`
   padding: 10px;
-  /* position:absolute; */
+  position: absolute;
+  top: 3vh;
+  white-space: nowrap;
+
   border-radius: 8px;
   background-color: #636363;
   color: #ffffff;
@@ -46,7 +55,7 @@ const HambergerMenuAlignBox = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  right: 0;
+  right: 2vw;
   cursor: pointer;
 `;
 
@@ -63,9 +72,8 @@ const UserInfoAndMenu = styled.div`
 
 const InputAlignBox = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
 `;
 
 export {
@@ -77,5 +85,6 @@ export {
   HambergerMenuAlignBox,
   UserInfoAndMenu,
   InputAlignBox,
-//   MessageSelect,
+  // MessageUsingCursor
+  //   MessageSelect,
 };
