@@ -1,4 +1,4 @@
-6yimport React, { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import AdminTitle from 'components/Management/NoticePin/AdminTitle';

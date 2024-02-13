@@ -16,7 +16,6 @@ border: 1px solid #232A6D;
 const Start = styled.div`
 border-bottom: 1px solid #D9D9D9;
 color: #000000;
-font-size: 18px;
 padding-bottom: 0.5vh;
 // font-weight: bold;
 
@@ -24,7 +23,6 @@ padding-bottom: 0.5vh;
 
 const End = styled.div`
 color: #000000;
-font-size: 18px;
 padding-top: 0.5vh;
 
 // font-weight: bold;

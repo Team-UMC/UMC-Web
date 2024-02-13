@@ -50,8 +50,11 @@ function App() {
             <Route element={<BasicLayout />}>
               <Route path="/board/*" element={<BoardPage />} />
               <Route path="/boardwrite" element={<BoardWrite />} />
-              <Route path="/management" element={<Management />} />
-              <Route path="/mywrite" element={<MyWrite />} />
+
+              <Route path="/management/*" element={<Management />} />
+              <Route path="/mywrite/*" element={<MyWrite />} />
+
+
               <Route path="/textdetail" element={<TextDetailPage />} />
               <Route path="/messagepreview" element={<MessagePreviewPage />} />
               <Route path="/messagedetail" element={<MessageDetailPage />} />

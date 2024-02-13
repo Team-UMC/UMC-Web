@@ -8,6 +8,84 @@ import ListUnchecked from 'assets/todolist/listuncheckedimg.svg';
 import Plant from 'assets/todolist/plant.svg';
 import Clock from 'assets/todolist/clock.svg';
 
+const TDLComponent = () => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const handleEdit = () => {
+    setShowEditModal(true);
+  };
+
+  const closeEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const handleDelete = () => {
+    setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
+  return (
+    <>
+      <ComponentContainer>
+        <ImgTitleContainer>
+          <img src={ListUnchecked} alt="선택로고" />
+          <StyleImg src={Plant} alt="식물사진" />
+
+          <TitleContainer>
+            <MainTitle>화분 물주기</MainTitle>
+            <SubTitle>
+              <img src={Clock} alt="시계이미지" /> 시간
+            </SubTitle>
+          </TitleContainer>
+        </ImgTitleContainer>
+
+        <img src={DetailImg} alt="상세보기 버튼" />
+
+        <OptionsContainer>
+          <OptionButton onClick={handleEdit}>수정하기</OptionButton>
+          <OptionButton onClick={handleDelete}>삭제하기</OptionButton>
+        </OptionsContainer>
+      </ComponentContainer>
+
+      {showEditModal && (
+        <ModalContainer onClick={closeEditModal}>
+          <ModalContent>
+            {/* 내용 */}
+            <ButtonContainer>
+              <ActionButton onClick={closeEditModal}>취소</ActionButton>
+              <ActionButton>추가</ActionButton>
+            </ButtonContainer>
+          </ModalContent>
+        </ModalContainer>
+      )}
+
+      {showDeleteModal && (
+        <ModalContainer>
+          <ModalContent>
+            <img src={ModalImg} alt="느낌표 이미지" />
+            <p>정말로 해당 TIL을 삭제하시겠습니까?</p>
+            <p>삭제 후에는 복구할 수 없습니다.</p>
+
+            <ModalButtonContainer>
+              <ModalCancelShape onClick={closeDeleteModal}>취소</ModalCancelShape>
+              <ModalDeleteShape onClick={() => console.log('삭제 로직 실행')}>
+                삭제
+              </ModalDeleteShape>
+            </ModalButtonContainer>
+          </ModalContent>
+        </ModalContainer>
+      )}
+    </>
+  );
+};
+
+export default TDLComponent;
+
+
 const OptionsContainer = styled.div`
   display: none;
   position: absolute;
@@ -142,80 +220,3 @@ const ActionButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
 `;
-
-const TDLComponent = () => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-
-  const handleEdit = () => {
-    setShowEditModal(true);
-  };
-
-  const closeEditModal = () => {
-    setShowEditModal(false);
-  };
-
-  const handleDelete = () => {
-    setShowDeleteModal(true);
-  };
-
-  const closeDeleteModal = () => {
-    setShowDeleteModal(false);
-  };
-
-  return (
-    <>
-      <ComponentContainer>
-        <ImgTitleContainer>
-          <img src={ListUnchecked} alt="선택로고" />
-          <StyleImg src={Plant} alt="식물사진" />
-
-          <TitleContainer>
-            <MainTitle>화분 물주기</MainTitle>
-            <SubTitle>
-              <img src={Clock} alt="시계이미지" /> 시간
-            </SubTitle>
-          </TitleContainer>
-        </ImgTitleContainer>
-
-        <img src={DetailImg} alt="상세보기 버튼" />
-
-        <OptionsContainer>
-          <OptionButton onClick={handleEdit}>수정하기</OptionButton>
-          <OptionButton onClick={handleDelete}>삭제하기</OptionButton>
-        </OptionsContainer>
-      </ComponentContainer>
-
-      {showEditModal && (
-        <ModalContainer onClick={closeEditModal}>
-          <ModalContent>
-            {/* 내용 */}
-            <ButtonContainer>
-              <ActionButton onClick={closeEditModal}>취소</ActionButton>
-              <ActionButton>추가</ActionButton>
-            </ButtonContainer>
-          </ModalContent>
-        </ModalContainer>
-      )}
-
-      {showDeleteModal && (
-        <ModalContainer>
-          <ModalContent>
-            <img src={ModalImg} alt="느낌표 이미지" />
-            <p>정말로 해당 TIL을 삭제하시겠습니까?</p>
-            <p>삭제 후에는 복구할 수 없습니다.</p>
-
-            <ModalButtonContainer>
-              <ModalCancelShape onClick={closeDeleteModal}>취소</ModalCancelShape>
-              <ModalDeleteShape onClick={() => console.log('삭제 로직 실행')}>
-                삭제
-              </ModalDeleteShape>
-            </ModalButtonContainer>
-          </ModalContent>
-        </ModalContainer>
-      )}
-    </>
-  );
-};
-
-export default TDLComponent;
