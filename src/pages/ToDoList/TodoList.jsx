@@ -80,7 +80,7 @@ const TodoList = () => {
         <TitleTDL />
 
         <CalenderContainer>
-          <ToDoListCalender setSelectedDate={setSelectedDate} />
+        <ToDoListCalender selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
           <AddButtonContainer onClick={() => setIsAddModalOpen(true)}>
             <SVGImage src={AddButtonImg} alt="추가 버튼" />
             <AddTIL>TO-DO 추가</AddTIL>

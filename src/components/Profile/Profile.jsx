@@ -160,7 +160,7 @@ const Profile = ({ setIsModalOpen }) => {
             </SettingIconWrapper>
 
             <SettingIconWrapper>
-              <Link to="/setting">
+              <Link to="/setting/custom">
                 <img src={SettingIconImage} alt="Setting" />
               </Link>
               <IconDescription>설정</IconDescription>

@@ -6,69 +6,8 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import DetailImg from 'assets/todayilearn/detail.svg'; /* 상세보기버튼 이미지 */
-import DetailLine from 'assets/todayilearn/DetailLine.svg';
 import ModalImg from 'assets/todayilearn/modalimg.svg'; /*모달 느낌표 버튼 */
 import FigmaImg from 'assets/todayilearn/figma.svg';
-
-const TILComponent = () => {
-  const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-
-  const handleEdit = () => { //수정하기 클릭시 페이지 이동
-    navigate(`/todayilearn/detail`);
-  };
-
-  const handleDelete = () => {   
-    //삭제 버튼 클릭시 모달창 보여줌, 삭제동작구현필요
-    setShowModal(true);
-  };
-
-  const closeModal = () => { //취소버튼 클릭시 모달창 끄기
-    setShowModal(false);
-  };
-
-  return (
-    <>
-      <ComponentContainer>
-
-      <ImgTitleContainer>
-    <StyleImg src={FigmaImg} alt="선택로고" />
-    <TitleContainer>
-        <MainTitle>프로젝트 웹 디자인하기</MainTitle>
-        <SubTitle>TIL뷰 만들기</SubTitle>
-    </TitleContainer>
-    </ImgTitleContainer>
-
-        <StyledImage src={DetailImg} alt="상세보기 버튼" />
-
-        <OptionsContainer>
-          <OptionButton onClick={handleEdit}>수정하기</OptionButton>
-          <img src={DetailLine} alt = '선' />
-          <OptionButton onClick={handleDelete}>삭제하기</OptionButton>
-        </OptionsContainer>
-      </ComponentContainer>
-
-      {showModal && ( /* 모달 실행 */
-        <ModalContainer>
-          <ModalContent>
-            <img src={ModalImg} alt="느낌표 이미지"/>
-            <p>정말로 해당 TIL을 삭제하시겠습니까?</p>
-            <p>삭제 후에는 복구할 수 없습니다.</p>
-
-            <ModalButtonContainer>
-            <ModalCancelShape onClick={closeModal}>취소</ModalCancelShape>
-            <ModalDeleteShape onClick={() => console.log('삭제 로직 실행')}>삭제</ModalDeleteShape>
-            </ModalButtonContainer>
-
-          </ModalContent>
-        </ModalContainer>
-      )}
-    </>
-  );
-};
-
-export default TILComponent;
-
 
 const OptionsContainer = styled.div`
   display: none;
@@ -193,7 +132,6 @@ const SubTitle = styled.div`
   font-size: 16px;
   font-weight: 500;
 `;
-<<<<<<< HEAD
 
 const TILComponent = () => {
   const navigate = useNavigate();
@@ -254,5 +192,3 @@ const TILComponent = () => {
 };
 
 export default TILComponent;
-=======
->>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0

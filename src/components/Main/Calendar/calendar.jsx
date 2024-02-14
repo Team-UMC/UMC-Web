@@ -10,9 +10,11 @@ const StyledCalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-`
+`;
 
 const MyCalendar = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
   const [value, onChange] = useState(new Date());
   // 선택된 날짜와 일정을 저장하는 state
   const [selectedDate, setSelectedDate] = useState(null);
@@ -21,59 +23,13 @@ const MyCalendar = () => {
   // 클릭한 위치를 저장하는 state
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
-  // view === 'month'이고 date === '토요일'인 경우 -> 'saturday' 클래스 적용
-  const tileClassName = ({ date, view }) => {
-    if (view === 'month' && date.getDay() === 6) {
-      return 'saturday';
-    }
-  };
+  // const handleOpen = () => {
+  //   setIsOpen(true);
+  // }
 
-  // 일정 표시 함수
-  const tileContent = ({ date, view }) => {
-    if (view === 'month') {
-      const dateString = moment(date).format('YYYY-MM-DD');
-
-      // 해당 날짜에 일정이 있는지 확인
-      const schedules = CalendarData.schedules.filter(
-        (s) => dateString >= s.startDateTime && dateString <= s.endDateTime,
-      );
-
-      // 일정이 있는 경우, 각 일정에 맞는 색상의 점을 표시
-      const dots = schedules.map((schedule) => {
-        let color;
-        switch (schedule.hostType) {
-          case 'CAMPUS':
-            color = '#FF8695';
-            break;
-          case 'CENTER':
-            color = '#A9CD85';
-            break;
-          case 'UNION':
-            color = '#009DA7';
-            break;
-          default:
-            break;
-        }
-
-        return (
-          <div
-            key={schedule.id}
-            className="dot"
-            style={{ backgroundColor: color }}
-          />
-        );
-      });
-
-      return (
-        <div
-          className="dot-container"
-          onMouseLeave={() => setSelectedDate(null)}
-        >
-          {dots}
-        </div>
-      );
-    }
-  };
+  const handleClose = () => {
+    setIsOpen(false);
+  }
 
   // 날짜 클릭 시 동작 정의
   const onClickDay = (date, event) => {
@@ -168,11 +124,12 @@ const MyCalendar = () => {
         tileContent={tileContent}
         onClickDay={onClickDay}
       />
-      {selectedDate && (
+      {isOpen && selectedDate && (
         <div
           className={`schedule-list ${selectedDate ? 'active' : ''}`}
           style={{ top: `${clickPosition.y}px`, left: `${clickPosition.x}px` }}
         >
+          <div onClick={handleClose} style={{cursor: "pointer"}}> X </div>
           <h2 className="schedule-main-title">
             {moment(selectedDate).format('YYYY.MM.DD')} 일정
           </h2>

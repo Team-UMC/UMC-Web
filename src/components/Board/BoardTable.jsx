@@ -1,17 +1,15 @@
 // BoardTable: 게시판 테이블 컴포넌트
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState } from 'react';
+import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
-import { ROWS_DATA } from 'Data';
+
 import SearchBar from './BoardSearch';
 import BoardWriteButton from './BoardWriteButton';
 import PinnedTable from 'components/Management/NoticePin/PinnedTable';
+import Row from './Row';
 
-import { IconButton } from '@mui/material';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
-import axiosInstance from 'apis/setting';
 
 // 게시글 테이블 컴포넌트 스타일링
 const StyledTable = styled.table`
@@ -28,7 +26,6 @@ const StyledTableHeader = styled.thead`
   /* 헤더 하단 경계선 표시 X */
   border-bottom: none;
 
-  padding: 0;
   font-weight: 600;
 `;
 
@@ -80,26 +77,6 @@ const StyledTableCell = styled.td`
 // 게시글 테이블 펼치기/접기 버튼 스타일링
 const StyledOpenToggle = styled.td`
   padding: 10px 10px;
-`;
-
-// 게시글 테이블 펼치기/접기 셀 스타일링
-const StyledCollapseCell = styled.td`
-  border: none;
-  padding: 0;
-`;
-
-// 게시글 테이블 펼치기/접기 내용 스타일링
-const StyledCollapseContent = styled.div`
-  border: none;
-  margin: 0;
-
-  /* 펼치기/접기 애니메이션 */
-  transition: max-height 0.3s ease;
-
-  overflow: hidden;
-
-  /* 펼치기/접기 상태에 따라 최대 높이 설정(0px ~ 500px) */
-  max-height: ${(props) => (props.open ? '500px' : '0')};
 `;
 
 // 게시글 작성 버튼 레이아웃 스타일링
@@ -176,79 +153,35 @@ const StyledTableCheckBoxCell = styled.td`
 // 한 페이지에 표시할 게시글 수
 const ROWS_PER_PAGE = 10;
 
-// 게시글 데이터 (나중에 서버 연동 시 삭제)
-const rows = ROWS_DATA;
-
-// 게시글 테이블의 행 컴포넌트
-const Row = () => {
-  // 게시글 펼치기/접기 상태
-  const [open, setOpen] = useState(false);
-  const [boardData, setBoardData] = useState([]);
-
-  useEffect(() => {
-    const getBoardData = async () => {
-      // 현재 주소 받아오기 [ex) localhost:3000/board/campus/notice]
-      const currentURL = window.location.href;
-
-      // /로 구분하여 배열로 저장하고 host 값과 board 값 변수에 저장하기
-      const urlParts = currentURL.split('/');
-      const host = urlParts[4].toUpperCase();
-      const board = urlParts[5].toUpperCase();
-
-      // Page 부분 수정 필요
-      const res = await axiosInstance.get(
-        `/boards?host=${host}&board=${board}&page=0`,
-      );
-
-      setBoardData(res.data.result.boardPageElement);
-    };
-    getBoardData();
-  }, []);
-
-  if (!boardData || boardData.length === 0) {
-    return null;
-  }
-
-  return (
-    <Fragment>
-      {boardData.map((boardItem) => (
-        <Fragment key={boardItem.boardId}>
-          <StyledTableRow>
-            <StyledTableCheckBoxCell />
-            <StyledTitleColumn style={{ textAlign: 'left' }}>
-              {boardItem.title}
-            </StyledTitleColumn>
-            <StyledTableCell>{boardItem.writer}</StyledTableCell>
-            <StyledTableCell>{boardItem.createdAt}</StyledTableCell>
-            <StyledTableCell>{boardItem.hitCount}</StyledTableCell>
-            <StyledOpenToggle>
-              <IconButton
-                aria-label="expand row"
-                size="small"
-                onClick={() => setOpen(!open)}
-              >
-                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-              </IconButton>
-            </StyledOpenToggle>
-          </StyledTableRow>
-          <StyledTableRow>
-            <StyledCollapseCell colSpan={5}>
-              <StyledCollapseContent open={open}>
-                {boardItem.content}
-              </StyledCollapseContent>
-            </StyledCollapseCell>
-          </StyledTableRow>
-        </Fragment>
-      ))}
-    </Fragment>
-  );
-};
-
 const BoardTable = () => {
+  // 현재 주소 받아오기 [ex) localhost:3000/board/campus/notice]
+  const currentURL = window.location.href;
+
+  // /로 구분하여 배열로 저장하고 host 값과 board 값 변수에 저장하기
+  const urlParts = currentURL.split('/');
+
   // 현재 페이지
   const [currentPage, setCurrentPage] = useState(0);
   // 검색어
   const [searchTerm, setSearchTerm] = useState('');
+
+  const host = urlParts[4].toUpperCase();
+  const board = urlParts[5].toUpperCase();
+
+  const [boardData, setBoardData] = useState([]);
+
+  const getBoardData = async () => {
+    try {
+      const res = await axiosInstance.get(
+        `/boards?host=${host}&board=${board}&page=0`,
+      );
+      setBoardData(res.data.result.boardPageElements);
+
+      console.log(boardData);
+    } catch (error) {
+      console.error();
+    }
+  };
 
   // 페이지네이션 클릭 이벤트 핸들러
   const handlePageClick = (pageNumber) => {
@@ -262,12 +195,11 @@ const BoardTable = () => {
   };
 
   // 검색어가 포함된 게시글만 필터링
-  const filteredRows = rows.filter(
-    (row) => row.title.includes(searchTerm) || row.content.includes(searchTerm),
+  const filteredRows = boardData.filter(
+    (boardItem) =>
+      boardItem.title.includes(searchTerm) ||
+      boardItem.content.includes(searchTerm),
   );
-
-  // 페이지네이션 상수에 따른 갤러리 아이템 데이터 필터링
-  const offset = currentPage * ROWS_PER_PAGE;
 
   // 페이지 버튼 렌더링
   const pageCount = Math.ceil(filteredRows.length / ROWS_PER_PAGE);
@@ -277,7 +209,7 @@ const BoardTable = () => {
     <>
       <StyledTable>
         <StyledTableHeader>
-          <StyledTableRow style={{ borderBottom: 0, paddingBottom: 0 }}>
+          <StyledTableRow style={{ borderBottom: 0 }}>
             <StyledTableCheckBoxCell />
             <StyledTitleColumn>제목</StyledTitleColumn>
             <StyledTableCell>작성자</StyledTableCell>
@@ -289,47 +221,53 @@ const BoardTable = () => {
         <tbody>
           {
             // 공지사항 고정 게시글
-            rows.map((row) =>
-              row.ispinned ? <PinnedTable key={row.title} row={row} /> : null,
+            boardData.map((boardItem) =>
+              boardItem.ispinned ? (
+                <PinnedTable key={boardItem.title} boardData={boardItem} />
+              ) : null,
             )
           }
-          {
-            // 페이지네이션 상수에 따른 갤러리 아이템 데이터 출력
-            filteredRows.slice(offset, offset + ROWS_PER_PAGE).map((row) => (
-              <Row key={row.title} row={row} />
-            ))
-          }
+          <Row
+            getBoardData={getBoardData}
+            boardData={boardData}
+            host={host}
+            board={board}
+          />
         </tbody>
       </StyledTable>
+
       <BoardWriteButtonLayout>
         <BoardWriteButton />
       </BoardWriteButtonLayout>
+
       <BoardPaginateStyle>
-        <ArrowButton
-          src={LeftArrowIcon}
-          alt="previous"
-          isHidden={currentPage === 0}
-          onClick={() => handlePageClick(currentPage - 1)}
-        />
-        {
-          // 페이지네이션 상수에 따른 페이지 번호 출력
-          pages.map((pageNumber) => (
-            <PageNumber
-              key={pageNumber}
-              onClick={() => handlePageClick(pageNumber)}
-              isActive={pageNumber === currentPage}
-            >
-              {pageNumber + 1}
-            </PageNumber>
-          ))
-        }
-        <ArrowButton
-          src={RightArrowIcon}
-          alt="next"
-          isHidden={currentPage === pageCount - 1}
-          onClick={() => handlePageClick(currentPage + 1)}
-        />
+        {pages.length > 0 && (
+          <>
+            <ArrowButton
+              src={LeftArrowIcon}
+              alt="previous"
+              isHidden={currentPage === 0}
+              onClick={() => handlePageClick(currentPage - 1)}
+            />
+            {pages.map((pageNumber) => (
+              <PageNumber
+                key={pageNumber}
+                onClick={() => handlePageClick(pageNumber)}
+                isActive={pageNumber === currentPage}
+              >
+                {pageNumber + 1}
+              </PageNumber>
+            ))}
+            <ArrowButton
+              src={RightArrowIcon}
+              alt="next"
+              isHidden={currentPage === pageCount - 1}
+              onClick={() => handlePageClick(currentPage + 1)}
+            />
+          </>
+        )}
       </BoardPaginateStyle>
+
       <BoardSearchLayout>
         <SearchBar onSearch={handleSearch} />
       </BoardSearchLayout>

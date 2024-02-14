@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import NavStyleStar from 'assets/header/NavStyleStar.svg';
-import NavTextStyle from 'assets/header/NavTextStyle.svg';
 
 const NavWrapper = styled.nav`
   display: flex;
@@ -36,11 +34,6 @@ const TextWrapper = styled.div`
   width: 130px;
   height: 39px;
   transition: background 0.3s ease;
-
-  &:hover {
-    background: url(${NavTextStyle}) no-repeat center center;
-  }
-
 `;
 
 const BlackLeftContainer = () => {
@@ -48,22 +41,18 @@ const BlackLeftContainer = () => {
     <NavWrapper>
       <>
         <StyledLink to="/main">
-          <img src={NavStyleStar} alt="별" />
           <TextWrapper>홈</TextWrapper>
         </StyledLink>
 
         <StyledLink to="/board/campus/notice">
-          <img src={NavStyleStar} alt="별" />
           <TextWrapper>게시판</TextWrapper>
         </StyledLink>
 
         <StyledLink to="/history">
-          <img src={NavStyleStar} alt="별" />
           <TextWrapper>히스토리</TextWrapper>
         </StyledLink>
 
         <StyledLink to="/gallery">
-          <img src={NavStyleStar} alt="별" />
           <TextWrapper>사진첩</TextWrapper>
         </StyledLink>
       </>

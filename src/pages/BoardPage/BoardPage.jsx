@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 import BoardTitle from 'components/BoardTitle/BoardTitle';
 import BoardBox from 'components/BoardBox/BoardBox';
-import BoardTable from 'components/Board/BoardTable';
+import BoardList from 'components/Board/BoardList';
+
+//import BoardTable from 'components/Board/BoardTable';
 
 // 게시글 전체 페이지 컨테이너
 const BoardPageContainer = styled.div`
@@ -13,6 +15,8 @@ const BoardPageContainer = styled.div`
   justify-content: center;
   padding-top: 100px;
   padding-bottom: 100px;
+
+  width: 80%;
 `;
 
 // 게시글 제목 레이아웃
@@ -26,23 +30,28 @@ const BoardBoxAndBoardTableWrapper = styled.div`
   /* 레이아웃 스타일링 */
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 0 80px;
+  justify-content: space-between;
+  gap: 0 40px;
+
+  width: 100%;
 `;
 
 // 좌측 메뉴바(BoardBox) 스타일링
 const StyledBoardBox = styled(BoardBox)`
-  width: 100%;
+  width: 20%;
 `;
 
 // 게시글 목록(Table)을 감싸는 컴포넌트
 const BoardTableWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  width: 70%;
+
 `;
 
 // 게시글 목록(Table) 스타일링
-const StyledBoardTable = styled(BoardTable)`
+const StyledBoardTable = styled(BoardList)`
   max-width: 720px;
 `;
 

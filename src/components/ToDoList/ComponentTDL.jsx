@@ -21,7 +21,6 @@ const ComponentContainer = styled.div`
 
   padding: 1vh;
   margin-top: 2vh;
-  position: relative;
 `;
 
 const TodoListWrapper = styled.div`
@@ -220,6 +219,8 @@ const TDLComponent = ({ todoListData, setTodoListData, selectedDate }) => {
 
         const todoLists = res.data.result.todoLists;
 
+        console.log(formattedDate);
+
         setTodoListData(
           todoLists.map((todo) => ({
             todoListId: todo.todoListId,
@@ -233,7 +234,7 @@ const TDLComponent = ({ todoListData, setTodoListData, selectedDate }) => {
       }
     };
     getTodoList();
-  }, [selectedDate, setTodoListData]);
+  }, [selectedDate]);
 
   // 해당 날짜의 투두리스트가 없으면 아무것도 출력하지 않도록 함
   if (!todoListData || todoListData.length === 0) {
@@ -244,8 +245,7 @@ const TDLComponent = ({ todoListData, setTodoListData, selectedDate }) => {
   const deleteTodoList = async (todoListId) => {
     try {
       await axiosInstance.delete(`/to-do-lists/${todoListId}`, {});
-      console.log('TodoList successfully deleted.');
-      // 삭제 후에는 화면에서 해당 아이템을 제거해줍니다.
+
       setTodoListData(
         todoListData.filter((item) => item.todoListId !== todoListId),
       );

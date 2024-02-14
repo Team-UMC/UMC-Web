@@ -6,7 +6,7 @@ const LinkWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 20%;
-  margin: 10vh auto;
+  margin: 10vh auto 5vh auto;
   justify-content: space-around;
 `;
 

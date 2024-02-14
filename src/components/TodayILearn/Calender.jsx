@@ -24,12 +24,7 @@ const TILCalender = () => {
   return (
     <>
       <TodayDate>
-<<<<<<< HEAD
         <img src={CalenderImg} alt="캘린더 이미지" onClick={openModal} />
-=======
-        {/*캘린더 클릭시 모달이 열리고 그 옆에 오늘 날을 적음 */}
-        <img src={CalenderImg} alt='캘린더 이미지' onClick={openModal} /> 
->>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
         <DateSelectCalendar />
       </TodayDate>
 

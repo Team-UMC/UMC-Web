@@ -20,10 +20,8 @@ const Overlay = styled.div`
 const Container = styled.div`
   display: flex;
   width: 20%;
-  height: 50%;
+  height: 90%;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
 `;
 
 const Wrapper = styled.div`

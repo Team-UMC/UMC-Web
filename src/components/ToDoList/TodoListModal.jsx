@@ -255,7 +255,7 @@ const TodoListModal = ({
 
   return (
     <Modal>
-      <div> {selectedDate.toString()} </div>
+      <div> {selectedDate.toISOString().slice(0, 10)} </div>
       <img src={ImgChoose} alt="이모티콘 선택" />
 
       <Wrapper>

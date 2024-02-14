@@ -4,9 +4,14 @@ import styled from 'styled-components';
 
 import BlackLeftContainer from 'components/Header/BlackLeftContainer';
 import BlackRightContainer from 'components/Header/BlackRightContainer';
+import HamburgerMenuBackgroundImage from 'assets/header/HamburgerMenuBackground.svg';
+
+import HamburgerMenuCloseBtnImage from 'assets/header/HamburgerCloseButton.svg';
+
 import DetailLink from './DetailLink';
 
 const SideBarWrap = styled.div`
+  background: url(${HamburgerMenuBackgroundImage}) no-repeat center center;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -14,7 +19,6 @@ const SideBarWrap = styled.div`
 
   z-index: 9999;
   padding: 12px;
-  border-radius: 15px 0 0 15px;
   background-color: #ffffff;
   height: 50%;
   width: 100%;
@@ -28,10 +32,10 @@ const SideBarWrap = styled.div`
 `;
 
 const CenterWrapper = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
   height: 90%;
-`
+`;
 
 const HamburgerMenu = ({ isOpen, setIsOpen }) => {
   const toggleSide = () => {
@@ -40,19 +44,18 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
 
   return (
     <SideBarWrap className={isOpen ? 'open' : ''}>
-      <div
-        onClick={toggleSide}
-        onKeyDown={toggleSide}
-        style={{ cursor: 'pointer' }}
-      >
-        닫기
-      </div>
-      <CenterWrapper>
-        <BlackLeftContainer />
-        <DetailLink />
-      </CenterWrapper>
-      
-      <BlackRightContainer />
+        <img
+          src={HamburgerMenuCloseBtnImage}
+          onClick={toggleSide}
+          style={{ cursor: 'pointer' }}
+        />
+
+        <CenterWrapper>
+          <BlackLeftContainer />
+          <DetailLink />
+        </CenterWrapper>
+
+        <BlackRightContainer />
     </SideBarWrap>
   );
 };
