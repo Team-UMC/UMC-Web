@@ -63,10 +63,16 @@ const MyCalendar = () => {
         (s) => dateString >= s.startDateTime && dateString <= s.endDateTime,
       );
 
+      // 일정이 있는 경우, 각 일정의 hostType을 저장
+      // Set 사용하여 중복 제거
+      const uniqueHostTypes = new Set(
+        schedules.map((schedule) => schedule.hostType),
+      );
+
       // 일정이 있는 경우, 각 일정에 맞는 색상의 점을 표시
-      const dots = schedules.map((schedule) => {
+      const dots = Array.from(uniqueHostTypes).map((hostType) => {
         let color;
-        switch (schedule.hostType) {
+        switch (hostType) {
           case 'CAMPUS':
             color = '#FF8695';
             break;
@@ -82,7 +88,7 @@ const MyCalendar = () => {
 
         return (
           <div
-            key={schedule.id}
+            key={hostType}
             className="dot"
             style={{ backgroundColor: color }}
           />
