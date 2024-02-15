@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types"; 
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import BoardTitle from 'components/BoardWrite/BoardTitle';
 import BoardText from 'components/BoardWrite/BoardText';
@@ -9,10 +9,10 @@ import StartendDate from 'components/Management/StartendDate';
 import Local from 'components/Management/SelectLocal';
 import Classify from 'components/Management/Classify';
 
-import SearchChallenger from "./SearchChallenger.jsx";
-import ChallengerType from "./ChallengerType";
-import ChallengerPosition from "./ChallengerPosition";
-import styled from "styled-components";
+import SearchChallenger from './SearchChallenger.jsx';
+import ChallengerType from './ChallengerType';
+import ChallengerPosition from './ChallengerPosition';
+import styled from 'styled-components';
 
 import NewAdminTable from 'components/Management/NoticePin/NewAdminTable';
 
