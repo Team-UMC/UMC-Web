@@ -44,11 +44,34 @@ const TotalWrapper = styled.div`
         transform 0.3s ease-in-out,
         opacity 0.3s ease-in-out;
     }
+
+    transition: background-color 0.3s ease-in-out;
+
+    ${(props) => {
+      switch (props.semester) {
+        case '1':
+          return 'background-color: #747881;';
+        case '2':
+          return 'background-color: #596075;';
+        case '3':
+          return 'background-color: #4B5061;';
+        case '4':
+          return 'background-color: #3E4352;';
+        case '5':
+          return 'background-color: #282B37;';
+        case '6':
+          return 'background-color: #1C1E27;';
+        default:
+          return '';
+      }
+    }}
   }
 
   &:not(:hover) {
     transform: translateY(0);
-    transition: transform 0.1s ease-in-out;
+    transition:
+      transform 0.1s ease-in-out,
+      background-color 0.3s ease-in-out;
 
     .description {
       visibility: hidden;
@@ -67,6 +90,19 @@ const HistoryListContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 34px 32px;
+`;
+
+// 찾을 수 없는 프로젝트 메시지 스타일링
+const NotFoundMessage = styled.div`
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 24px;
+  font-family: 'Pretendard';
+  font-weight: 600;
 `;
 
 // 히스토리 아이템 컴포넌트 스타일링
@@ -271,6 +307,47 @@ const Description = styled.div`
   }
 `;
 
+// 셀렉터 스타일링
+const SelectorContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  margin-bottom: 1em;
+  gap: 0 1em;
+`;
+
+const SelectorValue = styled.select`
+  display: flex;
+  padding: 6px 10px 6px 14px;
+  background: white;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  color: #4c4c4c;
+  text-align: center;
+  font-family: 'Pretendard';
+  font-size: 16px;
+  font-weight: 400;
+  word-wrap: break-word;
+`;
+
+const SelectorOption = styled.option`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: black;
+  text-align: center;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 6px 16px;
+`;
+
 // 히스토리 아이템 컴포넌트
 // item: 히스토리 아이템 데이터
 // index: 히스토리 아이템 데이터 인덱스
@@ -359,7 +436,10 @@ const HistoryItemComponent = ({ item, index }) => {
 
   return (
     <>
-      <TotalWrapper backgroundColor={getBackgroundColor(item.semester)}>
+      <TotalWrapper
+        backgroundColor={getBackgroundColor(item.semester)}
+        semester={item.semester}
+      >
         <HistoryItem key={index}>
           <div>
             <SemesterNTypeWrapper className="semester-type-wrapper">
@@ -434,6 +514,10 @@ const HistoryList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   // 검색어 상태 관리
   const [searchTerm, setSearchTerm] = useState('');
+  // 기수 상태 관리
+  const [selectedSemester, setSelectedSemester] = useState('');
+  // 유형 상태 관리
+  const [selectedType, setSelectedType] = useState('');
 
   // 페이지네이션 클릭 이벤트 핸들러
   const handlePageClick = (pageNumber) => {
@@ -446,6 +530,18 @@ const HistoryList = () => {
     setCurrentPage(0);
   };
 
+  // 기수 선택 이벤트 핸들러
+  const handleSemesterSelect = (semester) => {
+    setSelectedSemester(semester);
+    setCurrentPage(0);
+  };
+
+  // 유형 선택 이벤트 핸들러
+  const handleTypeSelect = (type) => {
+    setSelectedType(type);
+    setCurrentPage(0);
+  };
+
   // 페이지네이션 최대 상수
   const PER_PAGE = 16;
 
@@ -453,21 +549,63 @@ const HistoryList = () => {
   const offset = currentPage * PER_PAGE;
 
   // 검색어 상태에 따른 히스토리 아이템 데이터 필터링
-  const filteredData = HISTORY_DATAS.filter((item) =>
-    // 검색어가 없을 경우, 전체 히스토리 아이템 데이터 출력
-    item.projectName.toLowerCase().includes(searchTerm.toLowerCase()),
+  const filteredData = HISTORY_DATAS.filter(
+    (item) =>
+      // 검색어가 없을 경우, 전체 히스토리 아이템 데이터 출력
+      item.projectName.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      // 기수가 선택되지 않았을 경우, 전체 히스토리 아이템 출력
+      (selectedSemester === '' ? true : item.semester === selectedSemester) &&
+      // 유형이 선택되지 않았을 경우, 전체 히스토리 아이템 출력
+      (selectedType === ''
+        ? item.type.length > 0
+        : item.type.includes(selectedType)),
   );
 
   // 페이지네이션 상수에 따른 히스토리 아이템 데이터 페이지네이션
   const pageCount = Math.ceil(filteredData.length / PER_PAGE);
   const pages = new Array(pageCount).fill(null).map((_, i) => i);
 
+  const Selector = () => {
+    return (
+      <SelectorContainer>
+        <SelectorValue
+          value={selectedSemester}
+          onChange={(e) => handleSemesterSelect(e.target.value)}
+        >
+          <SelectorOption value="">기수</SelectorOption>
+          <SelectorOption value="1">1수</SelectorOption>
+          <SelectorOption value="2">2수</SelectorOption>
+          <SelectorOption value="3">3수</SelectorOption>
+          <SelectorOption value="4">4수</SelectorOption>
+          <SelectorOption value="5">5수</SelectorOption>
+          <SelectorOption value="6">6수</SelectorOption>
+        </SelectorValue>
+        <SelectorValue
+          value={selectedType}
+          onChange={(e) => handleTypeSelect(e.target.value)}
+        >
+          <SelectorOption value="">유형</SelectorOption>
+          <SelectorOption value="Web">웹</SelectorOption>
+          <SelectorOption value="IOS">iOS</SelectorOption>
+          <SelectorOption value="AOS">AOS</SelectorOption>
+        </SelectorValue>
+      </SelectorContainer>
+    );
+  };
+
   return (
     <>
+      <Selector />
       <HistoryListContainer>
-        {filteredData.slice(offset, offset + PER_PAGE).map((item, index) => (
-          <HistoryItemComponent key={index} item={item} index={index} />
-        ))}
+        {filteredData.length > 0 ? (
+          filteredData
+            .slice(offset, offset + PER_PAGE)
+            .map((item, index) => (
+              <HistoryItemComponent key={index} item={item} index={index} />
+            ))
+        ) : (
+          <NotFoundMessage>찾을 수 없는 프로젝트입니다.</NotFoundMessage>
+        )}
       </HistoryListContainer>
 
       <HistoryItemPaginateStyle>

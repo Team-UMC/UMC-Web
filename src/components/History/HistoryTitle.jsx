@@ -7,7 +7,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding-bottom: 3em;
+  padding-bottom: 1em;
   cursor: default;
 `;
 
