@@ -89,7 +89,7 @@ const ProfileSettingPage = () => {
       setStatusMessage(res.data.result.statusMessage);
     };
     getProfile();
-  }, [name, nickname, statusMessage]);
+  }, []);
 
   // 적용 버튼을 통해 내 상태메세지 변경하기
   const changeProfile = async () => {
@@ -107,18 +107,13 @@ const ProfileSettingPage = () => {
         statusMessage: statusMessage,
       }),
     );
-
-    console.log('FormData:', formData);
-    console.log('Status Message:', formData.get('request'));
-
     try {
-      const res = await axiosInstance.post('/members/update', formData, {
+      await axiosInstance.post('/members/update', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Server response: ', res.data);
-
+      window.location.replace('/profilesetting');
     } catch (error) {
       console.error('Error occurred: ', error);
     }

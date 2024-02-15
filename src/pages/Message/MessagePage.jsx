@@ -21,7 +21,7 @@ import {
   BoardSubText,
 } from 'components/BoardTextDetail/DetailPage.style';
 import MessageWrite from 'components/Message/MessageWrite';
-import { ReactComponent as MiniHambergerMenu } from 'assets/MiniHamberMenu.svg';
+import { ReactComponent as MiniHambergerMenu } from 'assets/OptionButton.svg';
 // import styled from 'styled-components';
 
 // const MessageSelect = styled(Message)`

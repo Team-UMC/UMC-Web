@@ -74,7 +74,7 @@ const Wrapper = styled.div`
   color: black;
 `;
 
-const SchoolRanking = ({ universityRank }) => {  
+const SchoolRanker = ({ inUniversityRankData }) => {
   return (
     <Container>
       <RankerWrapper>
@@ -82,34 +82,36 @@ const SchoolRanking = ({ universityRank }) => {
           <ImageWrapper>
             <CrownImage src={SilverCrownImage} />
             <img src={SecondGradeCircle} />
-            <ProfileImage src={universityRank[1].universityLogo} />
+            <ProfileImage src={inUniversityRankData[1].profileImage} />
           </ImageWrapper>
-          <div> {universityRank[1].universityName} </div>
+          <div> {inUniversityRankData[1].nickname} </div>
         </TopRanker>
         <TopRanker>
           <ImageWrapper>
             <CrownImage src={GoldCrownImage} />
             <img src={FirstGradeCircle} />
-            <ProfileImage src={universityRank[0].universityLogo} />
+            <ProfileImage src={inUniversityRankData[0].profileImage} />
           </ImageWrapper>
-          <div> {universityRank[0].universityName} </div>
+          <div> {inUniversityRankData[0].nickname} </div>
         </TopRanker>
         <TopRanker>
           <ImageWrapper>
             <CrownImage src={BronzeCrownImage} />
             <img src={ThirdGradeCircle} />
-            <ProfileImage src={universityRank[2].universityLogo} />
-            <div> {universityRank[2].universityName} </div>
+            <ProfileImage src={inUniversityRankData[2].profileImage} />
+            <div> {inUniversityRankData[2].nickname} </div>
           </ImageWrapper>
         </TopRanker>
       </RankerWrapper>
 
       <ETCWrapper>
-        {universityRank.slice(3, 13).map((rank, index) => (
+        {inUniversityRankData.slice(3, 13).map((rank, index) => (
           <Wrapper key={index}>
-            <div>{rank.universityRank}등</div>
-            <div>{rank.universityName}</div>
-            <div>{rank.universityPoint} point</div>
+            <div>{rank.rank}등</div>
+            <div>
+              {rank.nickname}/{rank.name}
+            </div>
+            <div>{rank.usedPoint} point</div>
           </Wrapper>
         ))}
       </ETCWrapper>
@@ -117,15 +119,16 @@ const SchoolRanking = ({ universityRank }) => {
   );
 };
 
-SchoolRanking.propTypes = {
-  universityRank: PropTypes.arrayOf(
+SchoolRanker.propTypes = {
+  inUniversityRankData: PropTypes.arrayOf(
     PropTypes.shape({
-      universityRank: PropTypes.number.isRequired,
-      universityName: PropTypes.string.isRequired,
-      universityPoint: PropTypes.number.isRequired,
-      universityLogo: PropTypes.string.isRequired,
-    })
+      name: PropTypes.string.isRequired,
+      nickname: PropTypes.string.isRequired,
+      rank: PropTypes.number.isRequired,
+      usedPoint: PropTypes.number.isRequired,
+      profileImage: PropTypes.string.isRequired,
+    }),
   ).isRequired,
 };
 
-export default SchoolRanking;
+export default SchoolRanker;

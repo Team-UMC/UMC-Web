@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import BoardTitle from 'components/BoardWrite/BoardTitle';
 import BoardText from 'components/BoardWrite/BoardText';
 
-//import AdminPage from 'layout/NoticePin/AdminPage.jsx';
 import ManagementButton from 'components/Management/Button';
 import StartendDate from 'components/Management/StartendDate';
 import Local from 'components/Management/SelectLocal';
@@ -43,9 +42,10 @@ const TypeComponent = ({ buttonStates }) => {
     <div>
       {buttonStates.setnoticeButton && (
         <>
-          <TableLayout />
+           <TableLayout /> 
         </>
-      )}{' '}
+      )}
+
       {buttonStates.calenderButton && (
         <>
           <BoardTitle />

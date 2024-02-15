@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axiosInstance from 'apis/setting';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -7,7 +6,7 @@ import DetailImg from 'assets/todayilearn/detail.svg';
 import ModalImg from 'assets/todayilearn/modalimg.svg';
 
 import ListUnchecked from 'assets/todolist/listuncheckedimg.svg';
-import ListChecked from 'assets/todolist/listcheckedimg.svg';
+//import ListChecked from 'assets/todolist/listcheckedimg.svg';
 import Plant from 'assets/todolist/plant.svg';
 import Clock from 'assets/todolist/clock.svg';
 
@@ -21,7 +20,6 @@ const ComponentContainer = styled.div`
 
   padding: 1vh;
   margin-top: 2vh;
-  position: relative;
 `;
 
 const TodoListWrapper = styled.div`
@@ -166,22 +164,16 @@ const ActionButton = styled.div`
   cursor: pointer;
 `;
 
-const TDLComponent = ({ todoListData, setTodoListData, selectedDate }) => {
-  // 투두리스트 완료 여부
-  const [completeStates, setCompleteStates] = useState({});
-
+const TDLComponent = ({
+  todoListData,
+  completeTodoList,
+  modifyTodoList,
+  deleteTodoList,
+}) => {
   // 삭제/수정하기 관련 모달 열기
   const [openOption, setOpenOption] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-
-  // 완료/미완료 함수
-  const handleComplete = (todoListId) => {
-    setCompleteStates((prevState) => ({
-      ...prevState,
-      [todoListId]: !prevState[todoListId],
-    }));
-  };
 
   // 삭제/수정하기 옵션 모달 열기/닫기 함수
   const handleOption = () => {
@@ -208,70 +200,22 @@ const TDLComponent = ({ todoListData, setTodoListData, selectedDate }) => {
     setShowEditModal(false);
   };
 
-  // 서버로부터 투두리스트 정보 받아오기
-  useEffect(() => {
-    const getTodoList = async () => {
-      try {
-        const formattedDate = selectedDate.toISOString().slice(0, 10);
-
-        const res = await axiosInstance.get(
-          `/to-do-lists?date=${formattedDate}`,
-        );
-
-        const todoLists = res.data.result.todoLists;
-
-        setTodoListData(
-          todoLists.map((todo) => ({
-            todoListId: todo.todoListId,
-            title: todo.title,
-            deadline: new Date(todo.deadline).toLocaleString(),
-            completed: todo.completed,
-          })),
-        );
-      } catch (error) {
-        console.error();
-      }
-    };
-    getTodoList();
-  }, [selectedDate, setTodoListData]);
-
-  // 해당 날짜의 투두리스트가 없으면 아무것도 출력하지 않도록 함
-  if (!todoListData || todoListData.length === 0) {
-    return null;
-  }
-
-  // 서버를 통해서 투두리스트 삭제
-  const deleteTodoList = async (todoListId) => {
-    try {
-      await axiosInstance.delete(`/to-do-lists/${todoListId}`, {});
-      console.log('TodoList successfully deleted.');
-      // 삭제 후에는 화면에서 해당 아이템을 제거해줍니다.
-      setTodoListData(
-        todoListData.filter((item) => item.todoListId !== todoListId),
-      );
-      setOpenOption(false);
-      setShowDeleteModal(false);
-    } catch (error) {
-      console.error();
-    }
-  };
-
   return (
     <>
       {todoListData.map((todoListItem) => (
         <>
           <ComponentContainer
             key={todoListItem.todoListId}
-            complete={completeStates[todoListItem.todoListId]}
+            //complete={completeStates[todoListItem.todoListId]}
           >
             <img
               src={
-                completeStates[todoListItem.todoListId]
-                  ? ListChecked
-                  : ListUnchecked
+                //completeStates[todoListItem.todoListId]
+                //? ListChecked
+                ListUnchecked
               }
               alt="선택로고"
-              onClick={() => handleComplete(todoListItem.todoListId)}
+              onClick={() => completeTodoList(todoListItem.todoListId)}
               style={{ cursor: 'pointer' }}
             />
 
@@ -308,7 +252,15 @@ const TDLComponent = ({ todoListData, setTodoListData, selectedDate }) => {
               <ModalContent>
                 <ButtonContainer>
                   <ActionButton onClick={closeEditModal}>취소</ActionButton>
-                  <ActionButton onClick={handleEdit}>수정</ActionButton>
+                  <ActionButton
+                    onClick={modifyTodoList(
+                      todoListData.id,
+                      todoListData.title,
+                      todoListData.deadline,
+                    )}
+                  >
+                    수정
+                  </ActionButton>
                 </ButtonContainer>
               </ModalContent>
             </ModalContainer>
@@ -342,8 +294,9 @@ const TDLComponent = ({ todoListData, setTodoListData, selectedDate }) => {
 
 TDLComponent.propTypes = {
   todoListData: PropTypes.array.isRequired,
-  setTodoListData: PropTypes.func.isRequired,
-  selectedDate: PropTypes.instanceOf(Date).isRequired,
+  completeTodoList: PropTypes.func.isRequired,
+  modifyTodoList: PropTypes.func.isRequired,
+  deleteTodoList: PropTypes.func.isRequired,
 };
 
 export default TDLComponent;

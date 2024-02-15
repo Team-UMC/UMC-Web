@@ -11,11 +11,15 @@ const Container = styled.div`
   margin-bottom: 50px;
 `;
 
+const TypeTitle = styled.h1`
+  color: white;
+`;
+
 const StyledDiv = styled.div`
   /* ${name} 부분의 스타일 */
   span.name,
   span.point,
-  span.grade {
+  span.rank {
     color: white;
   }
 
@@ -25,17 +29,17 @@ const StyledDiv = styled.div`
   }
 `;
 
-const Title = ({ name, point, grade }) => {
+const Title = ({ title, name, point, rank }) => {
   return (
     <Container>
-      <h1>{name}</h1>
+      <TypeTitle>{title}</TypeTitle>
       <StyledDiv>
         <span className="name">{name}</span>
         <span className="message">는</span>
         <span className="point"> {point} </span>
         <span className="message">포인트로</span>
         <span className="message"> 현재 </span>
-        <span className="grade">{grade}</span>
+        <span className="rank">{rank}등</span>
         <span className="message">이에요!</span>
       </StyledDiv>
     </Container>
@@ -43,9 +47,10 @@ const Title = ({ name, point, grade }) => {
 };
 
 Title.propTypes = {
+  title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  point: PropTypes.string.isRequired,
-  grade: PropTypes.string.isRequired,
+  point: PropTypes.number.isRequired,
+  rank: PropTypes.number.isRequired,
 };
 
 export default Title;

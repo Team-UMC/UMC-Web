@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { ReactComponent as MiniHambergerMenu } from 'assets/MiniHamberMenu.svg';
+import { ReactComponent as MiniHambergerMenu } from 'assets/OptionButton.svg';
 
 //미니햄버거메뉴버튼을 스타일링
 const MiniHambergerMenuImg = styled(MiniHambergerMenu)`

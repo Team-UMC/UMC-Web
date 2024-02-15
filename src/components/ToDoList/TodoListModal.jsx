@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axiosInstance from 'apis/setting';
-import PropTypes, { object } from 'prop-types';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ImgChoose from 'assets/todolist/imgchoose.svg';
@@ -117,14 +116,7 @@ const AddButton = styled.div`
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 `;
 
-const TodoListModal = ({
-  selectedDate,
-  setIsAddModalOpen,
-  editTodoData,
-  setIsEditModalOpen,
-  todoListData,
-  setTodoListData,
-}) => {
+const TodoListModal = ({ setIsModalOpen, selectedDate, addTodoList }) => {
   const [title, setTitle] = useState('');
   const [isNight, setIsNight] = useState(false);
   const [hour, setHour] = useState('');
@@ -153,109 +145,37 @@ const TodoListModal = ({
     setMinute(event.target.value);
   };
 
-  // 투두리스트 수정하는 경우
-  useEffect(() => {
-    if (editTodoData) {
-      setTitle(editTodoData.title);
-      // 시간 정보 설정
-      // editTodoData.deadline에서 시간 정보를 추출하여 상태 업데이트
-      // 예: "2024-02-11T08:00:00.000Z"에서 "08:00" 추출
-      const time = new Date(editTodoData.deadline).toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      });
-      const [editHour, editMinute] = time.split(':');
-      setHour(editHour);
-      setMinute(editMinute);
-      // 오전/오후 정보 설정
-      const editAMPM = new Date(editTodoData.deadline)
-        .toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true,
-        })
-        .slice(-2);
-      setIsNight(editAMPM === 'PM');
-    }
-  }, [editTodoData]);
-
-  // 추가 버튼 클릭시 서버에 데이터 POST OR PATCH
-  const handleAddClick = async () => {
-    if (editTodoData) {
-      // PATCH 요청
-      try {
-        const adjustedHour = isNight
-          ? parseInt(hour, 10) + 12
-          : parseInt(hour, 10);
-        const date = new Date(selectedDate);
-        date.setHours(adjustedHour, parseInt(minute, 10));
-        const deadline = date.toISOString();
-
-        await axiosInstance.patch(
-          `/to-do-lists/update/${editTodoData.todoListId}`,
-          {
-            title: title,
-            deadline: deadline,
-          },
-        );
-
-        // 업데이트된 Todo 항목을 화면에 반영하기 위해 todoListData 업데이트
-        const updatedTodoList = todoListData.map((todo) => {
-          if (todo.todoListId === editTodoData.todoListId) {
-            return {
-              ...todo,
-              title: title,
-              deadline: deadline,
-            };
-          }
-          return todo;
-        });
-        setTodoListData(updatedTodoList);
-        setIsEditModalOpen(false);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      console.log('title: ', title);
-      console.log('selectedDate: ', selectedDate);
-      try {
-        const date = new Date(selectedDate);
-        const adjustedHour = isNight
-          ? parseInt(hour, 10) + 12
-          : parseInt(hour, 10);
-        date.setHours(adjustedHour, parseInt(minute, 10));
-
-        const deadline = date.toISOString();
-
-        const res = await axiosInstance.post('/to-do-lists', {
-          title: title,
-          deadline: deadline,
-        });
-
-        console.log(title);
-        console.log(deadline);
-
-        console.log(res.data);
-
-        const newTodoList = [...todoListData, res.data];
-        setTodoListData(newTodoList);
-
-        setIsAddModalOpen(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   // 취소 버튼 클릭시 모달 닫기
   const handleCancelClick = () => {
-    setIsAddModalOpen(false);
+    setIsModalOpen(false);
+  };
+
+  // 추가 버튼 클릭시 To Do List 추가
+  const handleAddTodoList = () => {
+    // 시간과 분을 이용하여 새로운 날짜 객체 생성
+    const newDate = new Date(selectedDate);
+
+    // 오후 선택 시, 시간에 12를 더하여 오후 시간으로 설정
+    if (isNight) {
+      newDate.setHours(parseInt(hour) + 12);
+    } else {
+      newDate.setHours(parseInt(hour));
+    }
+
+    // 분 설정
+    newDate.setMinutes(parseInt(minute));
+
+    // ISO 형식의 문자열로 변환하여 서버로 전달
+    const formattedDate = newDate.toISOString();
+
+    // addTodoList 함수 호출하여 추가할 수 있도록 전달
+    addTodoList(title, formattedDate);
+    setIsModalOpen(false);
   };
 
   return (
     <Modal>
-      <div> {selectedDate.toString()} </div>
+      <div> {selectedDate.toISOString().slice(0, 10)} </div>
       <img src={ImgChoose} alt="이모티콘 선택" />
 
       <Wrapper>
@@ -298,10 +218,7 @@ const TodoListModal = ({
 
       <ButtonWrapper>
         <CancelButton onClick={handleCancelClick}>취소</CancelButton>
-        <AddButton
-          disabled={!title || !hour || !minute}
-          onClick={handleAddClick}
-        >
+        <AddButton disabled={!title || !hour || !minute} onClick={handleAddTodoList}>
           추가
         </AddButton>
       </ButtonWrapper>
@@ -310,12 +227,11 @@ const TodoListModal = ({
 };
 
 TodoListModal.propTypes = {
-  selectedDate: PropTypes.instanceOf(Date).isRequired,
-  setIsAddModalOpen: PropTypes.func.isRequired,
-  editTodoData: PropTypes.object,
-  setIsEditModalOpen: PropTypes.func,
-  todoListData: PropTypes.arrayOf(object).isRequired,
-  setTodoListData: PropTypes.func.isRequired,
+  setIsModalOpen: PropTypes.func.isRequired,
+  selectedDate: PropTypes.string.isRequired,
+  //todoListData: PropTypes.array.isRequired,
+  addTodoList: PropTypes.func,
+  //modifyTodoList: PropTypes.func,
 };
 
 export default TodoListModal;
