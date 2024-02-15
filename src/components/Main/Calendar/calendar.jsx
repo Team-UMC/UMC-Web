@@ -13,8 +13,6 @@ const StyledCalendarWrapper = styled.div`
 `;
 
 const MyCalendar = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
   const [value, onChange] = useState(new Date());
   // 선택된 날짜와 일정을 저장하는 state
   const [selectedDate, setSelectedDate] = useState(null);
