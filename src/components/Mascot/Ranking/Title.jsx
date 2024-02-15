@@ -49,8 +49,8 @@ const Title = ({ title, name, point, rank }) => {
 Title.propTypes = {
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  point: PropTypes.string.isRequired,
-  rank: PropTypes.string.isRequired,
+  point: PropTypes.number.isRequired,
+  rank: PropTypes.number.isRequired,
 };
 
 export default Title;

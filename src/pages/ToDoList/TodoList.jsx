@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
 import TitleTDL from 'components/ToDoList/TitleTDL';
@@ -59,13 +60,89 @@ const SVGImage = styled.img`
 `;
 
 const TodoList = () => {
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-
   const [todoListData, setTodoListData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 수정 모달을 열기 위한 상태
-  const [editTodoData, setEditTodoData] = useState(null);
+  const formatDate = (dateString) => {
+    const dateObject = new Date(dateString);
+
+    const year = dateObject.getFullYear();
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObject.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const formattedDate = formatDate(selectedDate);
+
+  const handleAddButton = () => {
+    setIsModalOpen(true);
+  };
+
+  // To Do List 추가 함수
+  const addTodoList = async (title, deadline) => {
+    try {
+      const res = await axiosInstance.post(`/to-do-lists`, {
+        title: title,
+        deadline: deadline,
+      });
+      console.log(res);
+    } catch (error) {
+      console.error();
+    }
+  };
+
+  // To Do List 수정 함수
+  const modifyTodoList = async (id, title, deadline) => {
+    try {
+      await axiosInstance.patch(`/to-do-lists/update/${id}`, {
+        title: title,
+        deadline: deadline,
+      });
+    } catch (error) {
+      console.error();
+    }
+  };
+
+  // To do List 완료 함수
+  const completeTodoList = async (id) => {
+    try {
+      await axiosInstance.patch(`/to-do-lists/update/${id}`, {
+        todoListId: id,
+        isPointAcquired: true,
+      });
+    } catch (error) {
+      console.error();
+    }
+  };
+
+  // To Do List 삭제 함수
+  const deleteTodoList = async (id) => {
+    try {
+      await axiosInstance.delete(`/to-do-lists/${id}`);
+    } catch {
+      console.error();
+    }
+  };
+
+  // To Do List 데이터 받아오는 함수
+  const getTodoListData = async (date) => {
+    try {
+      const res = await axiosInstance.get(`/to-do-lists`, {
+        params: {
+          date: date,
+        },
+      });
+      setTodoListData(res.data.result.todoLists);
+    } catch (error) {
+      console.error();
+    }
+  };
+
+  useEffect(() => {
+    getTodoListData(formattedDate);
+  }, [formattedDate, todoListData]);
 
   return (
     <div
@@ -80,8 +157,11 @@ const TodoList = () => {
         <TitleTDL />
 
         <CalenderContainer>
-        <ToDoListCalender selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-          <AddButtonContainer onClick={() => setIsAddModalOpen(true)}>
+          <ToDoListCalender
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
+          <AddButtonContainer onClick={handleAddButton}>
             <SVGImage src={AddButtonImg} alt="추가 버튼" />
             <AddTIL>TO-DO 추가</AddTIL>
           </AddButtonContainer>
@@ -89,21 +169,20 @@ const TodoList = () => {
 
         <TDLComponent
           todoListData={todoListData}
-          setTodoListData={setTodoListData}
-          selectedDate={selectedDate}
-          setEditTodoData={setEditTodoData}
+          completeTodoList={completeTodoList}
+          modifyTodoList={modifyTodoList}
+          deleteTodoList={deleteTodoList}
         />
 
-        {isAddModalOpen && (
+        {isModalOpen && (
           <>
             <Overlay />
             <TodoListModal
+              setIsModalOpen={setIsModalOpen}
               selectedDate={selectedDate}
-              setIsAddModalOpen={setIsAddModalOpen}
-              editTodoData={editTodoData}
-              setEditTodoData={setEditTodoData}
               todoListData={todoListData}
-              setTodoListData={setTodoListData}
+              addTodoList={addTodoList}
+              modifyTodoList={modifyTodoList}
             />
           </>
         )}

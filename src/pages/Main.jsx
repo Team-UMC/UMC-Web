@@ -13,8 +13,8 @@ import Mascot from 'components/Mascot/Mascot/Mascot';
 import CampusScheduleImage from 'assets/main/Calendar/CampusSchedule.svg';
 import BranchScheduleImage from 'assets/main/Calendar/BranchSchedule.svg';
 import CenterScheduleImage from 'assets/main/Calendar/CenterSchedule.svg';
-import MyContribution from 'components/Mascot/Ranking/MyContribution';
-import SchoolRanking from 'components/Mascot/Ranking/SchoolRanking';
+// import MyContribution from 'components/Mascot/Ranking/MyContribution';
+// import SchoolRanking from 'components/Mascot/Ranking/SchoolRanking';
 
 const Background = styled.div`
   background-color: #f2f5fc;
@@ -46,30 +46,30 @@ const ScheduleContainer = styled.div`
   width: 50%;
 `;
 
-const RankingWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 50%;
-`;
+// const RankingWrapper = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   width: 50%;
+// `;
 
-const SchoolWrapper = styled.div`
-  width: 200px;
+// const SchoolWrapper = styled.div`
+//   width: 200px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
 
-  background-color: white;
-  border: 1px solid white;
-  border-radius: 15px;
-`;
+//   background-color: white;
+//   border: 1px solid white;
+//   border-radius: 15px;
+// `;
 
-const SchoolRank = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 150%;
-`;
+// const SchoolRank = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 150%;
+// `;
 
 const Main = () => {
   // 마스코트 관련
@@ -96,49 +96,49 @@ const Main = () => {
     getMascot();
   }, []);
 
-  // 나의 기여도 관련
-  const [profileImage, setProfileImage] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [contributionPoint, setContributionPoint] = useState(0);
-  const [contributionRank, setContributionRank] = useState(0);
+  // // 나의 기여도 관련
+  // const [profileImage, setProfileImage] = useState('');
+  // const [nickname, setNickname] = useState('');
+  // const [contributionPoint, setContributionPoint] = useState(0);
+  // const [contributionRank, setContributionRank] = useState(0);
 
-  // 학교 관련
-  const [universityLogo, setuniversityLogo] = useState('');
-  const [universityName, setUniversityName] = useState('');
-  const [universityPoint, setUniversityPoint] = useState(0);
-  const [universityRank, setUniversityRank] = useState(0);
+  // // 학교 관련
+  // const [universityLogo, setuniversityLogo] = useState('');
+  // const [universityName, setUniversityName] = useState('');
+  // const [universityPoint, setUniversityPoint] = useState(0);
+  // const [universityRank, setUniversityRank] = useState(0);
 
-  useEffect(() => {
-    const getMyContribution = async () => {
-      try {
-        const res = await axiosInstance.get(`/members/rank`);
+  // useEffect(() => {
+  //   const getMyContribution = async () => {
+  //     try {
+  //       const res = await axiosInstance.get(`/members/rank`);
 
-        setProfileImage(res.data.result.profileImage);
-        setNickname(res.data.result.nickname);
-        setContributionPoint(res.data.result.contributionPoint);
-        setContributionRank(res.data.result.contributionRank);
-      } catch (error) {
-        console.error();
-      }
-    };
-    getMyContribution();
-  }, []);
+  //       setProfileImage(res.data.result.profileImage);
+  //       setNickname(res.data.result.nickname);
+  //       setContributionPoint(res.data.result.contributionPoint);
+  //       setContributionRank(res.data.result.contributionRank);
+  //     } catch (error) {
+  //       console.error();
+  //     }
+  //   };
+  //   getMyContribution();
+  // }, []);
 
-  useEffect(() => {
-    const getMyUniversity = async () => {
-      try {
-        const res = await axiosInstance.get(`/universities/details`);
+  // useEffect(() => {
+  //   const getMyUniversity = async () => {
+  //     try {
+  //       const res = await axiosInstance.get(`/universities/details`);
 
-        setuniversityLogo(res.data.result.universityLogo);
-        setUniversityName(res.data.result.universityName);
-        setUniversityPoint(res.data.result.universityPoint);
-        setUniversityRank(res.data.result.universityRank);
-      } catch (error) {
-        console.error();
-      }
-    };
-    getMyUniversity();
-  }, []);
+  //       setuniversityLogo(res.data.result.universityLogo);
+  //       setUniversityName(res.data.result.universityName);
+  //       setUniversityPoint(res.data.result.universityPoint);
+  //       setUniversityRank(res.data.result.universityRank);
+  //     } catch (error) {
+  //       console.error();
+  //     }
+  //   };
+  //   getMyUniversity();
+  // }, []);
 
   const scheduleData = [
     {
@@ -240,7 +240,7 @@ const Main = () => {
                 mascotDialog={mascotDialog}
               />
             </div>
-            <RankingWrapper>
+            {/* <RankingWrapper>
               <SchoolRank>
                 <SchoolWrapper>
                   <img
@@ -265,7 +265,7 @@ const Main = () => {
                 </SchoolWrapper>
                 <MyContribution />
               </SchoolRank>
-            </RankingWrapper>
+            </RankingWrapper> */}
           </Wrapper>
         </MainWrapper>
       </Background>
