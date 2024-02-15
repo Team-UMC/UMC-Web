@@ -12,7 +12,7 @@ import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
 import HistorySearchBar from './HistorySearchBar';
 import SeeMoreImage from 'assets/History/SeeMore.svg';
-import axiosInstance from 'apis/setting';
+// import axiosInstance from 'apis/setting';
 
 const TotalWrapper = styled.div`
   border-radius: 15px;
@@ -33,9 +33,10 @@ const HistoryItem = styled.div`
   /* 레이아웃 정렬 */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between; /* 아이콘과 더보기 사이 공간 분배 */
+  justify-content: space-between;
   height: 100%; /* 아이콘과 더보기가 있는 영역이 높이 100% 차지하도록 설정 */
+
+  cursor: pointer;
 `;
 
 const SemesterNTypeWrapper = styled.div`
@@ -45,11 +46,45 @@ const SemesterNTypeWrapper = styled.div`
   justify-content: space-between;
 `;
 
+const SemesterStyle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-family: 'Inter';
+  font-weight: 400;
+  padding: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+`;
+
 const TypeIconTextContainer = styled.div`
   /* 세로 중앙 정렬 */
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  gap: 2px;
+
+  color: white;
+  font-size: 10px;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  word-wrap: break-word;
+
+  margin-top: 10px;
+  margin-right: 5px;
+`;
+
+const HistoryItemIconLayout = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 `;
 
 // 히스토리 아이템 이미지 스타일링
@@ -62,10 +97,12 @@ const HistoryItemIcon = styled.img`
 // 히스토리 아이템 정보 감싸는 레이아웃 스타일링
 const HistoryItemInfoWrapper = styled.div`
   /* 레이아웃 정렬 */
-  width: 100%;
+  width: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  padding-left: 2em;
 `;
 
 // 히스토리 아이템 제목 스타일링
@@ -148,8 +185,14 @@ const HistorySearchBarLayout = styled(HistorySearchBar)`
   align-items: center;
 `;
 
+const SeeMoreLayout = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const SeeMoreIcon = styled.img`
-  margin-left: auto;
+  padding-right: 0.7em;
+  padding-bottom: 0.7em;
 `;
 
 // 히스토리 아이템 컴포넌트
@@ -205,30 +248,34 @@ const HistoryItemComponent = ({ item, index }) => {
     }
   };
 
+  // useEffect(() => {
+  //   const getHistoryData = async () => {
+  //     try {
+  //       const res = await axiosInstance.get('/projects');
+
+  //       const histories = res.data.result.projects;
+
+  //       setHistoryData(
+  //         histories.map((history) => ({
+  //           projectId: history.projectId,
+  //           name: history.name,
+  //           description: history.description,
+  //           logoImage: history.logoImage,
+  //           semester: history.semester,
+  //           types: history.types,
+  //           tags: history.tags,
+  //         })),
+  //       );
+  //     } catch (error) {
+  //       console.error();
+  //     }
+  //   };
+  //   getHistoryData();
+  // });
+
   useEffect(() => {
-    const getHistoryData = async () => {
-      try {
-        const res = await axiosInstance.get('/projects');
-
-        const histories = res.data.result.projects;
-
-        setHistoryData(
-          histories.map((history) => ({
-            projectId: history.projectId,
-            name: history.name,
-            description: history.description,
-            logoImage: history.logoImage,
-            semester: history.semester,
-            types: history.types,
-            tags: history.tags,
-          })),
-        );
-      } catch (error) {
-        console.error();
-      }
-    };
-    getHistoryData();
-  });
+    setHistoryData(HISTORY_DATAS);
+  }, []);
 
   if (!historyData || historyData.length === 0) {
     return null;
@@ -238,39 +285,47 @@ const HistoryItemComponent = ({ item, index }) => {
     <>
       <TotalWrapper backgroundColor={getBackgroundColor(item.semester)}>
         <HistoryItem key={index}>
-          <SemesterNTypeWrapper>
-            <div> {item.semester} </div>
-            <HistoryItemInfoAuthorDateLayout>
-              {item.type.map((type, index) => (
-                <React.Fragment key={index}>
-                  <TypeIconTextContainer>
-                    {renderTypeIconAndText(type)}
-                  </TypeIconTextContainer>
-                  {index !== item.type.length - 1 && ' '}
-                </React.Fragment>
-              ))}
-            </HistoryItemInfoAuthorDateLayout>
-          </SemesterNTypeWrapper>
-          <HistoryItemInfoWrapper>
-            {/* 아이디어 집합소와 같이 여러 줄을 한 줄로 표시하는 경우 */}
-            <HistoryItemInfoTitle>
-              {item.projectName.split(' ').map((word, index) => (
-                <React.Fragment key={index}>
-                  {word}
-                  <br />
-                </React.Fragment>
-              ))}
-              <div>
-                {item.hashtag.map((tag, index) => (
-                  <HistoryItemHashtag key={index}>#{tag} </HistoryItemHashtag>
+          <div>
+            <SemesterNTypeWrapper>
+              <SemesterStyle> {item.semester} </SemesterStyle>
+              <HistoryItemInfoAuthorDateLayout>
+                {item.type.map((type, index) => (
+                  <React.Fragment key={index}>
+                    <TypeIconTextContainer>
+                      {renderTypeIconAndText(type)}
+                    </TypeIconTextContainer>
+                    {index !== item.type.length - 1 && ' '}
+                  </React.Fragment>
                 ))}
-              </div>
-            </HistoryItemInfoTitle>
+              </HistoryItemInfoAuthorDateLayout>
+            </SemesterNTypeWrapper>
+            <HistoryItemInfoWrapper>
+              {/* 아이디어 집합소와 같이 여러 줄을 한 줄로 표시하는 경우 */}
+              <HistoryItemInfoTitle>
+                {item.projectName.split(' ').map((word, index) => (
+                  <React.Fragment key={index}>
+                    {word}
+                    <br />
+                  </React.Fragment>
+                ))}
+                <div>
+                  {item.hashtag.map((tag, index) => (
+                    <HistoryItemHashtag key={index}>#{tag} </HistoryItemHashtag>
+                  ))}
+                </div>
+              </HistoryItemInfoTitle>
 
-            {/* 아이콘 이미지 등을 추가 */}
-          </HistoryItemInfoWrapper>
-          <HistoryItemIcon src={item.logoImage} />
-          <SeeMoreIcon src={SeeMoreImage} />
+              {/* 아이콘 이미지 등을 추가 */}
+            </HistoryItemInfoWrapper>
+          </div>
+          <div>
+            <HistoryItemIconLayout>
+              <HistoryItemIcon src={item.logoImage} />
+            </HistoryItemIconLayout>
+            <SeeMoreLayout>
+              <SeeMoreIcon src={SeeMoreImage} />
+            </SeeMoreLayout>
+          </div>
         </HistoryItem>
       </TotalWrapper>
     </>
@@ -355,7 +410,7 @@ const HistoryList = () => {
           onClick={() => handlePageClick(currentPage + 1)}
         />
       </HistoryItemPaginateStyle>
-      
+
       <HistorySearchBarLayout onSearch={handleSearch} />
     </>
   );

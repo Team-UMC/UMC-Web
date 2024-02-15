@@ -6,6 +6,9 @@ import styled from 'styled-components';
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  padding-bottom: 3em;
+  cursor: default;
 `;
 
 // 갤러리 메인 타이틀 폰트 스타일링
