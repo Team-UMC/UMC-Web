@@ -27,6 +27,9 @@ import NewTIL from 'components/TodayILearn/NewTIL';
 import DetailTIL from 'components/TodayILearn/DetailTIL';
 import TodoList from 'pages/ToDoList/TodoList';
 import RankingPage from 'pages/Mascot/RankingPage';
+import MessagePreviewPage from 'pages/Message/MessagePreviewPage';
+import MessageDetailPage from 'pages/Message/MessageDetailPage';
+import MessagePage from 'pages/Message/MessagePage';
 
 function App() {
   return (
@@ -62,11 +65,14 @@ function App() {
               <Route path="/management" element={<Management />} />
               <Route path="/mywrite" element={<MyWrite />} />
 
-              <Route path="/textdetail/:category/:boardPath" element={<TextDetailPage />} />
+              <Route
+                path="/textdetail/:category/:boardPath"
+                element={<TextDetailPage />}
+              />
               <Route path="/messagepreview" element={<MessagePreviewPage />} />
               <Route path="/messagedetail" element={<MessageDetailPage />} />
               <Route path="/message" element={<MessagePage />} />
-              
+
               {/* Today-I-Learned */}
               <Route path="/todayilearn" element={<TodayILearn />} />
               <Route path="/todayilearn/addtil" element={<NewTIL />} />

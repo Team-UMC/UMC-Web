@@ -1,35 +1,34 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import CalenderImg from 'assets/todayilearn/calender.svg'; //캘린더 이미지 
+import CalenderImg from 'assets/todayilearn/calender.svg'; //캘린더 이미지
 import DateSelectCalendar from 'components/DateSelectCalendar'; //날짜를 오늘 날로 업데이트 가능
 
 const TILCalender = () => {
-  //달력을 클릭했을 때 나오는 모달의 작동을 위한 함수 
+  //달력을 클릭했을 때 나오는 모달의 작동을 위한 함수
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const openModal = () => { //모달 열기
+  const openModal = () => {
+    //모달 열기
     setIsModalOpen(true);
   };
 
-  const closeModal = () => { //모달 닫기
+  const closeModal = () => {
+    //모달 닫기
     setIsModalOpen(false);
   };
 
-  const handleDateSelect = (date) => { // 날짜 선택 후 모달 닫기
+  const handleDateSelect = (date) => {
+    // 날짜 선택 후 모달 닫기
     setSelectedDate(date);
-    closeModal(); 
+    closeModal();
   };
 
   return (
     <>
       <TodayDate>
-<<<<<<< HEAD
-        <img src={CalenderImg} alt="캘린더 이미지" onClick={openModal} />
-=======
         {/*캘린더 클릭시 모달이 열리고 그 옆에 오늘 날을 적음 */}
-        <img src={CalenderImg} alt='캘린더 이미지' onClick={openModal} /> 
->>>>>>> 604bb3ccc15199d0a6d078a43c027d325e8f03d0
+        <img src={CalenderImg} alt="캘린더 이미지" onClick={openModal} />
         <DateSelectCalendar />
       </TodayDate>
 
