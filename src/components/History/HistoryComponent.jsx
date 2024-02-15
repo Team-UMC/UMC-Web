@@ -17,6 +17,47 @@ import SeeMoreImage from 'assets/History/SeeMore.svg';
 const TotalWrapper = styled.div`
   border-radius: 15px;
   background-color: ${(props) => props.backgroundColor};
+  position: relative;
+
+  &:hover {
+    box-shadow: 4px 4px 15px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(-0.25rem);
+    transition: transform 0.1s ease-in-out;
+
+    .description {
+      visibility: visible;
+      opacity: 1;
+      transition:
+        opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out;
+    }
+
+    .semester-type-wrapper {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .history-item-icon {
+      transform: scale(1.2);
+      opacity: 0.5;
+      transition:
+        transform 0.3s ease-in-out,
+        opacity 0.3s ease-in-out;
+    }
+  }
+
+  &:not(:hover) {
+    transform: translateY(0);
+    transition: transform 0.1s ease-in-out;
+
+    .description {
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out;
+    }
+  }
 `;
 
 // 히스토리 리스트 컴포넌트 전체 컨테이너 스타일링
@@ -44,6 +85,7 @@ const SemesterNTypeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const SemesterStyle = styled.div`
@@ -78,7 +120,7 @@ const TypeIconTextContainer = styled.div`
   word-wrap: break-word;
 
   margin-top: 10px;
-  margin-right: 5px;
+  margin-right: 1em;
 `;
 
 const HistoryItemIconLayout = styled.div`
@@ -92,6 +134,10 @@ const HistoryItemIcon = styled.img`
   /* 히스토리 아이템 아이콘 */
   width: 150px;
   height: 157px;
+  position: relative;
+  transition:
+    transform 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
 `;
 
 // 히스토리 아이템 정보 감싸는 레이아웃 스타일링
@@ -102,7 +148,7 @@ const HistoryItemInfoWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
 
-  padding-left: 2em;
+  padding-left: 1.3em;
 `;
 
 // 히스토리 아이템 제목 스타일링
@@ -193,6 +239,36 @@ const SeeMoreLayout = styled.div`
 const SeeMoreIcon = styled.img`
   padding-right: 0.7em;
   padding-bottom: 0.7em;
+`;
+
+// 히스토리 아이템 컴포넌트 상세 정보
+const Description = styled.div`
+  display: block;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+
+  color: white;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 500;
+  line-height: 18.2px;
+  word-wrap: break-word;
+
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+
+  ${TotalWrapper}:hover & {
+    visibility: visible;
+    opacity: 1;
+  }
 `;
 
 // 히스토리 아이템 컴포넌트
@@ -286,7 +362,7 @@ const HistoryItemComponent = ({ item, index }) => {
       <TotalWrapper backgroundColor={getBackgroundColor(item.semester)}>
         <HistoryItem key={index}>
           <div>
-            <SemesterNTypeWrapper>
+            <SemesterNTypeWrapper className="semester-type-wrapper">
               <SemesterStyle> {item.semester} </SemesterStyle>
               <HistoryItemInfoAuthorDateLayout>
                 {item.type.map((type, index) => (
@@ -320,7 +396,13 @@ const HistoryItemComponent = ({ item, index }) => {
           </div>
           <div>
             <HistoryItemIconLayout>
-              <HistoryItemIcon src={item.logoImage} />
+              <Description className="description">
+                {item.description}
+              </Description>
+              <HistoryItemIcon
+                className="history-item-icon"
+                src={item.logoImage}
+              />
             </HistoryItemIconLayout>
             <SeeMoreLayout>
               <SeeMoreIcon src={SeeMoreImage} />
@@ -337,6 +419,7 @@ HistoryItemComponent.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
     projectName: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     logoImage: PropTypes.string.isRequired,
     type: PropTypes.arrayOf(PropTypes.string).isRequired,
     hashtag: PropTypes.arrayOf(PropTypes.string).isRequired,
