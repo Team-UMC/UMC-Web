@@ -325,6 +325,7 @@ const SelectorValue = styled.select`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: none;
   gap: 4px;
 
   color: #4c4c4c;
@@ -333,19 +334,34 @@ const SelectorValue = styled.select`
   font-size: 16px;
   font-weight: 400;
   word-wrap: break-word;
+
+  &:hover {
+    box-shadow: 4px 4px 15px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(-0.25rem);
+    transition: transform 0.1s ease-in-out;
+  }
+
+  &:not(:hover) {
+    transform: translateY(0);
+    transition:
+      transform 0.1s ease-in-out,
+      background-color 0.3s ease-in-out;
+  }
 `;
 
 const SelectorOption = styled.option`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: black;
+  text-align: center;
+  font-family: 'Pretendard';
+  font-size: 16px;
+  font-weight: 500;
+  word-wrap: break-word;
 
   color: black;
   text-align: center;
   font-weight: 500;
   border-radius: 20px;
-  padding: 6px 16px;
+  border: none;
 `;
 
 // 히스토리 아이템 컴포넌트
