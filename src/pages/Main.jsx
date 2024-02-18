@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 import MyCalendar from 'components/Main/Calendar/calendar';
 import MainDescription from 'components/Main/MainDescription';
@@ -12,13 +13,8 @@ import Mascot from 'components/Mascot/Mascot/Mascot';
 import CampusScheduleImage from 'assets/main/Calendar/CampusSchedule.svg';
 import BranchScheduleImage from 'assets/main/Calendar/BranchSchedule.svg';
 import CenterScheduleImage from 'assets/main/Calendar/CenterSchedule.svg';
-import MyContribution from 'components/Mascot/Ranking/MyContribution';
-import SchoolRanking from 'components/Mascot/Ranking/SchoolRanking';
-
-import InhaImage from 'assets/Mascot/Example/School.svg';
-import ProfileImage from 'assets/Mascot/Example/Ellipse 354.png';
-import { useNavigate } from 'react-router-dom';
-//import MascotBackgroundImage from "assets/Mascot/Background.svg";
+// import MyContribution from 'components/Mascot/Ranking/MyContribution';
+// import SchoolRanking from 'components/Mascot/Ranking/SchoolRanking';
 
 const Background = styled.div`
   background-color: #f2f5fc;
@@ -50,37 +46,99 @@ const ScheduleContainer = styled.div`
   width: 50%;
 `;
 
-const RankingWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 50%;
-`;
+// const RankingWrapper = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   width: 50%;
+// `;
 
-const SchoolWrapper = styled.div`
-  width: 200px;
+// const SchoolWrapper = styled.div`
+//   width: 200px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
 
-  background-color: white;
-  border: 1px solid white;
-  border-radius: 15px;
-`;
+//   background-color: white;
+//   border: 1px solid white;
+//   border-radius: 15px;
+// `;
 
-const SchoolRank = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 150%;
-`;
+// const SchoolRank = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 150%;
+// `;
 
 const Main = () => {
-  const navigate = useNavigate();
+  // 마스코트 관련
+  const [mascotLevel, setMascotLevel] = useState(0);
+  const [mascotPoint, setMascotPoint] = useState(0);
+  const [mascotRank, setMascotRank] = useState(0);
+  const [mascotImage, setMascotImage] = useState('');
+  const [mascotDialog, setMascotDialog] = useState([]);
 
-  const handleNavigate = () => {
-    navigate('/mascot');
-  };
+  useEffect(() => {
+    const getMascot = async () => {
+      try {
+        const res = await axiosInstance.get(`/universities/mascot`);
+
+        setMascotLevel(res.data.result.level);
+        setMascotPoint(res.data.result.point);
+        setMascotRank(res.data.result.rank);
+        setMascotImage(res.data.result.mascotImage);
+        setMascotDialog(res.data.result.mascotDialog);
+      } catch (error) {
+        console.error();
+      }
+    };
+    getMascot();
+  }, []);
+
+  // // 나의 기여도 관련
+  // const [profileImage, setProfileImage] = useState('');
+  // const [nickname, setNickname] = useState('');
+  // const [contributionPoint, setContributionPoint] = useState(0);
+  // const [contributionRank, setContributionRank] = useState(0);
+
+  // // 학교 관련
+  // const [universityLogo, setuniversityLogo] = useState('');
+  // const [universityName, setUniversityName] = useState('');
+  // const [universityPoint, setUniversityPoint] = useState(0);
+  // const [universityRank, setUniversityRank] = useState(0);
+
+  // useEffect(() => {
+  //   const getMyContribution = async () => {
+  //     try {
+  //       const res = await axiosInstance.get(`/members/rank`);
+
+  //       setProfileImage(res.data.result.profileImage);
+  //       setNickname(res.data.result.nickname);
+  //       setContributionPoint(res.data.result.contributionPoint);
+  //       setContributionRank(res.data.result.contributionRank);
+  //     } catch (error) {
+  //       console.error();
+  //     }
+  //   };
+  //   getMyContribution();
+  // }, []);
+
+  // useEffect(() => {
+  //   const getMyUniversity = async () => {
+  //     try {
+  //       const res = await axiosInstance.get(`/universities/details`);
+
+  //       setuniversityLogo(res.data.result.universityLogo);
+  //       setUniversityName(res.data.result.universityName);
+  //       setUniversityPoint(res.data.result.universityPoint);
+  //       setUniversityRank(res.data.result.universityRank);
+  //     } catch (error) {
+  //       console.error();
+  //     }
+  //   };
+  //   getMyUniversity();
+  // }, []);
 
   const scheduleData = [
     {
@@ -169,35 +227,45 @@ const Main = () => {
           />
           <Wrapper style={{ marginBottom: '100px' }}>
             <div
-              onClick={handleNavigate}
               style={{
                 backgroundColor: '#000414',
-                width: '483px',
-                height: '500px',
+                width: '45%',
               }}
             >
-              <Mascot />
+              <Mascot
+                mascotLevel={mascotLevel}
+                mascotPoint={mascotPoint}
+                mascotRank={mascotRank}
+                mascotImage={mascotImage}
+                mascotDialog={mascotDialog}
+              />
             </div>
-            <RankingWrapper>
+            {/* <RankingWrapper>
               <SchoolRank>
                 <SchoolWrapper>
-                  <img src={InhaImage} />
-                  <span>인하대학교는</span>
-                  <span>1200 포인트로</span>
-                  <span>현재 1등이에요! 👏🏻</span>
+                  <img
+                    src={universityLogo}
+                    style={{ width: '100px', height: '100px' }}
+                  />
+                  <span>{universityName}는</span>
+                  <span>{universityPoint} 포인트로</span>
+                  <span>현재 {universityRank}등이에요! 👏🏻</span>
                 </SchoolWrapper>
                 <SchoolRanking />
               </SchoolRank>
               <SchoolRank>
                 <SchoolWrapper>
-                  <img src={ProfileImage} />
-                  <span>눈꽃님은</span>
-                  <span>1200 포인트로</span>
-                  <span>현재 1등이에요! 👏🏻</span>
+                  <img
+                    src={profileImage}
+                    style={{ width: '100px', height: '100px' }}
+                  />
+                  <span>{nickname}님은</span>
+                  <span>{contributionPoint} 포인트로</span>
+                  <span>현재 {contributionRank}등이에요! 👏🏻</span>
                 </SchoolWrapper>
                 <MyContribution />
               </SchoolRank>
-            </RankingWrapper>
+            </RankingWrapper> */}
           </Wrapper>
         </MainWrapper>
       </Background>

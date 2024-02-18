@@ -6,7 +6,7 @@ import RightContainer from 'components/Header/RightContainer';
 
 import SmallHeaderImage from 'assets/header/SmallHeader.png';
 
-import HamburgerMenuBtnImage from 'assets/header/HamburgerButton.svg';
+import HamburgerMenuBtnImage from 'assets/header/HamburgerOpenButton.svg';
 
 import HamburgerMenu from './Hamburgermenu';
 

@@ -10,7 +10,7 @@ const TodayDate = styled.div`
   align-items: center;
 `;
 
-const ToDoListCalender = ({ setSelectedDate }) => {
+const ToDoListCalender = ({ setSelectedDate }) => { 
   return (
     <>
       <TodayDate>

@@ -18,14 +18,9 @@ const MyCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   // 선택된 날짜의 일정을 저장하는 state
   const [selectedSchedules, setSelectedSchedules] = useState([]);
-  // 클릭한 위치를 저장하는 state
-  const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
 
   // 날짜 클릭 시 동작 정의
-  const onClickDay = (date, event) => {
-    // 클릭한 위치 저장
-    setClickPosition({ x: event.clientX, y: event.clientY });
-
+  const onClickDay = (date) => {
     // 선택된 날짜의 일정을 찾아서 저장
     const dateString = moment(date).format('YYYY-MM-DD');
     // 해당 날짜에 일정이 있는지 확인
@@ -42,12 +37,13 @@ const MyCalendar = () => {
     // 선택된 날짜와 일정을 저장
     setSelectedDate(dateString);
     setSelectedSchedules(sortedSchedules);
+  };
 
-    // 선택된 날짜가 변경되었을 때만 state 업데이트
-    if (selectedDate !== dateString) {
-      setSelectedDate(dateString);
-      setSelectedSchedules(sortedSchedules);
-    }
+  // 'X' 버튼 클릭 시 동작 정의
+  const onCloseScheduleList = (e) => {
+    e.stopPropagation();
+    setSelectedDate(null);
+    setSelectedSchedules([]);
   };
 
   // view === 'month'이고 date === '토요일'인 경우 -> 'saturday' 클래스 적용
@@ -67,10 +63,16 @@ const MyCalendar = () => {
         (s) => dateString >= s.startDateTime && dateString <= s.endDateTime,
       );
 
+      // 일정이 있는 경우, 각 일정의 hostType을 저장
+      // Set 사용하여 중복 제거
+      const uniqueHostTypes = new Set(
+        schedules.map((schedule) => schedule.hostType),
+      );
+
       // 일정이 있는 경우, 각 일정에 맞는 색상의 점을 표시
-      const dots = schedules.map((schedule) => {
+      const dots = Array.from(uniqueHostTypes).map((hostType) => {
         let color;
-        switch (schedule.hostType) {
+        switch (hostType) {
           case 'CAMPUS':
             color = '#FF8695';
             break;
@@ -86,21 +88,14 @@ const MyCalendar = () => {
 
         return (
           <div
-            key={schedule.id}
+            key={hostType}
             className="dot"
             style={{ backgroundColor: color }}
           />
         );
       });
 
-      return (
-        <div
-          className="dot-container"
-          onMouseLeave={() => setSelectedDate(null)}
-        >
-          {dots}
-        </div>
-      );
+      return <div className="dot-container">{dots}</div>;
     }
   };
 
@@ -122,10 +117,10 @@ const MyCalendar = () => {
         onClickDay={onClickDay}
       />
       {selectedDate && (
-        <div
-          className={`schedule-list ${selectedDate ? 'active' : ''}`}
-          style={{ top: `${clickPosition.y}px`, left: `${clickPosition.x}px` }}
-        >
+        <div className={`schedule-list ${selectedDate ? 'active' : ''}`}>
+          <div className="close-button" onClick={onCloseScheduleList}>
+            X
+          </div>
           <h2 className="schedule-main-title">
             {moment(selectedDate).format('YYYY.MM.DD')} 일정
           </h2>

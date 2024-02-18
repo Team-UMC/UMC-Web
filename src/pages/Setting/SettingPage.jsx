@@ -9,11 +9,9 @@ import SettingContents from 'components/Setting/SettingContents';
 const SettingPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 30vh;
-  margin-bottom: 10vh;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin: 13vh auto 12.5vh auto;
   gap: 40px;
+  width: 70%;
 `;
 
 const SettingPageTitleLayout = styled(SettingTitle)`
@@ -30,13 +28,22 @@ const SettingMenuContentWrapper = styled.div`
 
 const SettingPage = () => {
   return (
-    <SettingPageContainer>
-      <SettingPageTitleLayout>설정</SettingPageTitleLayout>
-      <SettingMenuContentWrapper>
-        <SettingMenu />
-        <SettingContents />
-      </SettingMenuContentWrapper>
-    </SettingPageContainer>
+    <div
+      className="board-page"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <SettingPageContainer>
+        <SettingPageTitleLayout>설정</SettingPageTitleLayout>
+        <SettingMenuContentWrapper>
+          <SettingMenu />
+          <SettingContents />
+        </SettingMenuContentWrapper>
+      </SettingPageContainer>
+    </div>
   );
 };
 

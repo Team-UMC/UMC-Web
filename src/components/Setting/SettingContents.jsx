@@ -8,6 +8,7 @@ import WebInfoSetting from 'components/Setting/SettingContents/WebInfoSetting';
 import UmcInfoSetting from 'components/Setting/SettingContents/UmcInfoSetting';
 import EtcSetting from 'components/Setting/SettingContents/EtcSetting';
 
+
 // 설정 컨텐츠 컴포넌트
 const SettingContents = () => {
   // 현재 페이지의 링크 파라미터

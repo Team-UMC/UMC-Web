@@ -1,10 +1,10 @@
-import React from 'react';
-// import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-// import HistoryData from './HistoryData';
 import HistoryList from 'components/History/HistoryComponent';
 import HistoryTitle from 'components/History/HistoryTitle';
+import SearchDropdown from 'components/History/SearchDropdown';
+import axiosInstance from 'apis/setting';
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,30 +13,58 @@ const Wrapper = styled.div`
   width: 70%;
 `;
 
-// const PaginationContainer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   margin-top: 20px;
-// `;
-
-// const PaginationButton = styled.button`
-//   margin: 0 5px;
-//   padding: 5px 10px;
-//   cursor: pointer;
-//   background-color: ${({ isSelected }) => (isSelected ? '#3498db' : '#ddd')};
-//   color: ${({ isSelected }) => (isSelected ? '#fff' : '#333')};
-//   border: none;
-//   border-radius: 5px;
-// `;
-
-// const Container = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 20px;
-//   justify-content: space-between;
-// `;
+const UpperWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const HistoryPage = () => {
+  const [projectData, setProjectData] = useState([]);
+
+  const [semester, setSemester] = useState('');
+  const [type, setType] = useState([]);
+  //const [page, setPage] = useState(0);
+  const [size, setSize] = useState(0);
+
+  const handleSemesterDropdown = (e) => {
+    setSemester(e.target.value);
+
+    console.log(e.target.value);
+  };
+
+  const handleTypeDropdown = (e) => {
+    setType(e.target.value);
+
+    console.log(e.target.value);
+  };
+
+  const handleSizeDropdown = (e) => {
+    setSize(e.target.value);
+
+    console.log(e.target.value);
+  };
+
+  useEffect(() => {
+    const getProjectData = async (semester, type, page, size) => {
+      try {
+        const res = await axiosInstance.get(`/projects`, {
+          params: {
+            semester: semester,
+            type: type,
+            page: page,
+            size: size,
+          },
+        });
+        setProjectData(res.data.result.projects);
+      } catch (error) {
+        console.error();
+      }
+    };
+    getProjectData(semester, type, size);
+  }, [projectData, semester, type, size]);
+
   return (
     <div
       className="board-page"
@@ -47,9 +75,16 @@ const HistoryPage = () => {
       }}
     >
       <Wrapper>
-        <HistoryTitle />
+        <UpperWrapper>
+          <HistoryTitle />
+          <SearchDropdown
+            handleSemesterDropdown={handleSemesterDropdown}
+            handleTypeDropdown={handleTypeDropdown}
+            handleSizeDropdown={handleSizeDropdown}
+          />
+        </UpperWrapper>
         <div>
-          <HistoryList />
+          <HistoryList projectData={projectData} />
         </div>
       </Wrapper>
     </div>

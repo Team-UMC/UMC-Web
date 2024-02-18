@@ -15,6 +15,8 @@ import KakaoAuth from 'apis/app/auth/KakaoAuth';
 import NaverAuth from 'apis/app/auth/NaverAuth';
 import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
 
+import BoardDetailPage from 'pages/DetailPage/BoardDetailPage';
+
 import HistoryPage from 'pages/History/HistoryPage';
 import GalleryPage from 'pages/Gallery/GalleryPage';
 import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
@@ -30,6 +32,7 @@ import RankingPage from 'pages/Mascot/RankingPage';
 import MessagePreviewPage from 'pages/Message/MessagePreviewPage';
 import MessageDetailPage from 'pages/Message/MessageDetailPage';
 import MessagePage from 'pages/Message/MessagePage';
+import SettingPage from 'pages/Setting/SettingPage';
 
 function App() {
   return (
@@ -62,13 +65,19 @@ function App() {
               <Route path="/detailpage" element={<TextDetailPage />} />
 
               {/* 운영진 관리 페이지 */}
-              <Route path="/management" element={<Management />} />
+              <Route path="/management/notice" element={<Management />} />
+              <Route path="/management/calendar" element={<Management />} />
+              <Route path="/management/challenger" element={<Management />} />
+
               <Route path="/mywrite" element={<MyWrite />} />
 
+              <Route path="/setting/:contents" element={<SettingPage />} />
+
               <Route
-                path="/textdetail/:category/:boardPath"
-                element={<TextDetailPage />}
+                path="/board/campus/free/:boardId"
+                element={<BoardDetailPage />}
               />
+
               <Route path="/messagepreview" element={<MessagePreviewPage />} />
               <Route path="/messagedetail" element={<MessageDetailPage />} />
               <Route path="/message" element={<MessagePage />} />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import {
   getDay,
@@ -29,7 +30,7 @@ const MONTHS = [
   'December',
 ];
 
-const DateSelectCalendar = () => {
+const DateSelectCalendar = ({ onDateChange }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
@@ -57,7 +58,9 @@ const DateSelectCalendar = () => {
       }} // 선택된 날짜 스타일
       onChange={(date) => {
         // 날짜 선택 시 시작일 & 종료일 변경
+        console.log("Selected date:", date);
         setSelectedDate(date);
+        onDateChange(date);
       }} // 날짜 선택 시 selectedDate 변경
       renderCustomHeader={({
         date,
@@ -100,6 +103,10 @@ const DateSelectCalendar = () => {
       )}
     />
   );
+};
+
+DateSelectCalendar.propTypes = {
+  onDateChange: PropTypes.func.isRequired,
 };
 
 export default DateSelectCalendar;

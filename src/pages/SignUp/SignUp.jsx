@@ -79,13 +79,8 @@ const SignUp = () => {
   };
 
   const handleSubmit = async () => {
-    console.log('Submitting University Data:', universityName);
-    console.log('Submitting Semester and Part Data:', semesterParts);
-    console.log('Submitting Name Data:', name);
-    console.log('Submitting Nickname Data:', nickname);
-
     try {
-      const res = await axiosInstance.post(`/members`, {
+      await axiosInstance.post(`/members`, {
         name: name,
         nickname: nickname,
         semesterParts: semesterParts,
@@ -93,10 +88,6 @@ const SignUp = () => {
         campusPositions: campusPositions,
         centerPositions: centerPositions,
       });
-      console.log('Server Response: ', res.data);
-
-      localStorage.setItem('memberID: ', res.data.result.memberId);
-
       navigate('/main');
     } catch (error) {
       console.error('Form Data Submitted:', error);

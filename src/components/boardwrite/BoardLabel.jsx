@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -33,20 +33,8 @@ const BoardLabel = ({
   buttonStates,
   setButtonStates,
 }) => {
-  // const hostChange = useCallback(
-  //   (e) => {
-  //     setSelectedHost(e.target.value);
-  //   },
-  //   [selectedHost],
-  // );
-
-  // const boardChange = useCallback(
-  //   (e) => {
-  //     setSelectedBoard(e.target.value);
-  //   },
-  //   [selectedBoard],
-  // );
-
+  const location = useLocation();
+  
   const handleClick = (buttonName, host, board) => {
     setButtonStates((prevStates) => ({
       ...prevStates,
@@ -59,12 +47,15 @@ const BoardLabel = ({
     setSelectedBoard(board);
   };
 
+  // URL에서 board 정보 추출
+  const boardFromURL = location.pathname.split('/')[1].toUpperCase();
+
   return (
     <div>
       <ContainerType>
         <div>
           <TypeLink to="#" onClick={() => handleClick('campusButton', 'CAMPUS', 'NOTICE')}>
-            {buttonStates.campusButton ? (
+            {buttonStates.campusButton || boardFromURL === 'CAMPUS' ? (
               <img src={CampusChecked} alt="Inactive Image" />
             ) : (
               <img src={CampusUnchecked} alt="학교" />
@@ -72,7 +63,7 @@ const BoardLabel = ({
           </TypeLink>
 
           <TypeLink to="#" onClick={() => handleClick('branchButton', 'BRANCH', 'NOTICE')}>
-            {buttonStates.branchButton ? (
+            {buttonStates.branchButton || boardFromURL === 'BRANCH' ? (
               <img src={BranchChecked} alt="Inactive Image" />
             ) : (
               <img src={BranchUnchecked} alt="지부" />
@@ -80,7 +71,7 @@ const BoardLabel = ({
           </TypeLink>
 
           <TypeLink to="#" onClick={() => handleClick('centerButton', 'CENTER', 'NOTICE')}>
-            {buttonStates.centerButton ? (
+            {buttonStates.centerButton || boardFromURL === 'CENTER' ? (
               <img src={CenterChecked} alt="Inactive Image" />
             ) : (
               <img src={CenterUnchecked} alt="연합" />
@@ -88,7 +79,7 @@ const BoardLabel = ({
           </TypeLink>
 
           <TypeLink to="#" onClick={() => handleClick('suggestionButton', 'CENTER', 'NOTICE')}>
-            {buttonStates.suggestionButton ? (
+            {buttonStates.suggestionButton || boardFromURL === 'SUGGESTION' ? (
               <img src={SuggestionChecked} alt="Inactive Image" />
             ) : (
               <img src={SuggestionUnchecked} alt="연합" />
