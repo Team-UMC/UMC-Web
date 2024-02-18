@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
 import Calendar from 'react-calendar';
 import './calendar.css';
-import { CalendarData } from 'components/Main/Calendar/CalendarData';
 
 const StyledCalendarWrapper = styled.div`
   width: 100%;
@@ -12,7 +12,7 @@ const StyledCalendarWrapper = styled.div`
   position: relative;
 `;
 
-const MyCalendar = () => {
+const MyCalendar = ({ calendarData }) => {
   const [value, onChange] = useState(new Date());
   // 선택된 날짜와 일정을 저장하는 state
   const [selectedDate, setSelectedDate] = useState(null);
@@ -24,7 +24,7 @@ const MyCalendar = () => {
     // 선택된 날짜의 일정을 찾아서 저장
     const dateString = moment(date).format('YYYY-MM-DD');
     // 해당 날짜에 일정이 있는지 확인
-    const schedules = CalendarData.schedules.filter(
+    const schedules = calendarData.filter(
       (s) => dateString >= s.startDateTime && dateString <= s.endDateTime,
     );
 
@@ -59,7 +59,7 @@ const MyCalendar = () => {
       const dateString = moment(date).format('YYYY-MM-DD');
 
       // 해당 날짜에 일정이 있는지 확인
-      const schedules = CalendarData.schedules.filter(
+      const schedules = calendarData.filter(
         (s) => dateString >= s.startDateTime && dateString <= s.endDateTime,
       );
 
@@ -170,6 +170,18 @@ const MyCalendar = () => {
       )}
     </StyledCalendarWrapper>
   );
+};
+
+MyCalendar.propTypes = {
+  calendarData: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      startDateTime: PropTypes.string.isRequired,
+      endDateTime: PropTypes.string.isRequired,
+      hostType: PropTypes.oneOf(['CAMPUS', 'CENTER', 'UNION']).isRequired,
+    })
+  ).isRequired,
 };
 
 export default MyCalendar;

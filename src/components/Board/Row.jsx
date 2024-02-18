@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // 하나의 게시글을 감싸는 div
 const Container = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
 
@@ -46,7 +46,7 @@ const BoardCell = styled.div`
 `;
 
 // 게시글 테이블의 행 컴포넌트
-const Row = ({ getBoardData, boardData, host, board }) => {
+const Row = ({ boardData, host, board }) => {
   // createdAt이 "2024-02-14T00:21:55.884612" (ISO 8601 형식)으로 저장되어 있으므로 형태 변경시키기
   const changeDataFormat = (date) => {
     return new Date(date)
@@ -58,34 +58,30 @@ const Row = ({ getBoardData, boardData, host, board }) => {
       .replace(/-/g, '.');
   };
 
-  const handleTitleClick = (boardId) => {
-    window.location.href = `/board/${host}/${board}/${boardId}`;
-  };
+  const hostValue = host.toLowerCase();
+  const boardValue = board.toLowerCase();
 
-  useEffect(() => {
-    getBoardData();
-  }, []);
+  const handleTitleClick = (boardId) => {
+    window.location.href = `/board/${hostValue}/${boardValue}/${boardId}`;
+  };
 
   return (
     <>
       {boardData.map((data) => (
-        <>
-          <Container>
-            <BoardCell onClick={() => handleTitleClick(data.boardId)}>
-              {data.title}
-            </BoardCell>
-            <BoardCell>{data.writer}</BoardCell>
-            <BoardCell>{changeDataFormat(data.createdAt)}</BoardCell>
-            <BoardCell>{data.hitCount}</BoardCell>
-          </Container>
-        </>
+        <Container key={data.boardId}>
+          <BoardCell onClick={() => handleTitleClick(data.boardId)}>
+            {data.title}
+          </BoardCell>
+          <BoardCell>{data.writer}</BoardCell>
+          <BoardCell>{changeDataFormat(data.createdAt)}</BoardCell>
+          <BoardCell>{data.hitCount}</BoardCell>
+        </Container>
       ))}
     </>
   );
 };
 
 Row.propTypes = {
-  getBoardData: PropTypes.func.isRequired,
   boardData: PropTypes.array.isRequired,
   host: PropTypes.string.isRequired,
   board: PropTypes.string.isRequired,

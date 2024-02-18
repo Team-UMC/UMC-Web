@@ -1,4 +1,3 @@
-//til 내용, 노션연동, 첨부파일, 목록 버튼
 import React from "react";
 import styled from "styled-components";
 

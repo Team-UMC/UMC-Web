@@ -1,5 +1,5 @@
 // BoardTable: 게시판 테이블 컴포넌트
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
@@ -62,16 +62,48 @@ const BoardList = () => {
   const host = urlParts[4].toUpperCase();
   const board = urlParts[5].toUpperCase();
 
+  const page = 0;
+    //const [page, setPage] = useState(0);
+
   const [boardData, setBoardData] = useState([]);
 
-  const getBoardData = async () => {
-    try {
-      const res = await axiosInstance.get(
-        `/boards?host=${host}&board=${board}&page=0`,
-      );
-      setBoardData(res.data.result.boardPageElements);
+  useEffect(() => {
+    const getBoardData = async (host, board, page) => {
+      try {
+        const res = await axiosInstance.get(
+          `/boards`, {
+            params: {
+              host: host,
+              board: board,
+              page: page,
+            }
+          }
+        );
+        setBoardData(res.data.result.boardPageElements);
 
-      console.log(boardData);
+      } catch (error) {
+        console.error();
+      }
+    };
+    getBoardData(host, board, page);
+  }, [host, board, page]);
+
+  // 검색 기능
+  const [keyword, setKeyword] = useState('');
+
+  const handleKeyword = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const searchBoard = async () => {
+    try {
+      const res = await axiosInstance.get(`/boards/search`, {
+        params: {
+          keyword: keyword,
+          page: page,
+        },
+      });
+      setBoardData(res.data.result.boardSearchPageElements);
     } catch (error) {
       console.error();
     }
@@ -86,19 +118,19 @@ const BoardList = () => {
         <BoardCell>조회수</BoardCell>
       </Container>
 
-      <Row
-        getBoardData={getBoardData}
-        boardData={boardData}
-        host={host}
-        board={board}
-      />
+      <Row boardData={boardData} host={host} board={board} />
 
       <BoardWriteButtonLayout>
         <BoardWriteButton />
       </BoardWriteButtonLayout>
 
       <BoardSearchLayout>
-        <SearchBar />
+        <SearchBar
+          handleKeyword={handleKeyword}
+          searchBoard={searchBoard}
+          keyword={keyword}
+          page={page}
+        />
       </BoardSearchLayout>
     </div>
   );

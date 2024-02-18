@@ -29,17 +29,19 @@ const StyledDiv = styled.div`
   }
 `;
 
-const Title = ({ title, name, point, rank }) => {
+const Title = ({ title, data, keyNames }) => {
+  const { nameKey, pointKey, rankKey } = keyNames;
+
   return (
     <Container>
       <TypeTitle>{title}</TypeTitle>
       <StyledDiv>
-        <span className="name">{name}</span>
+        <span className="name">{data[nameKey]}</span>
         <span className="message">는</span>
-        <span className="point"> {point} </span>
+        <span className="point"> {data[pointKey]} </span>
         <span className="message">포인트로</span>
         <span className="message"> 현재 </span>
-        <span className="rank">{rank}등</span>
+        <span className="rank">{data[rankKey]}등</span>
         <span className="message">이에요!</span>
       </StyledDiv>
     </Container>
@@ -48,9 +50,12 @@ const Title = ({ title, name, point, rank }) => {
 
 Title.propTypes = {
   title: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  point: PropTypes.number.isRequired,
-  rank: PropTypes.number.isRequired,
+  data: PropTypes.object.isRequired,
+  keyNames: PropTypes.shape({
+    nameKey: PropTypes.string.isRequired,
+    pointKey: PropTypes.number.isRequired,
+    rankKey: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Title;

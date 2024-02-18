@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import SearchIcon from 'assets/board/search.svg';
 
 // 검색창 감싸는 컴포넌트
-const SearchWrapper = styled.form`
+const SearchWrapper = styled.div`
   /* 레이아웃 정렬 */
   display: flex;
   justify-content: row;
@@ -51,7 +51,7 @@ const SearchInput = styled.input`
 `;
 
 // 검색 버튼
-const SearchButton = styled.button`
+const SearchButton = styled.div`
   /* 레이아웃 정렬 */
   padding: 8px 16px;
   border-radius: 12px;
@@ -83,32 +83,31 @@ const SearchButton = styled.button`
 
 // 검색창 컴포넌트
 // onSearch: 검색 버튼 클릭 시 실행되는 함수
-const SearchBar = ({ onSearch }) => {
+const BoardSearchBar = ({ handleKeyword, searchBoard, keyword, page }) => {
   // 검색어를 담는 state
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // 검색 버튼 클릭 시 실행되는 함수
-  const handleSearch = (e) => {
-    e.preventDefault();
-    onSearch(searchTerm);
+  const handleSearchClick = () => {
+    searchBoard(keyword, page);
   };
 
   return (
-    <SearchWrapper onSubmit={handleSearch}>
+    <SearchWrapper>
       <SearchInput
         type="text"
         placeholder="글 제목, 내용을 입력해주세요"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        value={keyword}
+        onChange={handleKeyword}
       />
-      <SearchButton type="submit">검색</SearchButton>
+      <SearchButton onClick={handleSearchClick}>검색</SearchButton>
     </SearchWrapper>
   );
 };
 
 // 검색창 컴포넌트 props 검사
-SearchBar.propTypes = {
-  onSearch: PropTypes.func.isRequired,
+BoardSearchBar.propTypes = {
+  searchBoard: PropTypes.func.isRequired,
+  handleKeyword: PropTypes.func.isRequired,
+  keyword: PropTypes.string.isRequired,
+  page: PropTypes.number,
 };
 
-export default SearchBar;
+export default BoardSearchBar;

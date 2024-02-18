@@ -16,13 +16,18 @@ const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
 `;
 
 const Number = styled.div`
+  width: 30px;
+  text-align: center;
+  margin-left: 10px;
   color: black;
   background-color: white;
   border: 1px solid white;
   border-radius: 15px;
+  padding: 1px;
 `;
 
 const MyFeed = styled.div`
@@ -40,16 +45,24 @@ const Feed = ({ remainPoint, usedHistories }) => {
         <Number> {remainPoint} </Number>
       </TitleWrapper>
       <MyFeed>
-        {usedHistories.map((data) => {
-          <div>
-            <div>
-              <img src={FeedbackgroundImage} />
-              <img src={data.pointImage} />
-              <div> {data.point} </div>
-            </div>
-            <div> {data.description} </div>
-          </div>;
-        })}
+        {usedHistories.length > 0
+          ? usedHistories.map((data, index) => (
+              <div key={index}>
+                <div>
+                  <img src={FeedbackgroundImage} alt="Feed background" />
+                  <img src={data.pointImage} alt="Point image" />
+                  <div> {data.point} </div>
+                </div>
+                <div> {data.description} </div>
+              </div>
+            ))
+          : Array.from({ length: 4 }).map((_, index) => (
+              <div key={index}>
+                <div>
+                  <img src={FeedbackgroundImage} alt="Feed background" />
+                </div>
+              </div>
+            ))}
       </MyFeed>
     </FeedWrapper>
   );

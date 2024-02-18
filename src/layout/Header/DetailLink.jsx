@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -32,36 +33,44 @@ const SmallTitle = styled(Link)`
   margin-bottom: 12px;
 `;
 
-const DetailLink = () => {
+const DetailLink = ({toggleSide}) => {
+  const handleToggleSide = () => {
+    toggleSide();
+  };
+
   return (
     <Container>
       <Wrapper>
-        <BigTitle to="/todolist"> 투두리스트 </BigTitle>
-        <BigTitle to="/todayilearn"> TIL </BigTitle>
+        <BigTitle to="/todolist" onClick={handleToggleSide}> 투두리스트 </BigTitle>
+        <BigTitle to="/todayilearn" onClick={handleToggleSide}> TIL </BigTitle>
         <div style={{ fontWeight: 'bold', marginBottom: '14px' }}>
           마스코트 키우기
         </div>
-        <SmallTitle to="/mascot"> 마스코트 </SmallTitle>
-        <SmallTitle to="/ranking"> 랭킹 </SmallTitle>
+        <SmallTitle to="/mascot" onClick={handleToggleSide}> 마스코트 </SmallTitle>
+        <SmallTitle to="/ranking" onClick={handleToggleSide}> 랭킹 </SmallTitle>
       </Wrapper>
 
       <Wrapper>
-        <BigTitle to="/board/campus/notice"> 학교 게시판 </BigTitle>
-        <BigTitle to="/board/branch/notice">지부 게시판 </BigTitle>
-        <BigTitle to="/board/center/notice"> 연합 게시판 </BigTitle>
+        <BigTitle to="/board/campus/notice" onClick={handleToggleSide}> 학교 게시판 </BigTitle>
+        <BigTitle to="/board/branch/notice" onClick={handleToggleSide}>지부 게시판 </BigTitle>
+        <BigTitle to="/board/center/notice" onClick={handleToggleSide}> 연합 게시판 </BigTitle>
       </Wrapper>
 
       <Wrapper>
-        <SmallTitle to="/project"> 핫 프로젝트 </SmallTitle>
-        <SmallTitle to="/project"> 역대 프로젝트 </SmallTitle>
+        <SmallTitle to="/hothistory" onClick={handleToggleSide}> 핫 프로젝트 </SmallTitle>
+        <SmallTitle to="/history" onClick={handleToggleSide}> 역대 프로젝트 </SmallTitle>
       </Wrapper>
 
       <Wrapper>
-        <SmallTitle to="/gallery"> 핫 사진첩 </SmallTitle>
-        <SmallTitle to="/gallery"> 우리 학교 사진첩 </SmallTitle>
+        <SmallTitle to="/gallery" onClick={handleToggleSide}> 핫 사진첩 </SmallTitle>
+        <SmallTitle to="/gallery" onClick={handleToggleSide}> 우리 학교 사진첩 </SmallTitle>
       </Wrapper>
     </Container>
   );
+};
+
+DetailLink.propTypes = {
+  toggleSide: PropTypes.func.isRequired,
 };
 
 export default DetailLink;

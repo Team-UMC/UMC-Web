@@ -16,7 +16,7 @@ const BoardPageContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 100px;
 
-  width: 80%;
+  width: 70%;
 `;
 
 // 게시글 제목 레이아웃

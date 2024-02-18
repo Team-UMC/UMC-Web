@@ -16,6 +16,10 @@ import styled from 'styled-components';
 
 import NewAdminTable from 'components/Management/NoticePin/NewAdminTable';
 
+const Container = styled.div`
+  width: 100%;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   width: 120vh;
@@ -39,10 +43,10 @@ const TableLayout = styled(NewAdminTable)`
 
 const TypeComponent = ({ buttonStates }) => {
   return (
-    <div>
+    <Container>
       {buttonStates.setnoticeButton && (
         <>
-           <TableLayout /> 
+          <TableLayout />
         </>
       )}
 
@@ -68,7 +72,7 @@ const TypeComponent = ({ buttonStates }) => {
           </ButtonContainerChallenger>
         </>
       )}
-    </div>
+    </Container>
   );
 };
 

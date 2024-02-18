@@ -1,67 +1,61 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ReactComponent as LeftArrow } from 'assets/main/LeftArrow.svg';
-import { ReactComponent as RightArrow } from 'assets/main/RightArrow.svg';
+
+import LogoImage from 'assets/main/TIL/Logo.svg';
 
 const Container = styled.div`
+  width: 100%;
+
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
 
 const DataContainer = styled.div`
   display: flex;
-`;
-
-const Rectangle = styled.div`
-  width: 100px;
-  margin: 5px;
-  border: 1px solid white;
   background-color: white;
-  border-radius: 12px;
-  padding: 5px;
-  height: 118px;
+  width: 150px;
+  height: 300px;
+  border: 1px solid black;
 `;
 
-const ButtonContainer = styled.div`
+const DetailContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
+  background-color: white;
+  width: 300px;
+  height: 300px;
 `;
 
-const TodayILearned = () => {
-  const data = [
-    '1번입니다',
-    '2번입니다',
-    '3번입니다',
-    '4번입니다',
-    '5번입니다',
-    '6번입니다',
-  ];
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => prevIndex === 0 ? data.length - 1 : prevIndex - 1);
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => prevIndex === data.length - 1 ? 0 : prevIndex + 1);
-  };
-
+const TodayILearned = ({ tilData }) => {
   return (
     <Container>
-      <ButtonContainer>
-        <LeftArrow alt="이전" onClick={handlePrev} />
-      </ButtonContainer>
       <DataContainer>
-        {[data[currentIndex], data[(currentIndex + 1) % data.length], data[(currentIndex + 2) % data.length]].map((item, index) => (
-          <Rectangle key={index}>{item}</Rectangle>
+        {tilData.map((data, index) => (
+          <div key={index}>
+            <img src={LogoImage} />
+            <div>
+              <div> {data.title} </div>
+              <div> {data.subTitle} </div>
+            </div>
+          </div>
         ))}
       </DataContainer>
-      <ButtonContainer>
-        <RightArrow alt="다음" onClick={handleNext} />
-      </ButtonContainer>
+
+      <DetailContainer></DetailContainer>
     </Container>
   );
+};
+
+TodayILearned.propTypes = {
+  tilData: PropTypes.arrayOf(
+    PropTypes.shape({
+      todayILearnedId: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      subTitle: PropTypes.string.isRequired,
+      part: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default TodayILearned;

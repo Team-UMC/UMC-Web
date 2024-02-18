@@ -52,7 +52,7 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
 
         <CenterWrapper>
           <BlackLeftContainer />
-          <DetailLink />
+          <DetailLink toggleSide={toggleSide} />
         </CenterWrapper>
 
         <BlackRightContainer />
