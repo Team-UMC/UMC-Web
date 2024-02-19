@@ -55,7 +55,7 @@ const SwitchCheckedSlider = styled(SwitchSlider)`
   background-color: lightgray;
 
   ${SwitchInput}:checked + & {
-    background-color: black;
+    background-color: gray;
   }
 
   ${SwitchInput}:checked + &:before {
@@ -80,8 +80,10 @@ const CustomSetting = () => {
         <SettingDetailTitle>자동 로그인</SettingDetailTitle>
         <SettingDetailBlock>
           <div>
-            <SettingDetailBlockTitle>자동 로그인 허용</SettingDetailBlockTitle>
-            <SettingDetailBlockContent>
+            <SettingDetailBlockTitle style={{ color: 'gray' }}>
+              자동 로그인 허용
+            </SettingDetailBlockTitle>
+            <SettingDetailBlockContent style={{ color: 'gray' }}>
               자동 로그인을 설정하면, 다음부터는 로그인을 하지 않아도 됩니다.
             </SettingDetailBlockContent>
           </div>

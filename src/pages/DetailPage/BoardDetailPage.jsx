@@ -6,16 +6,28 @@ import BoardBox from 'components/BoardBox/BoardBox';
 import BoardDetail from 'components/BoardTextDetail/BoardDetail';
 import CommentBox from 'components/BoardTextDetail/CommentBox';
 import CommentWriteBox from 'components/BoardTextDetail/CommentWriteBox';
-//import BoardTitle from 'components/BoardTitle/BoardTitle';
-import Copy from 'components/BoardTitle/Copy';
+import BoardTitle from 'components/BoardTitle/BoardTitle';
+//import Copy from 'components/BoardTitle/Copy';
+
+const BoardTitleLayout = styled(BoardTitle)`
+  display: flex;
+  padding: 0 0 0 40px;
+`;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 80%;
+  flex-direction: column;
 
-  margin-top: 20vh;
+  width: 70%;
+
+  margin-top: 15vh;
+`;
+
+const LowerWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const RightWrapper = styled.div`
@@ -40,6 +52,8 @@ const BoardDetailPage = () => {
     try {
       const res = await axiosInstance.get(`/boards/${boardId}`);
       setBoardDetailData(res.data.result);
+
+      console.log(res);
     } catch (error) {
       console.error();
     }
@@ -80,23 +94,25 @@ const BoardDetailPage = () => {
         alignItems: 'center',
       }}
     >
-      <Copy />
       <Container>
-        <BoardBox />
-        <RightWrapper>
-          <BoardDetail
-            boardDetailData={boardDetailData}
-            boardLike={boardLike}
-            getBoardDetail={getBoardDetail}
-          />
-          {commentData && (
-            <CommentBox
-              commentData={commentData}
-              getBoardComment={getBoardComment}
+        <BoardTitleLayout />
+        <LowerWrapper>
+          <BoardBox />
+          <RightWrapper>
+            <BoardDetail
+              boardDetailData={boardDetailData}
+              boardLike={boardLike}
+              getBoardDetail={getBoardDetail}
             />
-          )}
-          <CommentWriteBox boardDetailData={boardDetailData} />
-        </RightWrapper>
+            {commentData && (
+              <CommentBox
+                commentData={commentData}
+                getBoardComment={getBoardComment}
+              />
+            )}
+            <CommentWriteBox boardDetailData={boardDetailData} />
+          </RightWrapper>
+        </LowerWrapper>
       </Container>
     </div>
   );

@@ -92,7 +92,7 @@ const RightContainer = () => {
         ) : (
           <ProfileImage src={BasicProfileImage} />
         )}
-        <ProfileNickname> {`${nickname}님 반가워요!`} </ProfileNickname>
+        <ProfileNickname> {`${nickname} 반가워요!`} </ProfileNickname>
 
         <LogoutButton onClick={handleLogout}> 로그아웃 </LogoutButton>
       </Wrapper>

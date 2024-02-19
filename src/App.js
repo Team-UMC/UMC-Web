@@ -18,21 +18,25 @@ import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
 import BoardDetailPage from 'pages/DetailPage/BoardDetailPage';
 
 import HistoryPage from 'pages/History/HistoryPage';
-import GalleryPage from 'pages/Gallery/GalleryPage';
-import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
+// import GalleryPage from 'pages/Gallery/GalleryPage';
+// import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
 import BoardPage from 'pages/BoardPage/BoardPage';
 import MascotPage from 'pages/Mascot/MascotPage';
-import TextDetailPage from 'pages/DetailPage/TextDetailPage';
 
-import TodayILearn from 'pages/TodayILearn/TodayILearn';
-import NewTIL from 'components/TodayILearn/NewTIL';
-import DetailTIL from 'components/TodayILearn/DetailTIL';
+import TodayILearn from 'pages/TodayILearn/TodayILearned';
+import NewTIL from 'pages/TodayILearn/NewTIL';
+import DetailTIL from 'pages/TodayILearn/DetailTIL';
 import TodoList from 'pages/ToDoList/TodoList';
 import RankingPage from 'pages/Mascot/RankingPage';
-import MessagePreviewPage from 'pages/Message/MessagePreviewPage';
-import MessageDetailPage from 'pages/Message/MessageDetailPage';
-import MessagePage from 'pages/Message/MessagePage';
+
 import SettingPage from 'pages/Setting/SettingPage';
+import HotHistoryPage from 'pages/History/HotHistoryPage';
+import ModifyTIL from 'pages/TodayILearn/ModiftTIL';
+import ModifyBoard from 'pages/BoardWrite/ModifyBoard';
+
+// import MessagePreviewPage from 'pages/Message/MessagePreviewPage';
+// import MessageDetailPage from 'pages/Message/MessageDetailPage';
+// import MessagePage from 'pages/Message/MessagePage';
 
 function App() {
   return (
@@ -62,7 +66,16 @@ function App() {
                 element={<BoardPage />}
               />
               <Route path="/boardwrite/:host/:board" element={<BoardWrite />} />
-              <Route path="/detailpage" element={<TextDetailPage />} />
+
+              <Route
+                path="/board/:category/:boardPath/:boardId"
+                element={<BoardDetailPage />}
+              />
+
+              <Route
+                path="/board/modify/:category/:boardPath/:boardId"
+                element={<ModifyBoard />}
+              />
 
               {/* 운영진 관리 페이지 */}
               <Route path="/management/notice" element={<Management />} />
@@ -73,32 +86,35 @@ function App() {
 
               <Route path="/setting/:contents" element={<SettingPage />} />
 
-              <Route
-                path="/board/campus/free/:boardId"
-                element={<BoardDetailPage />}
-              />
-
-              <Route path="/messagepreview" element={<MessagePreviewPage />} />
+              {/* <Route path="/messagepreview" element={<MessagePreviewPage />} />
               <Route path="/messagedetail" element={<MessageDetailPage />} />
-              <Route path="/message" element={<MessagePage />} />
+              <Route path="/message" element={<MessagePage />} /> */}
 
               {/* Today-I-Learned */}
-              <Route path="/todayilearn" element={<TodayILearn />} />
-              <Route path="/todayilearn/addtil" element={<NewTIL />} />
-              <Route path="/todayilearn/detail" element={<DetailTIL />} />
+              <Route path="/todayilearned" element={<TodayILearn />} />
+              <Route path="/todayilearned/addtil" element={<NewTIL />} />
+              <Route
+                path="/todayilearned/:todayILearnedId"
+                element={<DetailTIL />}
+              />
+              <Route
+                path="/todayilearned/modify/:todayILearnedId"
+                element={<ModifyTIL />}
+              />
 
               {/* TodoList */}
               <Route path="/todolist" element={<TodoList />} />
 
               {/* 사진첩 */}
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/gallery/:id" element={<GalleryDetailPage />} />
+              {/* <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/gallery/:id" element={<GalleryDetailPage />} /> */}
 
               {/* 프로필 설정 페이지 */}
               <Route path="/profilesetting" element={<ProfileSettingPage />} />
 
               {/* 히스토리(프로젝트) 페이지 */}
               <Route path="/history" element={<HistoryPage />} />
+              <Route path="/hothistory" element={<HotHistoryPage />} />
 
               {/* 마스코트 키우기 페이지 */}
               <Route path="/mascot" element={<MascotPage />} />

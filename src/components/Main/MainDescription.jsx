@@ -30,7 +30,7 @@ const MainDescription = ({ title, subtitle }) => {
           color: index === 2 ? '#7682F6' : 'inherit',
         }}
       >
-        {word}
+        {word}{' '}
       </span>
     </React.Fragment>
   ));

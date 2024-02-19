@@ -14,6 +14,8 @@ import ThirdGradeCircle from 'assets/Mascot/ThirdGrade.svg';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
 
 const RankerWrapper = styled.div`
@@ -29,6 +31,8 @@ const TopRanker = styled.div`
   flex-direction: column;
   align-items: center;
   color: white;
+
+  margin-bottom: 10px;
 `;
 
 const ImageWrapper = styled.div`
@@ -54,7 +58,7 @@ const ETCWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 70%;
+  height: 600px;
   align-items: center;
   justify-content: space-around;
 `;
@@ -74,7 +78,12 @@ const Wrapper = styled.div`
   color: black;
 `;
 
-const SchoolRanking = ({ universityRank }) => {  
+const SchoolRanking = ({
+  universityRank,
+  firstSchoolRank,
+  secondSchoolRank,
+  thirdSchoolRank,
+}) => {
   return (
     <Container>
       <RankerWrapper>
@@ -82,24 +91,30 @@ const SchoolRanking = ({ universityRank }) => {
           <ImageWrapper>
             <CrownImage src={SilverCrownImage} />
             <img src={SecondGradeCircle} />
-            <ProfileImage src={universityRank[1].universityLogo} />
+            {secondSchoolRank.universityLogo ? (
+              <ProfileImage src={secondSchoolRank.universityLogo} />
+            ) : null}
           </ImageWrapper>
-          <div> {universityRank[1].universityName} </div>
+          <div> {secondSchoolRank.universityName} </div>
         </TopRanker>
         <TopRanker>
           <ImageWrapper>
             <CrownImage src={GoldCrownImage} />
             <img src={FirstGradeCircle} />
-            <ProfileImage src={universityRank[0].universityLogo} />
+            {firstSchoolRank.universityLogo ? (
+              <ProfileImage src={firstSchoolRank.universityLogo} />
+            ) : null}
           </ImageWrapper>
-          <div> {universityRank[0].universityName} </div>
+          <div> {firstSchoolRank.universityName} </div>
         </TopRanker>
         <TopRanker>
           <ImageWrapper>
             <CrownImage src={BronzeCrownImage} />
             <img src={ThirdGradeCircle} />
-            <ProfileImage src={universityRank[2].universityLogo} />
-            <div> {universityRank[2].universityName} </div>
+            {thirdSchoolRank.universityLogo ? (
+              <ProfileImage src={thirdSchoolRank.universityLogo} />
+            ) : null}
+            <div> {thirdSchoolRank.universityName} </div>
           </ImageWrapper>
         </TopRanker>
       </RankerWrapper>
@@ -124,8 +139,11 @@ SchoolRanking.propTypes = {
       universityName: PropTypes.string.isRequired,
       universityPoint: PropTypes.number.isRequired,
       universityLogo: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
+  firstSchoolRank: PropTypes.object.isRequired,
+  secondSchoolRank: PropTypes.object.isRequired,
+  thirdSchoolRank: PropTypes.object.isRequired,
 };
 
 export default SchoolRanking;

@@ -1,11 +1,18 @@
 // BoardTable: 게시판 테이블 컴포넌트
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
 import SearchBar from './BoardSearch';
 import BoardWriteButton from './BoardWriteButton';
 import Row from './Row';
+import { useLocation } from 'react-router-dom';
+
+const TotalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 
 // 하나의 게시글을 감싸는 div
 const Container = styled.div`
@@ -52,33 +59,99 @@ const BoardSearchLayout = styled.div`
   align-items: center;
 `;
 
+const PageButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+
+  padding-top: 30px;
+`;
+
+const PageButton = styled.div`
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: ${({ selected }) => (selected ? 'white' : 'transparent')};
+  border-radius: 10px;
+  color: ${({ selected }) => (selected ? '#000C76' : 'black')};
+  font-weight: ${({ selected }) => (selected ? 'bold' : '')};
+`;
+
 const BoardList = () => {
-  // 현재 주소 받아오기 [ex) localhost:3000/board/campus/notice]
-  const currentURL = window.location.href;
+  const location = useLocation();
 
   // /로 구분하여 배열로 저장하고 host 값과 board 값 변수에 저장하기
-  const urlParts = currentURL.split('/');
+  const urlParts = location.pathname.split('/');
 
-  const host = urlParts[4].toUpperCase();
-  const board = urlParts[5].toUpperCase();
+  const [host, setHost] = useState(urlParts[2].toUpperCase());
+  const [board, setBoard] = useState(urlParts[3].toUpperCase());
+
+  useEffect(() => {
+    setHost(urlParts[2].toUpperCase());
+    setBoard(urlParts[3].toUpperCase());
+  }, [location]);
+
+  const [page, setPage] = useState(0);
 
   const [boardData, setBoardData] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const getBoardData = async () => {
+  useEffect(() => {
+    const getBoardData = async (host, board, page) => {
+      try {
+        const res = await axiosInstance.get(`/boards`, {
+          params: {
+            host: host,
+            board: board,
+            page: page,
+          },
+        });
+        setBoardData(res.data.result.boardPageElements);
+        setTotalPages(res.data.result.totalPages);
+
+        console.log(boardData);
+        console.log(host);
+        console.log(board);
+      } catch (error) {
+        console.error();
+      }
+    };
+    getBoardData(host, board, page);
+  }, [host, board, page]);
+
+  // 검색 기능
+  const [keyword, setKeyword] = useState('');
+
+  const handleKeyword = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const searchBoard = async () => {
     try {
-      const res = await axiosInstance.get(
-        `/boards?host=${host}&board=${board}&page=0`,
-      );
-      setBoardData(res.data.result.boardPageElements);
-
-      console.log(boardData);
+      const res = await axiosInstance.get(`/boards/search`, {
+        params: {
+          keyword: keyword,
+          page: page,
+        },
+      });
+      setBoardData(res.data.result.boardSearchPageElements);
+      setTotalPages(res.data.result.totalPages);
     } catch (error) {
       console.error();
     }
   };
 
+  const handlePageChange = (newPage) => {
+    setPage(newPage - 1);
+  };
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
   return (
-    <div>
+    <TotalWrapper>
       <Container>
         <BoardCell>제목</BoardCell>
         <BoardCell>작성자</BoardCell>
@@ -86,21 +159,34 @@ const BoardList = () => {
         <BoardCell>조회수</BoardCell>
       </Container>
 
-      <Row
-        getBoardData={getBoardData}
-        boardData={boardData}
-        host={host}
-        board={board}
-      />
+      <Row boardData={boardData} host={host} board={board} />
 
       <BoardWriteButtonLayout>
         <BoardWriteButton />
       </BoardWriteButtonLayout>
 
+      <PageButtonWrapper>
+        {pageNumbers.map((pageNumber) => (
+          <PageButton
+            key={pageNumber}
+            onClick={() => handlePageChange(pageNumber)}
+            selected={pageNumber === page + 1}
+            disabled={pageNumber === page}
+          >
+            {pageNumber}
+          </PageButton>
+        ))}
+      </PageButtonWrapper>
+
       <BoardSearchLayout>
-        <SearchBar />
+        <SearchBar
+          handleKeyword={handleKeyword}
+          searchBoard={searchBoard}
+          keyword={keyword}
+          page={page}
+        />
       </BoardSearchLayout>
-    </div>
+    </TotalWrapper>
   );
 };
 

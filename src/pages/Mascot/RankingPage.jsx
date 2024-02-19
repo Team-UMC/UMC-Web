@@ -36,30 +36,14 @@ const Wrapper = styled.div`
 
 const RankingPage = () => {
   // 나의 기여도 관련
-  const [myNickname, setMyNickname] = useState('');
-  const [myContributionPoint, setMyContributionPoint] = useState(0);
-  const [myContributionRank, setMyContributionRank] = useState(0);
+  const [myContribution, setMyContribution] = useState({});
 
-  // 내 학교 관련
-  const [myUniversityName, setMyUniversityName] = useState('');
-  const [myUniversityPoint, setMyUniversityPoint] = useState(0);
-  const [myUniversityRank, setMyUniversityRank] = useState(0);
-
-  // 학교 내 기여도 관련
-  const [inUniversityRankData, setInUniversityRankData] = useState([]);
-
-  // 학교 별 순위 관련
-  const [universityRank, setUniversityRank] = useState([]);
-
-  // 나의 기여도
   useEffect(() => {
     const getMyContribution = async () => {
       try {
         const res = await axiosInstance.get(`/members/rank`);
 
-        setMyNickname(res.data.result.nickname);
-        setMyContributionPoint(res.data.result.contributionPoint);
-        setMyContributionRank(res.data.result.contributionRank);
+        setMyContribution(res.data.result);
       } catch (error) {
         console.error();
       }
@@ -67,21 +51,27 @@ const RankingPage = () => {
     getMyContribution();
   }, []);
 
-  // 나의 학교
+  // 내 학교 관련
+  const [myUniversityData, setMyUniversityData] = useState({});
+
   useEffect(() => {
     const getMyUniversity = async () => {
       try {
         const res = await axiosInstance.get(`/universities/details`);
 
-        setMyUniversityName(res.data.result.universityName);
-        setMyUniversityPoint(res.data.result.universityPoint);
-        setMyUniversityRank(res.data.result.universityRank);
+        setMyUniversityData(res.data.result);
       } catch (error) {
         console.error();
       }
     };
     getMyUniversity();
   }, []);
+
+  // 학교 내 기여도 관련
+  const [inUniversityRankData, setInUniversityRankData] = useState([{}]);
+  const [firstRank, setFirstRank] = useState({});
+  const [secondRank, setSecondRank] = useState({});
+  const [thirdRank, setThirdRank] = useState({});
 
   // 학교 내 순위
   useEffect(() => {
@@ -90,6 +80,10 @@ const RankingPage = () => {
         const res = await axiosInstance.get(`/universities/members`);
 
         setInUniversityRankData(res.data.result.joinContributionRanks);
+        setFirstRank(res.data.result.joinContributionRanks[0]);
+        setSecondRank(res.data.result.joinContributionRanks[1]);
+        setThirdRank(res.data.result.joinContributionRanks[2]);
+        console.log(res.data.result.joinContributionRanks);
       } catch (error) {
         console.error();
       }
@@ -97,13 +91,21 @@ const RankingPage = () => {
     getInSchoolRank();
   }, []);
 
-  // 학교 별 순위
+  // 학교 별 순위 관련
+  const [universityRank, setUniversityRank] = useState([{}]);
+  const [firstSchoolRank, setFirstSchoolRank] = useState({});
+  const [secondSchoolRank, setSecondSchoolRank] = useState({});
+  const [thirdSchoolRank, setThirdSchoolRank] = useState({});
+
   useEffect(() => {
     const getSchoolRank = async () => {
       try {
         const res = await axiosInstance.get(`/universities/ranks`);
 
         setUniversityRank(res.data.result.joinUniversityRanks);
+        setFirstSchoolRank(res.data.result.joinUniversityRanks[0]);
+        setSecondSchoolRank(res.data.result.joinUniversityRanks[1]);
+        setThirdSchoolRank(res.data.result.joinUniversityRanks[2]);
       } catch (error) {
         console.error();
       }
@@ -126,21 +128,37 @@ const RankingPage = () => {
           <Wrapper>
             <Title
               title="나의 기여도"
-              name={myNickname}
-              point={myContributionPoint}
-              rank={myContributionRank}
+              data={myContribution}
+              keyNames={{
+                nameKey: 'nickname',
+                pointKey: 'contributionPoint',
+                rankKey: 'contributionRank',
+              }}
             />
-            <SchoolRanker inUniversityRankData={inUniversityRankData} />
+            <SchoolRanker
+              inUniversityRankData={inUniversityRankData}
+              firstRank={firstRank}
+              secondRank={secondRank}
+              thirdRank={thirdRank}
+            />
           </Wrapper>
 
           <Wrapper>
             <Title
               title="학교 랭킹"
-              name={myUniversityName}
-              point={myUniversityPoint}
-              rank={myUniversityRank}
+              data={myUniversityData}
+              keyNames={{
+                nameKey: 'universityName',
+                pointKey: 'universityPoint',
+                rankKey: 'universityRank',
+              }}
             />
-            <SchoolRanking universityRank={universityRank} />
+            <SchoolRanking
+              universityRank={universityRank}
+              firstSchoolRank={firstSchoolRank}
+              secondSchoolRank={secondSchoolRank}
+              thirdSchoolRank={thirdSchoolRank}
+            />
           </Wrapper>
         </Container>
       </Page>

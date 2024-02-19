@@ -11,13 +11,45 @@ import {
   SettingDetailWebInfoContentsBox,
   SettingDetailWrapper,
 } from 'components/Setting/Setting.style';
+import axiosInstance from 'apis/setting';
+import { useNavigate } from 'react-router-dom';
 
 // 기타 설정 컴포넌트
 const EtcSetting = () => {
+  const navigate = useNavigate();
+
+  const logoutMember = async () => {
+    try {
+      const res = await axiosInstance.delete(`/members/logout`);
+
+      console.log(res);
+
+      localStorage.removeItem('server Token');
+
+      navigate(`/`);
+    } catch (error) {
+      console.error();
+    }
+  };
+
+  const deleteMember = async () => {
+    try {
+      const res = await axiosInstance.delete(`/members`);
+
+      console.log(res);
+
+      localStorage.removeItem('server Token');
+
+      navigate(`/`);
+    } catch (error) {
+      console.error();
+    }
+  };
+
   return (
     <>
       <SettingContentsTitle>기타</SettingContentsTitle>
-      <SettingDetailWrapper style={{ marginBottom: '48px' }}>
+      <SettingDetailWrapper style={{ marginBottom: '30px' }}>
         <SettingDetailTitle>로그아웃</SettingDetailTitle>
         <SettingDetailBlock
           style={{
@@ -32,16 +64,21 @@ const EtcSetting = () => {
           </SettingDetailBlockContent>
         </SettingDetailBlock>
         <SettingDetailButtonLayout>
-          <SettingDetailEtcLogoutButton>로그아웃</SettingDetailEtcLogoutButton>
+          <SettingDetailEtcLogoutButton onClick={logoutMember}>
+            로그아웃
+          </SettingDetailEtcLogoutButton>
         </SettingDetailButtonLayout>
       </SettingDetailWrapper>
+
       <SettingDetailWrapper>
         <SettingDetailTitle>탈퇴 약관</SettingDetailTitle>
         <SettingDetailWebInfoContentsBox>
           탈퇴 약관입니다.
         </SettingDetailWebInfoContentsBox>
         <SettingDetailButtonLayout>
-          <SettingDetailEtcWithdrawButton>탈퇴</SettingDetailEtcWithdrawButton>
+          <SettingDetailEtcWithdrawButton onClick={deleteMember}>
+            탈퇴
+          </SettingDetailEtcWithdrawButton>
         </SettingDetailButtonLayout>
       </SettingDetailWrapper>
     </>

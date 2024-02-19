@@ -22,6 +22,8 @@ const ManagementLink = styled(Link)`
   margin-right: 10px;
   cursor: pointer;
   text-decoration: none;
+
+  padding: 0 15px;
 `;
 
 const ManagementType = ({ buttonStates, handleClick }) => {

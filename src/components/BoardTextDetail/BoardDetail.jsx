@@ -9,7 +9,10 @@ import CommentBtnImg from 'assets/CommentBtnImg.svg';
 import LikeBtnImgNotLiked from 'assets/LikeBtnImgNotLiked.svg';
 import LikeBtnImgLiked from 'assets/LikeBtnImgLiked.svg';
 
+import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
+
 import OptionButtonImage from 'assets/OptionButton.svg';
+import { useNavigate } from 'react-router-dom';
 
 // TextDetail을 스타일링하기 위한 박스
 const BoxContainer = styled.div`
@@ -114,23 +117,28 @@ const OptionWrapper = styled.div`
 `;
 
 const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
-  // createdAt이 "2024-02-14T00:21:55.884612" (ISO 8601 형식)으로 저장되어 있으므로 형태 변경시키기
-  // const changeDataFormat = (date) => {
-  //   return new Date(date)
-  //     .toLocaleDateString('ko-KR', {
-  //       year: 'numeric',
-  //       month: '2-digit',
-  //       day: '2-digit',
-  //     })
-  //     .replace(/-/g, '.');
-  // };
-
+  const navigate = useNavigate();
   // 우측 삭제/수정 옵션 모달 상태
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
   const handleButtonClick = () => {
     setIsOptionOpen(!isOptionOpen);
   };
+
+  const currentURL = window.location.href;
+  const urlParts = currentURL.split('/');
+
+  const host = urlParts[4];
+  const board = urlParts[5];
+  const boardId = urlParts[6];
+
+  // const host = boardDetailData.host;
+  // const board = boardDetailData.board;
+  // const boardId = boardDetailData.boardId;
+
+  const handleModifyButton = () => {
+    navigate(`/board/modify/${host}/${board}/${boardId}`)
+  }
 
   // 스크롤을 페이지 바닥으로 이동시키는 함수
   const scrollToBottom = () => {
@@ -149,7 +157,7 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
       <AllWrapper>
         <ProfileImgTextWrapper>
           <img
-            src={boardDetailData.profileImage}
+            src={boardDetailData.profileImage ? boardDetailData.profileImage : BasicProfileImage}
             style={{ width: '50px', height: '50px' }}
           />
 
@@ -169,7 +177,7 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
           {isOptionOpen && (
             <OptionWrapper>
               <div onClick={handleButtonClick}>
-                <div style={{ cursor: 'pointer' }}>수정하기</div>
+                <div style={{ cursor: 'pointer' }} onClick={handleModifyButton}>수정하기</div>
                 <hr />
                 <div style={{ cursor: 'pointer', color: 'red' }}>삭제하기</div>
               </div>

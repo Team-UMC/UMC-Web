@@ -58,7 +58,7 @@ export const DeleteProject = async (projectId) => {
 // 역대 프로젝트 조회
 export const getProjectData = async (semester, type, page, size) => {
   try {
-    await axiosInstance.get(`/projects`, {
+    const response = await axiosInstance.get(`/projects`, {
       params: {
         semester: semester,
         type: type,
@@ -66,6 +66,7 @@ export const getProjectData = async (semester, type, page, size) => {
         size: size,
       },
     });
+    return response;
   } catch (error) {
     console.error();
   }
@@ -74,12 +75,13 @@ export const getProjectData = async (semester, type, page, size) => {
 // HOT 프로젝트 조회
 export const getHotProjectData = async (page, size) => {
   try {
-    await axiosInstance.get(`/projects/hot`, {
+    const response = await axiosInstance.get(`/projects/hot`, {
       params: {
         page: page,
         size: size,
       },
     });
+    return response;
   } catch (error) {
     console.error();
   }
@@ -88,13 +90,14 @@ export const getHotProjectData = async (page, size) => {
 // 프로젝트 검색
 export const searchProject = async (keyword, page, size) => {
   try {
-    await axiosInstance.get(`/projects/search/keyword=?`, {
+    const response = await axiosInstance.get(`/projects/search/keyword=?`, {
       params: {
         keyword: keyword,
         page: page,
         size: size,
       },
     });
+    return response;
   } catch (error) {
     console.error();
   }
@@ -103,7 +106,9 @@ export const searchProject = async (keyword, page, size) => {
 // 프로젝트 상세 조회
 export const searchProjectData = async (projectId) => {
   try {
-    await axiosInstance.get(`/projects/${projectId}`);
+    const response = await axiosInstance.get(`/projects/${projectId}`);
+
+    return response;
   } catch (error) {
     console.error();
   }

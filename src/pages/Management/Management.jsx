@@ -5,9 +5,8 @@ import TypeComponent from 'components/Management/ManagementComponent';
 import ManagementType from 'components/Management/ManagementType';
 import AdminTitle from 'components/Management/NoticePin/AdminTitle';
 
-
 const AdminManagementWrapper = styled.div`
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -26,7 +25,6 @@ const TitleLayout = styled(AdminTitle)`
   display: flex;
   padding-bottom: 80px;
 `;
-
 
 const Management = () => {
   const [buttonStates, setButtonStates] = useState({
@@ -49,15 +47,24 @@ const Management = () => {
   };
 
   return (
-    <ManagmentContainer>
-      <AdminManagementWrapper>
-      <TitleLayout />
-      </AdminManagementWrapper>
+    <div
+      className="board-page"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <ManagmentContainer>
+        <AdminManagementWrapper>
+          <TitleLayout />
+        </AdminManagementWrapper>
 
-      <ManagementType buttonStates={buttonStates} handleClick={handleClick} />
+        <ManagementType buttonStates={buttonStates} handleClick={handleClick} />
 
-      <TypeComponent buttonStates={buttonStates} />
-    </ManagmentContainer>
+        <TypeComponent buttonStates={buttonStates} />
+      </ManagmentContainer>
+    </div>
   );
 };
 

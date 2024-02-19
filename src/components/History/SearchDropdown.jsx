@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import styled from "styled-components";
 
 const Semester = [
   { value: '', name: '기수' },
@@ -17,13 +16,6 @@ const Type = [
   { value: 'AOS', name: 'AOS' },
   { value: 'IOS', name: 'iOS' },
   { value: 'WEB', name: 'Web' },
-];
-
-const Size = [
-  { value: '1', name: '1' },
-  { value: '5', name: '5' },
-  { value: '10', name: '10' },
-  { value: '20', name: '20' },
 ];
 
 const Container = styled.div`
@@ -43,7 +35,6 @@ const SelectBox = styled.select`
 const SearchDropdown = ({
   handleSemesterDropdown,
   handleTypeDropdown,
-  handleSizeDropdown,
 }) => {
   return (
     <Container>
@@ -62,14 +53,6 @@ const SearchDropdown = ({
           </option>
         ))}
       </SelectBox>
-
-      <SelectBox onChange={handleSizeDropdown}>
-        {Size.map((option) => (
-          <option key={option.name} value={option.value} defaultValue="10">
-            {option.name}
-          </option>
-        ))}
-      </SelectBox>
     </Container>
   );
 };
@@ -77,7 +60,6 @@ const SearchDropdown = ({
 SearchDropdown.propTypes = {
   handleSemesterDropdown: PropTypes.func.isRequired,
   handleTypeDropdown: PropTypes.func.isRequired,
-  handleSizeDropdown: PropTypes.func.isRequired,
 };
 
 export default SearchDropdown;

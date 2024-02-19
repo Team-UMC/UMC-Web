@@ -1,24 +1,31 @@
-//오늘의 til 제목
-//상세보기 클릭시 수정 삭제 옵션이 나오고 모달 실행
-
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import DetailImg from 'assets/todayilearn/detail.svg'; /* 상세보기버튼 이미지 */
-import ModalImg from 'assets/todayilearn/modalimg.svg'; /*모달 느낌표 버튼 */
-import FigmaImg from 'assets/todayilearn/figma.svg';
+import DetailImg from 'assets/todayilearn/detail.svg';
+import ModalImg from 'assets/todayilearn/modalimg.svg';
+
+import PMImage from 'assets/Profile/Part/PM.svg';
+import DesignImage from 'assets/Profile/Part/Design.svg';
+import SpringImage from 'assets/Profile/Part/Spring.svg';
+import NodeImage from 'assets/Profile/Part/Node.svg';
+import WebImage from 'assets/Profile/Part/Web.svg';
+import iOSImage from 'assets/Profile/Part/iOS.svg';
+import AndroidImage from 'assets/Profile/Part/Android.svg';
+import ETCImage from 'assets/Profile/Part/Study.svg';
 
 const OptionsContainer = styled.div`
-  display: none;
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
   position: absolute;
-  right: 0;
+  right: -12px;
+  top: 40px;
   flex-direction: column;
-
-  // OptionsContainer에 대한 추가 스타일링
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.61);
   padding: 8px;
+
+  z-index: 5;
 `;
 
 const ComponentContainer = styled.div`
@@ -26,20 +33,12 @@ const ComponentContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   border-radius: 12px;
-  border: solid 1px;
   padding: 1vh;
   margin-top: 2vh;
   position: relative;
   width: 70%;
 
-  &:hover ${OptionsContainer} {
-    display: flex;
-  }
-`;
-
-const StyledImage = styled.img`
-  width: 50px;
-  height: 50px;
+  background-color: white;
 `;
 
 const OptionButton = styled.div`
@@ -89,6 +88,7 @@ const ModalDeleteShape = styled.div`
   background-color: #373c6b;
   border-radius: 8px;
   color: #fff;
+  cursor: pointer;
 `;
 
 const ModalCancelShape = styled.div`
@@ -100,6 +100,7 @@ const ModalCancelShape = styled.div`
   background-color: #e1e1ea;
   border-radius: 8px;
   color: #373c6b;
+  cursor: pointer;
 `;
 
 const StyleImg = styled.img`
@@ -120,6 +121,7 @@ const ImgTitleContainer = styled.div`
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const MainTitle = styled.div`
@@ -133,62 +135,168 @@ const SubTitle = styled.div`
   font-weight: 500;
 `;
 
-const TILComponent = () => {
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 16px;
+`;
+
+const ActionButton = styled.div`
+  padding: 8px 16px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+const TILComponent = ({ tilData, modifyTIL, deleteTIL }) => {
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
 
-  const handleEdit = () => {
-    //수정하기 클릭시 페이지 이동
-    navigate(`/todayilearn/detail`);
+  const [openOptions, setOpenOptions] = useState(
+    Array(tilData.length).fill(false),
+  );
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const handleTIL = (tilId) => {
+    navigate(`/todayilearned/${tilId}`);
   };
 
+  const toggleOption = (index) => {
+    const newOpenOptions = [...openOptions];
+    newOpenOptions[index] = !newOpenOptions[index];
+    setOpenOptions(newOpenOptions);
+  };
+
+  // 삭제 모달 열기 함수
   const handleDelete = () => {
-    //삭제 버튼 클릭시 모달창 보여줌, 삭제동작구현필요
-    setShowModal(true);
+    setShowDeleteModal(true);
   };
 
-  const closeModal = () => {
-    //취소버튼 클릭시 모달창 끄기
-    setShowModal(false);
+  // 삭제 모달 닫기 함수
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
+  // 수정 모달 열기 함수
+  const handleEdit = () => {
+    setShowEditModal(true);
+  };
+
+  // 수정 모달 닫기 함수
+  const closeEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const renderPartImage = (part) => {
+    if (part === 'PM') {
+      return <StyleImg src={PMImage} alt="PM" />;
+    } else if (part === 'DESIGN') {
+      return <StyleImg src={DesignImage} alt="DESIGN" />;
+    } else if (part === 'SPRING') {
+      return <StyleImg src={SpringImage} alt="SPRING" />;
+    } else if (part === 'NODE') {
+      return <StyleImg src={NodeImage} alt="NODE" />;
+    } else if (part === 'WEB') {
+      return <StyleImg src={WebImage} alt="WEB" />;
+    } else if (part === 'IOS') {
+      return <StyleImg src={iOSImage} alt="IOS" />;
+    } else if (part === 'ANDROID') {
+      return <StyleImg src={AndroidImage} alt="ANDROID" />;
+    } else if (part === 'ETC') {
+      return <StyleImg src={ETCImage} alt="ETC" />;
+    }
+    return null;
   };
 
   return (
     <>
-      <ComponentContainer>
-        <ImgTitleContainer>
-          <StyleImg src={FigmaImg} alt="선택로고" />
-          <TitleContainer>
-            <MainTitle>프로젝트 웹 디자인하기</MainTitle>
-            <SubTitle>TIL뷰 만들기</SubTitle>
-          </TitleContainer>
-        </ImgTitleContainer>
+      {tilData.map((tilItem, index) => (
+        <>
+          <ComponentContainer>
+            <ImgTitleContainer>
+              {renderPartImage(tilItem.part)}
+              <TitleContainer
+                onClick={() => handleTIL(tilItem.todayILearnedId)}
+              >
+                <MainTitle>{tilItem.title}</MainTitle>
+                <SubTitle>{tilItem.subTitle}</SubTitle>
+              </TitleContainer>
+            </ImgTitleContainer>
 
-        <StyledImage src={DetailImg} alt="상세보기 버튼" />
+            <img
+              src={DetailImg}
+              alt="상세보기 버튼"
+              onClick={() => toggleOption(index)}
+              style={{ cursor: 'pointer' }}
+            />
 
-        <OptionsContainer>
-          <OptionButton onClick={handleEdit}>수정하기</OptionButton>
-          <OptionButton onClick={handleDelete}>삭제하기</OptionButton>
-        </OptionsContainer>
-      </ComponentContainer>
+            <OptionsContainer visible={openOptions[index]}>
+              <OptionButton onClick={() => handleEdit(tilData)}>
+                수정하기
+              </OptionButton>
 
-      {showModal /* 모달 실행 */ && (
-        <ModalContainer>
-          <ModalContent>
-            <img src={ModalImg} alt="느낌표 이미지" />
-            <p>정말로 해당 TIL을 삭제하시겠습니까?</p>
-            <p>삭제 후에는 복구할 수 없습니다.</p>
+              <hr style={{ margin: '5px 0' }} />
 
-            <ModalButtonContainer>
-              <ModalCancelShape onClick={closeModal}>취소</ModalCancelShape>
-              <ModalDeleteShape onClick={() => console.log('삭제 로직 실행')}>
-                삭제
-              </ModalDeleteShape>
-            </ModalButtonContainer>
-          </ModalContent>
-        </ModalContainer>
-      )}
+              <OptionButton
+                onClick={() => handleDelete(tilData.todayILearnedId)}
+              >
+                삭제하기
+              </OptionButton>
+            </OptionsContainer>
+          </ComponentContainer>
+
+          {showEditModal && (
+            <ModalContainer onClick={closeEditModal}>
+              <ModalContent>
+                <ButtonContainer>
+                  <ActionButton onClick={closeEditModal}>취소</ActionButton>
+                  <ActionButton
+                    onClick={modifyTIL(
+                      tilData.id,
+                      tilData.title,
+                      tilData.deadline,
+                    )}
+                  >
+                    수정
+                  </ActionButton>
+                </ButtonContainer>
+              </ModalContent>
+            </ModalContainer>
+          )}
+
+          {showDeleteModal && (
+            <ModalContainer>
+              <ModalContent>
+                <img src={ModalImg} alt="느낌표 이미지" />
+                <p>정말로 해당 TIL을 삭제하시겠습니까?</p>
+                <p>삭제 후에는 복구할 수 없습니다.</p>
+
+                <ModalButtonContainer>
+                  <ModalCancelShape onClick={closeDeleteModal}>
+                    취소
+                  </ModalCancelShape>
+                  <ModalDeleteShape
+                    onClick={() => deleteTIL(tilItem.todayILearnedId)}
+                  >
+                    삭제
+                  </ModalDeleteShape>
+                </ModalButtonContainer>
+              </ModalContent>
+            </ModalContainer>
+          )}
+        </>
+      ))}
     </>
   );
+};
+
+TILComponent.propTypes = {
+  tilData: PropTypes.array.isRequired,
+  modifyTIL: PropTypes.func.isRequired,
+  deleteTIL: PropTypes.func.isRequired,
 };
 
 export default TILComponent;

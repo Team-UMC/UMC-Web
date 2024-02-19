@@ -3,11 +3,11 @@ import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
 import TitleTDL from 'components/ToDoList/TitleTDL';
+import ToDoListCalender from 'components/ToDoList/Calender';
 import TDLComponent from 'components/ToDoList/ComponentTDL';
 import TodoListModal from 'components/ToDoList/TodoListModal';
 
 import AddButtonImg from 'assets/todayilearn/addbutton.svg';
-import ToDoListCalender from 'components/ToDoList/Calender';
 
 const Overlay = styled.div`
   position: fixed;
@@ -22,7 +22,7 @@ const Overlay = styled.div`
 const TDLContainer = styled.div`
   margin: 0vh 50vh;
   width: 70%;
-  height: 100vh;
+  height: 120vh;
 `;
 
 const CalenderContainer = styled.div`
@@ -108,12 +108,13 @@ const TodoList = () => {
   // To do List 완료 함수
   const completeTodoList = async (id) => {
     try {
-      await axiosInstance.patch(`/to-do-lists/update/${id}`, {
-        todoListId: id,
-        isPointAcquired: true,
+      await axiosInstance.post(`/to-do-lists/${id}`, {
+        params: {
+          todoListId: id,
+        }
       });
     } catch (error) {
-      console.error();
+      console.log(error);
     }
   };
 

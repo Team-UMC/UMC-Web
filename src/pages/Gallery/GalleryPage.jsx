@@ -5,6 +5,7 @@ import GalleryTitle from 'components/Gallery/GalleryTitle';
 import GalleryWriteButton from 'components/Gallery/GalleryWriteButton';
 import GalleryList from 'components/Gallery/GalleryList';
 
+
 // 갤러리 전체 페이지 컨테이너
 const GalleryPageContainer = styled.div`
   /* 레이아웃 스타일링 */
@@ -48,6 +49,7 @@ const GalleryListLayout = styled(GalleryList)`
   align-items: center;
 `;
 
+
 // 갤러리 전체 페이지
 const GalleryPage = () => {
   return (
@@ -65,6 +67,7 @@ const GalleryPage = () => {
           <GalleryWriteButtonLayout />
         </GalleryTitleButtonWrapper>
         <GalleryListLayout />
+
       </GalleryPageContainer>
     </div>
   );

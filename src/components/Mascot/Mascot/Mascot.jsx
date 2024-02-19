@@ -10,8 +10,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 0 auto;
-  width: 70%;
-  height: 480px;
+  width: 100%;
+  height: 600px;
   color: white;
 `;
 
@@ -27,7 +27,7 @@ const BoldText = styled.span`
 const EXPWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 70%;
   align-items: center;
 `;
 
@@ -47,11 +47,25 @@ const CurrentEXP = styled.div`
 
 const MascotWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
   position: relative;
-  margin-top: 10vh;
+  margin-top: 8vh;
+  width: 100%;
 `;
+
+const FirstMascotDialog = styled.div`
+  display: flex;
+  align-items: flex-end;
+  height: 20%;
+
+  font-size: 12px;
+`;
+
+const SecondMascotDialog = styled.div`
+  display: flex;
+
+  font-size: 12px;
+`
 
 const MascotImg = styled.img`
   position: absolute;
@@ -64,47 +78,36 @@ const EarthImg = styled.img`
   position: relative;
 `;
 
-const Mascot = ({
-  mascotLevel,
-  mascotPoint,
-  mascotRank,
-  mascotImage,
-  mascotDialog,
-}) => {
-  const ratio = parseInt(mascotPoint % 100);
-
+const Mascot = ({ mascotData }) => {
   return (
     <Container>
       <EXPWrapper>
-        <Text> LV.{mascotLevel}</Text>
+        <Text> LV.{mascotData.level}</Text>
         <EXPBar>
-          <CurrentEXP width={ratio} />
+          <CurrentEXP width={parseInt(mascotData.point % 100)} />
         </EXPBar>
         <Text>
-          우리 학교는 현재 29개의 학교 중 <BoldText>{mascotRank}등</BoldText>
+          우리 학교는 현재 29개의 학교 중{' '}
+          <BoldText>{mascotData.rank}등</BoldText>
           이에요!
         </Text>
       </EXPWrapper>
 
       <MascotWrapper>
+        <FirstMascotDialog> {mascotData.mascotDialog} </FirstMascotDialog>
         <MascotImg
-          src={mascotImage}
+          src={mascotData.mascotImage}
           style={{ width: '148px', height: '148px' }}
         />
         <EarthImg src={EarthImage} />
+        <SecondMascotDialog> {mascotData.mascotDialog} </SecondMascotDialog>
       </MascotWrapper>
-
-      <div> {mascotDialog} </div>
     </Container>
   );
 };
 
 Mascot.propTypes = {
-  mascotLevel: PropTypes.number.isRequired,
-  mascotPoint: PropTypes.number.isRequired,
-  mascotRank: PropTypes.number.isRequired,
-  mascotImage: PropTypes.string.isRequired,
-  mascotDialog: PropTypes.array.isRequired,
+  mascotData: PropTypes.object.isRequired,
 };
 
 export default Mascot;

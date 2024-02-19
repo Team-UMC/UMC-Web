@@ -62,7 +62,7 @@ const Profile = ({ setIsModalOpen }) => {
     } else if (part === "ANDROID") {
       return <img src={AndroidImage} alt="ANDROID" />;
     }
-    return null; // 혹은 다른 기본값을 반환할 수 있습니다.
+    return null;
   };
 
   const renderSemesterImage = (semester) => {
@@ -79,7 +79,7 @@ const Profile = ({ setIsModalOpen }) => {
     } else if (semester === "SIXTH") {
       return <img src={SixthImage} alt="SIXTH" />;
     }
-    return null; // 혹은 다른 기본값을 반환할 수 있습니다.
+    return null;
   };
 
   useEffect(() => {
@@ -153,7 +153,7 @@ const Profile = ({ setIsModalOpen }) => {
 
           <IconWrapper>
             <SettingIconWrapper>
-              <Link to="/management">
+              <Link to="/management/notice">
                 <img src={ManagementIconImage} alt="Management" />
               </Link>
               <IconDescription> 운영진 관리 </IconDescription>

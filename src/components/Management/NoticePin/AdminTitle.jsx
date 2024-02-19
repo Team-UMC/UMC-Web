@@ -27,7 +27,6 @@ const AdminTitleMainStyle = styled.h1`
   /* 폰트 스타일링 */
   color: #7682f6;
   font-size: 34px;
-  font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
 `;
@@ -37,7 +36,6 @@ const AdminTitleSub = styled.p`
   /* 폰트 스타일링 */
   color: #9d9d9d;
   font-size: 18px;
-  font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
 `;

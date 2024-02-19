@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const BoxContainer = styled.div`
   width: 100%;
   background-color: #fff;
-  padding: 2vw;
+  padding: 1.5vw;
   word-wrap: break-word;
 
   border: 3px solid black;
