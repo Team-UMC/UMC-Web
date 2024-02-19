@@ -1,6 +1,28 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import FigmaCheckedImage from 'assets/todayilearn/figmaChecked.svg';
+import FigmaUnCheckedImage from 'assets/todayilearn/figmaUnchecked.svg';
+
+import SpringCheckedImage from 'assets/todayilearn/springChecked.svg';
+import SpringUnCheckedImage from 'assets/todayilearn/springUnchecked.svg';
+
+import NodeCheckedImage from 'assets/todayilearn/nodeChecked.svg';
+import NodeUnCheckedImage from 'assets/todayilearn/nodeUnchecked.svg';
+
+import WebCheckedImage from 'assets/todayilearn/webChecked.svg';
+import WebUnCheckedImage from 'assets/todayilearn/webUnchecked.svg';
+
+import iOSCheckedImage from 'assets/todayilearn/iosChecked.svg';
+import iOSUnCheckedImage from 'assets/todayilearn/iosUnchecked.svg';
+
+import AndroidCheckedImage from 'assets/todayilearn/androidChecked.svg';
+import AndroidUnCheckedImage from 'assets/todayilearn/androidUnchecked.svg';
+
+import ETCCheckedImage from 'assets/todayilearn/studyChecked.svg';
+import ETCUnCheckedImage from 'assets/todayilearn/studyUnchecked.svg';
 
 const OptionContainer = styled.div`
   border-radius: 12px;
@@ -14,6 +36,11 @@ const OptionContainer = styled.div`
 
 const ContainerType = styled.div`
   display: flex;
+`;
+
+const TypeLink = styled(Link)`
+  margin-right: 10px;
+  cursor: pointer;
 `;
 
 const FontStyle = styled.div`
@@ -33,7 +60,7 @@ const OptionTIL = ({ setPart }) => {
     web: false,
     android: false,
     ios: false,
-    study: false,
+    etc: false,
   });
 
   const handleClick = (buttonName) => {
@@ -44,7 +71,7 @@ const OptionTIL = ({ setPart }) => {
       web: buttonName === 'web' ? !prevStates.web : false,
       android: buttonName === 'android' ? !prevStates.android : false,
       ios: buttonName === 'ios' ? !prevStates.ios : false,
-      study: buttonName === 'study' ? !prevStates.study : false,
+      etc: buttonName === 'etc' ? !prevStates.etc : false,
     }));
 
     switch (buttonName) {
@@ -66,8 +93,8 @@ const OptionTIL = ({ setPart }) => {
       case 'ios':
         setPart('IOS');
         break;
-      case 'study':
-        setPart('STUDY');
+      case 'etc':
+        setPart('ETC');
         break;
       default:
         setPart('');
@@ -79,26 +106,62 @@ const OptionTIL = ({ setPart }) => {
     <OptionContainer>
       <ContainerType>
         <FontStyle> 분류 </FontStyle>
-        {Object.keys(buttonStates).map((buttonName) => (
-          <div key={buttonName} onClick={() => handleClick(buttonName)}>
-            {buttonStates[buttonName] ? (
-              <img
-                src={
-                  require(`assets/todayilearn/${buttonName}Checked.svg`).default
-                }
-                alt="Checked Image"
-              />
-            ) : (
-              <img
-                src={
-                  require(`assets/todayilearn/${buttonName}Unchecked.svg`)
-                    .default
-                }
-                alt="Unchecked Image"
-              />
-            )}
-          </div>
-        ))}
+
+        <TypeLink to="#" onClick={() => handleClick('figma')}>
+          {buttonStates.figma ? (
+            <img src={FigmaCheckedImage} alt="Checked Image" />
+          ) : (
+            <img src={FigmaUnCheckedImage} alt="Unchecked Image" />
+          )}
+        </TypeLink>
+
+        <TypeLink to="#" onClick={() => handleClick('spring')}>
+          {buttonStates.spring ? (
+            <img src={SpringCheckedImage} alt="Checked Image" />
+          ) : (
+            <img src={SpringUnCheckedImage} alt="Unchecked Image" />
+          )}
+        </TypeLink>
+
+        <TypeLink to="#" onClick={() => handleClick('node')}>
+          {buttonStates.node ? (
+            <img src={NodeCheckedImage} alt="Checked Image" />
+          ) : (
+            <img src={NodeUnCheckedImage} alt="Unchecked Image" />
+          )}
+        </TypeLink>
+
+        <TypeLink to="#" onClick={() => handleClick('web')}>
+          {buttonStates.web ? (
+            <img src={WebCheckedImage} alt="Checked Image" />
+          ) : (
+            <img src={WebUnCheckedImage} alt="Unchecked Image" />
+          )}
+        </TypeLink>
+
+        <TypeLink to="#" onClick={() => handleClick('ios')}>
+          {buttonStates.ios ? (
+            <img src={iOSCheckedImage} alt="Checked Image" />
+          ) : (
+            <img src={iOSUnCheckedImage} alt="Unchecked Image" />
+          )}
+        </TypeLink>
+
+        <TypeLink to="#" onClick={() => handleClick('android')}>
+          {buttonStates.android ? (
+            <img src={AndroidCheckedImage} alt="Checked Image" />
+          ) : (
+            <img src={AndroidUnCheckedImage} alt="Unchecked Image" />
+          )}
+        </TypeLink>
+
+        <TypeLink to="#" onClick={() => handleClick('etc')}>
+          {buttonStates.etc ? (
+            <img src={ETCCheckedImage} alt="Checked Image" />
+          ) : (
+            <img src={ETCUnCheckedImage} alt="Unchecked Image" />
+          )}
+        </TypeLink>
       </ContainerType>
     </OptionContainer>
   );

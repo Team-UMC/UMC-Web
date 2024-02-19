@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -13,14 +13,14 @@ import DetailLink from './DetailLink';
 const SideBarWrap = styled.div`
   background: url(${HamburgerMenuBackgroundImage}) no-repeat center center;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: flex-start;
+  flex-direction: row;
 
+  padding-top: 20px;
   z-index: 9999;
-  padding: 12px;
   background-color: #ffffff;
-  height: 50%;
+  height: 40%;
   width: 100%;
   top: -60%;
   position: fixed;
@@ -31,32 +31,62 @@ const SideBarWrap = styled.div`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: space-evenly;
+  align-items: flex-start;
+`;
+
 const CenterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 90%;
+  width: 50%;
+  justify-content: space-between;
 `;
 
 const HamburgerMenu = ({ isOpen, setIsOpen }) => {
+  const outside = useRef();
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handlerOutsie);
+    return () => {
+      document.removeEventListener('mousedown', handlerOutsie);
+    };
+  });
+  const handlerOutsie = (e) => {
+    if (!outside.current.contains(e.target)) {
+      toggleSide();
+    }
+  };
+
   const toggleSide = () => {
     setIsOpen(false);
   };
 
   return (
-    <SideBarWrap className={isOpen ? 'open' : ''}>
-        <img
-          src={HamburgerMenuCloseBtnImage}
-          onClick={toggleSide}
-          style={{ cursor: 'pointer' }}
-        />
+    <>
+      <SideBarWrap className={isOpen ? 'open' : ''} ref={outside}>
+        <Container>
+          <img
+            src={HamburgerMenuCloseBtnImage}
+            onClick={toggleSide}
+            style={{ cursor: 'pointer', color: 'white' }}
+          />
 
-        <CenterWrapper>
-          <BlackLeftContainer />
-          <DetailLink toggleSide={toggleSide} />
-        </CenterWrapper>
+          <CenterWrapper>
+            <BlackLeftContainer />
+            <hr />
+            <br />
+            <DetailLink toggleSide={toggleSide} />
+          </CenterWrapper>
 
-        <BlackRightContainer />
-    </SideBarWrap>
+          <BlackRightContainer />
+        </Container>
+      </SideBarWrap>
+    </>
   );
 };
 

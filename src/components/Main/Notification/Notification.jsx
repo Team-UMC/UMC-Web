@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ReactComponent as LeftArrowGray } from 'assets/main/LeftArrowGray.svg';
 import { ReactComponent as RightArrowGray } from 'assets/main/RightArrowGray.svg';
@@ -44,57 +45,7 @@ const Contents = styled.div`
   letter-spacing: -2px;
 `;
 
-const Notification = () => {
-  const data = [
-    {
-      title: 'UMC 6기 모집',
-      contents:
-        'UMC 6기를 모집합니다!!! 개발도 하고 친목도 다질 수 있는 절호의 기회~~~ 많은 지원 부탁드려요~',
-    },
-    {
-      title: '5기 회식 안내',
-      contents:
-        'UMC 5기 회식을 진행합니다!!! 돈은 회장 벡스가 다 낸다고 합니다~~',
-    },
-    {
-      title: '프로젝트 매칭 안내',
-      contents: '이번 주부터 프로젝트 매칭을 시작합니다.',
-    },
-    {
-      title: 'Design 파트장 모집',
-      contents:
-        '인하대 UMC 6기 Design 파트장은 델로로 확정되어 모집 받지 않습니다.',
-    },
-    {
-      title: 'Spring 파트장 모집',
-      contents:
-        '인하대 UMC 6기 Spring 파트장은 벡스로 확정되어 모집 받지 않습니다.',
-    },
-    {
-      title: 'UMC 6기 모집',
-      contents:
-        'UMC 6기를 모집합니다!!! 개발도 하고 친목도 다질 수 있는 절호의 기회~~~ 많은 지원 부탁드려요~',
-    },
-    {
-      title: '5기 회식 안내',
-      contents:
-        'UMC 5기 회식을 진행합니다!!! 돈은 회장 벡스가 다 낸다고 합니다~~',
-    },
-    {
-      title: '프로젝트 매칭 안내',
-      contents: '이번 주부터 프로젝트 매칭을 시작합니다.',
-    },
-    {
-      title: 'Design 파트장 모집',
-      contents:
-        '인하대 UMC 6기 Design 파트장은 델로로 확정되어 모집 받지 않습니다.',
-    },
-    {
-      title: 'Spring 파트장 모집',
-      contents:
-        '인하대 UMC 6기 Spring 파트장은 벡스로 확정되어 모집 받지 않습니다.',
-    },
-  ];
+const Notification = ({ notificationData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
@@ -102,11 +53,13 @@ const Notification = () => {
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 4, data.length - 4));
+    setCurrentIndex((prevIndex) =>
+      Math.min(prevIndex + 4, notificationData.length - 4),
+    );
   };
 
   const isLeftArrowGray = currentIndex === 0;
-  const isRightArrowGray = currentIndex === data.length - 4;
+  const isRightArrowGray = currentIndex === notificationData.length - 4;
 
   return (
     <Container>
@@ -118,12 +71,14 @@ const Notification = () => {
         )}
       </ButtonContainer>
       <DataContainer>
-        {data.slice(currentIndex, currentIndex + 4).map((item, index) => (
-          <Rectangle key={index}>
-            <Title>{item.title}</Title>
-            <Contents>{item.contents}</Contents>
-          </Rectangle>
-        ))}
+        {notificationData
+          .slice(currentIndex, currentIndex + 4)
+          .map((data, index) => (
+            <Rectangle key={index}>
+              <Title>{data.title}</Title>
+              <Contents>{data.content}</Contents>
+            </Rectangle>
+          ))}
       </DataContainer>
       <ButtonContainer>
         {isRightArrowGray ? (
@@ -134,6 +89,18 @@ const Notification = () => {
       </ButtonContainer>
     </Container>
   );
+};
+
+Notification.propTypes = {
+  notificationData: PropTypes.arrayOf(
+    PropTypes.shape({
+      boardId: PropTypes.string,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      hostType: PropTypes.string,
+      nickname: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 export default Notification;

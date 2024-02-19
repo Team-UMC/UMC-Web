@@ -24,18 +24,20 @@ const Textarea = styled.textarea`
   }
 `;
 
-const BoardText = ({ onChange }) => {
+const BoardText = ({ content, onChange }) => {
   return (
     <Textarea
       placeholder="내용을 입력해주세요"
       aria-label="게시글 내용"
       onChange={onChange}
+      defaultValue={content}
     />
   );
 };
 
 BoardText.propTypes = {
   onChange: PropTypes.func.isRequired,
+  content: PropTypes.string.isRequired,
 };
 
 export default BoardText;

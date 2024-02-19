@@ -6,19 +6,19 @@ import DetailImg from 'assets/todayilearn/detail.svg';
 import ModalImg from 'assets/todayilearn/modalimg.svg';
 
 import ListUnchecked from 'assets/todolist/listuncheckedimg.svg';
-//import ListChecked from 'assets/todolist/listcheckedimg.svg';
+import ListChecked from 'assets/todolist/listcheckedimg.svg';
 import Plant from 'assets/todolist/plant.svg';
 import Clock from 'assets/todolist/clock.svg';
 
 const ComponentContainer = styled.div`
-  background-color: ${(props) => (props.complete ? '#E2E5FF' : 'white')};
+  background-color: ${(props) => (props.completed ? '#E2E5FF' : 'white')};
   border-radius: 12px;
 
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 
-  padding: 1vh;
+  padding: 2vh;
   margin-top: 2vh;
 `;
 
@@ -61,20 +61,14 @@ const SubTitle = styled.div`
 const OptionsContainer = styled.div`
   display: ${(props) => (props.visible ? 'flex' : 'none')};
   position: absolute;
-  right: 215px;
-  top: 275px;
+  right: 7px;
+  top: 40px;
   flex-direction: column;
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.61);
   padding: 8px;
 
-  ::before {
-    content: '';
-    width: 100%;
-    height: 1px;
-    background-color: white;
-    margin: 8px 0;
-  }
+  z-index: 5;
 `;
 
 const OptionButton = styled.div`
@@ -83,14 +77,6 @@ const OptionButton = styled.div`
   align-items: center;
   color: white;
   cursor: pointer;
-
-  &:first-child {
-    margin-top: -8px;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 `;
 
 const ModalContainer = styled.div`
@@ -156,13 +142,13 @@ const ButtonContainer = styled.div`
   margin-top: 16px;
 `;
 
-const ActionButton = styled.div`
-  padding: 8px 16px;
-  margin-right: 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+// const ActionButton = styled.div`
+//   padding: 8px 16px;
+//   margin-right: 8px;
+//   border: none;
+//   border-radius: 4px;
+//   cursor: pointer;
+// `;
 
 const TDLComponent = ({
   todoListData,
@@ -171,13 +157,18 @@ const TDLComponent = ({
   deleteTodoList,
 }) => {
   // 삭제/수정하기 관련 모달 열기
-  const [openOption, setOpenOption] = useState(false);
+  const [openOptions, setOpenOptions] = useState(
+    Array(todoListData.length).fill(false),
+  );
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
   // 삭제/수정하기 옵션 모달 열기/닫기 함수
-  const handleOption = () => {
-    setOpenOption(!openOption);
+  const toggleOption = (index) => {
+    const newOpenOptions = [...openOptions];
+    newOpenOptions[index] = !newOpenOptions[index];
+    setOpenOptions(newOpenOptions);
   };
 
   // 삭제 모달 열기 함수
@@ -200,20 +191,28 @@ const TDLComponent = ({
     setShowEditModal(false);
   };
 
+  const DeleteTDL = (todoListId) => {
+    deleteTodoList(todoListId);
+    closeDeleteModal();
+  };
+
+  const formatTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const period = hours >= 12 ? '오후' : '오전';
+    const formattedHours = hours % 12 || 12;
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+    return `${period} ${formattedHours}:${formattedMinutes}`;
+  };
+
   return (
     <>
-      {todoListData.map((todoListItem) => (
-        <>
-          <ComponentContainer
-            key={todoListItem.todoListId}
-            //complete={completeStates[todoListItem.todoListId]}
-          >
+      {todoListData.map((todoListItem, index) => (
+        <div key={todoListItem.todoListId} style={{ position: 'relative' }}>
+          <ComponentContainer completed={todoListItem.completed}>
             <img
-              src={
-                //completeStates[todoListItem.todoListId]
-                //? ListChecked
-                ListUnchecked
-              }
+              src={todoListItem.completed ? ListChecked : ListUnchecked}
               alt="선택로고"
               onClick={() => completeTodoList(todoListItem.todoListId)}
               style={{ cursor: 'pointer' }}
@@ -224,7 +223,8 @@ const TDLComponent = ({
               <TitleContainer>
                 <MainTitle>{todoListItem.title}</MainTitle>
                 <SubTitle>
-                  <img src={Clock} alt="시계이미지" /> {todoListItem.deadline}
+                  <img src={Clock} alt="시계이미지" />
+                  {formatTime(todoListItem.deadline)}
                 </SubTitle>
               </TitleContainer>
             </TodoListWrapper>
@@ -232,27 +232,26 @@ const TDLComponent = ({
             <img
               src={DetailImg}
               alt="상세보기 버튼"
-              onClick={handleOption}
+              onClick={() => toggleOption(index)}
               style={{ cursor: 'pointer' }}
             />
+
+            <OptionsContainer visible={openOptions[index]}>
+              <OptionButton onClick={handleEdit}>수정하기</OptionButton>
+
+              <hr style={{ margin: '5px 0' }} />
+
+              <OptionButton onClick={handleDelete}>삭제하기</OptionButton>
+            </OptionsContainer>
           </ComponentContainer>
 
-          <OptionsContainer visible={openOption}>
-            <OptionButton onClick={() => handleEdit(todoListItem)}>
-              수정하기
-            </OptionButton>
-
-            <OptionButton onClick={() => handleDelete(todoListItem.todoListId)}>
-              삭제하기
-            </OptionButton>
-          </OptionsContainer>
-
           {showEditModal && (
-            <ModalContainer onClick={closeEditModal}>
+            <ModalContainer>
               <ModalContent>
+                <img src={ModalImg} alt="느낌표 이미지" />
+                <p>해당 TIL을 수정하시겠습니까?</p>
                 <ButtonContainer>
-                  <ActionButton onClick={closeEditModal}>취소</ActionButton>
-                  <ActionButton
+                  <ModalDeleteShape
                     onClick={modifyTodoList(
                       todoListData.id,
                       todoListData.title,
@@ -260,7 +259,10 @@ const TDLComponent = ({
                     )}
                   >
                     수정
-                  </ActionButton>
+                  </ModalDeleteShape>
+                  <ModalCancelShape onClick={closeEditModal}>
+                    취소
+                  </ModalCancelShape>
                 </ButtonContainer>
               </ModalContent>
             </ModalContainer>
@@ -278,7 +280,7 @@ const TDLComponent = ({
                     취소
                   </ModalCancelShape>
                   <ModalDeleteShape
-                    onClick={() => deleteTodoList(todoListItem.todoListId)}
+                    onClick={() => DeleteTDL(todoListItem.todoListId)}
                   >
                     삭제
                   </ModalDeleteShape>
@@ -286,7 +288,7 @@ const TDLComponent = ({
               </ModalContent>
             </ModalContainer>
           )}
-        </>
+        </div>
       ))}
     </>
   );

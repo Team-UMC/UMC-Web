@@ -12,7 +12,8 @@ import AddButtonImg from 'assets/todayilearn/addbutton.svg';
 const TILContainer = styled.div`
   margin: 0 50vh;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,12 +73,12 @@ const TodayILearn = () => {
   const formattedDate = formatDate(selectedDate);
 
   const handleAddButton = () => {
-    navigate(`/todayilearn/addtil`);
+    navigate(`/todayilearned/addtil`);
   };
 
   const modifyTIL = async (id, part, title, subTitle, content) => {
     try {
-      const res = await axiosInstance.patch(`/today-i-learned/updata/${id}`, {
+      const res = await axiosInstance.patch(`/today-i-learned/update/${id}`, {
         part: part,
         title: title,
         subTitle: subTitle,

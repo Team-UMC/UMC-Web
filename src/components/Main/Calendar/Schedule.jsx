@@ -7,6 +7,8 @@ import BranchScheduleImage from 'assets/main/Calendar/BranchSchedule.svg';
 import CenterScheduleImage from 'assets/main/Calendar/CenterSchedule.svg';
 
 import Line from 'assets/main/line.svg';
+import ScheduleRectangle from 'assets/main/Calendar/ScheduleRec.svg';
+
 import LeftArrowGray from 'assets/main/LeftArrowGray.svg';
 import RightArrowGray from 'assets/main/RightArrowGray.svg';
 import LeftArrowBlack from 'assets/main/LeftArrowBlack.svg';
@@ -15,7 +17,7 @@ import RightArrowBlack from 'assets/main/RightArrowBlack.svg';
 const ScheduleWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 100%;
 `;
 
@@ -29,7 +31,7 @@ const UpperWrapper = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 const ArrowButton = styled.img`
@@ -57,6 +59,24 @@ const ArrowButton = styled.img`
 //   display: flex;
 //   font-size: 16px;
 // `;
+
+const StyleRectangle = styled.img`
+  display: flex;
+  position: absolute;
+  top: -12px;
+`;
+
+const DatasWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
+
+const DataWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
 
 const ScheduleItem = ({
   campusSchedules,
@@ -108,97 +128,151 @@ const ScheduleItem = ({
     }
   };
 
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+
+    const days = ['일', '월', '화', '수', '목', '금', '토'];
+    const dayOfWeek = days[date.getDay()];
+
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    return `${month}. ${day} (${dayOfWeek})`;
+  };
+
   return (
     <ScheduleWrapper>
-      <UpperWrapper>
-        <img src={CampusScheduleImage} />
-        <div> 학교 별 일정 </div>
-      </UpperWrapper>
-      <ButtonContainer>
-        <ArrowButton
-          src={campusScheduleIndex > 0 ? LeftArrowBlack : LeftArrowGray}
-          onClick={handlePrevCampus}
-        />
-        <img src={Line} />
-        <ArrowButton
-          src={
-            campusScheduleIndex + 2 < campusSchedules.length
-              ? RightArrowBlack
-              : RightArrowGray
-          }
-          onClick={handleNextCampus}
-        />
-      </ButtonContainer>
-      {campusSchedules
-        .slice(campusScheduleIndex, campusScheduleIndex + 2)
-        .map((data, index) => (
-          <div key={index}>
-            <div>
-              {data.startDateTime} ~ {data.endDatetime}
-            </div>
-            <div>{data.title}</div>
-          </div>
-        ))}
+      <div>
+        <UpperWrapper>
+          <img src={CampusScheduleImage} style={{marginRight: "5px"}}/>
+          <div> 학교 별 일정 </div>
+        </UpperWrapper>
+        <ButtonContainer>
+          <ArrowButton
+            src={campusScheduleIndex > 0 ? LeftArrowBlack : LeftArrowGray}
+            onClick={handlePrevCampus}
+          />
+          <img src={Line} />
+          <ArrowButton
+            src={
+              campusScheduleIndex + 2 < campusSchedules.length
+                ? RightArrowBlack
+                : RightArrowGray
+            }
+            onClick={handleNextCampus}
+          />
+        </ButtonContainer>
 
-      <UpperWrapper>
-        <img src={BranchScheduleImage} />
-        <div> 지부 별 일정 </div>
-      </UpperWrapper>
-      <ButtonContainer>
-        <ArrowButton
-          src={branchScheduleIndex > 0 ? LeftArrowBlack : LeftArrowGray}
-          onClick={handlePrevBranch}
-        />
-        <img src={Line} />
-        <ArrowButton
-          src={
-            branchScheduleIndex + 2 < branchSchedules.length
-              ? RightArrowBlack
-              : RightArrowGray
-          }
-          onClick={handleNextBranch}
-        />
-      </ButtonContainer>
-      {branchSchedules
-        .slice(branchScheduleIndex, branchScheduleIndex + 2)
-        .map((data, index) => (
-          <div key={index}>
-            <div>
-              {data.startDateTime} ~ {data.endDatetime}
-            </div>
-            <div>{data.title}</div>
-          </div>
-        ))}
+        <DatasWrapper>
+          {campusSchedules
+            .slice(campusScheduleIndex, campusScheduleIndex + 2)
+            .map((data, index) => (
+              <DataWrapper key={index}>
+                <StyleRectangle src={ScheduleRectangle} />
+                <div style={{ fontSize: '12px' }}>
+                  {formatDate(data.startDateTime) ===
+                  formatDate(data.endDatetime) ? (
+                    formatDate(data.startDateTime)
+                  ) : (
+                    <>
+                      {formatDate(data.startDateTime)} ~{' '}
+                      {formatDate(data.endDatetime)}
+                    </>
+                  )}
+                </div>
+                <div style={{ fontWeight: 'bold' }}>{data.title}</div>
+              </DataWrapper>
+            ))}
+        </DatasWrapper>
+      </div>
 
-      <UpperWrapper>
-        <img src={CenterScheduleImage} />
-        <div> 중앙 일정 </div>
-      </UpperWrapper>
-      <ButtonContainer>
-        <ArrowButton
-          src={centerScheduleIndex > 0 ? LeftArrowBlack : LeftArrowGray}
-          onClick={handlePrevCenter}
-        />
-        <img src={Line} />
-        <ArrowButton
-          src={
-            centerScheduleIndex + 2 < centerSchedules.length
-              ? RightArrowBlack
-              : RightArrowGray
-          }
-          onClick={handleNextCenter}
-        />
-      </ButtonContainer>
-      {centerSchedules
-        .slice(centerScheduleIndex, centerScheduleIndex + 2)
-        .map((data, index) => (
-          <div key={index}>
-            <div>
-              {data.startDateTime} ~ {data.endDatetime}
-            </div>
-            <div>{data.title}</div>
-          </div>
-        ))}
+      <div>
+        <UpperWrapper>
+          <img src={BranchScheduleImage} style={{marginRight: "5px"}}/>
+          <div> 지부 별 일정 </div>
+        </UpperWrapper>
+        <ButtonContainer>
+          <ArrowButton
+            src={branchScheduleIndex > 0 ? LeftArrowBlack : LeftArrowGray}
+            onClick={handlePrevBranch}
+          />
+          <img src={Line} />
+          <ArrowButton
+            src={
+              branchScheduleIndex + 2 < branchSchedules.length
+                ? RightArrowBlack
+                : RightArrowGray
+            }
+            onClick={handleNextBranch}
+          />
+        </ButtonContainer>
+
+        <DatasWrapper>
+          {branchSchedules
+            .slice(branchScheduleIndex, branchScheduleIndex + 2)
+            .map((data, index) => (
+              <DataWrapper key={index}>
+                <StyleRectangle src={ScheduleRectangle} />
+                <div style={{ fontSize: '12px' }}>
+                  {formatDate(data.startDateTime) ===
+                  formatDate(data.endDatetime) ? (
+                    formatDate(data.startDateTime)
+                  ) : (
+                    <>
+                      {formatDate(data.startDateTime)} ~{' '}
+                      {formatDate(data.endDatetime)}
+                    </>
+                  )}
+                </div>
+                <div style={{ fontWeight: 'bold' }}>{data.title}</div>
+              </DataWrapper>
+            ))}
+        </DatasWrapper>
+      </div>
+
+      <div>
+        <UpperWrapper>
+          <img src={CenterScheduleImage} style={{marginRight: "5px"}}/>
+          <div> 중앙 일정 </div>
+        </UpperWrapper>
+        <ButtonContainer>
+          <ArrowButton
+            src={centerScheduleIndex > 0 ? LeftArrowBlack : LeftArrowGray}
+            onClick={handlePrevCenter}
+          />
+          <img src={Line} />
+          <ArrowButton
+            src={
+              centerScheduleIndex + 2 < centerSchedules.length
+                ? RightArrowBlack
+                : RightArrowGray
+            }
+            onClick={handleNextCenter}
+          />
+        </ButtonContainer>
+
+        <DatasWrapper>
+          {centerSchedules
+            .slice(centerScheduleIndex, centerScheduleIndex + 2)
+            .map((data, index) => (
+              <DataWrapper key={index}>
+                <StyleRectangle src={ScheduleRectangle} />
+                <div style={{ fontSize: '12px' }}>
+                  {formatDate(data.startDateTime) ===
+                  formatDate(data.endDatetime) ? (
+                    formatDate(data.startDateTime)
+                  ) : (
+                    <>
+                      {formatDate(data.startDateTime)} ~{' '}
+                      {formatDate(data.endDatetime)}
+                    </>
+                  )}
+                </div>
+                <div style={{ fontWeight: 'bold' }}>{data.title}</div>
+              </DataWrapper>
+            ))}
+        </DatasWrapper>
+      </div>
     </ScheduleWrapper>
   );
 };

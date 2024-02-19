@@ -14,6 +14,64 @@ const TotalWrapper = styled.div`
   height: 100%;
   border-radius: 15px;
   background-color: ${(props) => props.backgroundColor};
+
+  &:hover {
+    box-shadow: 4px 4px 15px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(-0.25rem);
+    transition: transform 0.1s ease-in-out;
+    .description {
+      visibility: visible;
+      opacity: 1;
+      transition:
+        opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out;
+    }
+    .semester-type-wrapper {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .history-item-icon {
+      transform: scale(1.2);
+      opacity: 0.5;
+      transition:
+        transform 0.3s ease-in-out,
+        opacity 0.3s ease-in-out;
+    }
+    transition: background-color 0.3s ease-in-out;
+
+    ${(props) => {
+      switch (props.semester) {
+        case '1':
+          return 'background-color: #747881;';
+        case '2':
+          return 'background-color: #596075;';
+        case '3':
+          return 'background-color: #4B5061;';
+        case '4':
+          return 'background-color: #3E4352;';
+        case '5':
+          return 'background-color: #282B37;';
+        case '6':
+          return 'background-color: #1C1E27;';
+        default:
+          return '';
+      }
+    }}
+  }
+
+  &:not(:hover) {
+    transform: translateY(0);
+    transition:
+      transform 0.1s ease-in-out,
+      background-color 0.3s ease-in-out;
+    .description {
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out;
+    }
+  }
 `;
 
 // 히스토리 아이템 컴포넌트 스타일링
@@ -31,6 +89,7 @@ const SemesterNTypeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const SemesterStyle = styled.div`
@@ -53,14 +112,12 @@ const SemesterStyle = styled.div`
 const TypeIconTextContainer = styled.div`
   /* 세로 중앙 정렬 */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 2px;
   color: white;
   font-size: 10px;
-  font-family: 'Pretendard';
   font-weight: 500;
-  word-wrap: break-word;
   margin-top: 5px;
   margin-right: 10px;
 `;
@@ -70,6 +127,10 @@ const HistoryItemIcon = styled.img`
   /* 히스토리 아이템 아이콘 */
   width: 100px;
   height: 100px;
+  position: relative;
+  transition:
+    transform 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
 `;
 
 const HistoryItemIconLayout = styled.div`
@@ -101,7 +162,7 @@ const HistoryItemInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-left: 1em;
+  padding-left: 1.3em;
 `;
 
 const SeeMoreIcon = styled.img`
@@ -110,36 +171,74 @@ const SeeMoreIcon = styled.img`
   padding-bottom: 0.7em;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: auto;
+`;
+
+const TypeIcon = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
+// 히스토리 아이템 컴포넌트 상세 정보
+const Description = styled.div`
+  display: block;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  text-align: center;
+  z-index: 100;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18.2px;
+  word-wrap: break-word;
+  white-space: normal;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+  ${TotalWrapper}:hover & {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
 // 히스토리 리스트 컴포넌트
 const HistoryList = ({ projectData }) => {
-  const renderTypeIconAndText = (type) => {
-    const stringType = type.toString();
-
-    switch (stringType) {
-      case 'IOS':
-        return (
-          <>
-            <img src={iOSIcon} alt="iOS Icon" />
-            iOS
-          </>
-        );
-      case 'AOS':
-        return (
-          <>
-            <img src={AOSIcon} alt="AOS Icon" />
-            AOS
-          </>
-        );
-      case 'WEB':
-        return (
-          <>
-            <img src={WebIcon} alt="Web Icon" />
-            Web
-          </>
-        );
-      default:
-        return '';
-    }
+  const renderTypeIconAndText = (types) => {
+    return types.map((type) => {
+      switch (type) {
+        case 'IOS':
+          return (
+            <Wrapper key="IOS">
+              <TypeIcon src={iOSIcon} alt="iOS Icon" />
+              iOS
+            </Wrapper>
+          );
+        case 'AOS':
+          return (
+            <Wrapper key="AOS">
+              <TypeIcon src={AOSIcon} alt="AOS Icon" />
+              AOS
+            </Wrapper>
+          );
+        case 'WEB':
+          return (
+            <Wrapper key="WEB">
+              <TypeIcon src={WebIcon} alt="Web Icon" />
+              Web
+            </Wrapper>
+          );
+        default:
+          return null;
+      }
+    });
   };
 
   const getBackgroundColor = (semester) => {
@@ -187,7 +286,7 @@ const HistoryList = ({ projectData }) => {
           <div key={data.projectId}>
             <TotalWrapper backgroundColor={getBackgroundColor(data.semester)}>
               <HistoryItem>
-                <SemesterNTypeWrapper>
+                <SemesterNTypeWrapper className="semester-type-wrapper">
                   <SemesterStyle> {getNumber(data.semester)} </SemesterStyle>
                   <TypeIconTextContainer>
                     {renderTypeIconAndText(data.types)}
@@ -205,10 +304,20 @@ const HistoryList = ({ projectData }) => {
                   </HistoryItemHashtag>
                 </HistoryItemInfoWrapper>
                 <HistoryItemIconLayout>
+                  <Description className="description">
+                    {data.description}
+                  </Description>
+
                   {data.logoImage ? (
-                    <HistoryItemIcon src={data.logoImage} />
+                    <HistoryItemIcon
+                      src={data.logoImage}
+                      className="history-item-icon"
+                    />
                   ) : (
-                    <HistoryItemIcon src={NoIconImage} />
+                    <HistoryItemIcon
+                      src={NoIconImage}
+                      className="history-item-icon"
+                    />
                   )}
                 </HistoryItemIconLayout>
                 <SeeMoreIcon src={SeeMoreImage} />

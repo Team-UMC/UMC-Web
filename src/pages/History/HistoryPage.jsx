@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   margin: 15vh auto;
   width: 70%;
   align-items: center;
+  min-height: 70vh;
 `;
 
 const UpperWrapper = styled.div`
@@ -36,8 +37,27 @@ const HistoryListContainer = styled.div`
   gap: 34px 32px;
 `;
 
+const PageButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  justify-content: center;
+
+  padding-top: 30px;
+`;
+
+const PageButton = styled.div`
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: ${({ selected }) => (selected ? 'white' : 'transparent')};
+  border-radius: 10px;
+  color: ${({ selected }) => (selected ? '#000C76' : 'black')};
+  font-weight: ${({ selected }) => (selected ? 'bold' : '')};
+`;
+
 const HistoryPage = () => {
   const [projectData, setProjectData] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
 
   const [semester, setSemester] = useState('');
   const [type, setType] = useState([]);
@@ -56,8 +76,6 @@ const HistoryPage = () => {
 
     setPage(0);
   };
-
-  // const [hasNextPage, setHasNextPage] = useState(true);
 
   // 검색 기능
   const [keyword, setKeyword] = useState('');
@@ -78,17 +96,13 @@ const HistoryPage = () => {
           },
         });
         setProjectData(res.data.result.projects);
-        // setHasNextPage(res.data.result.hasNext);
+        setTotalPages(res.data.result.totalPages);
       } catch (error) {
         console.error();
       }
     };
     getProjectData(semester, type, page, size);
   }, [semester, type, page, size]);
-
-  // const loadMoreData = () => {
-  //   setPage((prevPage) => prevPage + 1);
-  // };
 
   const searchProjectData = async (keyword, page, size) => {
     try {
@@ -100,10 +114,20 @@ const HistoryPage = () => {
         },
       });
       setProjectData(res.data.result.projects);
+      setTotalPages(res.data.result.totalPages);
     } catch (error) {
       console.error();
     }
   };
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage - 1);
+  };
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div
@@ -128,15 +152,26 @@ const HistoryPage = () => {
         <HistoryListContainer>
           <HistoryList projectData={projectData} />
         </HistoryListContainer>
-        {/* {hasNextPage && (
-          <div onClick={loadMoreData} style={{ cursor: 'pointer' }}>
-            Load More
-          </div>
-        )} */}
+
+        <PageButtonWrapper>
+          {pageNumbers.map((pageNumber) => (
+            <PageButton
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              selected={pageNumber === page + 1}
+              disabled={pageNumber === page}
+            >
+              {pageNumber}
+            </PageButton>
+          ))}
+        </PageButtonWrapper>
+
         <SearchBar
           handleKeyword={handleKeyword}
           searchProjectData={searchProjectData}
           keyword={keyword}
+          page={page}
+          size={size}
         />
       </Wrapper>
     </div>

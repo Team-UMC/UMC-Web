@@ -52,6 +52,8 @@ const BoardDetailPage = () => {
     try {
       const res = await axiosInstance.get(`/boards/${boardId}`);
       setBoardDetailData(res.data.result);
+
+      console.log(res);
     } catch (error) {
       console.error();
     }

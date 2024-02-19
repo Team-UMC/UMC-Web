@@ -35,38 +35,21 @@ const MascotPage = () => {
     getMascot();
   }, []);
 
-  // 남은 먹이(경험치)
-  const [remainPoint, setRemainPoint] = useState(0);
-  
-  useEffect(() => {
-    const getMascot = async () => {
-      try {
-        const res = await axiosInstance.get(`/universities/mascot`);
-
-        setMascotData(res.data.result);
-      } catch (error) {
-        console.error();
-      }
-    };
-    getMascot();
-  }, []);
-
-  // 먹이(경험치) 사용 내역
-  const [usedHistories, setUsedHistories] = useState([]);
+  // 남은 먹이(경험치) & 사용 기록
+  const [pointNHistory, setPointNHistory] = useState({});
 
   useEffect(() => {
-    const getPointData = async () => {
+    const getPointNHistory = async () => {
       try {
         const res = await axiosInstance.get(`/members/points`);
 
-        setRemainPoint(res.data.result.remainPoint);
-        setUsedHistories(res.data.result.usedHistories);
+        setPointNHistory(res.data.result);
       } catch (error) {
         console.error();
       }
     };
-    getPointData();
-  }, []);
+    getPointNHistory();
+  }, [pointNHistory]);
 
   return (
     <div
@@ -80,7 +63,7 @@ const MascotPage = () => {
       <Page>
         <MascotRankLink />
         <Mascot mascotData={mascotData} />
-        <Feed remainPoint={remainPoint} usedHistories={usedHistories} />
+        <Feed pointNHistory={pointNHistory}/>
       </Page>
     </div>
   );

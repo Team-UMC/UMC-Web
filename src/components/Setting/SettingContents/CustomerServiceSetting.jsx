@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+//import { makeStyles } from '@mui/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import SendIcon from 'assets/Setting/paper-plane.svg';
@@ -19,31 +19,31 @@ import {
   SettingDetailWrapper,
 } from 'components/Setting/Setting.style';
 
-// 아코디언 스타일
-const useStyles = makeStyles(() => ({
-  root: {
-    /* 레이아웃 스타일링 */
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: '8px 22px 8px 20px',
-    gap: '0 16px',
+// // 아코디언 스타일
+// const useStyles = makeStyles(() => ({
+//   root: {
+//     /* 레이아웃 스타일링 */
+//     display: 'flex',
+//     flexDirection: 'column',
+//     justifyContent: 'center',
+//     padding: '8px 22px 8px 20px',
+//     gap: '0 16px',
 
-    /* 외형 스타일링 */
-    background: 'white',
-    color: 'black',
-    borderRadius: 12,
+//     /* 외형 스타일링 */
+//     background: 'white',
+//     color: 'black',
+//     borderRadius: 12,
 
-    '&:before': {
-      // Accordion 확장 시 보이는 선의 스타일을 제거합니다.
-      display: 'none',
-    },
-    '&$expanded': {
-      margin: 'auto',
-    },
-    expanded: {},
-  },
-}));
+//     '&:before': {
+//       // Accordion 확장 시 보이는 선의 스타일을 제거합니다.
+//       display: 'none',
+//     },
+//     '&$expanded': {
+//       margin: 'auto',
+//     },
+//     expanded: {},
+//   },
+// }));
 
 // 자주 묻는 질문 이미지 레이아웃
 const SettingCustomerServiceQuestionImg = styled.img`
@@ -69,7 +69,7 @@ const AccordionSummaryStyle = styled(AccordionSummary)`
 // 고객 센터 설정 컴포넌트
 const CustomerServiceSetting = () => {
   // 아코디언 스타일 적용
-  const AccordionClasses = useStyles();
+  //const AccordionClasses = useStyles();
   // 아코디언 확장 여부 상태
   const [expanded, setExpended] = useState(false);
 
@@ -113,7 +113,7 @@ const CustomerServiceSetting = () => {
           <Accordion
             key={faq.id}
             expanded={expanded === faq.id}
-            classes={AccordionClasses}
+            //classes={AccordionClasses}
             onChange={handleExpand(faq.id)}
           >
             <AccordionSummaryStyle

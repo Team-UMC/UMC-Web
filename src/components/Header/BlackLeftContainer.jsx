@@ -10,7 +10,7 @@ const NavWrapper = styled.nav`
   justify-content: space-between;
 
   // 전체 화면 width(100%)의 60% 사용
-  width: 50%;
+  width: 100%;
 
   position: relative;
 `;
@@ -52,9 +52,9 @@ const BlackLeftContainer = () => {
           <TextWrapper>히스토리</TextWrapper>
         </StyledLink>
 
-        <StyledLink to="/gallery">
+        {/* <StyledLink to="/gallery">
           <TextWrapper>사진첩</TextWrapper>
-        </StyledLink>
+        </StyledLink> */}
       </>
     </NavWrapper>
   );

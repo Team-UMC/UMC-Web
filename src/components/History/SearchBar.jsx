@@ -81,7 +81,6 @@ const SearchButton = styled.div`
   }
 `;
 
-// SearchBar 컴포넌트
 const SearchBar = ({
   keyword,
   page,
@@ -91,8 +90,12 @@ const SearchBar = ({
 }) => {
   const handleSearchClick = () => {
     searchProjectData(keyword, page, size);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
-  
+
   return (
     <SearchWrapper>
       <SearchInput
@@ -106,13 +109,12 @@ const SearchBar = ({
   );
 };
 
-// 검색창 컴포넌트 props 검사
 SearchBar.propTypes = {
   searchProjectData: PropTypes.func.isRequired,
   handleKeyword: PropTypes.func.isRequired,
   keyword: PropTypes.string.isRequired,
-  page: PropTypes.number,
-  size: PropTypes.number,
+  page: PropTypes.number.isRequired,
+  size: PropTypes.number.isRequired,
 };
 
 export default SearchBar;

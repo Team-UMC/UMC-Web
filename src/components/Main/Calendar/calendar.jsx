@@ -28,9 +28,9 @@ const MyCalendar = ({ calendarData }) => {
       (s) => dateString >= s.startDateTime && dateString <= s.endDateTime,
     );
 
-    // 일정을 학교(CAMPUS) - 지부(CENTER) - 연합(UNION) 순으로 정렬
+    // 일정을 학교(CAMPUS) - 지부(BRANCH) - 연합(CENTER) 순으로 정렬
     const sortedSchedules = schedules.sort((a, b) => {
-      const order = ['CAMPUS', 'CENTER', 'UNION'];
+      const order = ['CAMPUS', 'BRANCH', 'CENTER'];
       return order.indexOf(a.hostType) - order.indexOf(b.hostType);
     });
 
@@ -76,10 +76,10 @@ const MyCalendar = ({ calendarData }) => {
           case 'CAMPUS':
             color = '#FF8695';
             break;
-          case 'CENTER':
+          case 'BRANCH':
             color = '#A9CD85';
             break;
-          case 'UNION':
+          case 'CENTER':
             color = '#009DA7';
             break;
           default:
@@ -133,10 +133,10 @@ const MyCalendar = ({ calendarData }) => {
                 case 'CAMPUS':
                   color = '#FF8695';
                   break;
-                case 'CENTER':
+                case 'BRANCH':
                   color = '#A9CD85';
                   break;
-                case 'UNION':
+                case 'CENTER':
                   color = '#009DA7';
                   break;
                 default:
@@ -152,13 +152,13 @@ const MyCalendar = ({ calendarData }) => {
                   >
                     {schedule.hostType} 일정
                   </h3>
-                  <h3 className="schedule-title">{schedule.title}</h3>
+                  <h4 className="schedule-title">{schedule.title}</h4>
                   <p className="schedule-date" style={{ color: 'black' }}>
                     {moment(schedule.startDateTime).format('YYYY.MM.DD')} ~{' '}
                     {moment(schedule.endDateTime).format('YYYY.MM.DD')}
                   </p>
                   {index !== selectedSchedules.length - 1 && (
-                    <hr style={{ border: '1px solid #8784ff' }} />
+                    <hr style={{ border: '1px solid #8784ff', margin: "5px 0"}} />
                   )}
                 </div>
               );
@@ -179,8 +179,8 @@ MyCalendar.propTypes = {
       title: PropTypes.string.isRequired,
       startDateTime: PropTypes.string.isRequired,
       endDateTime: PropTypes.string.isRequired,
-      hostType: PropTypes.oneOf(['CAMPUS', 'CENTER', 'UNION']).isRequired,
-    })
+      hostType: PropTypes.oneOf(['CAMPUS', 'BRANCH', 'CENTER']).isRequired,
+    }),
   ).isRequired,
 };
 

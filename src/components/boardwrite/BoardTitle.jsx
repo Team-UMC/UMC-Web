@@ -22,19 +22,21 @@ const TitleInput = styled.input`
   }
 `;
 
-const BoardTitle = ({ onChange }) => {
+const BoardTitle = ({ title, onChange }) => {
   return (
     <TitleInput
       className="title"
       placeholder="제목을 입력해주세요"
       aria-label="게시글 제목"
       onChange={onChange}
+      defaultValue={title}
     />
   );
 };
 
 BoardTitle.propTypes = {
   onChange: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default BoardTitle;

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-//import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
 import BoardFile from 'components/BoardWrite/BoardFile';
-import NotionLink from '../../components/TodayILearn/Notion';
+//import NotionLink from 'components/TodayILearn/Notion';
 
-import OptionTIL from '../../components/TodayILearn/OptionTIL';
-import TILCalender from '../../components/TodayILearn/Calender';
+import OptionTIL from 'components/TodayILearn/OptionTIL';
+import TILCalender from 'components/TodayILearn/Calender';
 
 const NewTILContainer = styled.div`
   display: flex;
@@ -65,6 +64,11 @@ const Textarea = styled.textarea`
     color: #bcbcbc;
   }
 `;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
 
 const Button = styled.div`
   font-weight: bold;
@@ -136,7 +140,7 @@ const NewTIL = () => {
       );
       console.log(res);
 
-      navigate(`/todayilearn`);
+      navigate(`/todayilearned`);
     } catch (error) {
       console.error();
     }
@@ -148,7 +152,7 @@ const NewTIL = () => {
       <TILCalender />
       <OptionTIL setPart={setPart} />
       <BoardFile file={file} setFile={setFile} />
-      <NotionLink />
+      {/* <NotionLink /> */}
 
       <TitleInput
         placeholder="제목을 입력해주세요"
@@ -168,10 +172,10 @@ const NewTIL = () => {
         onChange={(e) => handleContentInput(e)}
       />
 
-      <div>
+      <ButtonWrapper>
         <Button onClick={addTIL}>작성</Button>
         <Button onClick={handleCancel}>취소</Button>
-      </div>
+      </ButtonWrapper>
     </NewTILContainer>
   );
 };

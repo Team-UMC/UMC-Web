@@ -12,6 +12,7 @@ import LikeBtnImgLiked from 'assets/LikeBtnImgLiked.svg';
 import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
 
 import OptionButtonImage from 'assets/OptionButton.svg';
+import { useNavigate } from 'react-router-dom';
 
 // TextDetail을 스타일링하기 위한 박스
 const BoxContainer = styled.div`
@@ -116,12 +117,28 @@ const OptionWrapper = styled.div`
 `;
 
 const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
+  const navigate = useNavigate();
   // 우측 삭제/수정 옵션 모달 상태
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
   const handleButtonClick = () => {
     setIsOptionOpen(!isOptionOpen);
   };
+
+  const currentURL = window.location.href;
+  const urlParts = currentURL.split('/');
+
+  const host = urlParts[4];
+  const board = urlParts[5];
+  const boardId = urlParts[6];
+
+  // const host = boardDetailData.host;
+  // const board = boardDetailData.board;
+  // const boardId = boardDetailData.boardId;
+
+  const handleModifyButton = () => {
+    navigate(`/board/modify/${host}/${board}/${boardId}`)
+  }
 
   // 스크롤을 페이지 바닥으로 이동시키는 함수
   const scrollToBottom = () => {
@@ -160,7 +177,7 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
           {isOptionOpen && (
             <OptionWrapper>
               <div onClick={handleButtonClick}>
-                <div style={{ cursor: 'pointer' }}>수정하기</div>
+                <div style={{ cursor: 'pointer' }} onClick={handleModifyButton}>수정하기</div>
                 <hr />
                 <div style={{ cursor: 'pointer', color: 'red' }}>삭제하기</div>
               </div>

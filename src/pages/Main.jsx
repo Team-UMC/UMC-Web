@@ -2,25 +2,32 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
-import MyCalendar from 'components/Main/Calendar/calendar';
 import MainDescription from 'components/Main/MainDescription';
-import Notification from 'components/Main/Notification/Notification';
+
+import MyCalendar from 'components/Main/Calendar/calendar';
 import ScheduleItem from 'components/Main/Calendar/Schedule';
-import TodoList from 'components/Main/TodoList/TodoList';
+
+import Notification from 'components/Main/Notification/Notification';
+
+import InProgressTodoList from 'components/Main/TodoList/InProgressTodoList';
+import CompleteTodoList from 'components/Main/TodoList/CompleteTodoList';
+
 import TodayILearned from 'components/Main/TodayILearned/TodayILearned';
 import Github from 'components/Main/Github/Github';
-import Mascot from 'components/Mascot/Mascot/Mascot';
+
+import Mascot from 'components/Main/Mascot/Mascot';
 import SchoolRanking from 'components/Main/Rank/SchoolRanking';
 import SchoolRanker from 'components/Main/Rank/SchoolRanker';
 
 import InhaLogoImage from 'assets/SchoolLogo/인하대학교.svg';
+import MascotBackgroundImage from 'assets/main/MainMascotBackground.svg';
 
 const Background = styled.div`
   background-color: #f2f5fc;
 `;
 
 const MainWrapper = styled.div`
-  margin-top: 30vh;
+  margin-top: 27vh;
 `;
 
 const Wrapper = styled.div`
@@ -34,7 +41,7 @@ const Wrapper = styled.div`
 const LeftWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 40%;
+  width: 45%;
 `;
 
 const ScheduleContainer = styled.div`
@@ -45,14 +52,21 @@ const ScheduleContainer = styled.div`
   width: 50%;
 `;
 
+const IDinput = styled.input`
+  border: 1px solid white;
+  padding: 3px;
+
+  margin-bottom: 15px;
+`;
+
 const RankingWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 50%;
+  width: 55%;
 `;
 
 const SchoolWrapper = styled.div`
-  width: 200px;
+  width: 145px;
 
   display: flex;
   flex-direction: column;
@@ -61,13 +75,15 @@ const SchoolWrapper = styled.div`
   background-color: white;
   border: 1px solid white;
   border-radius: 15px;
+
+  padding: 10px;
 `;
 
 const SchoolRank = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 150%;
+  width: 100%;
 `;
 
 // const TodoListWrapper = styled.div`
@@ -80,27 +96,50 @@ const SchoolRank = styled.div`
 const TILGithubWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 45%;
+  width: 40%;
+`;
+
+const GithubWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 55%;
 `;
 
 const Main = () => {
   // 오늘 날짜
-  const today = new Date().toISOString().slice(0, 10);
+  const time = new Date();
+  const year = time.getFullYear();
+  const month = ('0' + (time.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더하고 두 자리로 맞추기
+  const day = ('0' + time.getDate()).slice(-2); // 일을 두 자리로 맞추기
+  const formattedDate = `${year}-${month}-${day}`;
 
   // 캘린더 관련
   const [calendarData, setCalendarData] = useState([{}]);
 
   useEffect(() => {
-    const getCalendarData = async () => {
+    const getCalendarData = async (time) => {
       try {
-        const res = await axiosInstance.post(`/schedules/calendar`, {});
+        const res = await axiosInstance.get(
+          `/schedules/calendar/web?date=${time}`,
+          {
+            date: time,
+          },
+        );
 
+        console.log(res);
         setCalendarData(res.data.result.schedules);
       } catch (error) {
         console.error();
       }
     };
-    getCalendarData();
+
+    const currentTime = new Date();
+    const year = currentTime.getFullYear();
+    const month = ('0' + (currentTime.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더하고 두 자리로 맞추기
+    const day = ('0' + currentTime.getDate()).slice(-2); // 일을 두 자리로 맞추기
+    const formattedDate = `${year}-${month}-${day}`;
+
+    getCalendarData(formattedDate);
   }, []);
 
   // 학교/지부/연합 일정 관련
@@ -109,9 +148,9 @@ const Main = () => {
   const [centerSchedules, setCenterSchedules] = useState([{}]);
 
   useEffect(() => {
-    const getSchedules = async () => {
+    const getSchedules = async (time) => {
       try {
-        const res = await axiosInstance.get(`/schedules`);
+        const res = await axiosInstance.get(`/schedules?date=${time}`);
 
         setCampusSchedules(res.data.result.campusSchedules);
         setBranchSchedules(res.data.result.branchSchedules);
@@ -120,7 +159,30 @@ const Main = () => {
         console.error();
       }
     };
-    getSchedules();
+
+    const currentTime = new Date();
+    const year = currentTime.getFullYear();
+    const month = ('0' + (currentTime.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더하고 두 자리로 맞추기
+    const day = ('0' + currentTime.getDate()).slice(-2); // 일을 두 자리로 맞추기
+    const formattedDate = `${year}-${month}-${day}`;
+
+    getSchedules(formattedDate);
+  }, []);
+
+  // 핀 설정 공지사항 관련
+  const [notificationData, setNotificationData] = useState([{}]);
+
+  useEffect(() => {
+    const getNotificationData = async () => {
+      try {
+        const res = await axiosInstance.get(`/boards/pinned`);
+
+        setNotificationData(res.data.result.pinnedNotices);
+      } catch (error) {
+        console.error();
+      }
+    };
+    getNotificationData();
   }, []);
 
   // TodoList 관련
@@ -129,15 +191,19 @@ const Main = () => {
   useEffect(() => {
     const getTodoList = async () => {
       try {
-        const res = await axiosInstance.get(`/to-do-lists?date=${today}`);
+        const res = await axiosInstance.get(
+          `/to-do-lists?date=${formattedDate}`,
+        );
 
         setTodoListsData(res.data.result.todoLists);
+
+        console.log(res.data.result.todoLists);
       } catch (error) {
         console.error();
       }
     };
     getTodoList();
-  });
+  }, []);
 
   // Today-I-Learned 관련
   const [tilData, setTilData] = useState([{}]);
@@ -145,31 +211,40 @@ const Main = () => {
   useEffect(() => {
     const getTil = async () => {
       try {
-        const res = await axiosInstance.get(`/today-i-learned`);
-
+        const res = await axiosInstance.get(`/today-i-learned/web`, {
+          params: {
+            date: formattedDate,
+          },
+        });
         setTilData(res.data.result.todayILearnedInfos);
       } catch (error) {
         console.error();
       }
     };
-    getTil;
+    getTil();
   }, []);
 
   // GitHub 관련
-  const [githubImage, setGithubImage] = useState('');
 
-  useEffect(() => {
-    const getGithubImage = async () => {
-      try {
-        const res = await axiosInstance.get(`/members/github`);
+  //const [githubImage, setGithubImage] = useState('');
+  const [githubID, setGithubID] = useState('');
 
-        setGithubImage(res.data.result.githubImage);
-      } catch (error) {
-        console.error();
-      }
-    };
-    getGithubImage();
-  }, []);
+  const handleGithubInput = (e) => {
+    setGithubID(e.target.value);
+  };
+
+  // useEffect(() => {
+  //   const getGithubImage = async () => {
+  //     try {
+  //       const res = await axiosInstance.get(`/members/github`);
+
+  //       setGithubImage(res.data.result.githubImage);
+  //     } catch (error) {
+  //       console.error();
+  //     }
+  //   };
+  //   getGithubImage();
+  // }, []);
 
   // 마스코트 관련
   const [mascotData, setMascotData] = useState({});
@@ -288,7 +363,7 @@ const Main = () => {
             subtitle="새롭게 업데이트된 공지사항을 확인하세요!"
           />
           <Wrapper>
-            <Notification />
+            <Notification notificationData={notificationData} />
           </Wrapper>
 
           <MainDescription
@@ -296,18 +371,26 @@ const Main = () => {
             subtitle="오늘 내가 할 일과 배운 것들을 기록해보세요!"
           />
           <Wrapper style={{ marginBottom: '100px' }}>
-            <TodoList todoListsData={todoListsData} />
+            <InProgressTodoList todoListsData={todoListsData} myContribution={myContribution}/>
+
+            <CompleteTodoList todoListsData={todoListsData} myContribution={myContribution}/>
           </Wrapper>
 
           <Wrapper>
             <TILGithubWrapper>
-              <div style={{ marginBottom: '15px' }}> Today I-Learned </div>
-              <TodayILearned tilData={tilData}/>
+              <TodayILearned tilData={tilData} />
             </TILGithubWrapper>
-            <TILGithubWrapper>
+
+            <GithubWrapper>
               <div style={{ marginBottom: '15px' }}> Git-hub </div>
-              <Github githubImage={githubImage} />
-            </TILGithubWrapper>
+              <IDinput
+                type="text"
+                value={githubID}
+                onChange={handleGithubInput}
+                placeholder="GitHub 아이디를 입력해주세요"
+              />
+              <Github githubID={githubID} />
+            </GithubWrapper>
           </Wrapper>
 
           <MainDescription
@@ -317,39 +400,77 @@ const Main = () => {
           <Wrapper style={{ marginBottom: '100px' }}>
             <div
               style={{
-                backgroundColor: '#000414',
+                backgroundImage: `url(${MascotBackgroundImage})`,
                 width: '45%',
+                height: '553px',
               }}
             >
               <Mascot mascotData={mascotData} />
             </div>
             <RankingWrapper>
               <SchoolRank>
-                <SchoolWrapper>
+                <SchoolWrapper
+                  style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)' }}
+                >
                   <img
                     src={InhaLogoImage}
-                    style={{ width: '100px', height: '100px' }}
+                    style={{ width: '90px', height: '90px' }}
                   />
-                  <span>{myUniversityData.universityName}는</span>
-                  <span>{myUniversityData.universityPoint} 포인트로</span>
-                  <span>
-                    현재 {myUniversityData.universityRank}등이에요! 👏🏻
-                  </span>
+                  <div>
+                    <span style={{ fontWeight: 'bold' }}>
+                      {myUniversityData.universityName}
+                    </span>
+                    <span>는</span>
+                  </div>
+
+                  <div>
+                    <span style={{ fontWeight: 'bold' }}>
+                      {myUniversityData.universityPoint}
+                    </span>
+                    <span> 포인트로</span>
+                  </div>
+
+                  <div>
+                    <span>현재 </span>
+                    <span style={{ fontWeight: 'bold' }}>
+                      {myUniversityData.universityRank}
+                    </span>
+                    <span>등이에요! 👏🏻</span>
+                  </div>
                 </SchoolWrapper>
 
                 <SchoolRanking universityRank={universityRank} />
               </SchoolRank>
               <SchoolRank>
-                <SchoolWrapper>
+                <SchoolWrapper
+                  style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)' }}
+                >
                   <img
                     src={myContribution.profileImage}
-                    style={{ width: '100px', height: '100px' }}
+                    style={{ width: '90px', height: '90px' }}
                   />
-                  <span>{myContribution.nickname}님은</span>
-                  <span>{myContribution.contributionPoint} 포인트로</span>
-                  <span>
-                    현재 {myContribution.contributionRank}등이에요! 👏🏻
-                  </span>
+
+                  <div>
+                    <span style={{ fontWeight: 'bold' }}>
+                      {myContribution.nickname}
+                    </span>
+                    <span>님은</span>
+                  </div>
+
+                  <div>
+                    <span style={{ fontWeight: 'bold' }}>
+                      {myContribution.contributionPoint}
+                    </span>
+                    <span> 포인트로</span>
+                  </div>
+
+                  <div>
+                    <span>현재 </span>
+                    <span style={{ fontWeight: 'bold' }}>
+                      {myContribution.contributionRank}
+                    </span>
+                    <span>등이에요! 👏🏻</span>
+                  </div>
                 </SchoolWrapper>
                 <SchoolRanker inUniversityRankData={inUniversityRankData} />
               </SchoolRank>
