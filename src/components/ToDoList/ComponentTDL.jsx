@@ -89,6 +89,8 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 999;
 `;
 
 const ModalContent = styled.div`
@@ -156,13 +158,15 @@ const TDLComponent = ({
   modifyTodoList,
   deleteTodoList,
 }) => {
-  // 삭제/수정하기 관련 모달 열기
   const [openOptions, setOpenOptions] = useState(
     Array(todoListData.length).fill(false),
   );
-
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModals, setShowDeleteModals] = useState(
+    Array(todoListData.length).fill(false),
+  );
+  const [showEditModals, setShowEditModals] = useState(
+    Array(todoListData.length).fill(false),
+  );
 
   // 삭제/수정하기 옵션 모달 열기/닫기 함수
   const toggleOption = (index) => {
@@ -171,29 +175,36 @@ const TDLComponent = ({
     setOpenOptions(newOpenOptions);
   };
 
-  // 삭제 모달 열기 함수
-  const handleDelete = () => {
-    setShowDeleteModal(true);
+  const toggleDeleteModal = (index) => {
+    const newShowDeleteModals = [...showDeleteModals];
+    newShowDeleteModals[index] = !newShowDeleteModals[index];
+    setShowDeleteModals(newShowDeleteModals);
   };
 
-  // 삭제 모달 닫기 함수
-  const closeDeleteModal = () => {
-    setShowDeleteModal(false);
+  const toggleEditModal = (index) => {
+    const newShowEditModals = [...showEditModals];
+    newShowEditModals[index] = !newShowEditModals[index];
+    setShowEditModals(newShowEditModals);
   };
 
-  // 수정 모달 열기 함수
-  const handleEdit = () => {
-    setShowEditModal(true);
+  const handleDelete = (index) => {
+    toggleDeleteModal(index);
   };
 
-  // 수정 모달 닫기 함수
-  const closeEditModal = () => {
-    setShowEditModal(false);
+  const handleCloseDeleteModal = (index) => {
+    toggleDeleteModal(index);
+  };
+
+  const handleEdit = (index) => {
+    toggleEditModal(index);
+  };
+
+  const handleCloseEditModal = (index) => {
+    toggleEditModal(index);
   };
 
   const DeleteTDL = (todoListId) => {
     deleteTodoList(todoListId);
-    closeDeleteModal();
   };
 
   const formatTime = (dateTimeString) => {
@@ -237,30 +248,37 @@ const TDLComponent = ({
             />
 
             <OptionsContainer visible={openOptions[index]}>
-              <OptionButton onClick={handleEdit}>수정하기</OptionButton>
+              <OptionButton onClick={() => handleEdit(index)}>
+                수정하기
+              </OptionButton>
 
               <hr style={{ margin: '5px 0' }} />
 
-              <OptionButton onClick={handleDelete}>삭제하기</OptionButton>
+              <OptionButton onClick={() => handleDelete(index)}>
+                삭제하기
+              </OptionButton>
             </OptionsContainer>
           </ComponentContainer>
 
-          {showEditModal && (
+          {showEditModals[index] && (
             <ModalContainer>
               <ModalContent>
                 <img src={ModalImg} alt="느낌표 이미지" />
                 <p>해당 TIL을 수정하시겠습니까?</p>
                 <ButtonContainer>
                   <ModalDeleteShape
-                    onClick={modifyTodoList(
-                      todoListData.id,
-                      todoListData.title,
-                      todoListData.deadline,
-                    )}
+                    onClick={() => {
+                      modifyTodoList(
+                        todoListData.id,
+                        todoListData.title,
+                        todoListData.deadline,
+                      );
+                      handleCloseEditModal(index);
+                    }}
                   >
                     수정
                   </ModalDeleteShape>
-                  <ModalCancelShape onClick={closeEditModal}>
+                  <ModalCancelShape onClick={() => handleCloseEditModal(index)}>
                     취소
                   </ModalCancelShape>
                 </ButtonContainer>
@@ -268,7 +286,7 @@ const TDLComponent = ({
             </ModalContainer>
           )}
 
-          {showDeleteModal && (
+          {showDeleteModals[index] && (
             <ModalContainer>
               <ModalContent>
                 <img src={ModalImg} alt="느낌표 이미지" />
@@ -276,11 +294,16 @@ const TDLComponent = ({
                 <p>삭제 후에는 복구할 수 없습니다.</p>
 
                 <ModalButtonContainer>
-                  <ModalCancelShape onClick={closeDeleteModal}>
+                  <ModalCancelShape
+                    onClick={() => handleCloseDeleteModal(index)}
+                  >
                     취소
                   </ModalCancelShape>
                   <ModalDeleteShape
-                    onClick={() => DeleteTDL(todoListItem.todoListId)}
+                    onClick={() => {
+                      DeleteTDL(todoListItem.todoListId);
+                      handleCloseDeleteModal(index);
+                    }}
                   >
                     삭제
                   </ModalDeleteShape>
