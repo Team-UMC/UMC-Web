@@ -106,6 +106,11 @@ const RankingPage = () => {
         setFirstSchoolRank(res.data.result.joinUniversityRanks[0]);
         setSecondSchoolRank(res.data.result.joinUniversityRanks[1]);
         setThirdSchoolRank(res.data.result.joinUniversityRanks[2]);
+        console.log(res.data.result.joinUniversityRanks);
+
+        console.log(res.data.result.joinUniversityRanks[0]);
+        console.log(res.data.result.joinUniversityRanks[1]);
+        console.log(res.data.result.joinUniversityRanks[2]);
       } catch (error) {
         console.error();
       }

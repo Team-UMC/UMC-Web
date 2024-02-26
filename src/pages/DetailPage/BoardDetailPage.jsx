@@ -63,6 +63,8 @@ const BoardDetailPage = () => {
     try {
       const res = await axiosInstance.get(`/boards/comments/${boardId}?page=0`);
       setCommentData(res.data.result.boardCommentPageElements);
+
+      console.log(res);
     } catch (error) {
       console.error();
     }

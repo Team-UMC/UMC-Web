@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Profile from 'components/Profile/Profile';
 import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
 import { useNavigate } from 'react-router-dom';
+import LogoutButtonImage from 'assets/Logout.svg';
 
 const Overlay = styled.div`
   position: fixed;
@@ -28,6 +29,7 @@ const Wrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+  align-items: center;
   cursor: pointer;
 `;
 
@@ -43,15 +45,10 @@ const ProfileNickname = styled.div`
   color: black;
 `;
 
-const LogoutButton = styled.div`
+const LogoutButton = styled.img`
   display: flex;
   align-items: center;
   cursor: pointer;
-
-  color: black;
-
-  border: 1px solid black;
-  border-radius: 5px;
 `;
 
 const BlackRightContainer = () => {
@@ -77,9 +74,18 @@ const BlackRightContainer = () => {
     getProfile();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('server Token');
-    navigate('/');
+  const logoutMember = async () => {
+    try {
+      const res = await axiosInstance.delete(`/members/logout`);
+
+      console.log(res);
+
+      localStorage.removeItem('server Token');
+
+      navigate(`/`);
+    } catch (error) {
+      console.error();
+    }
   };
 
   return (
@@ -90,9 +96,14 @@ const BlackRightContainer = () => {
         ) : (
           <ProfileImage src={BasicProfileImage} />
         )}
-        <ProfileNickname> {`${nickname} 반가워요!`} </ProfileNickname>
+        <ProfileNickname>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>{nickname}</span>
+            <span> 반가워요!</span>
+          </div>{' '}
+        </ProfileNickname>
 
-        <LogoutButton onClick={handleLogout}> 로그아웃 </LogoutButton>
+        <LogoutButton src={LogoutButtonImage} onClick={logoutMember} />
       </Wrapper>
       {isModalOpen && (
         <>

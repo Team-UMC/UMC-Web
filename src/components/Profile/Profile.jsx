@@ -22,20 +22,20 @@ import ExitButtonImage from 'assets/Profile/ExitButton.svg';
 import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
 import ProfileSettingImageImage from 'assets/Profile/ProfileSetting.svg';
 
-import PMImage from "assets/Profile/Part/PM.svg";
-import DesignImage from "assets/Profile/Part/Design.svg";
-import SpringImage from "assets/Profile/Part/Spring.svg";
-import NodeImage from "assets/Profile/Part/Node.svg";
-import WebImage from "assets/Profile/Part/Web.svg";
-import iOSImage from "assets/Profile/Part/iOS.svg";
-import AndroidImage from "assets/Profile/Part/Android.svg";
+import PMImage from 'assets/Profile/Part/PM.svg';
+import DesignImage from 'assets/Profile/Part/Design.svg';
+import SpringImage from 'assets/Profile/Part/Spring.svg';
+import NodeImage from 'assets/Profile/Part/Node.svg';
+import WebImage from 'assets/Profile/Part/Web.svg';
+import iOSImage from 'assets/Profile/Part/iOS.svg';
+import AndroidImage from 'assets/Profile/Part/Android.svg';
 
-import FisrtImage from "assets/Profile/Semester/First.svg";
-import SecondImage from "assets/Profile/Semester/Second.svg";
-import ThirdImage from "assets/Profile/Semester/Third.svg";
-import FourthImage from "assets/Profile/Semester/Fourth.svg";
-import FifthImage from "assets/Profile/Semester/Fifth.svg";
-import SixthImage from "assets/Profile/Semester/Sixth.svg";
+import FisrtImage from 'assets/Profile/Semester/First.svg';
+import SecondImage from 'assets/Profile/Semester/Second.svg';
+import ThirdImage from 'assets/Profile/Semester/Third.svg';
+import FourthImage from 'assets/Profile/Semester/Fourth.svg';
+import FifthImage from 'assets/Profile/Semester/Fifth.svg';
+import SixthImage from 'assets/Profile/Semester/Sixth.svg';
 
 import ManagementIconImage from 'assets/Profile/ManagementIcon.svg';
 import SettingIconImage from 'assets/Profile/SettingIcon.svg';
@@ -47,36 +47,36 @@ const Profile = ({ setIsModalOpen }) => {
   const [profileData, setProfileData] = useState(null);
 
   const renderPartImage = (part) => {
-    if (part === "PM") {
+    if (part === 'PM') {
       return <img src={PMImage} alt="PM" />;
-    } else if (part === "DESIGN") {
+    } else if (part === 'DESIGN') {
       return <img src={DesignImage} alt="DESIGN" />;
-    } else if (part === "SPRING") {
+    } else if (part === 'SPRING') {
       return <img src={SpringImage} alt="SPRING" />;
-    } else if (part === "NODE") {
+    } else if (part === 'NODE') {
       return <img src={NodeImage} alt="NODE" />;
-    } else if (part === "WEB") {
+    } else if (part === 'WEB') {
       return <img src={WebImage} alt="WEB" />;
-    } else if (part === "IOS") {
+    } else if (part === 'IOS') {
       return <img src={iOSImage} alt="IOS" />;
-    } else if (part === "ANDROID") {
+    } else if (part === 'ANDROID') {
       return <img src={AndroidImage} alt="ANDROID" />;
     }
     return null;
   };
 
   const renderSemesterImage = (semester) => {
-    if (semester === "FIRST") {
+    if (semester === 'FIRST') {
       return <img src={FisrtImage} alt="FIRST" />;
-    } else if (semester === "SECOND") {
+    } else if (semester === 'SECOND') {
       return <img src={SecondImage} alt="SECOND" />;
-    } else if (semester === "THIRD") {
+    } else if (semester === 'THIRD') {
       return <img src={ThirdImage} alt="THIRD" />;
-    } else if (semester === "FOURTH") {
+    } else if (semester === 'FOURTH') {
       return <img src={FourthImage} alt="FOURTH" />;
-    } else if (semester === "FIFTH") {
+    } else if (semester === 'FIFTH') {
       return <img src={FifthImage} alt="FIFTH" />;
-    } else if (semester === "SIXTH") {
+    } else if (semester === 'SIXTH') {
       return <img src={SixthImage} alt="SIXTH" />;
     }
     return null;
@@ -126,16 +126,17 @@ const Profile = ({ setIsModalOpen }) => {
           </div>
 
           <SemesterPart>
-            {profileData.semesterParts.map((parts, index) => (
-              <PartNSemesterWrapper key={index}>
-                {renderPartImage(parts.part)}
-              </PartNSemesterWrapper>
-            ))}
-            {profileData.semesterParts.map((semesters, index) => (
-              <PartNSemesterWrapper key={index}>
-                {renderSemesterImage(semesters.semester)}
-              </PartNSemesterWrapper>
-            ))}
+            <PartNSemesterWrapper>
+              {profileData.semesterParts.map((parts, index) => (
+                <div key={index}>{renderPartImage(parts.part)}</div>
+              ))}
+            </PartNSemesterWrapper>
+
+            <PartNSemesterWrapper>
+              {profileData.semesterParts.map((semesters, index) => (
+                <div key={index}>{renderSemesterImage(semesters.semester)}</div>
+              ))}
+            </PartNSemesterWrapper>
           </SemesterPart>
 
           <StatusMessageWrapper>

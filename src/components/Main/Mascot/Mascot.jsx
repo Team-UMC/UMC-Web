@@ -65,7 +65,7 @@ const SecondMascotDialog = styled.div`
   display: flex;
 
   font-size: 12px;
-`
+`;
 
 const MascotImg = styled.img`
   position: absolute;
@@ -107,7 +107,13 @@ const Mascot = ({ mascotData }) => {
 };
 
 Mascot.propTypes = {
-  mascotData: PropTypes.object.isRequired,
+  mascotData: PropTypes.shape({
+    mascotDialog: PropTypes.arrayOf(PropTypes.string.isRequired),
+    level: PropTypes.number.isRequired,
+    rank: PropTypes.number.isRequired,
+    point: PropTypes.number.isRequired,
+    mascotImage: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Mascot;

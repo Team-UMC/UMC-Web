@@ -65,11 +65,18 @@ const SecondMascotDialog = styled.div`
   display: flex;
 
   font-size: 12px;
-`
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
 
 const MascotImg = styled.img`
   position: absolute;
   top: -60px;
+  left: 60px;
 
   z-index: 5;
 `;
@@ -95,11 +102,13 @@ const Mascot = ({ mascotData }) => {
 
       <MascotWrapper>
         <FirstMascotDialog> {mascotData.mascotDialog} </FirstMascotDialog>
-        <MascotImg
-          src={mascotData.mascotImage}
-          style={{ width: '148px', height: '148px' }}
-        />
-        <EarthImg src={EarthImage} />
+        <ImageWrapper>
+          <MascotImg
+            src={mascotData.mascotImage}
+            style={{ width: '148px', height: '148px' }}
+          />
+          <EarthImg src={EarthImage} />
+        </ImageWrapper>
         <SecondMascotDialog> {mascotData.mascotDialog} </SecondMascotDialog>
       </MascotWrapper>
     </Container>
