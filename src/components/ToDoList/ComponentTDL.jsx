@@ -264,7 +264,7 @@ const TDLComponent = ({
             <ModalContainer>
               <ModalContent>
                 <img src={ModalImg} alt="느낌표 이미지" />
-                <p>해당 TIL을 수정하시겠습니까?</p>
+                <p>해당 To Do List를 수정하시겠습니까?</p>
                 <ButtonContainer>
                   <ModalDeleteShape
                     onClick={() => {

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-//import axios from 'axios';
+
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
 import Profile from 'components/Profile/Profile';
 import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
 import { useNavigate } from 'react-router-dom';
+
+import LogoutButtonImage from 'assets/Logout.svg';
 
 const Overlay = styled.div`
   position: fixed;
@@ -31,6 +33,7 @@ const Wrapper = styled.div`
   width: 100%;
   justify-content: space-evenly;
   cursor: pointer;
+  align-items: center;
 `;
 
 const ProfileImage = styled.img`
@@ -45,15 +48,10 @@ const ProfileNickname = styled.div`
   color: white;
 `;
 
-const LogoutButton = styled.div`
+const LogoutButton = styled.img`
   display: flex;
   align-items: center;
   cursor: pointer;
-
-  color: white;
-
-  border: 1px solid white;
-  border-radius: 5px;
 `;
 
 const RightContainer = () => {
@@ -79,9 +77,23 @@ const RightContainer = () => {
     getProfile();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('server Token');
-    navigate('/');
+  const logoutMember = async () => {
+    try {
+      const res = await axiosInstance.delete(`/members/logout`);
+
+      console.log(res);
+
+      // KakaoSDK.init({
+      //   apiKey: `50c85b2b0d0f9f82be406427654109fe`, // Replace with your Kakao app key
+      // });
+      // await KakaoSDK.Auth.logout();
+
+      localStorage.removeItem('server Token');
+
+      navigate(`/`);
+    } catch (error) {
+      console.error();
+    }
   };
 
   return (
@@ -92,9 +104,14 @@ const RightContainer = () => {
         ) : (
           <ProfileImage src={BasicProfileImage} />
         )}
-        <ProfileNickname> {`${nickname} 반가워요!`} </ProfileNickname>
+        <ProfileNickname>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>{nickname}</span>
+            <span> 반가워요!</span>
+          </div>
+        </ProfileNickname>
 
-        <LogoutButton onClick={handleLogout}> 로그아웃 </LogoutButton>
+        <LogoutButton src={LogoutButtonImage} onClick={logoutMember} />
       </Wrapper>
       {isModalOpen && (
         <>

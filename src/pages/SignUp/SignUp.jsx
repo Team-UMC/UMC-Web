@@ -22,7 +22,7 @@ const SignUpPageContainer = styled.div`
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
 
   const [inviteCode, setInviteCode] = useState('');
   const [isValidCode, setIsValidCode] = useState(false);
@@ -58,6 +58,7 @@ const SignUp = () => {
 
         // 서버 응답에서 result의 role이 "member"인 경우 Operator 단계를 건너뛰기
         if (res.data.result.role === 'MEMBER') {
+          handleNextStep();
           handleNextStep(); // Operator 단계를 건너뛰고 다음 단계로 이동
           return; // Operator 단계를 건너뛰었으므로 여기서 함수 종료
         }

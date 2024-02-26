@@ -47,7 +47,7 @@ const Rectangle = styled.div`
   background-color: white;
   border-radius: 12px;
   padding: 5px;
-  height: 118px;
+  height: 150px;
 `;
 
 const Wrapper = styled.div`

@@ -33,7 +33,7 @@ const MascotPage = () => {
       }
     };
     getMascot();
-  }, []);
+  }, [mascotData]);
 
   // 남은 먹이(경험치) & 사용 기록
   const [pointNHistory, setPointNHistory] = useState({});

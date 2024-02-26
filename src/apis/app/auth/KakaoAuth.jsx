@@ -27,6 +27,8 @@ const KakaoAuth = () => {
           },
         );
         setKakaoToken(res.data.access_token);
+
+        localStorage.setItem('kakao token', res.data.access_token);
       } catch (error) {
         console.log(error);
       }
@@ -57,9 +59,8 @@ const KakaoAuth = () => {
 
           if (serviceMember) {
             navigate('/main');
-          } else {
-            navigate('/signupform');
           }
+          navigate('/signupform');
         } catch (error) {
           console.log(error);
         }
@@ -69,9 +70,7 @@ const KakaoAuth = () => {
     loginWithKakao();
   }, [kakaoToken, navigate]);
 
-  return (
-    <LoadingPageImage></LoadingPageImage> 
-  );
+  return <LoadingPageImage></LoadingPageImage>;
 };
 
 export default KakaoAuth;

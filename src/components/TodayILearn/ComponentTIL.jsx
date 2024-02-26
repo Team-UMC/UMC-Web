@@ -56,6 +56,8 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 5;
 `;
 
 const ModalContent = styled.div`
@@ -251,8 +253,9 @@ const TILComponent = ({ tilData, modifyTIL, deleteTIL }) => {
           {showEditModal && (
             <ModalContainer onClick={closeEditModal}>
               <ModalContent>
+                <img src={ModalImg} alt="느낌표 이미지" />
+                <p>해당 TIL을 수정하시겠습니까?</p>
                 <ButtonContainer>
-                  <ActionButton onClick={closeEditModal}>취소</ActionButton>
                   <ActionButton
                     onClick={modifyTIL(
                       tilData.id,
@@ -262,6 +265,7 @@ const TILComponent = ({ tilData, modifyTIL, deleteTIL }) => {
                   >
                     수정
                   </ActionButton>
+                  <ActionButton onClick={closeEditModal}>취소</ActionButton>
                 </ButtonContainer>
               </ModalContent>
             </ModalContainer>
