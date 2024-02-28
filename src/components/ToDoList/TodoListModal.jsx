@@ -218,7 +218,10 @@ const TodoListModal = ({ setIsModalOpen, selectedDate, addTodoList }) => {
 
       <ButtonWrapper>
         <CancelButton onClick={handleCancelClick}>취소</CancelButton>
-        <AddButton disabled={!title || !hour || !minute} onClick={handleAddTodoList}>
+        <AddButton
+          disabled={!title || !hour || !minute}
+          onClick={handleAddTodoList}
+        >
           추가
         </AddButton>
       </ButtonWrapper>

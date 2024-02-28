@@ -8,29 +8,32 @@ export const getTodoListData = async ({ date }) => {
         date: date,
       },
     });
+    console.log(res.data.result);
     return res.data.result;
   } catch (error) {
     console.log(error);
   }
 };
 
-// 투두리스트 작성
-export const writeTodoList = async ({ title, deadline }) => {
+// 투두리스트 추가
+export const addTodoList = async (title, deadline) => {
   try {
     const res = await axiosInstance.post(`/to-do-lists`, {
       title: title,
       deadline: deadline,
     });
-    return res.data.result;
+    console.log(res.data.result);
+    //return res.data.result;
   } catch (error) {
     console.log(error);
   }
 };
 
 // 투두리스트 완성
-export const completeTodoList = async ({ todoListId }) => {
+export const completeTodoList = async (todoListId) => {
   try {
     const res = await axiosInstance.post(`/to-do-lists/${todoListId}`);
+    console.log(res.data.result);
     return res.data.result;
   } catch (error) {
     console.log(error);
@@ -38,9 +41,10 @@ export const completeTodoList = async ({ todoListId }) => {
 };
 
 // 투두리스트 삭제
-export const deleteTodoList = async ({ todoListId }) => {
+export const deleteTodoList = async (todoListId) => {
   try {
     const res = await axiosInstance.delete(`/to-do-lists/${todoListId}`);
+    console.log(res.data.result);
     return res.data.result;
   } catch (error) {
     console.log(error);
@@ -48,12 +52,13 @@ export const deleteTodoList = async ({ todoListId }) => {
 };
 
 // 투두리스트 수정
-export const updateTodoList = async ({ todoListId, title, deadline }) => {
+export const updateTodoList = async (todoListId, title, deadline) => {
   try {
     const res = await axiosInstance.post(`/to-do-lists/update/${todoListId}`, {
       title: title,
       deadline: deadline,
     });
+    console.log(res.data.result);
     return res.data.result;
   } catch (error) {
     console.log(error);

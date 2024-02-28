@@ -63,7 +63,7 @@ const GalleryWriteButtonLayout = styled(GalleryWriteButton)`
 const PageButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 50%;
+  width: 100%;
   justify-content: center;
 
   padding-top: 30px;
@@ -83,8 +83,8 @@ const GalleryPage = () => {
   // const [albumData, setAlbumData] = useState([]);
   // const [totalPages, setTotalPages] = useState(0);
 
-  const totalPages = total_Pages;
   const albumData = album_data;
+  const totalPages = total_Pages;
 
   const [page, setPage] = useState(0);
 

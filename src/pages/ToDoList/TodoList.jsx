@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from 'apis/setting';
+import {
+  getTodoListData,
+  addTodoList,
+  updateTodoList,
+  completeTodoList,
+  deleteTodoList,
+} from 'apis/TodoList/todolist';
 import styled from 'styled-components';
 
 import TitleTDL from 'components/ToDoList/TitleTDL';
@@ -80,69 +86,10 @@ const TodoList = () => {
     setIsModalOpen(true);
   };
 
-  // To Do List 추가 함수
-  const addTodoList = async (title, deadline) => {
-    try {
-      const res = await axiosInstance.post(`/to-do-lists`, {
-        title: title,
-        deadline: deadline,
-      });
-      console.log(res);
-    } catch (error) {
-      console.error();
-    }
-  };
-
-  // To Do List 수정 함수
-  const modifyTodoList = async (id, title, deadline) => {
-    try {
-      await axiosInstance.patch(`/to-do-lists/update/${id}`, {
-        title: title,
-        deadline: deadline,
-      });
-    } catch (error) {
-      console.error();
-    }
-  };
-
-  // To do List 완료 함수
-  const completeTodoList = async (id) => {
-    try {
-      await axiosInstance.post(`/to-do-lists/${id}`, {
-        params: {
-          todoListId: id,
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // To Do List 삭제 함수
-  const deleteTodoList = async (id) => {
-    try {
-      await axiosInstance.delete(`/to-do-lists/${id}`);
-    } catch {
-      console.error();
-    }
-  };
-
-  // To Do List 데이터 받아오는 함수
-  const getTodoListData = async (date) => {
-    try {
-      const res = await axiosInstance.get(`/to-do-lists`, {
-        params: {
-          date: date,
-        },
-      });
-      setTodoListData(res.data.result.todoLists);
-    } catch (error) {
-      console.error();
-    }
-  };
-
   useEffect(() => {
-    getTodoListData(formattedDate);
+    getTodoListData(formattedDate).then((data) => {
+      setTodoListData(data);
+    });
   }, [formattedDate, todoListData]);
 
   return (
@@ -168,12 +115,14 @@ const TodoList = () => {
           </AddButtonContainer>
         </CalenderContainer>
 
-        <TDLComponent
-          todoListData={todoListData}
-          completeTodoList={completeTodoList}
-          modifyTodoList={modifyTodoList}
-          deleteTodoList={deleteTodoList}
-        />
+        {todoListData && (
+          <TDLComponent
+            todoListData={todoListData}
+            completeTodoList={completeTodoList}
+            updateTodoList={updateTodoList}
+            deleteTodoList={deleteTodoList}
+          />
+        )}
 
         {isModalOpen && (
           <>
@@ -183,7 +132,7 @@ const TodoList = () => {
               selectedDate={selectedDate}
               todoListData={todoListData}
               addTodoList={addTodoList}
-              modifyTodoList={modifyTodoList}
+              updateTodoList={updateTodoList}
             />
           </>
         )}

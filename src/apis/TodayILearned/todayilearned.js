@@ -70,7 +70,7 @@ export const deleteTodayILearned = async ({ todayILearnedId }) => {
   }
 };
 
-// 투두리스트 수정
+// Today-I-Learned 수정
 export const updateTodayILearned = async ({
   todayILearnedId,
   part,
