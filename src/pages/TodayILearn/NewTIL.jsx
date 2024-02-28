@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import BoardFile from 'components/BoardWrite/BoardFile';
+import BoardFile from 'components/boardwrite/BoardFile';
 //import NotionLink from 'components/TodayILearn/Notion';
 
 import OptionTIL from 'components/TodayILearn/OptionTIL';

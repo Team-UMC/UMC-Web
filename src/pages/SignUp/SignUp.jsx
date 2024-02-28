@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axiosInstance from 'apis/setting';
 import NocontentsBackgroundImage from 'assets/signup/NoContentsBackground.svg';
 
-import InviteCode from 'components/SignUp/InviteCode';
-import Operator from 'components/SignUp/Operator';
-import University from 'components/SignUp/University';
-import Name from 'components/SignUp/Name';
-import Nickname from 'components/SignUp/Nickname';
-import Agreement from 'components/SignUp/Agreement';
-import SemesterParts from 'components/SignUp/SemesterParts';
-import SignUpComplete from 'components/SignUp/SignUpComplete';
-import { useNavigate } from 'react-router-dom';
+import InviteCode from 'components/signup/InviteCode';
+import Operator from 'components/signup/Operator';
+import University from 'components/signup/University';
+import Name from 'components/signup/Name';
+import Nickname from 'components/signup/Nickname';
+import Agreement from 'components/signup/Agreement';
+import SemesterParts from 'components/signup/SemesterParts';
+import SignUpComplete from 'components/signup/SignUpComplete';
 
 const SignUpPageContainer = styled.div`
   height: 100vh;
@@ -22,7 +22,7 @@ const SignUpPageContainer = styled.div`
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
 
   const [inviteCode, setInviteCode] = useState('');
   const [isValidCode, setIsValidCode] = useState(false);

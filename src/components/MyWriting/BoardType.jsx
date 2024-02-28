@@ -11,8 +11,8 @@ import UnionChecked from 'assets/mywrite/mywriteUnionChecked.svg';
 import SuggestionUnchecked from 'assets/mywrite/mywriteSuggestionUnchecked.svg';
 import SuggestionChecked from 'assets/mywrite/mywriteSuggestionChecked.svg';
 
-import SchoolBoard from 'components/BoardWrite/BoardCampus';
-import CampBoard from 'components/BoardWrite/BoardBranch';
+import SchoolBoard from 'components/boardwrite/BoardCampus';
+import CampBoard from 'components/boardwrite/BoardBranch';
 
 import ResetImg from 'assets/mywrite/reset.svg';
 
@@ -106,7 +106,7 @@ const BoardType = () => {
         <TypeName>종류</TypeName>
 
         <div>
-         
+
           <TypeLink to="/mywrite/school" onClick={() => handleClick('schoolButton')}>
             {buttonStates.schoolButton ? (
               <img src={SchoolChecked} alt="Inactive Image" />

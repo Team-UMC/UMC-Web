@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { GALLERY_DATAS } from '../GalleryData';
+import { album_data } from '../GalleryData';
 
 // 갤러리 상세 정보 프로필 컨테이너 스타일링
 const GalleryDetailProfileContainer = styled.div`
@@ -60,7 +60,7 @@ const GalleryDetailProfileAuthorPosition = styled.div`
 // id: 갤러리 아이디
 const GalleryDetailProfile = ({ id }) => {
   // 갤러리 데이터에서 id에 해당하는 데이터 찾아옴
-  const item = GALLERY_DATAS.find((item) => item.id === Number(id));
+  const item = album_data.find((item) => item.id === Number(id));
 
   // id에 해당하는 데이터가 없을 경우, 존재하지 않는 갤러리임을 알림
   if (!item) {

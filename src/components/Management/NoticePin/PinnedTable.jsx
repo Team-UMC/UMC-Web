@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
-import { IconButton } from '@mui/material';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import { IconButton } from '@mui/material';
+// import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Checked from 'assets/management/checked.svg';
 import pin from 'assets/board/list/Pinned.svg';
 
@@ -184,16 +184,15 @@ const PinnedTable = ({ row }) => {
         <StyledTableCell>{row.date}</StyledTableCell>
         <StyledTableCell>{row.views}</StyledTableCell>
         <StyledOpenToggle>
-          <IconButton
-            aria-label="expand row"
-            size="small"
+          <div
+
             onClick={() => setOpen(!open)}
           >
             {
-              // 펼치기/접기 상태에 따라 아이콘 변경
-              open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />
+              // 펼치기/접기 버튼 아이콘
+              open ? <div> </div> : <div> </div>
             }
-          </IconButton>
+          </div>
         </StyledOpenToggle>
       </StyledTableRow>
       <StyledTableRow>

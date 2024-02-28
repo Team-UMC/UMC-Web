@@ -7,9 +7,9 @@ import PinnedTable from './PinnedTable';
 import SearchBar from 'components/Board/BoardSearch';
 import AdminCompletionButton from 'components/Management/NoticePin/AdminCompletionButton';
 
-import { IconButton } from '@mui/material';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import { IconButton } from '@mui/material';
+// import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/main/LeftArrow.svg';
 import RightArrowIcon from 'assets/main/RightArrow.svg';
 import Checked from 'assets/management/checked.svg';
@@ -280,16 +280,15 @@ const NewAdminTable = () => {
           <StyledTableCell>{row.date}</StyledTableCell>
           <StyledTableCell>{row.views}</StyledTableCell>
           <StyledOpenToggle>
-            <IconButton
-              aria-label="expand row"
-              size="small"
+            <div
+
               onClick={() => setOpen(!open)}
             >
               {
                 // 펼치기/접기 버튼 아이콘
-                open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />
+                open ? <div> </div> : <div> </div>
               }
-            </IconButton>
+            </div>
           </StyledOpenToggle>
         </StyledTableRow>
         <StyledTableRow>

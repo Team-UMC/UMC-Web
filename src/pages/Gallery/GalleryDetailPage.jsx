@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { GALLERY_DATAS } from 'components/Gallery/GalleryData';
+import { album_data } from 'components/Gallery/GalleryData';
 import GalleryDetailProfile from 'components/Gallery/GalleryDetail/GalleryDetailProfile';
 import GalleryListButton from 'components/Gallery/GalleryDetail/GalleryListButton';
 
@@ -113,7 +113,7 @@ const GalleryDetailPage = () => {
   const { id } = useParams();
 
   // GALLERY_DATAS에서 id가 일치하는 데이터를 조회
-  const item = GALLERY_DATAS.find((item) => item.id === Number(id));
+  const item = album_data.find((item) => item.id === Number(id));
 
   //  목록 버튼 클릭 시 이벤트
   const handleListButtonClick = () => {

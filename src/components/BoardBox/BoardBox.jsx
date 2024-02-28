@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { Card as MuiCard, CardContent as MuiCardContent } from '@mui/material';
 import styled from 'styled-components';
 
 import suggestion from 'assets/boardCard/suggestion.svg';
@@ -10,7 +9,7 @@ import branch from 'assets/boardCard/branch.svg';
 import center from 'assets/boardCard/union.svg';
 
 // 게시판 박스를 감싸는 컴포넌트
-const Card = styled(MuiCard)`
+const Card = styled.div`
   /* 박스 크기 & 외형 스타일링 */
   height: 100%;
   border-radius: 12px;
@@ -26,7 +25,7 @@ const Card = styled(MuiCard)`
 `;
 
 // MuiCardContent 스타일링 컴포넌트
-const CardContent = styled(MuiCardContent)`
+const CardContent = styled.div`
   padding: 0px;
   background: white;
 `;

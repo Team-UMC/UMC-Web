@@ -8,7 +8,7 @@ import BasicLayout from 'layout/BasicLayout';
 import Main from 'pages/Main.jsx';
 import SignUpForm from 'pages/SignUp/SignUp';
 import BoardWrite from 'pages/BoardWrite/BoardWrite';
-import HomePage from 'pages/HomePage';
+import SignInPage from 'pages/SignInPage/SignInPage';
 import Management from 'pages/Management/Management';
 import MyWrite from 'pages/MyWrite/MyWrite';
 import KakaoAuth from 'apis/app/auth/KakaoAuth';
@@ -18,8 +18,8 @@ import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
 import BoardDetailPage from 'pages/DetailPage/BoardDetailPage';
 
 import HistoryPage from 'pages/History/HistoryPage';
-// import GalleryPage from 'pages/Gallery/GalleryPage';
-// import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
+import GalleryPage from 'pages/Gallery/GalleryPage';
+import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
 import BoardPage from 'pages/BoardPage/BoardPage';
 import MascotPage from 'pages/Mascot/MascotPage';
 
@@ -45,7 +45,7 @@ function App() {
         <>
           <Routes>
             {/* 소셜 로그인으로 시작하기 페이지 (초기 화면) */}
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<SignInPage />} />
 
             {/* 소셜 로그인 페이지 (path는 Redirect URI)*/}
             <Route path="/OAuth2/kakao" element={<KakaoAuth />} />
@@ -106,8 +106,8 @@ function App() {
               <Route path="/todolist" element={<TodoList />} />
 
               {/* 사진첩 */}
-              {/* <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/gallery/:id" element={<GalleryDetailPage />} /> */}
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/gallery/:id" element={<GalleryDetailPage />} />
 
               {/* 프로필 설정 페이지 */}
               <Route path="/profilesetting" element={<ProfileSettingPage />} />
