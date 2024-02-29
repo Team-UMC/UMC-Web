@@ -115,6 +115,42 @@ const NewTIL = () => {
     navigate(`/todayilearned`);
   };
 
+  // const addTIL = async () => {
+  //   const formData = new FormData();
+
+  //   if (file) {
+  //     formData.append('file', file[0]);
+  //   }
+
+  //   formData.append(
+  //     'request',
+  //     JSON.stringify({
+  //       part: part,
+  //       title: title,
+  //       subTitle: subTitle,
+  //       content: content,
+  //     }),
+  //   );
+
+  //   try {
+  //     const res = await axios.post(
+  //       `${process.env.REACT_APP_TEST_SERVER_URL}/today-i-learned`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //           Authorization: localStorage.getItem('server Token'),
+  //         },
+  //       },
+  //     );
+  //     console.log(res);
+
+  //     navigate(`/todayilearned`);
+  //   } catch (error) {
+  //     console.error();
+  //   }
+  // };
+
   return (
     <NewTILContainer>
       <Title>Today I Learned</Title>

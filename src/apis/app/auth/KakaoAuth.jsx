@@ -57,8 +57,9 @@ const KakaoAuth = () => {
 
           if (serviceMember) {
             navigate('/main');
+          } else {
+            navigate('/signupform');
           }
-          navigate('/signupform');
         } catch (error) {
           console.log(error);
         }

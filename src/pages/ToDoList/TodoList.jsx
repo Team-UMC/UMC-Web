@@ -11,9 +11,10 @@ import styled from 'styled-components';
 import TitleTDL from 'components/ToDoList/TitleTDL';
 import ToDoListCalender from 'components/ToDoList/Calender';
 import TDLComponent from 'components/ToDoList/ComponentTDL';
-import TodoListModal from 'components/ToDoList/TodoListModal';
+import AddTodoListModal from 'components/ToDoList/AddTodoListModal';
 
 import AddButtonImg from 'assets/todayilearn/addbutton.svg';
+import UpdateTodoListModal from 'components/ToDoList/UpdateTodoListModal';
 
 const Overlay = styled.div`
   position: fixed;
@@ -68,7 +69,8 @@ const SVGImage = styled.img`
 const TodoList = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [todoListData, setTodoListData] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const formatDate = (dateString) => {
     const dateObject = new Date(dateString);
@@ -83,7 +85,7 @@ const TodoList = () => {
   const formattedDate = formatDate(selectedDate);
 
   const handleAddButton = () => {
-    setIsModalOpen(true);
+    setIsAddModalOpen(true);
   };
 
   useEffect(() => {
@@ -124,14 +126,24 @@ const TodoList = () => {
           />
         )}
 
-        {isModalOpen && (
+        {isAddModalOpen && (
           <>
             <Overlay />
-            <TodoListModal
-              setIsModalOpen={setIsModalOpen}
+            <AddTodoListModal
+              setIsAddModalOpen={setIsAddModalOpen}
+              selectedDate={selectedDate}
+              addTodoList={addTodoList}
+            />
+          </>
+        )}
+
+        {isUpdateModalOpen && (
+          <>
+            <Overlay />
+            <UpdateTodoListModal
+              setIsUpdateModalOpen={setIsUpdateModalOpen}
               selectedDate={selectedDate}
               todoListData={todoListData}
-              addTodoList={addTodoList}
               updateTodoList={updateTodoList}
             />
           </>
