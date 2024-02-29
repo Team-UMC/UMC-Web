@@ -1,15 +1,14 @@
 import axiosInstance from 'apis/setting';
 
 // 투두리스트 조회
-export const getTodoListData = async ({ date }) => {
+export const getTodoListData = async (date) => {
   try {
     const res = await axiosInstance.get(`/to-do-lists?date=${date}`, {
       params: {
         date: date,
       },
     });
-    console.log(res.data.result);
-    return res.data.result;
+    return res.data.result.todoLists;
   } catch (error) {
     console.log(error);
   }
@@ -22,8 +21,7 @@ export const addTodoList = async (title, deadline) => {
       title: title,
       deadline: deadline,
     });
-    console.log(res.data.result);
-    //return res.data.result;
+    return res.data.result;
   } catch (error) {
     console.log(error);
   }

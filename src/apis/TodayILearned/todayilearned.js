@@ -1,27 +1,27 @@
 import axiosInstance from 'apis/setting';
 
 // Today-I-Learned 조회
-export const getTodayILearnedData = async ({ date }) => {
+export const getTodayILearnedData = async (date) => {
   try {
-    const res = await axiosInstance.get(`/today-i-learned?date=${date}`, {
+    const res = await axiosInstance.get(`/today-i-learned/web`, {
       params: {
         date: date,
       },
     });
-    return res.data.result;
+    return res.data.result.todayILearnedInfos;
   } catch (error) {
     console.log(error);
   }
 };
 
 // Today-I-Learned 추가
-export const addTodayILearned = async ({
+export const addTodayILearned = async (
   part,
   title,
   subTitle,
   content,
   file,
-}) => {
+) => {
   const formData = new FormData();
   if (file) {
     formData.append('file', file);
