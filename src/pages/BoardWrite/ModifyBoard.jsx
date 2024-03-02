@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
-import BoardFile from 'components/BoardWrite/BoardFile';
-import BoardLabel from 'components/BoardWrite/BoardLabel';
-import BoardTitle from 'components/BoardWrite/BoardTitle';
-import BoardText from 'components/BoardWrite/BoardText';
-import BoardButton from 'components/BoardWrite/BoardButton';
+import BoardFile from 'components/boardwrite/BoardFile';
+import BoardLabel from 'components/boardwrite/BoardLabel';
+import BoardTitle from 'components/boardwrite/BoardTitle';
+import BoardText from 'components/boardwrite/BoardText';
+import BoardButton from 'components/boardwrite/BoardButton';
 import { useNavigate } from 'react-router-dom';
 
 const BoardWriteContainer = styled.div`

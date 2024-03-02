@@ -81,14 +81,14 @@ const DetailLink = ({ toggleSide }) => {
         </SmallTitle>
       </Wrapper>
 
-      {/* <Wrapper>
+      <Wrapper>
         <SmallTitle to="/gallery" onClick={handleToggleSide}>
           핫 사진첩
         </SmallTitle>
         <SmallTitle to="/gallery" onClick={handleToggleSide}>
           우리 학교 사진첩
         </SmallTitle>
-      </Wrapper> */}
+      </Wrapper>
     </Container>
   );
 };

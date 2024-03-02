@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+//import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 //import { makeStyles } from '@mui/styles';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+//import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import SendIcon from 'assets/Setting/paper-plane.svg';
 import QuestionIcon from 'assets/Setting/question.svg';
@@ -55,7 +55,7 @@ const SettingCustomerServiceQuestionImg = styled.img`
 `;
 
 // 아코디언 요약 컴포넌트
-const AccordionSummaryStyle = styled(AccordionSummary)`
+const AccordionSummaryStyle = styled.div`
   /* 레이아웃 스타일링 */
   display: flex;
   align-items: center;
@@ -110,14 +110,14 @@ const CustomerServiceSetting = () => {
       <SettingDetailWrapper style={{ marginBottom: '48px' }}>
         <SettingDetailTitle>자주 묻는 질문</SettingDetailTitle>
         {faqList.map((faq, index) => (
-          <Accordion
+          <div
             key={faq.id}
-            expanded={expanded === faq.id}
+            //expanded={expanded === faq.id}
             //classes={AccordionClasses}
             onChange={handleExpand(faq.id)}
           >
             <AccordionSummaryStyle
-              expandIcon={<ExpandMoreIcon />}
+              //expandIcon={<ExpandMoreIcon />}
               aria-controls={`${faq.id}-content`}
               id={`${faq.id}-header`}
             >
@@ -137,8 +137,8 @@ const CustomerServiceSetting = () => {
               )}
               {faq.question}
             </AccordionSummaryStyle>
-            <AccordionDetails>{faq.answer}</AccordionDetails>
-          </Accordion>
+            {/* <AccordionDetails>{faq.answer}</AccordionDetails> */}
+          </div>
         ))}
       </SettingDetailWrapper>
       <SettingDetailWrapper>

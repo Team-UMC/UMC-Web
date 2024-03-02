@@ -197,8 +197,6 @@
 // ))}
 
 // </>
-    
-        
 
 //         <GalleryItemInfoWrapper>
 //           <GalleryItemInfoTitle>{item.title}</GalleryItemInfoTitle>

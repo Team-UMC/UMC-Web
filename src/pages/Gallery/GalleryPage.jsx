@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import GalleryTitle from 'components/Gallery/GalleryTitle';
 import GalleryWriteButton from 'components/Gallery/GalleryWriteButton';
-import GalleryList from 'components/Gallery/GalleryList';
+import GalleryList from 'components/Gallery/GalleryComponents';
+//import axiosInstance from 'apis/setting';
 
+import { total_Pages, album_data } from 'components/Gallery/GalleryData';
+
+// 갤러리 리스트 컴포넌트 전체 컨테이너 스타일링
+const GalleryListContainer = styled.div`
+  /* 레이아웃 정렬 - 사진 아이템 레이아웃 정렬을 2차원적으로 구현하기 위해 Grid 사용 */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 34px 32px;
+`;
 
 // 갤러리 전체 페이지 컨테이너
 const GalleryPageContainer = styled.div`
@@ -41,17 +52,68 @@ const GalleryWriteButtonLayout = styled(GalleryWriteButton)`
   flex-direction: column;
 `;
 
-// 갤러리 전체 페이지 리스트 스타일링
-const GalleryListLayout = styled(GalleryList)`
+// // 갤러리 전체 페이지 리스트 스타일링
+// const GalleryListLayout = styled(GalleryList)`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+// `;
+
+const PageButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
   justify-content: center;
-  align-items: center;
+
+  padding-top: 30px;
 `;
 
+const PageButton = styled.div`
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: ${({ selected }) => (selected ? 'white' : 'transparent')};
+  border-radius: 10px;
+  color: ${({ selected }) => (selected ? '#000C76' : 'black')};
+  font-weight: ${({ selected }) => (selected ? 'bold' : '')};
+`;
 
 // 갤러리 전체 페이지
 const GalleryPage = () => {
+  // const [albumData, setAlbumData] = useState([]);
+  // const [totalPages, setTotalPages] = useState(0);
+
+  const albumData = album_data;
+  const totalPages = total_Pages;
+
+  const [page, setPage] = useState(0);
+
+  // useEffect(() => {
+  //   const getAlbumData = async ({ page }) => {
+  //     try {
+  //       const res = await axiosInstance.get(`/albums`, {
+  //         params: {
+  //           page: page,
+  //         },
+  //       });
+  //       setAlbumData(res.data.result.albumPageResponses);
+  //       setTotalPages(res.data.result.totalPages);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getAlbumData(page);
+  // }, [page]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage - 1);
+  };
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div
       className="board-page"
@@ -66,8 +128,23 @@ const GalleryPage = () => {
           <GalleryTitleLayout />
           <GalleryWriteButtonLayout />
         </GalleryTitleButtonWrapper>
-        <GalleryListLayout />
 
+        <GalleryListContainer>
+          <GalleryList albumData={albumData} />
+        </GalleryListContainer>
+
+        <PageButtonWrapper>
+          {pageNumbers.map((pageNumber) => (
+            <PageButton
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              selected={pageNumber === page + 1}
+              disabled={pageNumber === page}
+            >
+              {pageNumber}
+            </PageButton>
+          ))}
+        </PageButtonWrapper>
       </GalleryPageContainer>
     </div>
   );

@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import LoadingImage from 'assets/Loading.svg';
 import { useNavigate } from 'react-router-dom';
 
-const LoadingPageImage = styled.div`
-  background: url(${LoadingImage}) no-repeat center center;
-  background-size: cover;
+const LoadingPageImage = styled.img`
   width: 100%;
 `;
 
@@ -44,7 +42,7 @@ const KakaoAuth = () => {
       if (kakaoToken) {
         try {
           const response = await axios.post(
-            `http://umcservice.shop:8000/members/login?accessToken=${kakaoToken}&socialType=KAKAO`,
+            `${process.env.REACT_APP_TEST_SERVER_URL}/members/login?accessToken=${kakaoToken}&socialType=KAKAO`,
             {
               headers: {
                 'Content-Type': 'application/json;charset=utf-8',
@@ -59,8 +57,9 @@ const KakaoAuth = () => {
 
           if (serviceMember) {
             navigate('/main');
+          } else {
+            navigate('/signupform');
           }
-          navigate('/signupform');
         } catch (error) {
           console.log(error);
         }
@@ -70,7 +69,7 @@ const KakaoAuth = () => {
     loginWithKakao();
   }, [kakaoToken, navigate]);
 
-  return <LoadingPageImage></LoadingPageImage>;
+  return <LoadingPageImage src={LoadingImage} />;
 };
 
 export default KakaoAuth;

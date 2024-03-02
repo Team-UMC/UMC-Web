@@ -52,7 +52,7 @@ const FontStyle = styled.div`
   margin-right: 1vh;
 `;
 
-const OptionTIL = ({ setPart }) => {
+const OptionTIL = ({ part, setPart }) => {
   const [buttonStates, setButtonStates] = useState({
     figma: false,
     spring: false,
@@ -100,6 +100,7 @@ const OptionTIL = ({ setPart }) => {
         setPart('');
         break;
     }
+    console.log(part);
   };
 
   return (
@@ -168,6 +169,7 @@ const OptionTIL = ({ setPart }) => {
 };
 
 OptionTIL.propTypes = {
+  part: PropTypes.string,
   setPart: PropTypes.func.isRequired,
 };
 

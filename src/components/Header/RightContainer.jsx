@@ -83,11 +83,6 @@ const RightContainer = () => {
 
       console.log(res);
 
-      // KakaoSDK.init({
-      //   apiKey: `50c85b2b0d0f9f82be406427654109fe`, // Replace with your Kakao app key
-      // });
-      // await KakaoSDK.Auth.logout();
-
       localStorage.removeItem('server Token');
 
       navigate(`/`);

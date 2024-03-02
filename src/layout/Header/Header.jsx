@@ -18,7 +18,7 @@ const HeaderWrapper = styled.div`
   align-items: flex-start;
   flex-direction: row;
   width: 100%;
-  height: ${(props) => (props.isScrolled ? 'auto' : '100vh')};
+  height: ${(props) => (props.scrolled ? 'auto' : '100vh')};
   position: fixed;
   top: 0;
   transition: background 0.3s ease;
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [canScrolled, setScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleSide = () => {
     setIsOpen(true);
@@ -45,7 +45,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setScrolled(scrollY > 0);
+      setIsScrolled(scrollY > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -59,11 +59,10 @@ const Header = () => {
     <>
       <HeaderWrapper
         style={{
-          background: `url(${
-            canScrolled ? SmallHeaderImage : LargeHeaderImage
-          }) no-repeat center center`,
+          background: `url(${isScrolled ? SmallHeaderImage : LargeHeaderImage
+            }) no-repeat center center`,
         }}
-        isScrolled={canScrolled}
+        scrolled={isScrolled}
       >
         <Wrapper>
           <img
@@ -72,7 +71,7 @@ const Header = () => {
             style={{ cursor: 'pointer', color: 'white' }}
           />
           <LeftContainer />
-          <RightContainer isScrolled={canScrolled} />
+          <RightContainer scrolled={isScrolled} />
         </Wrapper>
       </HeaderWrapper>
 

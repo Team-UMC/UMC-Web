@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from 'apis/setting';
+import {
+  getTodoListData,
+  addTodoList,
+  updateTodoList,
+  completeTodoList,
+  deleteTodoList,
+} from 'apis/TodoList/todolist';
 import styled from 'styled-components';
 
 import TitleTDL from 'components/ToDoList/TitleTDL';
 import ToDoListCalender from 'components/ToDoList/Calender';
 import TDLComponent from 'components/ToDoList/ComponentTDL';
-import TodoListModal from 'components/ToDoList/TodoListModal';
+import AddTodoListModal from 'components/ToDoList/AddTodoListModal';
 
 import AddButtonImg from 'assets/todayilearn/addbutton.svg';
+import UpdateTodoListModal from 'components/ToDoList/UpdateTodoListModal';
 
 const Overlay = styled.div`
   position: fixed;
@@ -62,7 +69,8 @@ const SVGImage = styled.img`
 const TodoList = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [todoListData, setTodoListData] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const formatDate = (dateString) => {
     const dateObject = new Date(dateString);
@@ -77,72 +85,13 @@ const TodoList = () => {
   const formattedDate = formatDate(selectedDate);
 
   const handleAddButton = () => {
-    setIsModalOpen(true);
-  };
-
-  // To Do List 추가 함수
-  const addTodoList = async (title, deadline) => {
-    try {
-      const res = await axiosInstance.post(`/to-do-lists`, {
-        title: title,
-        deadline: deadline,
-      });
-      console.log(res);
-    } catch (error) {
-      console.error();
-    }
-  };
-
-  // To Do List 수정 함수
-  const modifyTodoList = async (id, title, deadline) => {
-    try {
-      await axiosInstance.patch(`/to-do-lists/update/${id}`, {
-        title: title,
-        deadline: deadline,
-      });
-    } catch (error) {
-      console.error();
-    }
-  };
-
-  // To do List 완료 함수
-  const completeTodoList = async (id) => {
-    try {
-      await axiosInstance.post(`/to-do-lists/${id}`, {
-        params: {
-          todoListId: id,
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // To Do List 삭제 함수
-  const deleteTodoList = async (id) => {
-    try {
-      await axiosInstance.delete(`/to-do-lists/${id}`);
-    } catch {
-      console.error();
-    }
-  };
-
-  // To Do List 데이터 받아오는 함수
-  const getTodoListData = async (date) => {
-    try {
-      const res = await axiosInstance.get(`/to-do-lists`, {
-        params: {
-          date: date,
-        },
-      });
-      setTodoListData(res.data.result.todoLists);
-    } catch (error) {
-      console.error();
-    }
+    setIsAddModalOpen(true);
   };
 
   useEffect(() => {
-    getTodoListData(formattedDate);
+    getTodoListData(formattedDate).then((data) => {
+      setTodoListData(data);
+    });
   }, [formattedDate, todoListData]);
 
   return (
@@ -168,22 +117,34 @@ const TodoList = () => {
           </AddButtonContainer>
         </CalenderContainer>
 
-        <TDLComponent
-          todoListData={todoListData}
-          completeTodoList={completeTodoList}
-          modifyTodoList={modifyTodoList}
-          deleteTodoList={deleteTodoList}
-        />
+        {todoListData && (
+          <TDLComponent
+            todoListData={todoListData}
+            completeTodoList={completeTodoList}
+            updateTodoList={updateTodoList}
+            deleteTodoList={deleteTodoList}
+          />
+        )}
 
-        {isModalOpen && (
+        {isAddModalOpen && (
           <>
             <Overlay />
-            <TodoListModal
-              setIsModalOpen={setIsModalOpen}
+            <AddTodoListModal
+              setIsAddModalOpen={setIsAddModalOpen}
+              selectedDate={selectedDate}
+              addTodoList={addTodoList}
+            />
+          </>
+        )}
+
+        {isUpdateModalOpen && (
+          <>
+            <Overlay />
+            <UpdateTodoListModal
+              setIsUpdateModalOpen={setIsUpdateModalOpen}
               selectedDate={selectedDate}
               todoListData={todoListData}
-              addTodoList={addTodoList}
-              modifyTodoList={modifyTodoList}
+              updateTodoList={updateTodoList}
             />
           </>
         )}

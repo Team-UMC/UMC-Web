@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { addTodayILearned } from 'apis/TodayILearned/todayilearned';
 import styled from 'styled-components';
 
-import BoardFile from 'components/BoardWrite/BoardFile';
+import BoardFile from 'components/boardwrite/BoardFile';
 //import NotionLink from 'components/TodayILearn/Notion';
 
 import OptionTIL from 'components/TodayILearn/OptionTIL';
@@ -68,7 +68,7 @@ const Textarea = styled.textarea`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-`
+`;
 
 const Button = styled.div`
   font-weight: bold;
@@ -110,47 +110,52 @@ const NewTIL = () => {
     navigate(`/todayilearned`);
   };
 
-  const addTIL = async () => {
-    const formData = new FormData();
-
-    if (file) {
-      formData.append('file', file[0]);
-    }
-
-    formData.append(
-      'request',
-      JSON.stringify({
-        part: part,
-        title: title,
-        subTitle: subTitle,
-        content: content,
-      }),
-    );
-
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_TEST_SERVER_URL}/today-i-learned`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: localStorage.getItem('server Token'),
-          },
-        },
-      );
-      console.log(res);
-
-      navigate(`/todayilearned`);
-    } catch (error) {
-      console.error();
-    }
+  const handleAddTodayILearned = () => {
+    addTodayILearned(part, title, subTitle, content, file);
+    navigate(`/todayilearned`);
   };
+
+  // const addTIL = async () => {
+  //   const formData = new FormData();
+
+  //   if (file) {
+  //     formData.append('file', file[0]);
+  //   }
+
+  //   formData.append(
+  //     'request',
+  //     JSON.stringify({
+  //       part: part,
+  //       title: title,
+  //       subTitle: subTitle,
+  //       content: content,
+  //     }),
+  //   );
+
+  //   try {
+  //     const res = await axios.post(
+  //       `${process.env.REACT_APP_TEST_SERVER_URL}/today-i-learned`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //           Authorization: localStorage.getItem('server Token'),
+  //         },
+  //       },
+  //     );
+  //     console.log(res);
+
+  //     navigate(`/todayilearned`);
+  //   } catch (error) {
+  //     console.error();
+  //   }
+  // };
 
   return (
     <NewTILContainer>
       <Title>Today I Learned</Title>
       <TILCalender />
-      <OptionTIL setPart={setPart} />
+      <OptionTIL part={part} setPart={setPart} />
       <BoardFile file={file} setFile={setFile} />
       {/* <NotionLink /> */}
 
@@ -173,7 +178,7 @@ const NewTIL = () => {
       />
 
       <ButtonWrapper>
-        <Button onClick={addTIL}>작성</Button>
+        <Button onClick={handleAddTodayILearned}>작성</Button>
         <Button onClick={handleCancel}>취소</Button>
       </ButtonWrapper>
     </NewTILContainer>

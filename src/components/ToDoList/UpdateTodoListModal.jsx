@@ -116,7 +116,11 @@ const AddButton = styled.div`
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 `;
 
-const TodoListModal = ({ setIsModalOpen, selectedDate, addTodoList }) => {
+const UpdateTodoListModal = ({
+  setIsAddModalOpen,
+  selectedDate,
+  updateTodoList,
+}) => {
   const [title, setTitle] = useState('');
   const [isNight, setIsNight] = useState(false);
   const [hour, setHour] = useState('');
@@ -147,30 +151,38 @@ const TodoListModal = ({ setIsModalOpen, selectedDate, addTodoList }) => {
 
   // 취소 버튼 클릭시 모달 닫기
   const handleCancelClick = () => {
-    setIsModalOpen(false);
+    setIsAddModalOpen(false);
   };
 
-  // 추가 버튼 클릭시 To Do List 추가
+  const offset = 9 * 60 * 60 * 1000; // 9시간을 밀리초로 계산
+
   const handleAddTodoList = () => {
     // 시간과 분을 이용하여 새로운 날짜 객체 생성
     const newDate = new Date(selectedDate);
 
-    // 오후 선택 시, 시간에 12를 더하여 오후 시간으로 설정
-    if (isNight) {
-      newDate.setHours(parseInt(hour) + 12);
-    } else {
-      newDate.setHours(parseInt(hour));
+    // 시간 설정
+    let selectedHour = parseInt(hour);
+    if (isNight && selectedHour !== 12) {
+      // 오후 선택 시, 시간이 12시가 아니라면 12를 더하여 오후 시간으로 설정
+      selectedHour += 12;
+    } else if (!isNight && selectedHour === 12) {
+      // 오전 선택 시, 시간이 12시라면 0으로 설정
+      selectedHour = 0;
     }
+    newDate.setHours(selectedHour);
 
     // 분 설정
     newDate.setMinutes(parseInt(minute));
+
+    // 시간 오프셋을 더하여 한국 표준시(KST)로 변환
+    newDate.setTime(newDate.getTime() + offset);
 
     // ISO 형식의 문자열로 변환하여 서버로 전달
     const formattedDate = newDate.toISOString();
 
     // addTodoList 함수 호출하여 추가할 수 있도록 전달
-    addTodoList(title, formattedDate);
-    setIsModalOpen(false);
+    updateTodoList(title, formattedDate);
+    setIsAddModalOpen(false);
   };
 
   return (
@@ -218,7 +230,10 @@ const TodoListModal = ({ setIsModalOpen, selectedDate, addTodoList }) => {
 
       <ButtonWrapper>
         <CancelButton onClick={handleCancelClick}>취소</CancelButton>
-        <AddButton disabled={!title || !hour || !minute} onClick={handleAddTodoList}>
+        <AddButton
+          disabled={!title || !hour || !minute}
+          onClick={handleAddTodoList}
+        >
           추가
         </AddButton>
       </ButtonWrapper>
@@ -226,12 +241,10 @@ const TodoListModal = ({ setIsModalOpen, selectedDate, addTodoList }) => {
   );
 };
 
-TodoListModal.propTypes = {
-  setIsModalOpen: PropTypes.func.isRequired,
+UpdateTodoListModal.propTypes = {
+  setIsAddModalOpen: PropTypes.func.isRequired,
   selectedDate: PropTypes.string.isRequired,
-  //todoListData: PropTypes.array.isRequired,
-  addTodoList: PropTypes.func,
-  //modifyTodoList: PropTypes.func,
+  updateTodoList: PropTypes.func,
 };
 
-export default TodoListModal;
+export default UpdateTodoListModal;

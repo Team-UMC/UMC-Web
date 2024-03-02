@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getTodayILearnedData } from 'apis/TodayILearned/todayilearned';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
@@ -98,21 +99,23 @@ const TodayILearn = () => {
     }
   };
 
-  const getTILData = async (date) => {
-    try {
-      const res = await axiosInstance.get(`/today-i-learned`, {
-        params: {
-          date: date,
-        },
-      });
-      setTilData(res.data.result.todayILearnedInfos);
-    } catch (error) {
-      console.error();
-    }
-  };
+  // const getTILData = async (date) => {
+  //   try {
+  //     const res = await axiosInstance.get(`/today-i-learned`, {
+  //       params: {
+  //         date: date,
+  //       },
+  //     });
+  //     setTilData(res.data.result.todayILearnedInfos);
+  //   } catch (error) {
+  //     console.error();
+  //   }
+  // };
 
   useEffect(() => {
-    getTILData(formattedDate);
+    getTodayILearnedData(formattedDate).then((data) => {
+      setTilData(data);
+    });
   }, [formattedDate, tilData]);
 
   return (
@@ -140,11 +143,13 @@ const TodayILearn = () => {
           </AddButtonContainer>
         </CalenderContainer>
 
-        <TILComponent
-          tilData={tilData}
-          modifyTIL={modifyTIL}
-          deleteTIL={deleteTIL}
-        />
+        {tilData && (
+          <TILComponent
+            tilData={tilData}
+            modifyTIL={modifyTIL}
+            deleteTIL={deleteTIL}
+          />
+        )}
       </TILContainer>
     </div>
   );

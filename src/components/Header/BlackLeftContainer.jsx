@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-
 const NavWrapper = styled.nav`
   display: flex;
 
@@ -52,9 +51,9 @@ const BlackLeftContainer = () => {
           <TextWrapper>히스토리</TextWrapper>
         </StyledLink>
 
-        {/* <StyledLink to="/gallery">
+        <StyledLink to="/gallery">
           <TextWrapper>사진첩</TextWrapper>
-        </StyledLink> */}
+        </StyledLink>
       </>
     </NavWrapper>
   );
