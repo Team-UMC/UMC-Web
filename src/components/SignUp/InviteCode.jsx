@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-import SignUpFormStyle from 'components/signup/SignUpForm.style';
+import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
 import NextButton from './NextButton';
 

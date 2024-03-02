@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SignUpFormStyle from 'components/signup/SignUpForm.style';
+import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PropTypes from 'prop-types';
 import PrevButton from './PrevButton';
 import styled from 'styled-components';
