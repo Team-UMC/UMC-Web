@@ -8,6 +8,7 @@ import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
 import { useNavigate } from 'react-router-dom';
 
 import LogoutButtonImage from 'assets/Logout.svg';
+import axios from 'axios';
 
 const Overlay = styled.div`
   position: fixed;
@@ -70,24 +71,44 @@ const RightContainer = () => {
         setNickname(res.data.result.nickname);
         setProfileImage(res.data.result.profileImage);
       } catch (error) {
-        console.error('Error get nickname', error);
+        console.log('Error get nickname', error);
       }
     };
 
     getProfile();
   }, []);
 
+  const logoutKakao = async (accessToken) => {
+    try {
+      const response = await axios.post(
+        '/logout',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+
+      console.log(response.data);
+      // 여기에서 필요에 따라 로컬 스토리지 등에서 관련 정보를 삭제할 수 있습니다.
+    } catch (error) {
+      console.log('카카오톡 로그아웃 오류:', error);
+    }
+  };
+
   const logoutMember = async () => {
     try {
       const res = await axiosInstance.delete(`/members/logout`);
-
       console.log(res);
 
       localStorage.removeItem('server Token');
 
+      logoutKakao(localStorage.getItem('kakao token'));
+
       navigate(`/`);
     } catch (error) {
-      console.error();
+      console.log(error);
     }
   };
 
@@ -105,9 +126,8 @@ const RightContainer = () => {
             <span> 반가워요!</span>
           </div>
         </ProfileNickname>
-
-        <LogoutButton src={LogoutButtonImage} onClick={logoutMember} />
       </Wrapper>
+      <LogoutButton src={LogoutButtonImage} onClick={logoutMember} />
       {isModalOpen && (
         <>
           <Overlay />

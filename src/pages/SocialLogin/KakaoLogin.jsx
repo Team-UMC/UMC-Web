@@ -8,11 +8,10 @@ const LoadingPageImage = styled.img`
   width: 100%;
 `;
 
-const KakaoAuth = () => {
+const KakaoLoginPage = () => {
   const [kakaoToken, setKakaoToken] = useState('');
   const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
-
   useEffect(() => {
     const getKakaoToken = async () => {
       try {
@@ -25,13 +24,11 @@ const KakaoAuth = () => {
           },
         );
         setKakaoToken(res.data.access_token);
-
         localStorage.setItem('kakao token', res.data.access_token);
       } catch (error) {
         console.log(error);
       }
     };
-
     if (code) {
       getKakaoToken();
     }
@@ -49,10 +46,8 @@ const KakaoAuth = () => {
               },
             },
           );
-
           const accessToken = response.data.result.accessToken;
           const serviceMember = response.data.result.serviceMember;
-
           localStorage.setItem('server Token', accessToken);
 
           if (serviceMember) {
@@ -72,4 +67,4 @@ const KakaoAuth = () => {
   return <LoadingPageImage src={LoadingImage} />;
 };
 
-export default KakaoAuth;
+export default KakaoLoginPage;

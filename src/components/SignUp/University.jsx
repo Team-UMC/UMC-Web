@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import SignUpFormStyle from 'components/signup/SignUpForm.style';
+import SignUpFormStyle from 'components/SignUp/SignUpForm.style';
 import PrevButton from './PrevButton';
 import NextButton from './NextButton';
 

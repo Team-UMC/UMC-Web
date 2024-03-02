@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
-import BoardFile from 'components/boardwrite/BoardFile';
-import BoardLabel from 'components/boardwrite/BoardLabel';
-import BoardTitle from 'components/boardwrite/BoardTitle';
-import BoardText from 'components/boardwrite/BoardText';
-import BoardButton from 'components/boardwrite/BoardButton';
+import BoardFile from 'components/BoardWrite/BoardFile';
+import BoardLabel from 'components/BoardWrite/BoardLabel';
+import BoardTitle from 'components/BoardWrite/BoardTitle';
+import BoardText from 'components/BoardWrite/BoardText';
+import BoardButton from 'components/BoardWrite/BoardButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const BoardWriteContainer = styled.div`
@@ -138,9 +138,7 @@ const BoardWrite = () => {
         <BoardText onChange={(e) => setContent(e.target.value)} />
 
         <RightContainer>
-          <BoardButton
-            handleSubmit={handleSubmit}
-          />
+          <BoardButton handleSubmit={handleSubmit} />
         </RightContainer>
       </BoardWriteContainer>
     </div>
