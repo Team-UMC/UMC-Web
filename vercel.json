@@ -2,7 +2,6 @@
   "routes": [
     { "src": "/oauth2.0", "dest": "https://nid.naver.com" },
     { "src": "/oauth", "dest": "https://kauth.kakao.com" },
-    { "src": "/boards", "dest": "http://umcservice.shop:8000" },
     { "src": "/logout", "dest": "https://kapi.kakao.com/v1/user" }
   ]
 }
