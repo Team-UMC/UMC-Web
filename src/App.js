@@ -5,7 +5,7 @@ import 'App.css';
 import MainLayout from 'layout/MainLayout';
 import BasicLayout from 'layout/BasicLayout';
 
-import Main from 'pages/Main.jsx';
+import Main from 'pages/Main/Main.jsx';
 import SignUpForm from 'pages/SignUp/SignUp';
 import BoardWrite from 'pages/BoardWrite/BoardWrite';
 import SignInPage from 'pages/SignInPage/SignInPage';

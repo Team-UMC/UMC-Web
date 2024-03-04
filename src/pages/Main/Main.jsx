@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from 'apis/setting';
-import styled from 'styled-components';
-
+import styles from './style';
 import MainDescription from 'components/Main/MainDescription';
 
 import MyCalendar from 'components/Main/Calendar/calendar';
@@ -19,7 +18,7 @@ import Mascot from 'components/Main/Mascot/Mascot';
 import SchoolRanking from 'components/Main/Rank/SchoolRanking';
 import SchoolRanker from 'components/Main/Rank/SchoolRanker';
 
-import MascotBackgroundImage from 'assets/main/MainMascotBackground.svg';
+import MascotBackgroundImage from 'assets/Main/MainMascotBackground.svg';
 
 import Gachon from 'assets/SchoolLogo/Gachon.svg';
 import Catholic from 'assets/SchoolLogo/Catholic.svg';
@@ -48,89 +47,6 @@ import KoreaAerospace from 'assets/SchoolLogo/KoreaAerospace.svg';
 import Hansung from 'assets/SchoolLogo/Hansung.svg';
 import Hanyang from 'assets/SchoolLogo/Hanyang.svg';
 import Hongik from 'assets/SchoolLogo/Hongik.svg';
-
-const Background = styled.div`
-  background-color: #f2f5fc;
-`;
-
-const MainWrapper = styled.div`
-  margin-top: 27vh;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0 auto;
-  width: 70%;
-`;
-
-const LeftWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 45%;
-`;
-
-const ScheduleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-left: auto;
-  width: 50%;
-`;
-
-const IDinput = styled.input`
-  border: 1px solid white;
-  padding: 3px;
-
-  margin-bottom: 15px;
-`;
-
-const RankingWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 55%;
-`;
-
-const SchoolWrapper = styled.div`
-  width: 145px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  background-color: white;
-  border: 1px solid white;
-  border-radius: 15px;
-
-  padding: 10px;
-`;
-
-const SchoolRank = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-`;
-
-// const TodoListWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   width: 45%;
-//   justify-content: flex-start;
-// `;
-
-const TILGithubWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-`;
-
-const GithubWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 55%;
-`;
 
 const Main = () => {
   const schoolImages = {
@@ -395,41 +311,41 @@ const Main = () => {
         alignItems: 'center',
       }}
     >
-      <Background>
-        <MainWrapper>
+      <styles.Background>
+        <styles.MainWrapper>
           {/* 홈화면 캘린더 */}
           <MainDescription
             title="이번 달 일정 한눈에 보기"
             subtitle="UMC 일정을 확인해보세요!"
           />
-          <Wrapper>
-            <LeftWrapper>
+          <styles.Wrapper>
+            <styles.LeftWrapper>
               <MyCalendar calendarData={calendarData} />
-            </LeftWrapper>
+            </styles.LeftWrapper>
 
-            <ScheduleContainer>
+            <styles.ScheduleContainer>
               <ScheduleItem
                 campusSchedules={campusSchedules}
                 branchSchedules={branchSchedules}
                 centerSchedules={centerSchedules}
               />
-            </ScheduleContainer>
-          </Wrapper>
+            </styles.ScheduleContainer>
+          </styles.Wrapper>
 
           {/* 홈화면 공지사항 */}
           <MainDescription
             title="공지사항"
             subtitle="새롭게 업데이트된 공지사항을 확인하세요!"
           />
-          <Wrapper>
+          <styles.Wrapper>
             <Notification notificationData={notificationData} />
-          </Wrapper>
+          </styles.Wrapper>
 
           <MainDescription
             title="오늘 나의 기록"
             subtitle="오늘 내가 할 일과 배운 것들을 기록해보세요!"
           />
-          <Wrapper style={{ marginBottom: '100px' }}>
+          <styles.Wrapper>
             <InProgressTodoList
               todoListsData={todoListsData}
               myContribution={myContribution}
@@ -439,42 +355,41 @@ const Main = () => {
               todoListsData={todoListsData}
               myContribution={myContribution}
             />
-          </Wrapper>
+          </styles.Wrapper>
 
-          <Wrapper>
-            <TILGithubWrapper>
+          <styles.Wrapper>
+            <styles.TILGithubWrapper>
               <TodayILearned tilData={tilData} />
-            </TILGithubWrapper>
+            </styles.TILGithubWrapper>
 
-            <GithubWrapper>
+            <styles.GithubWrapper>
               <div style={{ marginBottom: '15px' }}> Git-hub </div>
-              <IDinput
+              <styles.IDinput
                 type="text"
                 value={githubID}
                 onChange={handleGithubInput}
                 placeholder="GitHub 아이디를 입력해주세요"
               />
               <Github githubID={githubID} />
-            </GithubWrapper>
-          </Wrapper>
+            </styles.GithubWrapper>
+          </styles.Wrapper>
 
           <MainDescription
             title="우리 학교 마스코트"
             subtitle="말랑말랑말랑이!"
           />
-          <Wrapper style={{ marginBottom: '100px' }}>
+          <styles.Wrapper>
             <div
               style={{
                 backgroundImage: `url(${MascotBackgroundImage})`,
-                width: '45%',
-                height: '553px',
+                width: '40%',
               }}
             >
               <Mascot mascotData={mascotData} />
             </div>
-            <RankingWrapper>
-              <SchoolRank>
-                <SchoolWrapper
+            <styles.RankingWrapper>
+              <styles.SchoolRank>
+                <styles.SchoolWrapper
                   style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)' }}
                 >
                   <img
@@ -502,12 +417,12 @@ const Main = () => {
                     </span>
                     <span>등이에요! 👏🏻</span>
                   </div>
-                </SchoolWrapper>
+                </styles.SchoolWrapper>
 
                 <SchoolRanking universityRank={universityRank} />
-              </SchoolRank>
-              <SchoolRank>
-                <SchoolWrapper
+              </styles.SchoolRank>
+              <styles.SchoolRank>
+                <styles.SchoolWrapper
                   style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)' }}
                 >
                   <img
@@ -536,13 +451,13 @@ const Main = () => {
                     </span>
                     <span>등이에요! 👏🏻</span>
                   </div>
-                </SchoolWrapper>
+                </styles.SchoolWrapper>
                 <SchoolRanker inUniversityRankData={inUniversityRankData} />
-              </SchoolRank>
-            </RankingWrapper>
-          </Wrapper>
-        </MainWrapper>
-      </Background>
+              </styles.SchoolRank>
+            </styles.RankingWrapper>
+          </styles.Wrapper>
+        </styles.MainWrapper>
+      </styles.Background>
     </div>
   );
 };

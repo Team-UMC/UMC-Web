@@ -10,8 +10,8 @@ import AdminCompletionButton from 'components/Management/NoticePin/AdminCompleti
 // import { IconButton } from '@mui/material';
 // import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 // import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import LeftArrowIcon from 'assets/main/LeftArrow.svg';
-import RightArrowIcon from 'assets/main/RightArrow.svg';
+import LeftArrowIcon from 'assets/Main/LeftArrow.svg';
+import RightArrowIcon from 'assets/Main/RightArrow.svg';
 import Checked from 'assets/management/checked.svg';
 
 // 운영자 관리 게시글 테이블 컴포넌트 스타일링
@@ -280,10 +280,7 @@ const NewAdminTable = () => {
           <StyledTableCell>{row.date}</StyledTableCell>
           <StyledTableCell>{row.views}</StyledTableCell>
           <StyledOpenToggle>
-            <div
-
-              onClick={() => setOpen(!open)}
-            >
+            <div onClick={() => setOpen(!open)}>
               {
                 // 펼치기/접기 버튼 아이콘
                 open ? <div> </div> : <div> </div>

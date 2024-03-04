@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import LoadingImage from 'assets/Loading.svg';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styles from './style';
 
-const LoadingPageImage = styled.img`
-  width: 100%;
-`;
+import LoadingImage from 'assets/Loading.svg';
 
 const KakaoLoginPage = () => {
   const [kakaoToken, setKakaoToken] = useState('');
   const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
+
   useEffect(() => {
     const getKakaoToken = async () => {
       try {
@@ -38,7 +36,7 @@ const KakaoLoginPage = () => {
     const loginWithKakao = async () => {
       if (kakaoToken) {
         try {
-          const response = await axios.post(
+          const res = await axios.post(
             `${process.env.REACT_APP_TEST_SERVER_URL}/members/login?accessToken=${kakaoToken}&socialType=KAKAO`,
             {
               headers: {
@@ -46,8 +44,8 @@ const KakaoLoginPage = () => {
               },
             },
           );
-          const accessToken = response.data.result.accessToken;
-          const serviceMember = response.data.result.serviceMember;
+          const accessToken = res.data.result.accessToken;
+          const serviceMember = res.data.result.serviceMember;
           localStorage.setItem('server Token', accessToken);
 
           if (serviceMember) {
@@ -64,7 +62,7 @@ const KakaoLoginPage = () => {
     loginWithKakao();
   }, [kakaoToken, navigate]);
 
-  return <LoadingPageImage src={LoadingImage} />;
+  return <styles.LoadingPageImage src={LoadingImage} />;
 };
 
 export default KakaoLoginPage;
