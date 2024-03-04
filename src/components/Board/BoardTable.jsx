@@ -8,8 +8,8 @@ import BoardWriteButton from './BoardWriteButton';
 import PinnedTable from 'components/Management/NoticePin/PinnedTable';
 import Row from './Row';
 
-import LeftArrowIcon from 'assets/main/LeftArrow.svg';
-import RightArrowIcon from 'assets/main/RightArrow.svg';
+import LeftArrowIcon from 'assets/Main/LeftArrow.svg';
+import RightArrowIcon from 'assets/Main/RightArrow.svg';
 
 // 게시글 테이블 컴포넌트 스타일링
 const StyledTable = styled.table`

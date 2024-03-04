@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ReactComponent as LeftArrowGray } from 'assets/main/LeftArrowGray.svg';
-import { ReactComponent as RightArrowGray } from 'assets/main/RightArrowGray.svg';
-import { ReactComponent as LeftArrowBlack } from 'assets/main/LeftArrowBlack.svg';
-import { ReactComponent as RightArrowBlack } from 'assets/main/RightArrowBlack.svg';
+import { ReactComponent as LeftArrowGray } from 'assets/Main/LeftArrowGray.svg';
+import { ReactComponent as RightArrowGray } from 'assets/Main/RightArrowGray.svg';
+import { ReactComponent as LeftArrowBlack } from 'assets/Main/LeftArrowBlack.svg';
+import { ReactComponent as RightArrowBlack } from 'assets/Main/RightArrowBlack.svg';
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
 `;
 
 const DataContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-around;
 `;
 
 const Rectangle = styled.div`
-  width: 20%;
+  width: 22%;
   height: 120px;
   margin: 15px;
   border: 1px solid black;
@@ -27,10 +29,11 @@ const Rectangle = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  width: 6%;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
+  justify-content: center;
 `;
 
 const Title = styled.div`

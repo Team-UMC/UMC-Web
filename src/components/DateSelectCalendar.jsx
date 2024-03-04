@@ -11,9 +11,9 @@ import {
 } from 'date-fns';
 import 'components/dateselectcalendar.css';
 
-import CalendarIcon from 'assets/main/calendar.svg';
-import LeftArrow from 'assets/main/LeftArrowGray.svg';
-import RightArrow from 'assets/main/RightArrowGray.svg';
+import CalendarIcon from 'assets/Main/calendar.svg';
+import LeftArrow from 'assets/Main/LeftArrowGray.svg';
+import RightArrow from 'assets/Main/RightArrowGray.svg';
 
 const MONTHS = [
   'January',
@@ -58,7 +58,7 @@ const DateSelectCalendar = ({ onDateChange }) => {
       }} // 선택된 날짜 스타일
       onChange={(date) => {
         // 날짜 선택 시 시작일 & 종료일 변경
-        console.log("Selected date:", date);
+        console.log('Selected date:', date);
         setSelectedDate(date);
         onDateChange(date);
       }} // 날짜 선택 시 selectedDate 변경

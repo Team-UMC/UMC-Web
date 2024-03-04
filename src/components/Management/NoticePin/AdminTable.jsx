@@ -9,8 +9,8 @@
 // import { IconButton } from '@mui/material';
 // import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 // import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-// import LeftArrowIcon from 'assets/main/LeftArrow.svg';
-// import RightArrowIcon from 'assets/main/RightArrow.svg';
+// import LeftArrowIcon from 'assets/Main/LeftArrow.svg';
+// import RightArrowIcon from 'assets/Main/RightArrow.svg';
 // import Checked from 'assets/management/checked.svg';
 
 // const StyledTable = styled.table`

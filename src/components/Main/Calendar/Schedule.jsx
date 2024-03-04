@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CampusScheduleImage from 'assets/main/Calendar/CampusSchedule.svg';
-import BranchScheduleImage from 'assets/main/Calendar/BranchSchedule.svg';
-import CenterScheduleImage from 'assets/main/Calendar/CenterSchedule.svg';
+import CampusScheduleImage from 'assets/Main/Calendar/CampusSchedule.svg';
+import BranchScheduleImage from 'assets/Main/Calendar/BranchSchedule.svg';
+import CenterScheduleImage from 'assets/Main/Calendar/CenterSchedule.svg';
 
-import Line from 'assets/main/line.svg';
-import ScheduleRectangle from 'assets/main/Calendar/ScheduleRec.svg';
+import Line from 'assets/Main/line.svg';
+import ScheduleRectangle from 'assets/Main/Calendar/ScheduleRec.svg';
 
-import LeftArrowGray from 'assets/main/LeftArrowGray.svg';
-import RightArrowGray from 'assets/main/RightArrowGray.svg';
-import LeftArrowBlack from 'assets/main/LeftArrowBlack.svg';
-import RightArrowBlack from 'assets/main/RightArrowBlack.svg';
+import LeftArrowGray from 'assets/Main/LeftArrowGray.svg';
+import RightArrowGray from 'assets/Main/RightArrowGray.svg';
+import LeftArrowBlack from 'assets/Main/LeftArrowBlack.svg';
+import RightArrowBlack from 'assets/Main/RightArrowBlack.svg';
 
 const ScheduleWrapper = styled.div`
   display: flex;
@@ -144,7 +144,7 @@ const ScheduleItem = ({
     <ScheduleWrapper>
       <div>
         <UpperWrapper>
-          <img src={CampusScheduleImage} style={{marginRight: "5px"}}/>
+          <img src={CampusScheduleImage} style={{ marginRight: '5px' }} />
           <div> 학교 별 일정 </div>
         </UpperWrapper>
         <ButtonContainer>
@@ -188,7 +188,7 @@ const ScheduleItem = ({
 
       <div>
         <UpperWrapper>
-          <img src={BranchScheduleImage} style={{marginRight: "5px"}}/>
+          <img src={BranchScheduleImage} style={{ marginRight: '5px' }} />
           <div> 지부 별 일정 </div>
         </UpperWrapper>
         <ButtonContainer>
@@ -232,7 +232,7 @@ const ScheduleItem = ({
 
       <div>
         <UpperWrapper>
-          <img src={CenterScheduleImage} style={{marginRight: "5px"}}/>
+          <img src={CenterScheduleImage} style={{ marginRight: '5px' }} />
           <div> 중앙 일정 </div>
         </UpperWrapper>
         <ButtonContainer>

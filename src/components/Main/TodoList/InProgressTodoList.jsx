@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import LeftArrowBlack from 'assets/main/LeftArrowBlack.svg';
-import RightArrowBlack from 'assets/main/RightArrowBlack.svg';
+import LeftArrowBlack from 'assets/Main/LeftArrowBlack.svg';
+import RightArrowBlack from 'assets/Main/RightArrowBlack.svg';
 
-import ClockImage from 'assets/main/Clock.svg';
+import ClockImage from 'assets/Main/Clock.svg';
 
-import TodoListAddImage from 'assets/main/TodoListAdd.svg';
+import TodoListAddImage from 'assets/Main/TodoListAdd.svg';
 
 // 진행중이에요/완료했어요 각각 Container
 const DataContainer = styled.div`
