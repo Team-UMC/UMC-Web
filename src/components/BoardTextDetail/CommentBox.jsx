@@ -97,11 +97,7 @@ const CommentBox = ({ commentData, getBoardComment }) => {
         <Container key={index}>
           <ProfileImgTextWrapper>
             <img
-              src={
-                boardDetailData.profileImage
-                  ? boardDetailData.profileImage
-                  : BasicProfileImage
-              }
+              src={data.profileImage ? data.profileImage : BasicProfileImage}
               style={{ width: '50px', height: '50px' }}
             />
 
