@@ -137,8 +137,8 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
   // const boardId = boardDetailData.boardId;
 
   const handleModifyButton = () => {
-    navigate(`/board/modify/${host}/${board}/${boardId}`)
-  }
+    navigate(`/board/modify/${host}/${board}/${boardId}`);
+  };
 
   // 스크롤을 페이지 바닥으로 이동시키는 함수
   const scrollToBottom = () => {
@@ -150,14 +150,18 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
 
   useEffect(() => {
     getBoardDetail();
-  }, [boardDetailData]);
+  }, []);
 
   return (
     <BoxContainer>
       <AllWrapper>
         <ProfileImgTextWrapper>
           <img
-            src={boardDetailData.profileImage ? boardDetailData.profileImage : BasicProfileImage}
+            src={
+              boardDetailData.profileImage
+                ? boardDetailData.profileImage
+                : BasicProfileImage
+            }
             style={{ width: '50px', height: '50px' }}
           />
 
@@ -177,7 +181,9 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
           {isOptionOpen && (
             <OptionWrapper>
               <div onClick={handleButtonClick}>
-                <div style={{ cursor: 'pointer' }} onClick={handleModifyButton}>수정하기</div>
+                <div style={{ cursor: 'pointer' }} onClick={handleModifyButton}>
+                  수정하기
+                </div>
                 <hr />
                 <div style={{ cursor: 'pointer', color: 'red' }}>삭제하기</div>
               </div>
