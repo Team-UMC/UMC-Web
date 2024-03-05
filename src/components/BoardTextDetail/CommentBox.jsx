@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
 import OptionButtonImage from 'assets/OptionButton.svg';
 
 // 댓글의 전체(작성자 정보, 댓글 내용, 날짜)를 감싸는 박스
@@ -96,7 +97,11 @@ const CommentBox = ({ commentData, getBoardComment }) => {
         <Container key={index}>
           <ProfileImgTextWrapper>
             <img
-              src={data.profileImage}
+              src={
+                boardDetailData.profileImage
+                  ? boardDetailData.profileImage
+                  : BasicProfileImage
+              }
               style={{ width: '50px', height: '50px' }}
             />
 
