@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 // 하나의 게시글을 감싸는 div
 const Container = styled.div`
@@ -47,6 +48,8 @@ const BoardCell = styled.div`
 
 // 게시글 테이블의 행 컴포넌트
 const Row = ({ boardData, host, board }) => {
+  const navigate = useNavigate();
+
   // createdAt이 "2024-02-14T00:21:55.884612" (ISO 8601 형식)으로 저장되어 있으므로 형태 변경시키기
   const changeDataFormat = (date) => {
     return new Date(date)
@@ -62,7 +65,7 @@ const Row = ({ boardData, host, board }) => {
   const boardValue = board.toLowerCase();
 
   const handleTitleClick = (boardId) => {
-    window.location.href = `/board/${hostValue}/${boardValue}/${boardId}`;
+    navigate(`/board/${hostValue}/${boardValue}/${boardId}`);
   };
 
   return (
