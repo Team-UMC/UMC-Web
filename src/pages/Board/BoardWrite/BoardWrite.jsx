@@ -102,19 +102,15 @@ const BoardWrite = () => {
     );
 
     try {
-      const res = await axiosInstance.post('/boards', formData, {
+      await axiosInstance.post('/boards', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
-      console.log(imageList);
-      console.log('Server response:', res.data.result);
-
       const url = `/board/${selectedHost}/${selectedBoard}`;
       navigate(url);
     } catch (error) {
-      console.error('Error creating post: ', error);
+      console.log('Error creating post: ', error);
     }
   };
 

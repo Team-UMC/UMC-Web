@@ -133,8 +133,6 @@ const Main = () => {
         setCampusSchedules(res.data.result.campusSchedules);
         setBranchSchedules(res.data.result.branchSchedules);
         setCenterSchedules(res.data.result.centerSchedules);
-
-        console.log(res);
       } catch (error) {
         console.error();
       }
