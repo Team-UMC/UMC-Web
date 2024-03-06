@@ -12,7 +12,7 @@ import AdminCompletionButton from 'components/Management/NoticePin/AdminCompleti
 // import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LeftArrowIcon from 'assets/Main/LeftArrow.svg';
 import RightArrowIcon from 'assets/Main/RightArrow.svg';
-import Checked from 'assets/management/checked.svg';
+import Checked from 'assets/Management/Checked.svg';
 
 // 운영자 관리 게시글 테이블 컴포넌트 스타일링
 const StyledTable = styled.table`

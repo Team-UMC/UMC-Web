@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import SearchIcon from 'assets/board/search.svg';
+import SearchIcon from 'assets/Board/Search.svg';
 
 // 검색창 감싸는 컴포넌트
 const SearchWrapper = styled.div`

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-import suggestion from 'assets/boardCard/suggestion.svg';
-import campus from 'assets/boardCard/school.svg';
-import branch from 'assets/boardCard/branch.svg';
-import center from 'assets/boardCard/union.svg';
+import suggestion from 'assets/Board/BoardCard/Suggestion.svg';
+import campus from 'assets/Board/BoardCard/School.svg';
+import branch from 'assets/Board/BoardCard/Branch.svg';
+import center from 'assets/Board/BoardCard/Union.svg';
 
 // 게시판 박스를 감싸는 컴포넌트
 const Card = styled.div`

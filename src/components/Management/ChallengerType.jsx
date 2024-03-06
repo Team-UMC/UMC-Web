@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import ChallengerAdd from 'assets/management/challengeradd.svg';
-import ChallengerRemove from 'assets/management/challengerremove.svg';
+import ChallengerAdd from 'assets/Management/ChallengerAdd.svg';
+import ChallengerRemove from 'assets/Management/ChallengerRemove.svg';
 
 const ChallengerTypeContainer = styled.div`
   width: 100%;
@@ -22,7 +22,7 @@ const TitleContainer = styled.div`
   margin-top: 16px;
   background-color: #fff;
 
-  border: 1px solid #232A6D;
+  border: 1px solid #232a6d;
 `;
 
 const DropdownBox = styled.select`
@@ -53,11 +53,11 @@ const AddButton = styled.div`
 `;
 
 const RemoveButton = styled.div`
-margin-right: 1vh;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
+  margin-right: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `;
 
 const ChallengerType = () => {
@@ -100,8 +100,7 @@ const ChallengerType = () => {
       <DropBoxContainer key={index}>
         {additionalDropdowns.length > 0 && (
           <RemoveButton onClick={() => handleRemoveButtonClick(index)}>
-            <img src={ChallengerRemove} alt='챌린저 제거 버튼' />
-
+            <img src={ChallengerRemove} alt="챌린저 제거 버튼" />
           </RemoveButton>
         )}
         <DropdownBox
@@ -109,7 +108,9 @@ const ChallengerType = () => {
           onChange={(event) => handleAdditionalDropdownChange(index, event)}
           selected={dropdown.option !== ''}
         >
-          <option value="" hidden disabled>기수</option>
+          <option value="" hidden disabled>
+            기수
+          </option>
           <option value="1기">1기</option>
           <option value="2기">2기</option>
           <option value="3기">3기</option>
@@ -123,7 +124,9 @@ const ChallengerType = () => {
           onChange={(event) => handleAdditionalDropdownChangePart(index, event)}
           selected={dropdown.part !== ''}
         >
-          <option value="" hidden disabled>파트</option>
+          <option value="" hidden disabled>
+            파트
+          </option>
           <option value="PM">PM</option>
           <option value="Design">Design</option>
           <option value="Spring">Spring</option>
@@ -133,10 +136,10 @@ const ChallengerType = () => {
           <option value="Android">Android</option>
         </DropdownBox>
 
-        <AddButton onClick={handleAddButtonClick}>기수추가
-        <img src={ChallengerAdd} alt='더하기 버튼' />
+        <AddButton onClick={handleAddButtonClick}>
+          기수추가
+          <img src={ChallengerAdd} alt="더하기 버튼" />
         </AddButton>
-        
       </DropBoxContainer>
     ));
   };
@@ -146,9 +149,9 @@ const ChallengerType = () => {
       <TitleContainer>
         기수 및 파트
         <DropBoxContainer>
-        {additionalDropdowns.length > 0 && (
+          {additionalDropdowns.length > 0 && (
             <RemoveButton onClick={() => handleRemoveButtonClick(0)}>
-              <img src={ChallengerRemove} alt='챌린저 제거 버튼' />
+              <img src={ChallengerRemove} alt="챌린저 제거 버튼" />
             </RemoveButton>
           )}
           <DropdownBox
@@ -156,7 +159,9 @@ const ChallengerType = () => {
             onChange={handleDropdownChange}
             selected={selectedOption !== ''}
           >
-            <option value="" hidden disabled>기수</option>
+            <option value="" hidden disabled>
+              기수
+            </option>
             <option value="1기">1기</option>
             <option value="2기">2기</option>
             <option value="3기">3기</option>
@@ -170,7 +175,9 @@ const ChallengerType = () => {
             onChange={handleDropdownChangePart}
             selected={selectedPart !== ''}
           >
-            <option value="" hidden disabled>파트</option>
+            <option value="" hidden disabled>
+              파트
+            </option>
             <option value="PM">PM</option>
             <option value="Design">Design</option>
             <option value="Spring">Spring</option>
@@ -180,10 +187,10 @@ const ChallengerType = () => {
             <option value="Android">Android</option>
           </DropdownBox>
 
-          <AddButton onClick={handleAddButtonClick}>기수추가
-        <img src={ChallengerAdd} alt='더하기 버튼' />
-        </AddButton>          
-        
+          <AddButton onClick={handleAddButtonClick}>
+            기수추가
+            <img src={ChallengerAdd} alt="더하기 버튼" />
+          </AddButton>
         </DropBoxContainer>
         {renderAdditionalDropdowns()}
       </TitleContainer>

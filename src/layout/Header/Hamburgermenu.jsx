@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import BlackLeftContainer from 'components/Header/BlackLeftContainer';
 import BlackRightContainer from 'components/Header/BlackRightContainer';
-import HamburgerMenuBackgroundImage from 'assets/header/HamburgerMenuBackground.svg';
+import HamburgerMenuBackgroundImage from 'assets/Header/HamburgerMenuBackground.svg';
 
-import HamburgerMenuCloseBtnImage from 'assets/header/HamburgerCloseButton.svg';
+import HamburgerMenuCloseBtnImage from 'assets/Header/HamburgerCloseButton.svg';
 
 import DetailLink from './DetailLink';
 

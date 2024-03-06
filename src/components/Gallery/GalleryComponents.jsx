@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ViewIcon from 'assets/gallery/view.svg';
+import ViewIcon from 'assets/Album/View.svg';
 
 // 갤러리 아이템 컴포넌트 스타일링
 const GalleryItem = styled.div`

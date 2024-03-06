@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import pencil from 'assets/gallery/pencil-fill.svg';
+import pencil from 'assets/Album/Pencil.svg';
 
 // 글쓰기 버튼 전체 컨테이너 스타일링
 const GalleryButtonWrapper = styled.div`
