@@ -69,8 +69,6 @@ const RightContainer = () => {
 
         setNickname(res.data.result.nickname);
         setProfileImage(res.data.result.profileImage);
-
-        console.log(res);
       } catch (error) {
         console.log('Error get nickname', error);
       }
