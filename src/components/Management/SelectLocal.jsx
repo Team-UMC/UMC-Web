@@ -7,7 +7,7 @@ const LocalContainer = styled.div`
   padding: 1vh;
   border-radius: 12px;
   margin-top: 1.6vh;
-  border: 1px solid #232A6D;
+  border: 1px solid #232a6d;
 `;
 
 const LocalInput = styled.input`
@@ -18,16 +18,16 @@ const LocalInput = styled.input`
   border-radius: 12px;
   outline: none;
   &::placeholder {
-    color: #BCBCBC; 
+    color: #bcbcbc;
   }
 `;
 
 const Local = () => {
-    return(
-        <LocalContainer>
-            <LocalInput placeholder="장소설정" />
-        </LocalContainer>
-    );
+  return (
+    <LocalContainer>
+      <LocalInput placeholder="장소설정" />
+    </LocalContainer>
+  );
 };
 
 export default Local;

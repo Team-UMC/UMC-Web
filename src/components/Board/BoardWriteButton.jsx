@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import pencil from 'assets/board/pencil-fill.svg';
+import pencil from 'assets/Board/Pencil.svg';
 
 // 글쓰기 버튼을 감싸는 컴포넌트
 const BoardButtonWrapper = styled.div`
