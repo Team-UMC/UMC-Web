@@ -63,6 +63,26 @@ const Button = styled.div`
   cursor: pointer;
 `;
 
+const ApplyButton = styled.div`
+  width: 8%;
+  height: 40px;
+
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // 흰색 네모 박스 형태로 만들기
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: #000c76;
+
+  color: white;
+
+  // 마우스 커서 올리면 커서 변경
+  cursor: pointer;
+`;
+
 const ProfileSettingPage = () => {
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
@@ -113,7 +133,7 @@ const ProfileSettingPage = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      window.location.replace('/profilesetting');
+      navigate('/main');
     } catch (error) {
       console.error('Error occurred: ', error);
     }
@@ -161,7 +181,7 @@ const ProfileSettingPage = () => {
         </Wrapper>
         <ButtonContainer>
           <Button onClick={ExitHandler}> 취소 </Button>
-          <Button onClick={changeProfile}> 적용 </Button>
+          <ApplyButton onClick={changeProfile}> 적용 </ApplyButton>
         </ButtonContainer>
       </Div>
     </div>

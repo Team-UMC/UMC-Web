@@ -18,8 +18,6 @@ import Mascot from 'components/Main/Mascot/Mascot';
 import SchoolRanking from 'components/Main/Rank/SchoolRanking';
 import SchoolRanker from 'components/Main/Rank/SchoolRanker';
 
-import MascotBackgroundImage from 'assets/Main/MainMascotBackground.svg';
-
 import Gachon from 'assets/SchoolLogo/Gachon.svg';
 import Catholic from 'assets/SchoolLogo/Catholic.svg';
 import Kyounggi from 'assets/SchoolLogo/Kyounggi.svg';
@@ -47,6 +45,9 @@ import KoreaAerospace from 'assets/SchoolLogo/KoreaAerospace.svg';
 import Hansung from 'assets/SchoolLogo/Hansung.svg';
 import Hanyang from 'assets/SchoolLogo/Hanyang.svg';
 import Hongik from 'assets/SchoolLogo/Hongik.svg';
+
+import SchoolHatImage from 'assets/Main/Ranking/SchoolHat.svg';
+import MedalImage from 'assets/Main/Ranking/Medal.svg';
 
 const Main = () => {
   const schoolImages = {
@@ -132,6 +133,8 @@ const Main = () => {
         setCampusSchedules(res.data.result.campusSchedules);
         setBranchSchedules(res.data.result.branchSchedules);
         setCenterSchedules(res.data.result.centerSchedules);
+
+        console.log(res);
       } catch (error) {
         console.error();
       }
@@ -379,16 +382,11 @@ const Main = () => {
             subtitle="말랑말랑말랑이!"
           />
           <styles.Wrapper>
-            <div
-              style={{
-                backgroundImage: `url(${MascotBackgroundImage})`,
-                width: '40%',
-              }}
-            >
-              <Mascot mascotData={mascotData} />
-            </div>
+            <Mascot mascotData={mascotData} />
             <styles.RankingWrapper>
               <styles.SchoolRank>
+                <img src={SchoolHatImage} />
+
                 <styles.SchoolWrapper
                   style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)' }}
                 >
@@ -422,6 +420,7 @@ const Main = () => {
                 <SchoolRanking universityRank={universityRank} />
               </styles.SchoolRank>
               <styles.SchoolRank>
+                <img src={MedalImage} />
                 <styles.SchoolWrapper
                   style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)' }}
                 >

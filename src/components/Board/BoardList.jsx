@@ -96,6 +96,8 @@ const BoardList = () => {
   const [boardData, setBoardData] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
 
+  const [pinnedData, setPinnedData] = useState([]);
+
   useEffect(() => {
     const getBoardData = async (host, board, page) => {
       try {
@@ -108,16 +110,25 @@ const BoardList = () => {
         });
         setBoardData(res.data.result.boardPageElements);
         setTotalPages(res.data.result.totalPages);
-
-        console.log(boardData);
-        console.log(host);
-        console.log(board);
       } catch (error) {
-        console.error();
+        console.log(error);
       }
     };
     getBoardData(host, board, page);
   }, [host, board, page]);
+
+  useEffect(() => {
+    const getPinnedData = async () => {
+      try {
+        const res = await axiosInstance.get(`/boards/pinned`);
+
+        setPinnedData(res.data.result.pinnedNotices);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getPinnedData();
+  }, []);
 
   // 검색 기능
   const [keyword, setKeyword] = useState('');
@@ -159,7 +170,12 @@ const BoardList = () => {
         <BoardCell>조회수</BoardCell>
       </Container>
 
-      <Row boardData={boardData} host={host} board={board} />
+      <Row
+        boardData={boardData}
+        host={host}
+        board={board}
+        pinnedData={pinnedData}
+      />
 
       <BoardWriteButtonLayout>
         <BoardWriteButton />
