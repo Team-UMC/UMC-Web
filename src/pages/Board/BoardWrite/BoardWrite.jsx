@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
-import BoardFile from 'components/BoardWrite/BoardFile';
+//import BoardFile from 'components/BoardWrite/BoardFile';
 import BoardLabel from 'components/BoardWrite/BoardLabel';
 import BoardTitle from 'components/BoardWrite/BoardTitle';
 import BoardText from 'components/BoardWrite/BoardText';
@@ -47,7 +47,9 @@ const BoardWrite = () => {
   const [content, setContent] = useState('');
   const [selectedHost, setSelectedHost] = useState('');
   const [selectedBoard, setSelectedBoard] = useState('');
-  const [boardFiles, setBoardFiles] = useState([]);
+  //const [boardFiles, setBoardFiles] = useState([]);
+
+  const boardFiles = [];
 
   const [buttonStates, setButtonStates] = useState({
     campusButton: false,
@@ -78,12 +80,21 @@ const BoardWrite = () => {
     }));
   }, [location.pathname]);
 
+  const onSaveFiles = (e) => {
+    const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일선택창에서 선택한 파일들
+
+    uploadFiles.forEach((uploadFile) => {
+      boardFiles.push(uploadFile);
+    });
+  };
+
   const handleSubmit = async () => {
     const formData = new FormData();
 
-    if (boardFiles) {
-      formData.append('boardFiles', boardFiles);
-    }
+    // 파일을 formData에 추가합니다.
+    boardFiles.forEach((file) => {
+      formData.append('boardFiles', file);
+    });
 
     formData.append(
       'request',
@@ -133,7 +144,12 @@ const BoardWrite = () => {
           />
         </LeftContainer>
 
-        <BoardFile boardFiles={boardFiles} setBoardFiles={setBoardFiles} />
+        <input
+          type="file"
+          multiple
+          /* 파일 여러개 선택 가능하게 하기 */ onChange={onSaveFiles}
+        />
+
         <BoardTitle onChange={(e) => setTitle(e.target.value)} />
         <BoardText onChange={(e) => setContent(e.target.value)} />
 

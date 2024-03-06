@@ -110,6 +110,7 @@ const CommentWriteBox = () => {
         const res = await axiosInstance.get(`/members`);
 
         setUserData(res.data.result);
+        console.log(res);
       } catch {
         console.error();
       }
@@ -147,7 +148,9 @@ const CommentWriteBox = () => {
             {userData.nickname}/{userData.name}
           </NameNickname>
 
-          <CohortPart> {userData.universityName} &#124; {/* 파트 들어가야 됨 */} </CohortPart>
+          <CohortPart>
+            {/* {userData.universityName} &#124; {userData.semesterParts[0].part} */}
+          </CohortPart>
         </ProfileWrapper>
       </ProfileImgTextWrapper>
 

@@ -56,10 +56,10 @@ const FileInput = styled.input`
 
 const BoardFile = ({ boardFiles, setBoardFiles }) => {
   const handleFileChange = (event) => {
-    const newFiles = [...boardFiles]; // 기존 파일 배열을 복사합니다.
-    const files = event.target.boardFiles;
+    const newFiles = [...boardFiles];
+    const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
-      newFiles.push(files[i]); // 새 파일을 기존 파일 배열에 추가합니다.
+      newFiles.push(files[i]);
     }
     setBoardFiles(newFiles);
   };
@@ -85,11 +85,12 @@ const BoardFile = ({ boardFiles, setBoardFiles }) => {
         id="fileInput"
         onChange={handleFileChange}
         multiple
+        accept=".pdf, .png, .jpg, .jpeg"
       />
       <FileNameContainer>
-        {boardFiles.map((files, index) => (
+        {boardFiles.map((file, index) => (
           <FileName key={index}>
-            {files.name}
+            {file.name}
             <DeleteButton onClick={() => handleDeleteFile(index)}>
               X
             </DeleteButton>

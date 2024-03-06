@@ -192,6 +192,22 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
         </ProfileImgTextWrapper>
 
         <TextTitle> {boardDetailData.title} </TextTitle>
+
+        {boardDetailData.boardFiles &&
+          boardDetailData.boardFiles.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Image ${index + 1}`}
+              style={{
+                maxWidth: '80%',
+                maxHeight: '80%',
+                width: 'auto',
+                height: 'auto',
+              }}
+            />
+          ))}
+
         <TextContent> {boardDetailData.content} </TextContent>
 
         <LikeCommentViewCountWrapper>
