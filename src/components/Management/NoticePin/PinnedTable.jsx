@@ -7,8 +7,8 @@ import { useLocation } from 'react-router-dom';
 // import { IconButton } from '@mui/material';
 // import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 // import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Checked from 'assets/management/checked.svg';
-import pin from 'assets/board/list/Pinned.svg';
+import Checked from 'assets/Management/Checked.svg';
+import pin from 'assets/Board/List/Pinned.svg';
 
 // 고정된 글 목록을 감싸는 컴포넌트
 const StyledTableRow = styled.tr`
@@ -184,10 +184,7 @@ const PinnedTable = ({ row }) => {
         <StyledTableCell>{row.date}</StyledTableCell>
         <StyledTableCell>{row.views}</StyledTableCell>
         <StyledOpenToggle>
-          <div
-
-            onClick={() => setOpen(!open)}
-          >
+          <div onClick={() => setOpen(!open)}>
             {
               // 펼치기/접기 버튼 아이콘
               open ? <div> </div> : <div> </div>

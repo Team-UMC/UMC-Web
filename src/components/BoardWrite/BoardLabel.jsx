@@ -3,14 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CampusUnchecked from 'assets/board/write/SchoolUnchecked.svg';
-import CampusChecked from 'assets/board/write/SchoolChecked.svg';
-import BranchUnchecked from 'assets/board/write/CampUnchecked.svg';
-import BranchChecked from 'assets/board/write/CampChecked.svg';
-import CenterUnchecked from 'assets/board/write/UnionUnchecked.svg';
-import CenterChecked from 'assets/board/write/UnionChecked.svg';
-import SuggestionUnchecked from 'assets/board/write/SuggestionUnchecked.svg';
-import SuggestionChecked from 'assets/board/write/SuggestionChecked.svg';
+import CampusUnchecked from 'assets/Board/Write/SchoolUnchecked.svg';
+import CampusChecked from 'assets/Board/Write/SchoolChecked.svg';
+import BranchUnchecked from 'assets/Board/Write/CampUnchecked.svg';
+import BranchChecked from 'assets/Board/Write/CampChecked.svg';
+import CenterUnchecked from 'assets/Board/Write/UnionUnchecked.svg';
+import CenterChecked from 'assets/Board/Write/UnionChecked.svg';
+import SuggestionUnchecked from 'assets/Board/Write/SuggestionUnchecked.svg';
+import SuggestionChecked from 'assets/Board/Write/SuggestionChecked.svg';
 
 import CampusBoard from './BoardCampus';
 import BranchBoard from './BoardBranch';
@@ -34,7 +34,7 @@ const BoardLabel = ({
   setButtonStates,
 }) => {
   const location = useLocation();
-  
+
   const handleClick = (buttonName, host, board) => {
     setButtonStates((prevStates) => ({
       ...prevStates,
@@ -54,7 +54,10 @@ const BoardLabel = ({
     <div>
       <ContainerType>
         <div>
-          <TypeLink to="#" onClick={() => handleClick('campusButton', 'CAMPUS', 'NOTICE')}>
+          <TypeLink
+            to="#"
+            onClick={() => handleClick('campusButton', 'CAMPUS', 'NOTICE')}
+          >
             {buttonStates.campusButton || boardFromURL === 'CAMPUS' ? (
               <img src={CampusChecked} alt="Inactive Image" />
             ) : (
@@ -62,7 +65,10 @@ const BoardLabel = ({
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('branchButton', 'BRANCH', 'NOTICE')}>
+          <TypeLink
+            to="#"
+            onClick={() => handleClick('branchButton', 'BRANCH', 'NOTICE')}
+          >
             {buttonStates.branchButton || boardFromURL === 'BRANCH' ? (
               <img src={BranchChecked} alt="Inactive Image" />
             ) : (
@@ -70,7 +76,10 @@ const BoardLabel = ({
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('centerButton', 'CENTER', 'NOTICE')}>
+          <TypeLink
+            to="#"
+            onClick={() => handleClick('centerButton', 'CENTER', 'NOTICE')}
+          >
             {buttonStates.centerButton || boardFromURL === 'CENTER' ? (
               <img src={CenterChecked} alt="Inactive Image" />
             ) : (
@@ -78,7 +87,10 @@ const BoardLabel = ({
             )}
           </TypeLink>
 
-          <TypeLink to="#" onClick={() => handleClick('suggestionButton', 'CENTER', 'NOTICE')}>
+          <TypeLink
+            to="#"
+            onClick={() => handleClick('suggestionButton', 'CENTER', 'NOTICE')}
+          >
             {buttonStates.suggestionButton || boardFromURL === 'SUGGESTION' ? (
               <img src={SuggestionChecked} alt="Inactive Image" />
             ) : (

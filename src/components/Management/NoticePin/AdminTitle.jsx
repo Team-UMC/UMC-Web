@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import AdminTitleIcon from 'assets/management/AdminTitle.svg';
+import AdminTitleIcon from 'assets/Management/AdminTitle.svg';
 
 // 사용자 관리 페이지 제목 컴포넌트 스타일링
 const AdminTitleContainer = styled.div`

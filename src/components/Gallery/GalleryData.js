@@ -1,9 +1,9 @@
-import gallery1 from 'assets/gallery/gallerylist/gallery01.png';
-import gallery2 from 'assets/gallery/gallerylist/gallery02.png';
-import gallery3 from 'assets/gallery/gallerylist/gallery03.png';
-import gallery4 from 'assets/gallery/gallerylist/gallery04.png';
-import gallery5 from 'assets/gallery/gallerylist/gallery05.png';
-import gallery6 from 'assets/gallery/gallerylist/gallery06.png';
+import gallery1 from 'assets/Album/List/gallery01.png';
+import gallery2 from 'assets/Album/List/gallery02.png';
+import gallery3 from 'assets/Album/List/gallery03.png';
+import gallery4 from 'assets/Album/List/gallery04.png';
+import gallery5 from 'assets/Album/List/gallery05.png';
+import gallery6 from 'assets/Album/List/gallery06.png';
 
 const total_Pages = 10;
 

@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import NavStyleStar from 'assets/header/NavStyleStar.svg';
-import NavTextStyle from 'assets/header/NavTextStyle.svg';
+import NavStyleStar from 'assets/Header/NavStyleStar.svg';
+import NavTextStyle from 'assets/Header/NavTextStyle.svg';
 
 const NavWrapper = styled.nav`
   display: flex;

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import LeftContainer from 'components/Header/LeftContainer';
 import RightContainer from 'components/Header/RightContainer';
 
-import LargeHeaderImage from 'assets/header/LargeHeader.svg';
-import SmallHeaderImage from 'assets/header/SmallHeader.png';
-import HamburgerMenuBtnImage from 'assets/header/HamburgerOpenButton.svg';
+import LargeHeaderImage from 'assets/Header/LargeHeader.svg';
+import SmallHeaderImage from 'assets/Header/SmallHeader.png';
+import HamburgerMenuBtnImage from 'assets/Header/HamburgerOpenButton.svg';
 
 import HamburgerMenu from './Hamburgermenu';
 
@@ -59,8 +59,9 @@ const Header = () => {
     <>
       <HeaderWrapper
         style={{
-          background: `url(${isScrolled ? SmallHeaderImage : LargeHeaderImage
-            }) no-repeat center center`,
+          background: `url(${
+            isScrolled ? SmallHeaderImage : LargeHeaderImage
+          }) no-repeat center center`,
         }}
         scrolled={isScrolled}
       >

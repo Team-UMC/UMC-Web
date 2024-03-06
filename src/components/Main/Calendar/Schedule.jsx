@@ -6,7 +6,7 @@ import CampusScheduleImage from 'assets/Main/Calendar/CampusSchedule.svg';
 import BranchScheduleImage from 'assets/Main/Calendar/BranchSchedule.svg';
 import CenterScheduleImage from 'assets/Main/Calendar/CenterSchedule.svg';
 
-import Line from 'assets/Main/line.svg';
+import Line from 'assets/Main/Line.svg';
 import ScheduleRectangle from 'assets/Main/Calendar/ScheduleRec.svg';
 
 import LeftArrowGray from 'assets/Main/LeftArrowGray.svg';

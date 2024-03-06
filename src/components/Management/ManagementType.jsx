@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import setnoticeUnchecked from 'assets/management/setnoticeUnchecked.svg';
-import setnoticeChecked from 'assets/management/setnoticeChecked.svg';
-import calenderUnchecked from 'assets/management/calenderUnchecked.svg';
-import calenderChecked from 'assets/management/calenderChecked.svg';
-import challengerUnchecked from 'assets/management/challengerUnchecked.svg';
-import challengerChecked from 'assets/management/challengerChecked.svg';
+import setnoticeUnchecked from 'assets/Management/SetNoticeUnchecked.svg';
+import setnoticeChecked from 'assets/Management/SetNoticeChecked.svg';
+import calenderUnchecked from 'assets/Management/CalenderUnchecked.svg';
+import calenderChecked from 'assets/Management/CalenderChecked.svg';
+import challengerUnchecked from 'assets/Management/ChallengerUnchecked.svg';
+import challengerChecked from 'assets/Management/ChallengerChecked.svg';
 
 const ManagmentContainer = styled.div`
   display: flex;
@@ -29,7 +29,10 @@ const ManagementLink = styled(Link)`
 const ManagementType = ({ buttonStates, handleClick }) => {
   return (
     <ManagmentContainer>
-      <ManagementLink to="/management/notice" onClick={() => handleClick('setnoticeButton')}>
+      <ManagementLink
+        to="/management/notice"
+        onClick={() => handleClick('setnoticeButton')}
+      >
         {buttonStates.setnoticeButton ? (
           <img src={setnoticeChecked} alt="활성 이미지" />
         ) : (
@@ -37,7 +40,10 @@ const ManagementType = ({ buttonStates, handleClick }) => {
         )}
       </ManagementLink>
 
-      <ManagementLink to="/management/calendar" onClick={() => handleClick('calenderButton')}>
+      <ManagementLink
+        to="/management/calendar"
+        onClick={() => handleClick('calenderButton')}
+      >
         {buttonStates.calenderButton ? (
           <img src={calenderChecked} alt="활성 이미지" />
         ) : (
@@ -45,7 +51,10 @@ const ManagementType = ({ buttonStates, handleClick }) => {
         )}
       </ManagementLink>
 
-      <ManagementLink to="/management/challenger" onClick={() => handleClick('challengerButton')}>
+      <ManagementLink
+        to="/management/challenger"
+        onClick={() => handleClick('challengerButton')}
+      >
         {buttonStates.challengerButton ? (
           <img src={challengerChecked} alt="활성 이미지" />
         ) : (

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import LeftContainer from 'components/Header/LeftContainer';
 import RightContainer from 'components/Header/RightContainer';
 
-import SmallHeaderImage from 'assets/header/SmallHeader.png';
+import SmallHeaderImage from 'assets/Header/SmallHeader.png';
 
-import HamburgerMenuBtnImage from 'assets/header/HamburgerOpenButton.svg';
+import HamburgerMenuBtnImage from 'assets/Header/HamburgerOpenButton.svg';
 
 import HamburgerMenu from './Hamburgermenu';
 

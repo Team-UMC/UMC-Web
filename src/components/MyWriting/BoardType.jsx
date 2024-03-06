@@ -2,19 +2,19 @@ import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import SchoolUnchecked from 'assets/mywrite/mywriteSchoolUnchecked.svg';
-import SchoolChecked from 'assets/mywrite/mywriteSchoolChecked.svg';
-import CampUnchecked from 'assets/mywrite/mywriteCampUnchecked.svg';
-import CampChecked from 'assets/mywrite/mywriteCampChecked.svg';
-import UnionUnchecked from 'assets/mywrite/mywriteUnionUnchecked.svg';
-import UnionChecked from 'assets/mywrite/mywriteUnionChecked.svg';
-import SuggestionUnchecked from 'assets/mywrite/mywriteSuggestionUnchecked.svg';
-import SuggestionChecked from 'assets/mywrite/mywriteSuggestionChecked.svg';
+import SchoolUnchecked from 'assets/MyWrite/MyWriteSchoolUnchecked.svg';
+import SchoolChecked from 'assets/MyWrite/MyWriteSchoolChecked.svg';
+import CampUnchecked from 'assets/MyWrite/MyWriteCampUnchecked.svg';
+import CampChecked from 'assets/MyWrite/MyWriteCampChecked.svg';
+import UnionUnchecked from 'assets/MyWrite/MyWriteUnionUnchecked.svg';
+import UnionChecked from 'assets/MyWrite/MyWriteUnionChecked.svg';
+import SuggestionUnchecked from 'assets/MyWrite/MyWriteSuggestionUnchecked.svg';
+import SuggestionChecked from 'assets/MyWrite/MyWriteSuggestionChecked.svg';
 
 import SchoolBoard from 'components/BoardWrite/BoardCampus';
 import CampBoard from 'components/BoardWrite/BoardBranch';
 
-import ResetImg from 'assets/mywrite/reset.svg';
+import ResetImg from 'assets/MyWrite/Reset.svg';
 
 const AllContainer = styled.div`
   display: flex;
