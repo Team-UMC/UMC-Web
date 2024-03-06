@@ -44,7 +44,7 @@ const NameNickname = styled.p`
 
 // 글의 내용을 나타내는 컴포넌트
 const TextContent = styled.p`
-  padding-bottom: 1%;
+  padding: 1% 0;
 `;
 
 // 기수/파트에 스타일링하기 위해 사용

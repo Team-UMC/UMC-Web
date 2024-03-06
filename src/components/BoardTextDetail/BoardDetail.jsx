@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+
+import styles from './BoardDetail.style';
 
 import Like from 'assets/Like.svg';
 import Comment from 'assets/Comment.svg';
@@ -13,108 +14,6 @@ import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
 
 import OptionButtonImage from 'assets/OptionButton.svg';
 import { useNavigate } from 'react-router-dom';
-
-// TextDetail을 스타일링하기 위한 박스
-const BoxContainer = styled.div`
-  width: 100%;
-  background-color: white;
-  padding: 1.5vw;
-  word-wrap: break-word;
-  border-radius: 15px;
-`;
-
-// 전체를 스타일링 하는 컴포넌트(가장 상위 요소)
-const AllWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const ProfileImgTextWrapper = styled.div`
-  display: flex;
-  position: relative;
-  // 프로필 사진과 (닉네임/이름, 기수/파트)그룹 사이의 간격을 조절하기 위해 사용
-  gap: 0.3vw;
-`;
-
-// 닉네임/이름, 기수/파트를 그룹화 하기 위해 사용
-const ProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-// 닉네임/이름에 스타일링하기 위해 사용
-const NameNickname = styled.p`
-  // 글씨 스타일링
-  color: #000000;
-  font-size: 1em;
-  font-weight: bold;
-  letter-spacing: -1.4px;
-`;
-
-// 글의 제목을 나타내는 컴포넌트
-const TextTitle = styled.h2`
-  padding: 1% 0;
-  font-weight: bold;
-`;
-
-// 글의 내용을 나타내는 컴포넌트
-const TextContent = styled.p`
-  padding: 1% 0;
-`;
-
-// 기수/파트에 스타일링하기 위해 사용
-const CohortPart = styled.p`
-  // 글씨 스타일링
-  color: #9d9d9d;
-  font-size: 0.9em;
-  font-weight: 600;
-  letter-spacing: -1.4px;
-`;
-
-// 좋아요수, 댓글수, 조회수를 묶어서 정렬하기 위해 사용
-const LikeCommentViewCountWrapper = styled.div`
-  display: inline-flex;
-  width: 50%;
-  flex-direction: row;
-  gap: 1vw;
-  justify-content: flex-start;
-  padding: 1% 0;
-`;
-
-// 좋아요수, 댓글수, 조회수를 각각 정렬하기 위해 사용
-const Wrapper = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  gap: 0.1vw;
-`;
-
-const BottomWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-`;
-
-// 날짜글씨 스타일링
-const Date = styled.p`
-  color: #bcbcbc;
-  display: flex;
-  margin-left: auto;
-`;
-
-const OptionWrapper = styled.div`
-  background-color: white;
-  border: 1px solid white;
-  border-radius: 10px;
-
-  position: absolute;
-  right: -80px;
-  top: -5px;
-
-  padding: 7px;
-`;
 
 const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
   const navigate = useNavigate();
@@ -153,9 +52,9 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
   }, []);
 
   return (
-    <BoxContainer>
-      <AllWrapper>
-        <ProfileImgTextWrapper>
+    <styles.BoxContainer>
+      <styles.AllWrapper>
+        <styles.ProfileImgTextWrapper>
           <img
             src={
               boardDetailData.profileImage
@@ -165,12 +64,12 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
             style={{ width: '50px', height: '50px' }}
           />
 
-          <ProfileWrapper>
-            <NameNickname> {boardDetailData.writer} </NameNickname>
-            <CohortPart>
+          <styles.ProfileWrapper>
+            <styles.NameNickname>{boardDetailData.writer}</styles.NameNickname>
+            <styles.CohortPart>
               {boardDetailData.semester} &#124; {boardDetailData.part}
-            </CohortPart>
-          </ProfileWrapper>
+            </styles.CohortPart>
+          </styles.ProfileWrapper>
 
           <img
             src={OptionButtonImage}
@@ -179,7 +78,7 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
             onClick={handleButtonClick}
           />
           {isOptionOpen && (
-            <OptionWrapper>
+            <styles.OptionWrapper>
               <div onClick={handleButtonClick}>
                 <div style={{ cursor: 'pointer' }} onClick={handleModifyButton}>
                   수정하기
@@ -187,34 +86,44 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
                 <hr />
                 <div style={{ cursor: 'pointer', color: 'red' }}>삭제하기</div>
               </div>
-            </OptionWrapper>
+            </styles.OptionWrapper>
           )}
-        </ProfileImgTextWrapper>
+        </styles.ProfileImgTextWrapper>
 
-        <TextTitle> {boardDetailData.title} </TextTitle>
-        <TextContent> {boardDetailData.content} </TextContent>
+        <styles.TextTitle> {boardDetailData.title} </styles.TextTitle>
 
-        <LikeCommentViewCountWrapper>
-          <Wrapper>
+        {boardDetailData.boardFiles &&
+          boardDetailData.boardFiles.map((image, index) => (
+            <styles.ImageFile
+              key={index}
+              src={image}
+              alt={`Image ${index + 1}`}
+            />
+          ))}
+
+        <styles.TextContent> {boardDetailData.content} </styles.TextContent>
+
+        <styles.LikeCommentViewCountWrapper>
+          <styles.Wrapper>
             <img src={Like} alt="좋아요" />
             <span style={{ color: '#000C76' }}>
               {boardDetailData.heartCount}
             </span>
-          </Wrapper>
-          <Wrapper>
+          </styles.Wrapper>
+          <styles.Wrapper>
             <img src={Comment} alt="댓글" />
             <span style={{ color: '#FFC700' }}>
               {boardDetailData.commentCount}
             </span>
-          </Wrapper>
-          <Wrapper>
+          </styles.Wrapper>
+          <styles.Wrapper>
             <img src={ViewCount} alt="조회수" />
             <span style={{ color: '#4B4B4B' }}>{boardDetailData.hitCount}</span>
-          </Wrapper>
-        </LikeCommentViewCountWrapper>
+          </styles.Wrapper>
+        </styles.LikeCommentViewCountWrapper>
 
-        <BottomWrapper>
-          <LikeCommentViewCountWrapper>
+        <styles.BottomWrapper>
+          <styles.LikeCommentViewCountWrapper>
             <img
               src={boardDetailData.liked ? LikeBtnImgLiked : LikeBtnImgNotLiked}
               alt="좋아요버튼"
@@ -227,12 +136,12 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
               onClick={scrollToBottom}
               style={{ cursor: 'pointer', height: '30px' }}
             />
-          </LikeCommentViewCountWrapper>
+          </styles.LikeCommentViewCountWrapper>
 
-          <Date>{boardDetailData.createdAt}</Date>
-        </BottomWrapper>
-      </AllWrapper>
-    </BoxContainer>
+          <styles.Date>{boardDetailData.createdAt}</styles.Date>
+        </styles.BottomWrapper>
+      </styles.AllWrapper>
+    </styles.BoxContainer>
   );
 };
 

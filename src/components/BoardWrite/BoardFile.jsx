@@ -54,20 +54,20 @@ const FileInput = styled.input`
   display: none;
 `;
 
-const BoardFile = ({ file, setFile }) => {
+const BoardFile = ({ boardFiles, setBoardFiles }) => {
   const handleFileChange = (event) => {
-    const newFiles = [...file]; // 기존 파일 배열을 복사합니다.
+    const newFiles = [...boardFiles];
     const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
-      newFiles.push(files[i]); // 새 파일을 기존 파일 배열에 추가합니다.
+      newFiles.push(files[i]);
     }
-    setFile(newFiles);
+    setBoardFiles(newFiles);
   };
 
   const handleDeleteFile = (index) => {
-    const newFiles = [...file];
+    const newFiles = [...boardFiles];
     newFiles.splice(index, 1);
-    setFile(newFiles);
+    setBoardFiles(newFiles);
   };
 
   return (
@@ -85,11 +85,12 @@ const BoardFile = ({ file, setFile }) => {
         id="fileInput"
         onChange={handleFileChange}
         multiple
+        accept=".pdf, .png, .jpg, .jpeg"
       />
       <FileNameContainer>
-        {file.map((files, index) => (
+        {boardFiles.map((file, index) => (
           <FileName key={index}>
-            {files.name}
+            {file.name}
             <DeleteButton onClick={() => handleDeleteFile(index)}>
               X
             </DeleteButton>
@@ -101,8 +102,8 @@ const BoardFile = ({ file, setFile }) => {
 };
 
 BoardFile.propTypes = {
-  file: PropTypes.array,
-  setFile: PropTypes.func.isRequired,
+  boardFiles: PropTypes.array,
+  setBoardFiles: PropTypes.func.isRequired,
 };
 
 export default BoardFile;

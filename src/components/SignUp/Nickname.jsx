@@ -24,6 +24,12 @@ const Nickname = ({
     [nickname],
   );
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleNextStep();
+    }
+  };
+
   return (
     <SignUpFormStyle.Wrapper>
       <SignUpFormStyle.SignUpFormWrapper>
@@ -33,6 +39,7 @@ const Nickname = ({
           name="nickname"
           value={nickname}
           onChange={nicknameChange}
+          onKeyDown={handleKeyDown}
           placeholder="예시) 눈꽃"
         />
       </SignUpFormStyle.SignUpFormWrapper>

@@ -19,6 +19,12 @@ const Name = ({ name, setName, handleNextStep, handlePrevStep }) => {
     [name],
   );
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleNextStep();
+    }
+  };
+
   return (
     <SignUpFormStyle.Wrapper>
       <SignUpFormStyle.SignUpFormWrapper>
@@ -28,6 +34,7 @@ const Name = ({ name, setName, handleNextStep, handlePrevStep }) => {
           name="name"
           value={name}
           onChange={nameChange}
+          onKeyDown={handleKeyDown}
           placeholder="예시) 정진혁"
         />
       </SignUpFormStyle.SignUpFormWrapper>
