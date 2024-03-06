@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import SearchImg from 'assets/search.svg';
+import SearchImg from 'assets/Search.svg';
 
 const ListContainer = styled.div`
   margin-top: 20px;
   width: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
 `;

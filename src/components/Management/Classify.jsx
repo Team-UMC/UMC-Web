@@ -9,7 +9,7 @@ const ClassifyContainer = styled.div`
   padding: 1vh;
   margin-top: 1.6vh;
 
-  border: 1px solid #232A6D;
+  border: 1px solid #232a6d;
 `;
 
 //분류 글
@@ -25,17 +25,16 @@ const CheckContainer = styled.div`
 
 //체크로 나타나야하는 타입 폰트
 const CheckType = styled.div`
-  color: ${(props) => (props.isActive ? "#8784FF" : "#BCBCBC")};
+  color: ${(props) => (props.isActive ? '#8784FF' : '#BCBCBC')};
   cursor: pointer;
   margin: 0.3vh;
   display: flex;
   flex-direction: row;
   align-items: center; /* 수직 가운데 정렬 */
-
 `;
 
 const Line = styled.div`
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid #d9d9d9;
   margin: 0.3vh 0;
 `;
 
@@ -55,20 +54,20 @@ const Circle = styled.div`
     height: 100%;
     position: absolute;
     border-radius: 50%;
-    border: 1px solid ${(props) => (props.isActive ? "#8784FF" : "#BCBCBC")};
-    filter: drop-shadow(0px 2px 4px rgba(177, 177, 177, 0.40));
+    border: 1px solid ${(props) => (props.isActive ? '#8784FF' : '#BCBCBC')};
+    filter: drop-shadow(0px 2px 4px rgba(177, 177, 177, 0.4));
   }
 
   &::after {
     content: '';
-    width: 10px; 
+    width: 10px;
     height: 10px;
-    background-color: ${(props) => (props.isActive ? "#8784FF" : "transparent")};
+    background-color: ${(props) =>
+      props.isActive ? '#8784FF' : 'transparent'};
     border-radius: 50%;
     position: absolute;
   }
 `;
-
 
 const Classify = () => {
   const [typeGroup1, setTypeGroup1] = useState(null);
@@ -87,13 +86,22 @@ const Classify = () => {
       <ClassifyTitle>분류</ClassifyTitle>
 
       <CheckContainer>
-        <CheckType onClick={() => handleTypeClick('전체', 1)} isActive={typeGroup1 === '전체'}>
+        <CheckType
+          onClick={() => handleTypeClick('전체', 1)}
+          isActive={typeGroup1 === '전체'}
+        >
           전체 <Circle isActive={typeGroup1 === '전체'} />
-        </CheckType> 
-        <CheckType onClick={() => handleTypeClick('이전기수', 1)} isActive={typeGroup1 === '이전기수'}>
+        </CheckType>
+        <CheckType
+          onClick={() => handleTypeClick('이전기수', 1)}
+          isActive={typeGroup1 === '이전기수'}
+        >
           이전기수 <Circle isActive={typeGroup1 === '이전기수'} />
         </CheckType>
-        <CheckType onClick={() => handleTypeClick('현재기수', 1)} isActive={typeGroup1 === '현재기수'}>
+        <CheckType
+          onClick={() => handleTypeClick('현재기수', 1)}
+          isActive={typeGroup1 === '현재기수'}
+        >
           현재기수 <Circle isActive={typeGroup1 === '현재기수'} />
         </CheckType>
       </CheckContainer>
@@ -101,13 +109,22 @@ const Classify = () => {
       <Line />
 
       <CheckContainer>
-        <CheckType onClick={() => handleTypeClick('학교', 2)} isActive={typeGroup2 === '학교'}>
+        <CheckType
+          onClick={() => handleTypeClick('학교', 2)}
+          isActive={typeGroup2 === '학교'}
+        >
           학교 <Circle isActive={typeGroup2 === '학교'} />
         </CheckType>
-        <CheckType onClick={() => handleTypeClick('지부', 2)} isActive={typeGroup2 === '지부'}>
+        <CheckType
+          onClick={() => handleTypeClick('지부', 2)}
+          isActive={typeGroup2 === '지부'}
+        >
           지부 <Circle isActive={typeGroup2 === '지부'} />
         </CheckType>
-        <CheckType onClick={() => handleTypeClick('연합', 2)} isActive={typeGroup2 === '연합'}>
+        <CheckType
+          onClick={() => handleTypeClick('연합', 2)}
+          isActive={typeGroup2 === '연합'}
+        >
           연합 <Circle isActive={typeGroup2 === '연합'} />
         </CheckType>
       </CheckContainer>

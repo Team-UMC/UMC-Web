@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchImg from 'assets/management/searchimg.svg';
+import SearchImg from 'assets/Management/SearchImage.svg';
 
 const Searchdiv = styled.div`
   display: flex;
