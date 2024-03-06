@@ -47,7 +47,7 @@ const BoardWrite = () => {
   const [content, setContent] = useState('');
   const [selectedHost, setSelectedHost] = useState('');
   const [selectedBoard, setSelectedBoard] = useState('');
-  const [file, setFile] = useState([]);
+  const [boardFiles, setBoardFiles] = useState([]);
 
   const [buttonStates, setButtonStates] = useState({
     campusButton: false,
@@ -81,8 +81,8 @@ const BoardWrite = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
 
-    if (file) {
-      formData.append('file', file);
+    if (boardFiles) {
+      formData.append('boardFiles', boardFiles);
     }
 
     formData.append(
@@ -133,7 +133,7 @@ const BoardWrite = () => {
           />
         </LeftContainer>
 
-        <BoardFile file={file} setFile={setFile} />
+        <BoardFile boardFiles={boardFiles} setBoardFiles={setBoardFiles} />
         <BoardTitle onChange={(e) => setTitle(e.target.value)} />
         <BoardText onChange={(e) => setContent(e.target.value)} />
 

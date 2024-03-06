@@ -7,7 +7,7 @@ import BasicLayout from 'layout/BasicLayout';
 
 import Main from 'pages/Main/Main.jsx';
 import SignUpForm from 'pages/SignUp/SignUp';
-import BoardWrite from 'pages/BoardWrite/BoardWrite';
+import BoardWrite from 'pages/Board/BoardWrite/BoardWrite';
 import SignInPage from 'pages/SignInPage/SignInPage';
 import Management from 'pages/Management/Management';
 import MyWrite from 'pages/MyWrite/MyWrite';
@@ -15,12 +15,12 @@ import KakaoLoginPage from 'pages/SocialLogin/KakaoLogin';
 //import NaverAuth from 'apis/app/auth/NaverAuth';
 import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
 
-import BoardDetailPage from 'pages/DetailPage/BoardDetailPage';
+import BoardDetailPage from 'pages/Board/DetailPage/BoardDetailPage';
 
 import HistoryPage from 'pages/History/HistoryPage';
 import GalleryPage from 'pages/Gallery/GalleryPage';
 import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
-import BoardPage from 'pages/BoardPage/BoardPage';
+import BoardPage from 'pages/Board/BoardPage/BoardPage';
 import MascotPage from 'pages/Mascot/MascotPage';
 
 import TodayILearn from 'pages/TodayILearn/TodayILearned';
@@ -32,7 +32,7 @@ import RankingPage from 'pages/Mascot/RankingPage';
 import SettingPage from 'pages/Setting/SettingPage';
 import HotHistoryPage from 'pages/History/HotHistoryPage';
 import ModifyTIL from 'pages/TodayILearn/ModiftTIL';
-import ModifyBoard from 'pages/BoardWrite/ModifyBoard';
+import ModifyBoard from 'pages/Board/BoardWrite/ModifyBoard';
 
 // import MessagePreviewPage from 'pages/Message/MessagePreviewPage';
 // import MessageDetailPage from 'pages/Message/MessageDetailPage';

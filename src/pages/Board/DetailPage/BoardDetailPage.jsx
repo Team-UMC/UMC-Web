@@ -1,41 +1,12 @@
 import React, { useState } from 'react';
 import axiosInstance from 'apis/setting';
-import styled from 'styled-components';
+
+import styles from './styles';
 
 import BoardBox from 'components/BoardBox/BoardBox';
 import BoardDetail from 'components/BoardTextDetail/BoardDetail';
 import CommentBox from 'components/BoardTextDetail/CommentBox';
 import CommentWriteBox from 'components/BoardTextDetail/CommentWriteBox';
-import BoardTitle from 'components/BoardTitle/BoardTitle';
-//import Copy from 'components/BoardTitle/Copy';
-
-const BoardTitleLayout = styled(BoardTitle)`
-  display: flex;
-  padding: 0 0 0 40px;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 70%;
-
-  margin-top: 15vh;
-`;
-
-const LowerWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-const RightWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 70%;
-`;
 
 const BoardDetailPage = () => {
   const currentURL = window.location.href;
@@ -63,8 +34,6 @@ const BoardDetailPage = () => {
     try {
       const res = await axiosInstance.get(`/boards/comments/${boardId}?page=0`);
       setCommentData(res.data.result.boardCommentPageElements);
-
-      console.log(res);
     } catch (error) {
       console.error();
     }
@@ -96,11 +65,11 @@ const BoardDetailPage = () => {
         alignItems: 'center',
       }}
     >
-      <Container>
-        <BoardTitleLayout />
-        <LowerWrapper>
+      <styles.Container>
+        <styles.BoardTitleLayout />
+        <styles.LowerWrapper>
           <BoardBox />
-          <RightWrapper>
+          <styles.RightWrapper>
             <BoardDetail
               boardDetailData={boardDetailData}
               boardLike={boardLike}
@@ -113,9 +82,9 @@ const BoardDetailPage = () => {
               />
             )}
             <CommentWriteBox boardDetailData={boardDetailData} />
-          </RightWrapper>
-        </LowerWrapper>
-      </Container>
+          </styles.RightWrapper>
+        </styles.LowerWrapper>
+      </styles.Container>
     </div>
   );
 };
