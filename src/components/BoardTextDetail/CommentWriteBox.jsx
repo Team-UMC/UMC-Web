@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
+import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
+
 const BoxContainer = styled.div`
   width: 100%;
   background-color: #fff;
@@ -140,7 +142,9 @@ const CommentWriteBox = () => {
     <BoxContainer>
       <ProfileImgTextWrapper>
         <img
-          src={userData.profileImage}
+          src={
+            userData.profileImage ? userData.profileImage : BasicProfileImage
+          }
           style={{ width: '50px', height: '50px' }}
         />
         <ProfileWrapper>
