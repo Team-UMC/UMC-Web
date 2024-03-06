@@ -92,16 +92,18 @@ const BoardDetail = ({ boardLike, boardDetailData, getBoardDetail }) => {
 
         <styles.TextTitle> {boardDetailData.title} </styles.TextTitle>
 
-        {boardDetailData.boardFiles &&
-          boardDetailData.boardFiles.map((image, index) => (
-            <styles.ImageFile
-              key={index}
-              src={image}
-              alt={`Image ${index + 1}`}
-            />
-          ))}
-
         <styles.TextContent> {boardDetailData.content} </styles.TextContent>
+
+        <styles.ImageWrapper>
+          {boardDetailData.boardFiles &&
+            boardDetailData.boardFiles.map((image, index) => (
+              <styles.ImageFile
+                key={index}
+                src={image}
+                alt={`Image ${index + 1}`}
+              />
+            ))}
+        </styles.ImageWrapper>
 
         <styles.LikeCommentViewCountWrapper>
           <styles.Wrapper>

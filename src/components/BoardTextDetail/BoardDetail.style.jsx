@@ -46,11 +46,18 @@ const styles = {
     font-weight: bold;
   `,
 
+  ImageWrapper: styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  `,
+
   ImageFile: styled.img`
-    max-width: '80%';
-    max-height: '80%';
-    width: 'auto';
-    height: 'auto';
+    max-width: 50%;
+    max-height: 50%;
+    width: auto;
+    height: auto;
+    padding: 1% 0;
   `,
 
   // 글의 내용을 나타내는 컴포넌트

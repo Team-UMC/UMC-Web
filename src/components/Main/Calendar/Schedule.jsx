@@ -145,7 +145,7 @@ const ScheduleItem = ({
       <div>
         <UpperWrapper>
           <img src={CampusScheduleImage} style={{ marginRight: '5px' }} />
-          <div> 학교 별 일정 </div>
+          <div style={{ fontWeight: 'bold' }}> 학교 별 일정 </div>
         </UpperWrapper>
         <ButtonContainer>
           <ArrowButton
@@ -189,7 +189,7 @@ const ScheduleItem = ({
       <div>
         <UpperWrapper>
           <img src={BranchScheduleImage} style={{ marginRight: '5px' }} />
-          <div> 지부 별 일정 </div>
+          <div style={{ fontWeight: 'bold' }}> 지부 별 일정 </div>
         </UpperWrapper>
         <ButtonContainer>
           <ArrowButton
@@ -233,7 +233,7 @@ const ScheduleItem = ({
       <div>
         <UpperWrapper>
           <img src={CenterScheduleImage} style={{ marginRight: '5px' }} />
-          <div> 중앙 일정 </div>
+          <div style={{ fontWeight: 'bold' }}> UMC 연합 일정 </div>
         </UpperWrapper>
         <ButtonContainer>
           <ArrowButton

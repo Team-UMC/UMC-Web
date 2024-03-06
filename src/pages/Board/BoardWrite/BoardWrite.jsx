@@ -49,7 +49,7 @@ const BoardWrite = () => {
   const [selectedBoard, setSelectedBoard] = useState('');
   //const [boardFiles, setBoardFiles] = useState([]);
 
-  const boardFiles = [];
+  const [imageList, setImageList] = useState([]);
 
   const [buttonStates, setButtonStates] = useState({
     campusButton: false,
@@ -80,20 +80,15 @@ const BoardWrite = () => {
     }));
   }, [location.pathname]);
 
-  const onSaveFiles = (e) => {
-    const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일선택창에서 선택한 파일들
-
-    uploadFiles.forEach((uploadFile) => {
-      boardFiles.push(uploadFile);
-    });
+  const onChangeImageInput = (e) => {
+    setImageList([...imageList, ...e.target.files]);
   };
 
   const handleSubmit = async () => {
     const formData = new FormData();
 
-    // 파일을 formData에 추가합니다.
-    boardFiles.forEach((file) => {
-      formData.append('boardFiles', file);
+    imageList.forEach((image) => {
+      formData.append('file', image);
     });
 
     formData.append(
@@ -113,7 +108,8 @@ const BoardWrite = () => {
         },
       });
 
-      console.log('Server response:', res.data);
+      console.log(imageList);
+      console.log('Server response:', res.data.result);
 
       const url = `/board/${selectedHost}/${selectedBoard}`;
       navigate(url);
@@ -146,13 +142,13 @@ const BoardWrite = () => {
 
         <input
           type="file"
+          accept="image/jpg,image/png,image/jpeg,image/gif"
           multiple
-          /* 파일 여러개 선택 가능하게 하기 */ onChange={onSaveFiles}
+          onChange={onChangeImageInput}
         />
 
         <BoardTitle onChange={(e) => setTitle(e.target.value)} />
         <BoardText onChange={(e) => setContent(e.target.value)} />
-
         <RightContainer>
           <BoardButton handleSubmit={handleSubmit} />
         </RightContainer>

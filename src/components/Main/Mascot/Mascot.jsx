@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import MascotBackgroundImage from 'assets/Main/MainMascotBackground.svg';
 import EarthImage from 'assets/Mascot/Earth.svg';
 
 const Container = styled.div`
+  background: url(${MascotBackgroundImage}) no-repeat center center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin: 0 auto;
-  width: 100%;
-  height: 540px;
+  width: 40%;
+  height: 600px;
   color: white;
 `;
 
