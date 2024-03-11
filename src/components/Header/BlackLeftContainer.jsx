@@ -55,7 +55,7 @@ const BlackLeftContainer = () => {
           <TextWrapper>히스토리</TextWrapper>
         </StyledLink>
 
-        <StyledLink to="/gallery">
+        <StyledLink to="/album">
           <TextWrapper>사진첩</TextWrapper>
         </StyledLink>
       </>

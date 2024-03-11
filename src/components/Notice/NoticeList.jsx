@@ -86,6 +86,8 @@ const NoticeList = () => {
   const [host, setHost] = useState(urlParts[2].toUpperCase());
   const board = 'NOTICE';
 
+  console.log(host);
+
   useEffect(() => {
     setHost(urlParts[2].toUpperCase());
   }, [location]);
@@ -140,6 +142,7 @@ const NoticeList = () => {
     try {
       const res = await axiosInstance.get(`/boards/search`, {
         params: {
+          host: host,
           keyword: keyword,
           page: page,
         },

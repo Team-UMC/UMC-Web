@@ -48,6 +48,7 @@ const styles = {
     flex-direction: column;
 
     width: 70%;
+    margin-top: 50px;
   `,
 
   // 게시글 목록(Table) 스타일링

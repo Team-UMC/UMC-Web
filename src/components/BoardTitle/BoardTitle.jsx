@@ -31,7 +31,6 @@ const BoardTitleMainStyle = styled.h1`
   /* 제목 폰트 스타일링 */
   color: #7682f6;
   font-size: 34px;
-  font-family: 'Pretendard';
   font-weight: 600;
   word-wrap: break-word;
 `;
@@ -98,7 +97,6 @@ const BoardTitleSub = styled.p`
   /* 설명 폰트 스타일링 */
   color: #9d9d9d;
   font-size: 18px;
-  font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
 `;
@@ -168,7 +166,7 @@ const BoardTitle = () => {
   );
 
   // 게시판 이름에 해당하는 정보를 가져옴
-  const board = TITLE_LISTS.find((link) => link.path === boardPath); 
+  const board = TITLE_LISTS.find((link) => link.path === boardPath);
 
   // 카테고리와 게시판 이름이 없으면 null 반환
   if (!categoryInfo || !board) {

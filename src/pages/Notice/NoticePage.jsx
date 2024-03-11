@@ -14,8 +14,6 @@ const NoticePage = () => {
     >
       <styles.NoticePageContainer>
         <styles.BoardTitleLayout />
-        {/* <styles.BoardBoxAndBoardTableWrapper> */}
-        {/* <styles.StyledBoardBox /> */}
 
         <styles.LinkWrapper>
           <styles.StyledNavLink to="/notice/campus">
@@ -32,7 +30,6 @@ const NoticePage = () => {
         <styles.NoticeTableWrapper>
           <styles.StyledNoticeTable />
         </styles.NoticeTableWrapper>
-        {/* </styles.BoardBoxAndBoardTableWrapper> */}
       </styles.NoticePageContainer>
     </div>
   );

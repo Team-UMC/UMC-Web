@@ -100,7 +100,7 @@ const BlackRightContainer = () => {
           <div>
             <span style={{ fontWeight: 'bold' }}>{nickname}</span>
             <span> 반가워요!</span>
-          </div>{' '}
+          </div>
         </ProfileNickname>
 
         <LogoutButton src={LogoutButtonImage} onClick={logoutMember} />

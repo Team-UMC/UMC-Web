@@ -105,7 +105,7 @@ const GalleryDetailListButtonLayout = styled.div`
 `;
 
 // 갤러리 상세 페이지 컴포넌트
-const GalleryDetailPage = () => {
+const AlbumDetailPage = () => {
   // useNavigate: 특정 경로로 이동하는 함수
   const navigate = useNavigate();
 
@@ -117,7 +117,7 @@ const GalleryDetailPage = () => {
 
   //  목록 버튼 클릭 시 이벤트
   const handleListButtonClick = () => {
-    navigate('/gallery');
+    navigate('/album');
   };
 
   // id가 일치하는 데이터가 없을 경우
@@ -159,4 +159,4 @@ const GalleryDetailPage = () => {
   );
 };
 
-export default GalleryDetailPage;
+export default AlbumDetailPage;
