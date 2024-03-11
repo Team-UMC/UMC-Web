@@ -79,7 +79,7 @@ const PageButton = styled.div`
 `;
 
 // 갤러리 전체 페이지
-const GalleryPage = () => {
+const AlbumPage = () => {
   // const [albumData, setAlbumData] = useState([]);
   // const [totalPages, setTotalPages] = useState(0);
 
@@ -150,4 +150,4 @@ const GalleryPage = () => {
   );
 };
 
-export default GalleryPage;
+export default AlbumPage;

@@ -5,34 +5,46 @@ import 'App.css';
 import MainLayout from 'layout/MainLayout';
 import BasicLayout from 'layout/BasicLayout';
 
-import Main from 'pages/Main/Main.jsx';
-import SignUpForm from 'pages/SignUp/SignUp';
-import BoardWrite from 'pages/Board/BoardWrite/BoardWrite';
 import SignInPage from 'pages/SignInPage/SignInPage';
-import Management from 'pages/Management/Management';
-import MyWrite from 'pages/MyWrite/MyWrite';
+
 import KakaoLoginPage from 'pages/SocialLogin/KakaoLogin';
-//import NaverAuth from 'apis/app/auth/NaverAuth';
-import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
+import NaverLoginPage from 'pages/SocialLogin/NaverLogin';
 
-import BoardDetailPage from 'pages/Board/DetailPage/BoardDetailPage';
+import SignUpForm from 'pages/SignUp/SignUp';
 
-import HistoryPage from 'pages/History/HistoryPage';
-import GalleryPage from 'pages/Gallery/GalleryPage';
-import GalleryDetailPage from 'pages/Gallery/GalleryDetailPage';
+import Main from 'pages/Main/Main.jsx';
+
+import NoticePage from 'pages/Notice/NoticePage';
+
 import BoardPage from 'pages/Board/BoardPage/BoardPage';
-import MascotPage from 'pages/Mascot/MascotPage';
+import BoardWrite from 'pages/Board/BoardWrite/BoardWrite';
+import BoardDetailPage from 'pages/Board/DetailPage/BoardDetailPage';
+import ModifyBoard from 'pages/Board/BoardWrite/ModifyBoard';
+
+import Management from 'pages/Management/Management';
+
+import MyWrite from 'pages/MyWrite/MyWrite';
+
+import SettingPage from 'pages/Setting/SettingPage';
 
 import TodayILearn from 'pages/TodayILearn/TodayILearned';
 import NewTIL from 'pages/TodayILearn/NewTIL';
 import DetailTIL from 'pages/TodayILearn/DetailTIL';
-import TodoList from 'pages/ToDoList/TodoList';
-import RankingPage from 'pages/Mascot/RankingPage';
-
-import SettingPage from 'pages/Setting/SettingPage';
-import HotHistoryPage from 'pages/History/HotHistoryPage';
 import ModifyTIL from 'pages/TodayILearn/ModiftTIL';
-import ModifyBoard from 'pages/Board/BoardWrite/ModifyBoard';
+
+import TodoList from 'pages/ToDoList/TodoList';
+
+import AlbumPage from 'pages/Album/AlbumPage';
+import AlbumDetailPage from 'pages/Album/AlbumDetailPage';
+
+import ProfileSettingPage from 'pages/Setting/Profile/ProfileSettingPage';
+
+import HistoryPage from 'pages/History/HistoryPage';
+import HotHistoryPage from 'pages/History/HotHistoryPage';
+
+import MascotPage from 'pages/Mascot/MascotPage';
+
+import RankingPage from 'pages/Mascot/RankingPage';
 
 // import MessagePreviewPage from 'pages/Message/MessagePreviewPage';
 // import MessageDetailPage from 'pages/Message/MessageDetailPage';
@@ -49,7 +61,7 @@ function App() {
 
             {/* 소셜 로그인 페이지 (path는 Redirect URI)*/}
             <Route path="/OAuth2/kakao" element={<KakaoLoginPage />} />
-            {/* <Route path="/oauth2/naver" element={<NaverAuth />} /> */}
+            <Route path="/oauth2/naver" element={<NaverLoginPage />} />
 
             {/* 회원 가입 페이지 */}
             <Route path="/signupform" element={<SignUpForm />} />
@@ -60,6 +72,8 @@ function App() {
             </Route>
 
             <Route element={<BasicLayout />}>
+              <Route path="/notice/:category" element={<NoticePage />} />
+
               {/* 게시판 관련 페이지*/}
               <Route
                 path="/board/:category/:boardPath"
@@ -106,8 +120,8 @@ function App() {
               <Route path="/todolist" element={<TodoList />} />
 
               {/* 사진첩 */}
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/gallery/:id" element={<GalleryDetailPage />} />
+              <Route path="/album" element={<AlbumPage />} />
+              <Route path="/album/:id" element={<AlbumDetailPage />} />
 
               {/* 프로필 설정 페이지 */}
               <Route path="/profilesetting" element={<ProfileSettingPage />} />

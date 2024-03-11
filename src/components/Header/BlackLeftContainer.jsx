@@ -43,6 +43,10 @@ const BlackLeftContainer = () => {
           <TextWrapper>홈</TextWrapper>
         </StyledLink>
 
+        <StyledLink to="/notice">
+          <TextWrapper>공지사항</TextWrapper>
+        </StyledLink>
+
         <StyledLink to="/board/campus/notice">
           <TextWrapper>게시판</TextWrapper>
         </StyledLink>
@@ -51,7 +55,7 @@ const BlackLeftContainer = () => {
           <TextWrapper>히스토리</TextWrapper>
         </StyledLink>
 
-        <StyledLink to="/gallery">
+        <StyledLink to="/album">
           <TextWrapper>사진첩</TextWrapper>
         </StyledLink>
       </>

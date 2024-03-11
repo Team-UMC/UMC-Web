@@ -47,7 +47,12 @@ const BoardCell = styled.div`
 `;
 
 // 게시글 테이블의 행 컴포넌트
-const Row = ({ boardData, host, board }) => {
+const Row = ({
+  boardData,
+  host,
+  board,
+  //pinnedData
+}) => {
   const navigate = useNavigate();
 
   // createdAt이 "2024-02-14T00:21:55.884612" (ISO 8601 형식)으로 저장되어 있으므로 형태 변경시키기
@@ -68,8 +73,23 @@ const Row = ({ boardData, host, board }) => {
     navigate(`/board/${hostValue}/${boardValue}/${boardId}`);
   };
 
+  // const handleNoticeClick = (boardId, hostType) => {
+  //   navigate(`/board/${hostType}/notice/${boardId}`);
+  // };
+
   return (
     <>
+      {/* {pinnedData.map((data) => (
+        <Container key={data.boardId}>
+          <BoardCell
+            onClick={() => handleNoticeClick(data.boardId, data.hostType)}
+          >
+            {data.title}
+          </BoardCell>
+          <BoardCell>{data.nickname}</BoardCell>
+        </Container>
+      ))} */}
+
       {boardData.map((data) => (
         <Container key={data.boardId}>
           <BoardCell onClick={() => handleTitleClick(data.boardId)}>
@@ -88,6 +108,7 @@ Row.propTypes = {
   boardData: PropTypes.array.isRequired,
   host: PropTypes.string.isRequired,
   board: PropTypes.string.isRequired,
+  pinnedData: PropTypes.array.isRequired,
 };
 
 export default Row;

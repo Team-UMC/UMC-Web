@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const styles = {
   // TextDetail을 스타일링하기 위한 박스
   BoxContainer: styled.div`
+    box-sizing: border-box;
     width: 100%;
     background-color: white;
     padding: 1.5vw;

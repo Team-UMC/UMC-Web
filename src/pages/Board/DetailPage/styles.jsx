@@ -30,6 +30,18 @@ const styles = {
 
     width: 70%;
   `,
+
+  BackButton: styled.div`
+    margin-left: auto;
+    width: 5%;
+    text-align: center;
+    background-color: #7f7cff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  `,
 };
 
 export default styles;

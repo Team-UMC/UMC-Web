@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from 'apis/setting';
 import styled from 'styled-components';
 
-import SearchBar from './BoardSearch';
-import BoardWriteButton from './BoardWriteButton';
+import SearchBar from './NoticeSearch';
+import NoticeWriteButton from './NoticeWriteButton';
 import Row from './Row';
 import { useLocation } from 'react-router-dom';
 
@@ -77,18 +77,19 @@ const PageButton = styled.div`
   font-weight: ${({ selected }) => (selected ? 'bold' : '')};
 `;
 
-const BoardList = () => {
+const NoticeList = () => {
   const location = useLocation();
 
   // /로 구분하여 배열로 저장하고 host 값과 board 값 변수에 저장하기
   const urlParts = location.pathname.split('/');
 
   const [host, setHost] = useState(urlParts[2].toUpperCase());
-  const [board, setBoard] = useState(urlParts[3].toUpperCase());
+  const board = 'NOTICE';
+
+  console.log(host);
 
   useEffect(() => {
     setHost(urlParts[2].toUpperCase());
-    setBoard(urlParts[3].toUpperCase());
   }, [location]);
 
   const [page, setPage] = useState(0);
@@ -141,6 +142,7 @@ const BoardList = () => {
     try {
       const res = await axiosInstance.get(`/boards/search`, {
         params: {
+          host: host,
           keyword: keyword,
           page: page,
         },
@@ -178,7 +180,7 @@ const BoardList = () => {
       />
 
       <BoardWriteButtonLayout>
-        <BoardWriteButton host={host} board={board} />
+        <NoticeWriteButton host={host} board={board} />
       </BoardWriteButtonLayout>
 
       <PageButtonWrapper>
@@ -206,4 +208,4 @@ const BoardList = () => {
   );
 };
 
-export default BoardList;
+export default NoticeList;

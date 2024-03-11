@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import BasicProfileImage from 'assets/Profile/ProfileImage.svg';
 
 const BoxContainer = styled.div`
+  box-sizing: border-box;
   width: 100%;
   background-color: #fff;
   padding: 1.5vw;

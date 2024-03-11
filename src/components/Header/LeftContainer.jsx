@@ -51,7 +51,12 @@ const LeftContainer = () => {
           <TextWrapper>홈</TextWrapper>
         </StyledLink>
 
-        <StyledLink to="/board/campus/notice">
+        <StyledLink to="/notice/campus">
+          <img src={NavStyleStar} alt="별" />
+          <TextWrapper>공지사항</TextWrapper>
+        </StyledLink>
+
+        <StyledLink to="/board/campus/free">
           <img src={NavStyleStar} alt="별" />
           <TextWrapper>게시판</TextWrapper>
         </StyledLink>
@@ -61,7 +66,7 @@ const LeftContainer = () => {
           <TextWrapper>히스토리</TextWrapper>
         </StyledLink>
 
-        <StyledLink to="/gallery">
+        <StyledLink to="/album">
           <img src={NavStyleStar} alt="별" />
           <TextWrapper>사진첩</TextWrapper>
         </StyledLink>
