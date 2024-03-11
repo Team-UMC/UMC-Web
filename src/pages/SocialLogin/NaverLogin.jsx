@@ -17,7 +17,7 @@ const NaverLoginPage = () => {
     const getNaverToken = async () => {
       try {
         const res = await axios.post(
-          `/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_NAVER_REST_API_KEY}&client_secret=${process.env.REACT_APP_NAVER_CLIENT_SECRET}&code=${code}&state=${state}`,
+          `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_NAVER_REST_API_KEY}&client_secret=${process.env.REACT_APP_NAVER_CLIENT_SECRET}&code=${code}&state=${state}`,
           {
             headers: {
               'X-Naver-Client-Id': process.env.REACT_APP_NAVER_REST_API_KEY,
@@ -36,7 +36,7 @@ const NaverLoginPage = () => {
     if (code) {
       getNaverToken();
     }
-  }, [code]);
+  }, []);
 
   useEffect(() => {
     const loginWithNaver = async () => {
@@ -53,7 +53,6 @@ const NaverLoginPage = () => {
 
           const accessToken = response.data.result.accessToken;
           const serviceMember = response.data.result.serviceMember;
-
           localStorage.setItem('server Token', accessToken);
 
           if (serviceMember) {
