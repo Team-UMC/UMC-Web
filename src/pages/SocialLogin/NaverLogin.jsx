@@ -20,9 +20,7 @@ const NaverLoginPage = () => {
           `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_NAVER_REST_API_KEY}&client_secret=${process.env.REACT_APP_NAVER_CLIENT_SECRET}&code=${code}&state=${state}`,
           {
             headers: {
-              'X-Naver-Client-Id': process.env.REACT_APP_NAVER_REST_API_KEY,
-              'X-Naver-Client-Secret':
-                process.env.REACT_APP_NAVER_CLIENT_SECRET,
+              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
             },
           },
         );
