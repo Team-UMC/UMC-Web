@@ -7,8 +7,11 @@ import BoardBox from 'components/BoardBox/BoardBox';
 import BoardDetail from 'components/BoardTextDetail/BoardDetail';
 import CommentBox from 'components/BoardTextDetail/CommentBox';
 import CommentWriteBox from 'components/BoardTextDetail/CommentWriteBox';
+import { useNavigate } from 'react-router-dom';
 
 const BoardDetailPage = () => {
+  const navigate = useNavigate();
+
   const currentURL = window.location.href;
 
   // /로 구분하여 배열로 저장하고 host 값과 board 값 변수에 저장하기
@@ -32,10 +35,14 @@ const BoardDetailPage = () => {
 
   const getBoardComment = async () => {
     try {
-      const res = await axiosInstance.get(`/boards/comments/${boardId}?page=0`);
+      const res = await axiosInstance.get(`/boards/comments/${boardId}`, {
+        params: {
+          page: 0,
+        },
+      });
       setCommentData(res.data.result.boardCommentPageElements);
     } catch (error) {
-      console.error();
+      console.log(error);
     }
   };
 
@@ -56,6 +63,13 @@ const BoardDetailPage = () => {
     }
   };
 
+  const backToBoardListPage = () => {
+    // 주어진 URL에서 boardId를 제외한 주소로 이동
+    let baseAddress = window.location.pathname.split('/');
+    baseAddress.pop();
+    navigate(baseAddress.join('/'));
+  };
+
   return (
     <div
       className="board-page"
@@ -70,6 +84,9 @@ const BoardDetailPage = () => {
         <styles.LowerWrapper>
           <BoardBox />
           <styles.RightWrapper>
+            <styles.BackButton onClick={backToBoardListPage}>
+              목록
+            </styles.BackButton>
             <BoardDetail
               boardDetailData={boardDetailData}
               boardLike={boardLike}

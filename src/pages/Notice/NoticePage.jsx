@@ -13,9 +13,22 @@ const NoticePage = () => {
       }}
     >
       <styles.NoticePageContainer>
-        {/* <styles.BoardTitleLayout /> */}
+        <styles.BoardTitleLayout />
         {/* <styles.BoardBoxAndBoardTableWrapper> */}
         {/* <styles.StyledBoardBox /> */}
+
+        <styles.LinkWrapper>
+          <styles.StyledNavLink to="/notice/campus">
+            학교 공지사항
+          </styles.StyledNavLink>
+          <styles.StyledNavLink to="/notice/branch">
+            지부 공지사항
+          </styles.StyledNavLink>
+          <styles.StyledNavLink to="/notice/center">
+            중앙 공지사항
+          </styles.StyledNavLink>
+        </styles.LinkWrapper>
+
         <styles.NoticeTableWrapper>
           <styles.StyledNoticeTable />
         </styles.NoticeTableWrapper>

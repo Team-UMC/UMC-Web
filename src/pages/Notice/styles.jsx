@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
-//import NoticeTitle from 'components/Notice/NoticeTitle';
+import NoticeTitle from 'components/Notice/NoticeTitle';
 import NoticeList from 'components/Notice/NoticeList';
 
 const styles = {
@@ -16,22 +17,30 @@ const styles = {
     width: 70%;
   `,
 
-  // // 게시글 제목 레이아웃
-  // BoardTitleLayout: styled(NoticeTitle)`
-  //   display: flex;
-  //   padding: 0 0 0 40px;
-  // `,
+  // 게시글 제목 레이아웃
+  BoardTitleLayout: styled(NoticeTitle)`
+    display: flex;
+    padding: 0 0 0 40px;
+    width: 100%;
+  `,
 
-  // // 게시글 좌측 메뉴바(BoardBox)와 게시글 목록(Table)을 감싸는 컴포넌트
-  // BoardBoxAndBoardTableWrapper: styled.div`
-  //   /* 레이아웃 스타일링 */
-  //   display: flex;
-  //   flex-direction: row;
-  //   justify-content: space-between;
-  //   gap: 0 40px;
+  LinkWrapper: styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  `,
 
-  //   width: 100%;
-  // `,
+  StyledNavLink: styled(NavLink)`
+    text-decoration: none;
+    color: black;
+    &.active {
+      color: #000c76;
+      font-weight: bold;
+
+      text-decoration: underline 3px #000c76;
+    }
+  `,
 
   // 게시글 목록(Table)을 감싸는 컴포넌트
   NoticeTableWrapper: styled.div`
