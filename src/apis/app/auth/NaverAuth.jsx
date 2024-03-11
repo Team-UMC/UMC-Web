@@ -25,6 +25,7 @@ const NaverAuth = () => {
         );
 
         setNaverToken(res.data.access_token);
+        localStorage.setItem('naver token', res.data.access_token);
       } catch (error) {
         console.log(error);
       }
@@ -40,7 +41,7 @@ const NaverAuth = () => {
       if (naverToken) {
         try {
           const response = await axios.post(
-            `http://umcservice.shop:8000/members/login?accessToken=${naverToken}&socialType=NAVER`,
+            `${process.env.REACT_APP_TEST_SERVER_URL}/members/login?accessToken=${naverToken}&socialType=NAVER`,
             {
               headers: {
                 'Content-Type': 'application/json;charset=utf-8',

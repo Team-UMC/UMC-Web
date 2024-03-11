@@ -36,7 +36,7 @@ const NaverLoginPage = () => {
     if (code) {
       getNaverToken();
     }
-  }, [code]);
+  }, []);
 
   useEffect(() => {
     const loginWithNaver = async () => {
@@ -53,7 +53,6 @@ const NaverLoginPage = () => {
 
           const accessToken = response.data.result.accessToken;
           const serviceMember = response.data.result.serviceMember;
-
           localStorage.setItem('server Token', accessToken);
 
           if (serviceMember) {
