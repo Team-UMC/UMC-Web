@@ -61,6 +61,18 @@ const DetailLink = ({ toggleSide }) => {
       </Wrapper>
 
       <Wrapper>
+        <BigTitle to="/notice/campus" onClick={handleToggleSide}>
+          학교 공지사항
+        </BigTitle>
+        <BigTitle to="/notice/branch" onClick={handleToggleSide}>
+          지부 공지사항
+        </BigTitle>
+        <BigTitle to="/notice/center" onClick={handleToggleSide}>
+          연합 공지사항
+        </BigTitle>
+      </Wrapper>
+
+      <Wrapper>
         <BigTitle to="/board/campus/notice" onClick={handleToggleSide}>
           학교 게시판
         </BigTitle>

@@ -33,6 +33,7 @@ import SettingPage from 'pages/Setting/SettingPage';
 import HotHistoryPage from 'pages/History/HotHistoryPage';
 import ModifyTIL from 'pages/TodayILearn/ModiftTIL';
 import ModifyBoard from 'pages/Board/BoardWrite/ModifyBoard';
+import NoticePage from 'pages/Notice/NoticePage';
 
 // import MessagePreviewPage from 'pages/Message/MessagePreviewPage';
 // import MessageDetailPage from 'pages/Message/MessageDetailPage';
@@ -60,6 +61,8 @@ function App() {
             </Route>
 
             <Route element={<BasicLayout />}>
+              <Route path="/notice/:category" element={<NoticePage />} />
+
               {/* 게시판 관련 페이지*/}
               <Route
                 path="/board/:category/:boardPath"

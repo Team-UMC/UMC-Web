@@ -167,18 +167,16 @@ const BoardBoxWrapper = () => {
       image: campus,
       title: ['학교', 'campus'],
       links: [
-        { name: '공지사항', path: 'notice' },
         { name: '자유 게시판', path: 'free' },
         { name: '질문 게시판', path: 'question' },
-        { name: '워크북 게시판', path: 'workbook' },
         { name: '이전 기수 게시판', path: 'ob' },
+        { name: '워크북 게시판', path: 'workbook' },
       ],
     },
     {
       image: branch,
       title: ['지부', 'branch'],
       links: [
-        { name: '공지사항', path: 'notice' },
         { name: '자유 게시판', path: 'free' },
         { name: '질문 게시판', path: 'question' },
         { name: '이전 기수 게시판', path: 'ob' },
@@ -188,7 +186,6 @@ const BoardBoxWrapper = () => {
       image: center,
       title: ['연합', 'center'],
       links: [
-        { name: '공지사항', path: 'notice' },
         { name: '자유 게시판', path: 'free' },
         { name: '질문 게시판', path: 'question' },
         { name: '이전 기수 게시판', path: 'ob' },

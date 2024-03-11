@@ -43,6 +43,10 @@ const BlackLeftContainer = () => {
           <TextWrapper>홈</TextWrapper>
         </StyledLink>
 
+        <StyledLink to="/notice">
+          <TextWrapper>공지사항</TextWrapper>
+        </StyledLink>
+
         <StyledLink to="/board/campus/notice">
           <TextWrapper>게시판</TextWrapper>
         </StyledLink>
