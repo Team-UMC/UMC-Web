@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 const TotalWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 75%;
 `;
 
 // 하나의 게시글을 감싸는 div

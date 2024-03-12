@@ -14,7 +14,7 @@ const styles = {
     padding-top: 100px;
     padding-bottom: 100px;
 
-    width: 70%;
+    width: 60%;
   `,
 
   // 게시글 제목 레이아웃
@@ -35,6 +35,12 @@ const styles = {
     text-decoration: none;
     color: black;
     &.active {
+      color: #000c76;
+      font-weight: bold;
+
+      text-decoration: underline 3px #000c76;
+    }
+    &:hover {
       color: #000c76;
       font-weight: bold;
 
