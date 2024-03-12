@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const styles = {
   BoxContainer: styled.div`
-    width: 10%;
+    width: 120px;
 
     box-sizing: border-box;
     padding: 40px 20px;

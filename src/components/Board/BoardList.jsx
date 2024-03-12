@@ -1,12 +1,12 @@
 // BoardTable: 게시판 테이블 컴포넌트
-import React, { useEffect, useState } from 'react';
-import axiosInstance from 'apis/setting';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import styled from 'styled-components';
 
 import SearchBar from './BoardSearch';
 import BoardWriteButton from './BoardWriteButton';
 import Row from './Row';
-import { useLocation } from 'react-router-dom';
 
 const TotalWrapper = styled.div`
   display: flex;
@@ -77,90 +77,17 @@ const PageButton = styled.div`
   font-weight: ${({ selected }) => (selected ? 'bold' : '')};
 `;
 
-const BoardList = () => {
-  const location = useLocation();
-
-  // /로 구분하여 배열로 저장하고 host 값과 board 값 변수에 저장하기
-  const urlParts = location.pathname.split('/');
-
-  const [host, setHost] = useState(urlParts[2].toUpperCase());
-  const [board, setBoard] = useState(urlParts[3].toUpperCase());
-
-  useEffect(() => {
-    setHost(urlParts[2].toUpperCase());
-    setBoard(urlParts[3].toUpperCase());
-  }, [location]);
-
-  const [page, setPage] = useState(0);
-
-  const [boardData, setBoardData] = useState([]);
-  const [totalPages, setTotalPages] = useState(0);
-
-  const [pinnedData, setPinnedData] = useState([]);
-
-  useEffect(() => {
-    const getBoardData = async (host, board, page) => {
-      try {
-        const res = await axiosInstance.get(`/boards`, {
-          params: {
-            host: host,
-            board: board,
-            page: page,
-          },
-        });
-        setBoardData(res.data.result.boardPageElements);
-        setTotalPages(res.data.result.totalPages);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getBoardData(host, board, page);
-  }, [host, board, page]);
-
-  useEffect(() => {
-    const getPinnedData = async () => {
-      try {
-        const res = await axiosInstance.get(`/boards/pinned`);
-
-        setPinnedData(res.data.result.pinnedNotices);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getPinnedData();
-  }, []);
-
-  // 검색 기능
-  const [keyword, setKeyword] = useState('');
-
-  const handleKeyword = (e) => {
-    setKeyword(e.target.value);
-  };
-
-  const searchBoard = async () => {
-    try {
-      const res = await axiosInstance.get(`/boards/search`, {
-        params: {
-          keyword: keyword,
-          page: page,
-        },
-      });
-      setBoardData(res.data.result.boardSearchPageElements);
-      setTotalPages(res.data.result.totalPages);
-    } catch (error) {
-      console.error();
-    }
-  };
-
-  const handlePageChange = (newPage) => {
-    setPage(newPage - 1);
-  };
-
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
-
+const BoardList = ({
+  host,
+  board,
+  boardData,
+  page,
+  pageNumbers,
+  handlePageChange,
+  keyword,
+  handleKeyword,
+  searchBoard,
+}) => {
   return (
     <TotalWrapper>
       <Container>
@@ -170,12 +97,7 @@ const BoardList = () => {
         <BoardCell>조회수</BoardCell>
       </Container>
 
-      <Row
-        boardData={boardData}
-        host={host}
-        board={board}
-        pinnedData={pinnedData}
-      />
+      <Row boardData={boardData} host={host} board={board} />
 
       <BoardWriteButtonLayout>
         <BoardWriteButton host={host} board={board} />
@@ -204,6 +126,18 @@ const BoardList = () => {
       </BoardSearchLayout>
     </TotalWrapper>
   );
+};
+
+BoardList.propTypes = {
+  host: PropTypes.string.isRequired,
+  board: PropTypes.string.isRequired,
+  boardData: PropTypes.array.isRequired,
+  page: PropTypes.number.isRequired,
+  pageNumbers: PropTypes.array.isRequired,
+  handlePageChange: PropTypes.func.isRequired,
+  keyword: PropTypes.string.isRequired,
+  handleKeyword: PropTypes.func.isRequired,
+  searchBoard: PropTypes.func.isRequired,
 };
 
 export default BoardList;
